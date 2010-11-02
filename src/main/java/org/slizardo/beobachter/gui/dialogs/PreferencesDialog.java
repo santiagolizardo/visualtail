@@ -43,7 +43,7 @@ import javax.swing.UIManager;
 import javax.swing.SpringLayout.Constraints;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.beans.SwingLookAndFeel;
 import org.slizardo.beobachter.config.ConfigManager;
 import org.slizardo.beobachter.gui.renderers.LocaleRender;
@@ -69,7 +69,7 @@ public class PreferencesDialog extends JDialog {
 	private JButton btnCancel;
 
 	public PreferencesDialog() {
-		final ConfigManager configManager = Beobachter.instance.configManager;
+		final ConfigManager configManager = MainGUI.instance.configManager;
 
 		setTitle(Translator.t("Preferences"));
 		setResizable(false);
@@ -111,7 +111,7 @@ public class PreferencesDialog extends JDialog {
 				SwingLookAndFeel laf = ((SwingLookAndFeel) lookAndFeel.getSelectedItem());
 				configManager.setWindowLAF(laf.getClassName());
 				SwingUtil.setLookAndFeel(laf.getClassName());
-				SwingUtilities.updateComponentTreeUI(Beobachter.instance);
+				SwingUtilities.updateComponentTreeUI(MainGUI.instance);
 				configManager.setLanguage(languagesList.getSelectedItem()
 						.toString());
 				configManager.setFontFamily(fontsList.getSelectedItem()

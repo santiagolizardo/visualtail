@@ -47,7 +47,7 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
 import org.apache.commons.io.FileUtils;
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.beans.LogType;
 import org.slizardo.beobachter.beans.Rule;
 import org.slizardo.beobachter.engine.Tail;
@@ -91,7 +91,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		setResizable(true);
 		setFrameIcon(IconFactory.getImage("log_window.png"));
 
-		Beobachter.instance.configManager.setLastPath(fileName);
+		MainGUI.instance.configManager.setLastPath(fileName);
 
 		linesModel = new DefaultListModel();
 		lines = new JList(linesModel);

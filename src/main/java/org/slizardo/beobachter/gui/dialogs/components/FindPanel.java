@@ -29,7 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.gui.dialogs.LogWindow;
 import org.slizardo.beobachter.resources.images.IconFactory;
 import org.slizardo.beobachter.resources.languages.Translator;
@@ -52,7 +52,7 @@ public class FindPanel extends JPanel {
 				int modifiers = e.getModifiers();
 				int keyCode = e.getKeyCode();
 				if(modifiers == KeyEvent.CTRL_MASK && keyCode == KeyEvent.VK_ENTER) {
-					LogWindow log = (LogWindow) Beobachter.instance.desktop
+					LogWindow log = (LogWindow) MainGUI.instance.desktop
 					.getSelectedFrame();
 					if (log != null) {
 						log.searchText(search.getText());
@@ -64,7 +64,7 @@ public class FindPanel extends JPanel {
 		close = new JButton(IconFactory.getImage("close.png"));
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Beobachter.instance.removeFindPanel();
+				MainGUI.instance.removeFindPanel();
 			}
 		});
 		

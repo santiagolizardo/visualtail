@@ -32,7 +32,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.Constants;
 import org.slizardo.beobachter.beans.LogType;
 import org.slizardo.beobachter.engine.Controller;
@@ -61,7 +61,7 @@ public class FileMenu extends JMenu {
 			public void actionPerformed(ActionEvent arg0) {
 				OpenDialogPanel panel = new OpenDialogPanel();
 				JFileChooser chooser = new JFileChooser();
-				File lastSelected = new File(Beobachter.instance.configManager.getLastPath());
+				File lastSelected = new File(MainGUI.instance.configManager.getLastPath());
 				chooser.setSelectedFile(lastSelected);
 				Container parent = FileMenu.this.getParent();
 				chooser.setAccessory(panel);
@@ -103,7 +103,7 @@ public class FileMenu extends JMenu {
 		saveSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				JInternalFrame[] frames = Beobachter.instance.desktop
+				JInternalFrame[] frames = MainGUI.instance.desktop
 						.getAllFrames();
 				if (frames.length == 0) {
 					DialogFactory.showErrorMessage(getParent(),

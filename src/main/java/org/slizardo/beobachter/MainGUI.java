@@ -41,11 +41,11 @@ import org.slizardo.beobachter.resources.languages.Translator;
  * @author slizardo
  * 
  */
-public class Beobachter extends JFrame {
+public class MainGUI extends JFrame {
 
 	private static final long serialVersionUID = -349295815866572937L;
 
-	public static Beobachter instance = null;
+	public static MainGUI instance = null;
 
 	public static void main(String[] args) {
 		ConfigManager configManager = null;
@@ -67,7 +67,7 @@ public class Beobachter extends JFrame {
 				dirSessions.mkdirs();
 			}
 
-			instance = new Beobachter(configManager);
+			instance = new MainGUI(configManager);
 			instance.setVisible(true);
 		} catch (Exception ioe) {
 			ioe.printStackTrace();
@@ -78,7 +78,7 @@ public class Beobachter extends JFrame {
 	public JDesktopPane desktop;
 	private FindPanel findPanel;
 
-	public Beobachter(ConfigManager configManager) {
+	public MainGUI(ConfigManager configManager) {
 		this.configManager = configManager;
 
 		desktop = new JDesktopPane();

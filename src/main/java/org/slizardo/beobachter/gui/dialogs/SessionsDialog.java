@@ -48,7 +48,7 @@ import javax.swing.SpringLayout;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.Constants;
 import org.slizardo.beobachter.beans.LogType;
 import org.slizardo.beobachter.engine.Controller;
@@ -186,7 +186,7 @@ public class SessionsDialog extends JDialog {
 			ee.printStackTrace();
 		}
 
-		Controller.setWindowsOnCascade(Beobachter.instance.desktop);
+		Controller.setWindowsOnCascade(MainGUI.instance.desktop);
 
 		setVisible(false);
 		dispose();

@@ -27,7 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.beans.Rule;
 import org.slizardo.beobachter.config.ConfigManager;
 
@@ -41,7 +41,7 @@ public class LineRenderer extends JLabel implements ListCellRenderer {
 	private List<Rule> rules;
 
 	public LineRenderer() {
-		ConfigManager configManager = Beobachter.instance.configManager;
+		ConfigManager configManager = MainGUI.instance.configManager;
 
 		Font font = new Font(configManager.getFontFamily(), Font.PLAIN,
 				configManager.getFontSize());

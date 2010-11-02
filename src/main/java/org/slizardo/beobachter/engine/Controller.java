@@ -31,7 +31,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import org.apache.commons.configuration.ConfigurationException;
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.beans.LogType;
 import org.slizardo.beobachter.config.ConfigManager;
 import org.slizardo.beobachter.gui.dialogs.LogWindow;
@@ -140,7 +140,7 @@ public class Controller {
 		int errCode = EXIT_FAILURE;
 
 		try {
-			Beobachter beobachter = Beobachter.instance;
+			MainGUI beobachter = MainGUI.instance;
 			beobachter.setVisible(false);
 			beobachter.dispose();
 
@@ -171,7 +171,7 @@ public class Controller {
 					try {
 						FileUtil.isReadable(file);
 					} catch (Exception e) {
-						DialogFactory.showErrorMessage(Beobachter.instance, e
+						DialogFactory.showErrorMessage(MainGUI.instance, e
 								.getMessage());
 						return;
 					}
@@ -224,7 +224,7 @@ public class Controller {
 	 */
 	public static void openFile(String fileName, LogType logType) {
 		LogWindow logWindow = new LogWindow(fileName, logType);
-		Beobachter.instance.desktop.add(logWindow);
+		MainGUI.instance.desktop.add(logWindow);
 		try {
 			logWindow.setSelected(true);
 		} catch (PropertyVetoException pve) {

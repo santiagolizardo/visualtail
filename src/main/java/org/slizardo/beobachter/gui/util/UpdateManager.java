@@ -23,7 +23,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.text.MessageFormat;
 
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.Constants;
 import org.slizardo.beobachter.resources.languages.Translator;
 
@@ -54,14 +54,14 @@ public class UpdateManager extends Thread {
 				StringBuffer text = new StringBuffer();
 				text.append(MessageFormat.format(Translator.t("New_version_0_available"), new Object[] { version })).append(Constants.LINE_SEP).append(Constants.LINE_SEP);
 				text.append(Translator.t("Please_visit_us_on_sourceforge")).append(Constants.LINE_SEP);
-				DialogFactory.showInformationMessage(Beobachter.instance, text.toString());
+				DialogFactory.showInformationMessage(MainGUI.instance, text.toString());
 			} else if (serverVersion <= currentVersion) {
-				DialogFactory.showInformationMessage(Beobachter.instance,
+				DialogFactory.showInformationMessage(MainGUI.instance,
 						Translator.t("There_are_not_updates_available"));
 			}
 
 		} catch (Exception e) {
-			DialogFactory.showErrorMessage(Beobachter.instance, Translator.t("Unable_to_fetch_server_information"));
+			DialogFactory.showErrorMessage(MainGUI.instance, Translator.t("Unable_to_fetch_server_information"));
 		}
 
 	}

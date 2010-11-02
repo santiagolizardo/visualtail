@@ -24,7 +24,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.gui.dialogs.LogWindow;
 import org.slizardo.beobachter.gui.util.EmptyIcon;
 import org.slizardo.beobachter.resources.languages.Translator;
@@ -45,7 +45,7 @@ public class FindNextAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) Beobachter.instance.desktop
+		LogWindow log = (LogWindow) MainGUI.instance.desktop
 		.getSelectedFrame();
 		if(log != null) {
 			log.searchAgainText();

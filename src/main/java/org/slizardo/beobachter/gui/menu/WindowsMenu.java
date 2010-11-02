@@ -26,7 +26,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.engine.Controller;
 import org.slizardo.beobachter.resources.images.IconFactory;
 import org.slizardo.beobachter.resources.languages.Translator;
@@ -46,7 +46,7 @@ public class WindowsMenu extends JMenu {
 				KeyEvent.CTRL_MASK));
 		itemCascade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				Controller.setWindowsOnCascade(Beobachter.instance.desktop);
+				Controller.setWindowsOnCascade(MainGUI.instance.desktop);
 			}
 		});
 
@@ -60,7 +60,7 @@ public class WindowsMenu extends JMenu {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				Controller
-						.setWindowsOnTileVertical(Beobachter.instance.desktop);
+						.setWindowsOnTileVertical(MainGUI.instance.desktop);
 			}
 		});
 
@@ -73,7 +73,7 @@ public class WindowsMenu extends JMenu {
 		itemTileHor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				Controller
-						.setWindowsOnTileHorizontal(Beobachter.instance.desktop);
+						.setWindowsOnTileHorizontal(MainGUI.instance.desktop);
 			}
 		});
 

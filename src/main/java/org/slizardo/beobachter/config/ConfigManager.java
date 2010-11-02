@@ -25,7 +25,7 @@ import javax.swing.UIManager;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.engine.Controller;
 import org.slizardo.beobachter.gui.util.FileUtil;
 import org.slizardo.beobachter.util.ArraysUtil;
@@ -137,7 +137,7 @@ public class ConfigManager {
 
 	public void setDragMode(int dragMode) {
 		configuration.setProperty(DRAG_MODE, dragMode);
-		Beobachter.instance.desktop.setDragMode(dragMode);
+		MainGUI.instance.desktop.setDragMode(dragMode);
 	}
 
 	public String getLanguage() {

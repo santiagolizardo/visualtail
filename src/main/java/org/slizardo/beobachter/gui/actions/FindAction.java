@@ -24,7 +24,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.resources.images.IconFactory;
 import org.slizardo.beobachter.resources.languages.Translator;
 
@@ -44,6 +44,6 @@ public class FindAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		Beobachter.instance.addFindPanel();
+		MainGUI.instance.addFindPanel();
 	}
 }

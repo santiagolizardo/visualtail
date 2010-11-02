@@ -27,7 +27,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
-import org.slizardo.beobachter.Beobachter;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.Constants;
 import org.slizardo.beobachter.gui.dialogs.LogWindow;
 import org.slizardo.beobachter.resources.images.IconFactory;
@@ -56,7 +56,7 @@ class CopyAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) Beobachter.instance.desktop
+		LogWindow log = (LogWindow) MainGUI.instance.desktop
 				.getSelectedFrame();
 		if (log != null) {
 			Object[] selected = log.lines.getSelectedValues();
