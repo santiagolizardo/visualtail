@@ -44,7 +44,7 @@ public class ConfigManager {
 	private final String WINDOW_LAF = "window.laf";
 
 	// App properties
-	private final String LANGUAGE = "LANGUAGE";
+	private final String LANGUAGE = "language";
 
 	private final String DRAG_MODE = "drag_mode";
 
@@ -171,12 +171,9 @@ public class ConfigManager {
 			dir.mkdirs();
 		}
 		if (!file.exists()) {
-			System.out.println(file);
 			InputStream is = ConfigManager.class.getResourceAsStream(
 			"default_config.properties");
-			System.out.println(is);
-			if(!FileUtil.copy(is, file))
-				System.err.println("No se pudo copiar");
+			FileUtil.copy(is, file);
 		}
 
 		configuration = new PropertiesConfiguration(fileName);

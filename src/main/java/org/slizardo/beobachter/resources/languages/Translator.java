@@ -35,8 +35,6 @@ public class Translator {
 	private static ResourceBundle bundle;
 
 	public static void start(ConfigManager configManager) {
-		System.out.println(configManager);
-		System.out.println(configManager.getLanguage());
 		String[] locales = configManager.getLanguage().split("_");
 		Locale locale = new Locale(locales[0], locales[1]);
 		bundle = ResourceBundle.getBundle("org.slizardo.beobachter.resources.languages.Translation", locale);
