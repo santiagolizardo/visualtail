@@ -1,4 +1,4 @@
-package org.slizardo.beobacher;
+package org.slizardo.beobachter;
 
 /**
  * Hello world!

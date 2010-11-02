@@ -1,0 +1,56 @@
+CHANGES
+
+Version 1.6 (novembre 2010):
+
+	- VCS converted from SVN to GIT
+	- Ant replaced by Maven
+
+Version 1.5 (november 2009):
+
+	- The library commons-configuration was updated to version 1.6.
+	- The logging facility included with Java it's being used.
+	- Code is now more 1.5 like (generics, for(iterators), ...)
+	- Removed start.(sh|bat) and created the README.txt
+	- Minor bugfixes and optimizations.
+
+Version 1.4:
+
+	- Minor GUI enhacements on the log types dialog
+	- Session feature implemented. It allows to load and save several opened files (logs) at the same time.
+	- More translations
+	- Minor code improvements
+	- Web page, http://beobachter.sf.net
+	- Documentation and license for every class
+
+Version 1.3:
+
+	- Minor refactorings.
+	- Nice installer for the Windows platform.
+	- New translations: ja_JA, nl_NL. (see CREDITS for the people who help us)
+
+Version 1.2:
+
+	- Color chooser now has a special preview panel.
+	- Select all/Copy now appears disabled when no internal frame is present.
+	- New Find/Find next options were added to the Edit menu.
+	- The preferences dialog allow us to change the default LAF of the application.
+	- The language option in preferences dialog now show us a better description of each language.
+	  (ie: ca_FR by Catalan (France))
+	- All the dialogs now have a better behaviour when resizes.
+	- New translations: pt_BR, zh_CN, ru_RU. (see CREDITS for the people who help us)
+	- The new ANT file allow developers to compile the application without an ide.
+	- Minor bug fixes.
+
+Version 1.1:
+
+	- Now all the dialogs close when the ESCAPE key is pressed.
+	- Better administration of logtypes. Now update a logtype configuration is allowed.
+	- Almost all the dialogs now have a default button.
+	- New feature that checks if a new version is available was added.
+	- The application now remember the position and size of his last execution.
+	- New translations: pl_DE, in_IN, ca_FR. (see CREDITS for the people who help us)
+	- Minor bug fixes.
+
+Version 1.0:
+
+	- Initial version
