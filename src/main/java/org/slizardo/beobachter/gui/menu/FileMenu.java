@@ -1,47 +1,42 @@
 /**
- * Beobachter, the universal logs watcher
- * Copyright (C) 2009  Santiago Lizardo
-
+ * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
+ * Copyright (C) 2011 Santiago Lizardo (http://www.santiagolizardo.com)
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
-
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.slizardo.beobachter.gui.menu;
 
-
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileWriter;
 
-import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.Constants;
-import org.slizardo.beobachter.beans.LogType;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.engine.Controller;
 import org.slizardo.beobachter.gui.actions.ExitAction;
 import org.slizardo.beobachter.gui.dialogs.LogWindow;
-import org.slizardo.beobachter.gui.dialogs.OpenDialogPanel;
+import org.slizardo.beobachter.gui.dialogs.OpenFileDialog;
 import org.slizardo.beobachter.gui.dialogs.SessionsDialog;
 import org.slizardo.beobachter.gui.util.DialogFactory;
-import org.slizardo.beobachter.gui.util.FileUtil;
 import org.slizardo.beobachter.resources.images.IconFactory;
 import org.slizardo.beobachter.resources.languages.Translator;
 import org.slizardo.beobachter.util.ArraysUtil;
@@ -59,28 +54,8 @@ public class FileMenu extends JMenu {
 				KeyEvent.CTRL_MASK));
 		open.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				OpenDialogPanel panel = new OpenDialogPanel();
-				JFileChooser chooser = new JFileChooser();
-				File lastSelected = new File(MainGUI.instance.configManager.getLastPath());
-				chooser.setSelectedFile(lastSelected);
-				Container parent = FileMenu.this.getParent();
-				chooser.setAccessory(panel);
-				chooser.addPropertyChangeListener(panel);
-				int resp = chooser.showOpenDialog(parent);
-				if (resp == JFileChooser.APPROVE_OPTION) {
-					File file = chooser.getSelectedFile();
-					try {
-						FileUtil.isReadable(file);
-					} catch (Exception e) {
-						DialogFactory.showErrorMessage(null, e.getMessage());
-						return;
-					}
-
-					LogType logType = panel.getSelectedLogType();
-
-					Controller.addRecent(file.getAbsolutePath());
-					Controller.openFile(file.getAbsolutePath(), logType);
-				}
+				OpenFileDialog ofDialog = new OpenFileDialog();
+				ofDialog.setVisible(true);
 			}
 		});
 
@@ -98,8 +73,8 @@ public class FileMenu extends JMenu {
 			}
 		});
 
-		JMenuItem saveSession = new JMenuItem(Translator
-				.t("Save_current_session"));
+		JMenuItem saveSession = new JMenuItem(
+				Translator.t("Save_current_session"));
 		saveSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

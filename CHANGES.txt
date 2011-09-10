@@ -1,6 +1,13 @@
 CHANGES
 
-Version 1.6 (novembre 2010):
+Version 1.7 (september 2011)
+
+	- Refactoring of the "Open file" dialog.
+	- Tray icon.
+	- More unit tests meaning more robust-stable working.
+	- Better handling of huge files.
+
+Version 1.6 (november 2010):
 
 	- VCS converted from SVN to GIT
 	- Ant replaced by Maven
