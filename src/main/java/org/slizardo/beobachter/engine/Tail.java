@@ -17,18 +17,24 @@
  */
 package org.slizardo.beobachter.engine;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class Tail extends Thread {
 
+	private static final Logger logger = Logger.getLogger(Tail.class.getName());
+
 	private boolean enabled;
 
-	private ArrayList<TailListener> listeners;
+	private List<TailListener> listeners;
 
-	private RandomAccessFile file;
+	private File file;
+	private RandomAccessFile accessFile;
 
 	private long size;
 
@@ -37,44 +43,52 @@ public class Tail extends Thread {
 	private short refreshInterval;
 
 	public Tail(String fileName, short refreshInterval) {
-
 		setName("Tail");
 		listeners = new ArrayList<TailListener>();
 		enabled = true;
+
+		file = new File(fileName);
+		size = file.length();
 		this.fileName = fileName;
 		this.refreshInterval = refreshInterval;
 	}
 
 	public void run() {
-		while (file == null) {
-			try {
-				file = new RandomAccessFile(fileName, "r");
-				size = file.length();
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
-			}
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException ie) {
-				ie.printStackTrace();
+		while (enabled) {
+			openFileIfNeeded();
+			if (accessFile != null) {
+				try {
+					long newSize = accessFile.length();
+					if (newSize > size) {
+						accessFile.seek(size);
+						String line = accessFile.readLine();
+						do {
+							notifyListeners(line);
+						} while ((line = accessFile.readLine()) != null);
+						size = newSize;
+					}
+					Thread.sleep(refreshInterval);
+				} catch (IOException ioe) {
+					logger.severe(ioe.getMessage());
+				} catch (InterruptedException ie) {
+					logger.severe(ie.getMessage());
+				}
+				try {
+					accessFile.close();
+				} catch (IOException e) {
+					logger.severe(e.getMessage());
+				}
 			}
 		}
-		while (enabled) {
+	}
+
+	private void openFileIfNeeded() {
+		if (file.length() > size) {
 			try {
-				long newSize = file.length();
-				if (newSize > size) {
-					file.seek(size);
-					String line = file.readLine();
-					do {
-						notifyListeners(line);
-					} while ((line = file.readLine()) != null);
-					size = newSize;
-				}
-				Thread.sleep(refreshInterval);
-			} catch (IOException ioe) {
-				ioe.printStackTrace();
-			} catch (InterruptedException ie) {
-				ie.printStackTrace();
+				accessFile = new RandomAccessFile(fileName, "r");
+				size = accessFile.length();
+			} catch (Exception e) {
+				logger.severe(e.getMessage());
 			}
 		}
 	}

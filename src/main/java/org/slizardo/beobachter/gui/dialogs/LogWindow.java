@@ -17,7 +17,6 @@
  */
 package org.slizardo.beobachter.gui.dialogs;
 
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Desktop;
@@ -137,20 +136,6 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		});
 		logTypes.setSelectedItem(logType);
 
-		final Desktop desktop = Desktop.getDesktop();
-
-		JButton btnPrint = new JButton(Translator.t("Print_this_file"));
-		btnPrint.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					desktop.print(file);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
 		JButton btnClear = new JButton(Translator.t("Clear_buffer"));
 		btnClear.addActionListener(new ActionListener() {
 			@Override
@@ -161,9 +146,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		toolbar.add(followTail);
 		toolbar.add(logTypes);
-		if (desktop.isSupported(Action.PRINT)) {
-			toolbar.add(btnPrint);
-		}
+		addPrintMenuItem();
 		toolbar.add(btnClear);
 
 		file = new File(fileName);
@@ -181,6 +164,32 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		defineLayout();
 
 		setVisible(true);
+	}
+
+	/**
+	 * Tries to add the print menu if the desktop supports it.
+	 */
+	private void addPrintMenuItem() {
+		if (Desktop.isDesktopSupported()) {
+			final Desktop desktop = Desktop.getDesktop();
+			if (desktop.isSupported(Action.PRINT)) {
+
+				JButton btnPrint = new JButton(Translator.t("Print_this_file"));
+				btnPrint.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							desktop.print(file);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+
+				toolbar.add(btnPrint);
+			}
+		}
+
 	}
 
 	public void onFileChanges(final TailEvent tailEvent) {
@@ -223,8 +232,8 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			}
 		}
 		if (searchIndex >= linesSize
-				&& DialogFactory.showQuestionDialog(this, Translator
-						.t("Do_you_want_to_search_again"))) {
+				&& DialogFactory.showQuestionDialog(this,
+						Translator.t("Do_you_want_to_search_again"))) {
 			searchIndex = 0;
 			searchAgainText();
 		}

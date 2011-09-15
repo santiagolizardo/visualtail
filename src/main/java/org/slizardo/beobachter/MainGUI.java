@@ -21,6 +21,10 @@ import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -49,6 +53,17 @@ public class MainGUI extends JFrame {
 	public static void main(String[] args) {
 		ConfigManager configManager = null;
 
+		try {
+			Properties prop = System.getProperties();
+			prop.setProperty("java.util.logging.config.file",
+					"logging.properties");
+			LogManager.getLogManager().readConfiguration();
+		} catch (IOException ex) {
+			System.err.println(ex.getMessage());
+		}
+
+		Logger.getLogger(MainGUI.class.getName()).severe("ABC");
+		
 		try {
 			configManager = new ConfigManager(Constants.CONFIG_FILE);
 			configManager.loadConfiguration();
