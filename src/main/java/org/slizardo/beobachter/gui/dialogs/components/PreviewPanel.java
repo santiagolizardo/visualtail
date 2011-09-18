@@ -29,28 +29,25 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class PreviewPanel extends JPanel implements ChangeListener {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -7883502338884979025L;
+
 	private JLabel label;
-	
+
 	public PreviewPanel(JColorChooser chooser) {
 		super();
 		label = new JLabel("EXAMPLE");
-		
+
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setLayout(new BorderLayout());
-		
+
 		add(label);
 
 		chooser.getSelectionModel().addChangeListener(this);
 	}
-	
+
 	public void stateChanged(ChangeEvent e) {
-		ColorSelectionModel model = (ColorSelectionModel)e.getSource();
+		ColorSelectionModel model = (ColorSelectionModel) e.getSource();
 		label.setForeground(model.getSelectedColor());
 	}
 }
-

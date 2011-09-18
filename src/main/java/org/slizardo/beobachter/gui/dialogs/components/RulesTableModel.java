@@ -17,9 +17,9 @@
  */
 package org.slizardo.beobachter.gui.dialogs.components;
 
-
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -33,10 +33,9 @@ public class RulesTableModel extends AbstractTableModel {
 	private String columns[] = new String[] { Translator.t("Pattern"),
 			Translator.t("Colors"), Translator.t("Ignore_case") };
 
-	private ArrayList<Rule> rules;
+	private List<Rule> rules;
 
 	public RulesTableModel() {
-
 		rules = new ArrayList<Rule>();
 	}
 
@@ -68,8 +67,8 @@ public class RulesTableModel extends AbstractTableModel {
 	}
 
 	public void addRule(Object o) {
-		if(o instanceof Rule) {
-			Rule rule = (Rule)o;
+		if (o instanceof Rule) {
+			Rule rule = (Rule) o;
 			rules.add(rule);
 			fireTableRowsInserted(rules.size() - 1, rules.size() - 1);
 		}
@@ -79,13 +78,13 @@ public class RulesTableModel extends AbstractTableModel {
 		rules.remove(index);
 		fireTableRowsDeleted(index, index);
 	}
-	
+
 	public void clear() {
 		rules.clear();
 		fireTableDataChanged();
 	}
 
-	public ArrayList<Rule> getRules() {
+	public List<Rule> getRules() {
 		return rules;
 	}
 }

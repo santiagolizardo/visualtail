@@ -21,21 +21,11 @@ import java.awt.Color;
 import java.util.regex.Pattern;
 
 public class Rule {
-
-	public final String PATTERN = "pattern";
-	public final String REGULAR_EXPRESSION = "regular_expression";
-	public final String IGNORE_CASE = "ignore_case";
-	public final String BACKGROUND_COLOR = "background_color";
-	public final String FOREGROUND_COLOR = "foreground_color";
 	
-	private String pattern;
-	
+	private String pattern;	
 	private boolean regularExpression;
-
 	private boolean ignoreCase;
-
 	private Color backgroundColor;
-
 	private Color foregroundColor;
 
 	public Rule() {

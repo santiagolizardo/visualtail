@@ -6,6 +6,7 @@ Version 1.7 (september 2011)
 	- Tray icon.
 	- More unit tests meaning more robust-stable working.
 	- Better handling of huge files.
+	- Replacement of many StringBuffers to StringBuilders.
 
 Version 1.6 (november 2010):
 

@@ -121,9 +121,10 @@ public class ListingPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				LogType selected = (LogType) lstTypes.getSelectedValue();
 				String newName = JOptionPane.showInputDialog(getParent(),
-						"Enter the new name of the log type:", selected
-								.getName());
-				if(newName == null) return;
+						"Enter the new name of the log type:",
+						selected.getName());
+				if (newName == null)
+					return;
 				newName = newName.trim();
 				if (newName.length() > 0 && !newName.equals(selected.getName())) {
 					File file = new File(selected.getPath());
@@ -145,18 +146,15 @@ public class ListingPanel extends JPanel {
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (DialogFactory
-						.showQuestionDialog(
-								getParent(),
-								Translator
-										.t("Sure_you_want_to_delete_the_selected_log_type"))) {
+				if (DialogFactory.showQuestionDialog(getParent(), Translator
+						.t("Sure_you_want_to_delete_the_selected_log_type"))) {
 					LogType selected = (LogType) lstTypes.getSelectedValue();
 					File file = new File(selected.getPath());
-					System.out.printf("Trying to delete '%s'...\n", file
-							.getAbsolutePath());
+					System.out.printf("Trying to delete '%s'...\n",
+							file.getAbsolutePath());
 					if (!file.delete()) {
-						DialogFactory.showErrorMessage(getParent(), Translator
-								.t("Unable_to_delete_the_log_type"));
+						DialogFactory.showErrorMessage(getParent(),
+								Translator.t("Unable_to_delete_the_log_type"));
 					}
 
 					updateLogTypes();
@@ -206,8 +204,8 @@ public class ListingPanel extends JPanel {
 		modelTypes.clear();
 		Vector<LogType> logTypes = ArraysUtil.arrayLogTypes();
 		for (LogType logType : logTypes) {
-			if(!logType.getName().equals("Default")) {
-				modelTypes.addElement(logType);				
+			if (!"Default".equals(logType.getName())) {
+				modelTypes.addElement(logType);
 			}
 		}
 	}

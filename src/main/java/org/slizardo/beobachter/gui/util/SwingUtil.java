@@ -36,15 +36,9 @@ public class SwingUtil {
 	}
 
 	public static String colorToString(Color color) {
-		StringBuffer buffer = new StringBuffer();
-
-		buffer.append(color.getRed());
-		buffer.append(":");
-		buffer.append(color.getGreen());
-		buffer.append(":");
-		buffer.append(color.getBlue());
-
-		return buffer.toString();
+		StringBuilder sb = new StringBuilder(color.getRed()).append(":")
+				.append(color.getGreen()).append(":").append(color.getBlue());
+		return sb.toString();
 	}
 
 	public static Color stringToColor(String color) {

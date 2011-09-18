@@ -17,40 +17,38 @@
  */
 package org.slizardo.beobachter.resources;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.commons.io.IOUtils;
+
 public class ResourcesLoader {
 
+	private static final Logger logger = Logger.getLogger(ResourcesLoader.class
+			.getName());
+
 	public static String readResource(Class<?> clazz, String name) {
-		StringBuffer buffer = new StringBuffer();
+		String resourceContent = null;
 
 		try {
 			InputStream is = clazz.getResourceAsStream(name);
-			BufferedReader reader = new BufferedReader(
-					new InputStreamReader(is));
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				buffer.append(line);
-			}
-			reader.close();
+			resourceContent = IOUtils.toString(is, "UTF-8");
 			is.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException ioe) {
+			logger.severe(ioe.getMessage());
 		}
 
-		return buffer.toString();
+		return resourceContent;
 	}
 
 	public static Collection<String> getResources(Pattern pattern)

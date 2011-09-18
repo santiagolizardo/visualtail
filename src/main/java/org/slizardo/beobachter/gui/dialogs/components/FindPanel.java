@@ -17,7 +17,6 @@
  */
 package org.slizardo.beobachter.gui.dialogs.components;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -36,51 +35,51 @@ import org.slizardo.beobachter.resources.languages.Translator;
 
 public class FindPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -750096502886630895L;
+	
 	private JTextField search;
 	private JButton close;
-	
+
 	public FindPanel() {
+		final MainGUI mainGUI = MainGUI.instance;
 
 		search = new JTextField(20);
 		search.addKeyListener(new KeyAdapter() {
-			
+
 			public void keyReleased(KeyEvent e) {
 				int modifiers = e.getModifiers();
 				int keyCode = e.getKeyCode();
-				if(modifiers == KeyEvent.CTRL_MASK && keyCode == KeyEvent.VK_ENTER) {
-					LogWindow log = (LogWindow) MainGUI.instance.desktop
-					.getSelectedFrame();
+				if (modifiers == KeyEvent.CTRL_MASK
+						&& keyCode == KeyEvent.VK_ENTER) {
+					LogWindow log = (LogWindow) mainGUI.desktop
+							.getSelectedFrame();
 					if (log != null) {
 						log.searchText(search.getText());
 					}
 				}
 			}
 		});
-				
+
 		close = new JButton(IconFactory.getImage("close.png"));
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MainGUI.instance.removeFindPanel();
+				mainGUI.removeFindPanel();
 			}
 		});
-		
+
 		defineLayout();
 	}
-	
+
 	public void focus() {
 		search.requestFocusInWindow();
 	}
-	
+
 	public void defineLayout() {
 		BoxLayout box = new BoxLayout(this, BoxLayout.X_AXIS);
 		setLayout(box);
 
-		JLabel _search = new JLabel(Translator.t("Search")+":");
-		
+		JLabel _search = new JLabel(Translator.t("Search") + ":");
+
 		add(_search);
 		add(search);
 		add(close);

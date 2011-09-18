@@ -17,7 +17,6 @@
  */
 package org.slizardo.beobachter.gui.actions;
 
-
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -27,8 +26,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
-import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.Constants;
+import org.slizardo.beobachter.MainGUI;
 import org.slizardo.beobachter.gui.dialogs.LogWindow;
 import org.slizardo.beobachter.resources.images.IconFactory;
 import org.slizardo.beobachter.resources.languages.Translator;
@@ -40,33 +39,29 @@ class CopyAction extends AbstractAction {
 	 */
 	private static final long serialVersionUID = 2226006120048433873L;
 
-	private StringBuffer buffer;
-
 	private Clipboard clipboard;
 
 	public CopyAction() {
 
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("copy.png"));
 		putValue(AbstractAction.NAME, Translator.t("Copy"));
-		putValue(AbstractAction.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
-				KeyEvent.VK_C, KeyEvent.CTRL_MASK));
+		putValue(AbstractAction.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
 
-		buffer = new StringBuffer();
 		clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) MainGUI.instance.desktop
-				.getSelectedFrame();
+		LogWindow log = (LogWindow) MainGUI.instance.desktop.getSelectedFrame();
 		if (log != null) {
 			Object[] selected = log.lines.getSelectedValues();
-			buffer.setLength(0);
+			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < selected.length; i++) {
-				buffer.append(selected[i].toString());
-				buffer.append(Constants.LINE_SEP);
+				sb.append(selected[i].toString());
+				sb.append(Constants.LINE_SEP);
 			}
 			clipboard
-					.setContents(new StringSelection(buffer.toString()), null /* ClipboardOwner */);
+					.setContents(new StringSelection(sb.toString()), null /* ClipboardOwner */);
 		}
 	}
 }
