@@ -40,9 +40,9 @@ public class Tail extends Thread {
 
 	private String fileName;
 
-	private short refreshInterval;
+	private int refreshInterval;
 
-	public Tail(String fileName, short refreshInterval) {
+	public Tail(String fileName, int refreshInterval) {
 		setName("Tail");
 		listeners = new ArrayList<TailListener>();
 		enabled = true;

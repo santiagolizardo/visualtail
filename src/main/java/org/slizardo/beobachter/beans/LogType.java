@@ -17,7 +17,6 @@
  */
 package org.slizardo.beobachter.beans;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,13 +25,13 @@ import org.slizardo.beobachter.Constants;
 public class LogType {
 
 	private String name;
-	private short refreshInterval;
+	private int refreshInterval;
 
 	private List<Rule> rules;
 
 	public LogType(String name) {
 		setName(name);
-		setRefreshInterval((short) 500);
+		setRefreshInterval(500);
 
 		rules = new ArrayList<Rule>();
 	}
@@ -50,11 +49,11 @@ public class LogType {
 		this.name = name;
 	}
 
-	public short getRefreshInterval() {
+	public int getRefreshInterval() {
 		return refreshInterval;
 	}
 
-	public void setRefreshInterval(short refreshInterval) {
+	public void setRefreshInterval(int refreshInterval) {
 		this.refreshInterval = refreshInterval;
 	}
 
