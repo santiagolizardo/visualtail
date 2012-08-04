@@ -24,7 +24,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -61,8 +60,6 @@ public class MainGUI extends JFrame {
 		} catch (IOException ex) {
 			System.err.println(ex.getMessage());
 		}
-
-		Logger.getLogger(MainGUI.class.getName()).severe("ABC");
 		
 		try {
 			configManager = new ConfigManager(Constants.CONFIG_FILE);

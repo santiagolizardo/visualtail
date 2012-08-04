@@ -17,18 +17,20 @@
  */
 package org.slizardo.beobachter.config;
 
-
 import java.awt.Color;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.slizardo.beobachter.Constants;
 import org.slizardo.beobachter.beans.LogType;
 import org.slizardo.beobachter.beans.Rule;
-import org.slizardo.beobachter.gui.util.SwingUtil;
 
 public class EntitiesConfiguration {
+
+	private static final Logger LOGGER = Logger
+			.getLogger(EntitiesConfiguration.class.getName());
 
 	private static final String REFRESH_INTERVAL = "option.refresh_interval";
 
@@ -70,18 +72,18 @@ public class EntitiesConfiguration {
 			throws ConfigurationException {
 		PropertiesConfiguration configuration = new PropertiesConfiguration();
 
-		configuration.setProperty(REFRESH_INTERVAL, logType
-				.getRefreshInterval());
+		configuration.setProperty(REFRESH_INTERVAL,
+				logType.getRefreshInterval());
 
 		List<Rule> rules = logType.getRules();
 		for (int i = 0; i < rules.size(); i++) {
 			Rule rule = (Rule) rules.get(i);
-			configuration.setProperty("rule." + i + ".pattern", rule
-					.getPattern());
-			configuration.setProperty("rule." + i + ".regular_expression", rule
-					.isRegularExpression());
-			configuration.setProperty("rule." + i + ".ignore_case", rule
-					.isIgnoreCase());
+			configuration.setProperty("rule." + i + ".pattern",
+					rule.getPattern());
+			configuration.setProperty("rule." + i + ".regular_expression",
+					rule.isRegularExpression());
+			configuration.setProperty("rule." + i + ".ignore_case",
+					rule.isIgnoreCase());
 			setColorProperty(configuration, "rule." + i + ".background_color",
 					rule.getBackgroundColor());
 			setColorProperty(configuration, "rule." + i + ".foreground_color",
@@ -94,12 +96,22 @@ public class EntitiesConfiguration {
 
 	public static void setColorProperty(PropertiesConfiguration configuration,
 			String propertyName, Color propertyValue) {
-		configuration.setProperty(propertyName, SwingUtil
-				.colorToString(propertyValue));
+		try {
+			String intColorString = String.valueOf(propertyValue.getRGB());
+			configuration.setProperty(propertyName, intColorString);
+		} catch (Exception e) {
+			LOGGER.warning(e.getMessage());
+		}
 	}
 
 	public static Color getColorProperty(PropertiesConfiguration configuration,
 			String propertyName) {
-		return SwingUtil.stringToColor(configuration.getString(propertyName));
+		try {
+			String intColorString = configuration.getString(propertyName);
+			return Color.decode(intColorString);
+		} catch (Exception e) {
+			LOGGER.warning(e.getMessage());
+			return null;
+		}
 	}
 }

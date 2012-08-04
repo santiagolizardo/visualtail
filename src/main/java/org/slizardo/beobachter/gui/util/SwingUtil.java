@@ -17,7 +17,6 @@
  */
 package org.slizardo.beobachter.gui.util;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 
 import javax.swing.UIManager;
@@ -33,22 +32,6 @@ public class SwingUtil {
 
 	public static void beep() {
 		toolkit.beep();
-	}
-
-	public static String colorToString(Color color) {
-		StringBuilder sb = new StringBuilder(color.getRed()).append(":")
-				.append(color.getGreen()).append(":").append(color.getBlue());
-		return sb.toString();
-	}
-
-	public static Color stringToColor(String color) {
-		String[] channels = color.split(":");
-
-		int red = Integer.parseInt(channels[0]);
-		int green = Integer.parseInt(channels[1]);
-		int blue = Integer.parseInt(channels[2]);
-
-		return new Color(red, green, blue);
 	}
 
 	public static void setSystemLookAndFeel() {

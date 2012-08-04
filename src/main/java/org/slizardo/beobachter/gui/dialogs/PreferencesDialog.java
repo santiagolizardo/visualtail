@@ -38,9 +38,9 @@ import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
+import javax.swing.SpringLayout.Constraints;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.SpringLayout.Constraints;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.slizardo.beobachter.MainGUI;
