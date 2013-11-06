@@ -1,12 +1,12 @@
 
 Developers:
 
-	Santiago Lizardo (santiago.lizardo@gmail.com)
+	Santiago Lizardo (http://www.santiagolizardo.com)
 	Main application development
 
 Translators:
 
-	Santiago Lizardo (santiago.lizardo@gmail.com)
+	Santiago Lizardo (http://www.santiagolizardo.com)
 	Spanish, catalan and english translations
 	
 	fooey (fooeyy@users.sourceforge.net)
