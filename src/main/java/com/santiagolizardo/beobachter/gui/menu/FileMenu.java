@@ -23,6 +23,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileWriter;
 
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -45,7 +46,7 @@ public class FileMenu extends JMenu {
 
 	private static final long serialVersionUID = -9095266179967845006L;
 
-	public FileMenu() {
+	public FileMenu(final JFrame parentFrame) {
 		setText(Translator.t("File"));
 		setMnemonic(KeyEvent.VK_F);
 
@@ -54,7 +55,7 @@ public class FileMenu extends JMenu {
 				KeyEvent.CTRL_MASK));
 		open.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				OpenFileDialog ofDialog = new OpenFileDialog();
+				OpenFileDialog ofDialog = new OpenFileDialog(parentFrame);
 				ofDialog.setVisible(true);
 			}
 		});
@@ -68,7 +69,7 @@ public class FileMenu extends JMenu {
 		loadSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SessionsDialog dialog = new SessionsDialog();
+				SessionsDialog dialog = new SessionsDialog(parentFrame);
 				dialog.setVisible(true);
 			}
 		});

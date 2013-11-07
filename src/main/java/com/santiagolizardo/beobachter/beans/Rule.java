@@ -80,11 +80,13 @@ public class Rule {
 			return false;
 		}
 
+		String pattern = getPattern();
+
 		if (regularExpression) {
-			Pattern p = Pattern.compile(getPattern());
+			Pattern p = Pattern.compile(pattern);
 			return p.matcher(text).matches();
 		} else {
-			return (text.indexOf(getPattern()) != -1);
+			return (text.indexOf(pattern) != -1);
 		}
 	}
 

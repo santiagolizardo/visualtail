@@ -34,8 +34,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.SpringLayout.Constraints;
@@ -55,11 +57,20 @@ import com.santiagolizardo.beobachter.util.ArraysUtil;
  * @author slizardo
  * 
  */
-public class OpenFileDialog extends JDialog {
+public class OpenFileDialog extends AbstractDialog {
 
 	private static final long serialVersionUID = 8551819260159898361L;
 
-	public OpenFileDialog() {
+	private JTextField tfFilePath;
+	private JButton btnBrowse;
+	private DefaultComboBoxModel<LogType> logTypesModel;
+	private JComboBox<LogType> cbLogTypes;
+	private JButton btnOpen;
+	private JButton btnCancel;
+
+	public OpenFileDialog(JFrame parentFrame) {
+		super(parentFrame);
+		
 		setTitle(Translator.t("Open file..."));
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setModal(true);
@@ -69,24 +80,24 @@ public class OpenFileDialog extends JDialog {
 		configureEvents();
 	}
 
-	private JTextField tfFilePath;
-	private JButton btnBrowse;
-	private DefaultComboBoxModel logTypesModel;
-	private JComboBox cbLogTypes;
-	private JButton btnOpen;
-	private JButton btnCancel;
+	@Override
+	protected JRootPane createRootPane() {
+		JRootPane rootPane = super.createRootPane();
+		rootPane.setDefaultButton(btnOpen);
+		return rootPane;
+	}
 
 	private void initComponents() {
 		tfFilePath = new JTextField(50);
 		btnBrowse = new JButton(Translator.t("Browse..."));
 
-		logTypesModel = new DefaultComboBoxModel();
+		logTypesModel = new DefaultComboBoxModel<LogType>();
 		Iterator<LogType> logTypes = ArraysUtil.arrayLogTypes().iterator();
 		while (logTypes.hasNext()) {
 			logTypesModel.addElement(logTypes.next());
 		}
 
-		cbLogTypes = new JComboBox(logTypesModel);
+		cbLogTypes = new JComboBox<LogType>(logTypesModel);
 		cbLogTypes.setRenderer(new LogTypeListRenderer());
 
 		btnOpen = new JButton(Translator.t("Open"));
@@ -125,9 +136,11 @@ public class OpenFileDialog extends JDialog {
 		constraints.setWidth(spring.getConstraint(EAST, btnBrowse));
 		constraints.setHeight(spring.getConstraint(SOUTH, btnOpen));
 		pack();
+		setLocationRelativeTo(parentFrame);
 	}
 
 	private void configureEvents() {
+
 		btnBrowse.addActionListener(new ActionListener() {
 
 			@Override
@@ -160,10 +173,12 @@ public class OpenFileDialog extends JDialog {
 					return;
 				}
 
-				dispose();
+				setVisible(false);
 
 				Controller.addRecent(filePath);
 				Controller.openFile(filePath, logType);
+
+				dispose();
 			}
 		});
 		btnCancel.addActionListener(new ActionListener() {

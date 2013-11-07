@@ -17,34 +17,29 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
-
 import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JRootPane;
-import javax.swing.KeyStroke;
+import javax.swing.JFrame;
 
 import com.santiagolizardo.beobachter.gui.dialogs.components.EditionPanel;
 import com.santiagolizardo.beobachter.gui.dialogs.components.ListingPanel;
 
-public class LogTypesDialog extends JDialog {
+public class LogTypesDialog extends AbstractDialog {
 
 	private static final long serialVersionUID = -1516233460385847703L;
 
 	private ListingPanel listingPanel;
 	private EditionPanel editionPanel;
 
-	public LogTypesDialog() {
+	public LogTypesDialog(JFrame parentFrame) {
+		super(parentFrame);
+
 		setTitle("Log types configuration");
 		setModal(true);
 
 		editionPanel = new EditionPanel();
-		
+
 		listingPanel = new ListingPanel();
 		listingPanel.setEditionPanel(editionPanel);
 
@@ -55,22 +50,6 @@ public class LogTypesDialog extends JDialog {
 		container.add(editionPanel);
 
 		pack();
-		setLocationRelativeTo(null);
-	}
-
-	@Override
-	protected JRootPane createRootPane() {
-		JRootPane rootPane = super.createRootPane();
-
-		rootPane.registerKeyboardAction(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-				dispose();
-			}
-		}, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
-				JComponent.WHEN_IN_FOCUSED_WINDOW);
-
-		return rootPane;
+		setLocationRelativeTo(parentFrame);
 	}
 }

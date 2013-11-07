@@ -26,7 +26,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -36,14 +35,11 @@ import java.io.FileReader;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
-import javax.swing.KeyStroke;
 import javax.swing.SpringLayout;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -60,7 +56,7 @@ import com.santiagolizardo.beobachter.resources.languages.Translator;
  * @author slizardo
  * 
  */
-public class SessionsDialog extends JDialog {
+public class SessionsDialog extends AbstractDialog {
 
 	private static final long serialVersionUID = -8601498821660138035L;
 
@@ -70,11 +66,12 @@ public class SessionsDialog extends JDialog {
 	private JButton btnOpen;
 	private JButton btnRemove;
 
-	public SessionsDialog() {
+	public SessionsDialog(JFrame parentFrame) {
+		super(parentFrame);
+
 		setTitle(Translator.t("Sessions"));
 		setModal(true);
 		setSize(320, 240);
-		setLocationRelativeTo(null);
 
 		listModel = new DefaultListModel();
 		list = new JList(listModel);
@@ -110,8 +107,10 @@ public class SessionsDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String sessionName = list.getSelectedValue().toString();
-				int resp = JOptionPane.showConfirmDialog(getParent(),
-						Translator.t("Are you sure you want to delete this session?"));
+				int resp = JOptionPane.showConfirmDialog(
+						getParent(),
+						Translator
+								.t("Are you sure you want to delete this session?"));
 				if (resp == JOptionPane.YES_OPTION) {
 					File file = new File(Constants.FOLDER_SESSIONS + "/"
 							+ sessionName + ".txt");
@@ -169,6 +168,8 @@ public class SessionsDialog extends JDialog {
 		container.add(scrollList);
 		container.add(btnOpen);
 		container.add(btnRemove);
+
+		setLocationRelativeTo(parentFrame);
 	}
 
 	private void openSession() {
@@ -190,21 +191,5 @@ public class SessionsDialog extends JDialog {
 
 		setVisible(false);
 		dispose();
-	}
-
-	@Override
-	protected JRootPane createRootPane() {
-		JRootPane rootPane = super.createRootPane();
-
-		rootPane.registerKeyboardAction(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-				dispose();
-			}
-		}, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
-				JComponent.WHEN_IN_FOCUSED_WINDOW);
-
-		return rootPane;
 	}
 }

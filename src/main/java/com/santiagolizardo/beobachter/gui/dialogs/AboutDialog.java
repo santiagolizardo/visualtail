@@ -17,7 +17,6 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Desktop;
@@ -25,28 +24,25 @@ import java.awt.Desktop.Action;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.net.URI;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
-import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
 
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.resources.ResourcesLoader;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 
-public class AboutDialog extends JDialog {
+public class AboutDialog extends AbstractDialog {
 
 	private static final long serialVersionUID = -3985858584067350439L;
 
-	public AboutDialog() {
+	public AboutDialog(JFrame parentFrame) {
+		super(parentFrame);
 
 		setTitle(Translator.t("About_this_application"));
 		setSize(320, 270);
@@ -54,7 +50,6 @@ public class AboutDialog extends JDialog {
 		setResizable(false);
 
 		defineLayout();
-		setLocationRelativeTo(null);
 	}
 
 	private void defineLayout() {
@@ -62,8 +57,9 @@ public class AboutDialog extends JDialog {
 		container.setBackground(Color.WHITE);
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 
-		String credits = ResourcesLoader.readResource(AboutDialog.class, "CREDITS.html");
-		
+		String credits = ResourcesLoader.readResource(AboutDialog.class,
+				"CREDITS.html");
+
 		JLabel lblName = new JLabel(Constants.APP_NAME);
 		Font fontName = lblName.getFont();
 		fontName = fontName.deriveFont(25f);
@@ -73,23 +69,25 @@ public class AboutDialog extends JDialog {
 		fontVersion = fontVersion.deriveFont(Font.ITALIC);
 		lblVersion.setFont(fontVersion);
 		JLabel lblCredits = new JLabel(credits);
-		
+
 		JScrollPane scrollPane = new JScrollPane(lblCredits);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		
+		scrollPane
+				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
 		container.add(lblName);
 		container.add(lblVersion);
 		container.add(scrollPane);
-		
+
 		final Desktop desktop = Desktop.getDesktop();
-		
-		if(desktop.isSupported(Action.BROWSE)) {
+
+		if (desktop.isSupported(Action.BROWSE)) {
 			JButton btnWebsite = new JButton(Translator.t("Visit_the_website"));
 			btnWebsite.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						URI uri = new URI("http://sourceforge.net/projects/beobachter/");
+						URI uri = new URI(
+								"http://sourceforge.net/projects/beobachter/");
 						desktop.browse(uri);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -99,26 +97,13 @@ public class AboutDialog extends JDialog {
 
 			container.add(btnWebsite);
 		} else {
-			JLabel lblWebsite = new JLabel("http://sourceforge.net/projects/beobachter/");
+			JLabel lblWebsite = new JLabel(
+					"http://sourceforge.net/projects/beobachter/");
 			lblWebsite.setForeground(Color.BLUE);
-			
+
 			container.add(lblWebsite);
 		}
-	}
-	
-	@Override
-	protected JRootPane createRootPane() {
-		JRootPane rootPane = super.createRootPane();
-
-		rootPane.registerKeyboardAction(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-				dispose();
-			}
-		}, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
-				JComponent.WHEN_IN_FOCUSED_WINDOW);
-
-		return rootPane;
+		
+		setLocationRelativeTo(parentFrame);
 	}
 }

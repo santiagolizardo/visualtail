@@ -93,7 +93,7 @@ public class MainGUI extends JFrame {
 		this.configManager = configManager;
 
 		desktop = new JDesktopPane();
-		Menu menu = new Menu(desktop);
+		Menu menu = new Menu(desktop, this);
 		setJMenuBar(menu);
 		setTitle(Constants.APP_NAME);
 		setSize(configManager.getWindowWidth(), configManager.getWindowHeight());

@@ -24,17 +24,14 @@ import java.awt.Container;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRootPane;
 import javax.swing.JSpinner;
-import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
@@ -52,23 +49,26 @@ import com.santiagolizardo.beobachter.gui.util.SwingUtil;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 import com.santiagolizardo.beobachter.util.ArraysUtil;
 
-public class PreferencesDialog extends JDialog {
+public class PreferencesDialog extends AbstractDialog {
 
 	private static final long serialVersionUID = -4534774464099526206L;
-	
-	private static final Logger logger = Logger.getLogger(PreferencesDialog.class.getName());
 
-	private JComboBox lookAndFeel;
+	private static final Logger logger = Logger
+			.getLogger(PreferencesDialog.class.getName());
 
-	private JComboBox languagesList;
-	private JComboBox fontsList;
+	private JComboBox<SwingLookAndFeel> lookAndFeel;
+
+	private JComboBox<String> languagesList;
+	private JComboBox<String> fontsList;
 
 	private JSpinner size;
 
 	private JButton btnOk;
 	private JButton btnCancel;
 
-	public PreferencesDialog() {
+	public PreferencesDialog(JFrame parentFrame) {
+		super(parentFrame);
+
 		final ConfigManager configManager = MainGUI.instance.configManager;
 
 		setTitle(Translator.t("Preferences"));
@@ -81,10 +81,11 @@ public class PreferencesDialog extends JDialog {
 			LookAndFeelInfo info = infos[i];
 			lafs[i] = new SwingLookAndFeel(info.getName(), info.getClassName());
 		}
-		lookAndFeel = new JComboBox(lafs);
+		lookAndFeel = new JComboBox<SwingLookAndFeel>(lafs);
 		lookAndFeel.setRenderer(new SwingLAFRenderer());
 		try {
-			SwingLookAndFeel look = SwingLookAndFeel.forName(configManager.getWindowLAF());
+			SwingLookAndFeel look = SwingLookAndFeel.forName(configManager
+					.getWindowLAF());
 			lookAndFeel.setSelectedItem(look);
 		} catch (Exception e) {
 			logger.warning("Unable to set the selected look&feel.");
@@ -92,13 +93,13 @@ public class PreferencesDialog extends JDialog {
 
 		String[] languages = ArraysUtil.arrayLanguages();
 
-		languagesList = new JComboBox(languages);
+		languagesList = new JComboBox<String>(languages);
 		languagesList.setSelectedItem(configManager.getLanguage());
 		languagesList.setRenderer(new LocaleRender());
 
 		String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment()
 				.getAvailableFontFamilyNames();
-		fontsList = new JComboBox(fonts);
+		fontsList = new JComboBox<String>(fonts);
 		fontsList.setSelectedItem(configManager.getFontFamily());
 
 		size = new JSpinner(new SpinnerNumberModel(configManager.getFontSize(),
@@ -108,7 +109,8 @@ public class PreferencesDialog extends JDialog {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				setVisible(false);
-				SwingLookAndFeel laf = ((SwingLookAndFeel) lookAndFeel.getSelectedItem());
+				SwingLookAndFeel laf = ((SwingLookAndFeel) lookAndFeel
+						.getSelectedItem());
 				configManager.setWindowLAF(laf.getClassName());
 				SwingUtil.setLookAndFeel(laf.getClassName());
 				SwingUtilities.updateComponentTreeUI(MainGUI.instance);
@@ -136,24 +138,12 @@ public class PreferencesDialog extends JDialog {
 		});
 
 		defineLayout();
-		setLocationRelativeTo(null);
 	}
 
 	@Override
 	protected JRootPane createRootPane() {
 		JRootPane rootPane = super.createRootPane();
-
-		rootPane.registerKeyboardAction(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-				dispose();
-			}
-		}, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
-				JComponent.WHEN_IN_FOCUSED_WINDOW);
-
 		rootPane.setDefaultButton(btnOk);
-
 		return rootPane;
 	}
 
@@ -225,11 +215,12 @@ public class PreferencesDialog extends JDialog {
 		Constraints fontCons = layout.getConstraints(fontsList);
 		Constraints okCons = layout.getConstraints(btnOk);
 
-		containerCons.setWidth(Spring.sum(Spring.constant(5), fontCons
-				.getConstraint(EAST)));
-		containerCons.setHeight(Spring.sum(Spring.constant(5), okCons
-				.getConstraint(SOUTH)));
+		containerCons.setWidth(Spring.sum(Spring.constant(5),
+				fontCons.getConstraint(EAST)));
+		containerCons.setHeight(Spring.sum(Spring.constant(5),
+				okCons.getConstraint(SOUTH)));
 
 		pack();
+		setLocationRelativeTo(parentFrame);
 	}
 }

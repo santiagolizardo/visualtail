@@ -17,11 +17,11 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
@@ -35,29 +35,28 @@ public class OptionsMenu extends JMenu {
 
 	private static final long serialVersionUID = 4390929385204480673L;
 
-	public OptionsMenu() {
+	public OptionsMenu(final JFrame parentFrame) {
 
 		setText(Translator.t("Options"));
 		setMnemonic(KeyEvent.VK_O);
 
-		JMenuItem manageLogTypes = new JMenuItem(Translator
-				.t("Manage_log_types..."));
+		JMenuItem manageLogTypes = new JMenuItem(
+				Translator.t("Manage_log_types..."));
 		manageLogTypes.setIcon(IconFactory.getImage("manage_log_types.png"));
 		manageLogTypes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				LogTypesDialog dialog = new LogTypesDialog();
+				LogTypesDialog dialog = new LogTypesDialog(parentFrame);
 				dialog.setVisible(true);
 			}
 		});
 
-		JMenuItem preferences = new JMenuItem(Translator
-				.t("Preferences..."));
+		JMenuItem preferences = new JMenuItem(Translator.t("Preferences..."));
 		preferences.setIcon(IconFactory.getImage("preferences.png"));
 		preferences.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
 				KeyEvent.CTRL_MASK));
 		preferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				PreferencesDialog dialog = new PreferencesDialog();
+				PreferencesDialog dialog = new PreferencesDialog(parentFrame);
 				dialog.setVisible(true);
 			}
 		});

@@ -19,19 +19,20 @@ package com.santiagolizardo.beobachter.gui.menu;
 
 import javax.swing.Box;
 import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 public class Menu extends JMenuBar {
 
 	private static final long serialVersionUID = -1490576137341648743L;
 
-	public Menu(final JDesktopPane pane) {
+	public Menu(final JDesktopPane pane, JFrame parentFrame) {
 
-		FileMenu fileMenu = new FileMenu();
+		FileMenu fileMenu = new FileMenu(parentFrame);
 		EditMenu editMenu = new EditMenu();
-		OptionsMenu optionsMenu = new OptionsMenu();
+		OptionsMenu optionsMenu = new OptionsMenu(parentFrame);
 		WindowsMenu windowMenu = new WindowsMenu();
-		HelpMenu helpMenu = new HelpMenu();
+		HelpMenu helpMenu = new HelpMenu(parentFrame);
 
 		add(fileMenu);
 		add(editMenu);
