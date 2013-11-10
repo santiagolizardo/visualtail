@@ -55,9 +55,9 @@ public class ListingPanel extends JPanel {
 
 	private EditionPanel editionPanel;
 
-	private DefaultListModel modelTypes;
+	private DefaultListModel<LogType> modelTypes;
 
-	private JList lstTypes;
+	private JList<LogType> lstTypes;
 	private JScrollPane scrollTypes;
 
 	private JButton btnAdd;
@@ -67,8 +67,8 @@ public class ListingPanel extends JPanel {
 	public ListingPanel() {
 		setPreferredSize(new Dimension(180, 340));
 
-		modelTypes = new DefaultListModel();
-		lstTypes = new JList(modelTypes);
+		modelTypes = new DefaultListModel<LogType>();
+		lstTypes = new JList<LogType>(modelTypes);
 		lstTypes.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 		lstTypes.setCellRenderer(new LogTypeListRenderer());
 		lstTypes.addListSelectionListener(new ListSelectionListener() {
@@ -96,12 +96,12 @@ public class ListingPanel extends JPanel {
 
 		scrollTypes = new JScrollPane(lstTypes);
 
-		btnAdd = new JButton(Translator.t("Add"));
+		btnAdd = new JButton(Translator._("Add"));
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String name = JOptionPane.showInputDialog(getParent(),
-						Translator.t("Enter_the_name_of_the_new_log_type"));
+						Translator._("Enter_the_name_of_the_new_log_type"));
 				if (name != null && name.trim().length() > 0) {
 					LogType logType = new LogType(name);
 					try {
@@ -115,7 +115,7 @@ public class ListingPanel extends JPanel {
 			}
 		});
 
-		btnRename = new JButton(Translator.t("Rename"));
+		btnRename = new JButton(Translator._("Rename"));
 		btnRename.setEnabled(false);
 		btnRename.addActionListener(new ActionListener() {
 			@Override
@@ -142,20 +142,20 @@ public class ListingPanel extends JPanel {
 			}
 		});
 
-		btnRemove = new JButton(Translator.t("Remove"));
+		btnRemove = new JButton(Translator._("Remove"));
 		btnRemove.setEnabled(false);
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (DialogFactory.showQuestionDialog(getParent(), Translator
-						.t("Sure_you_want_to_delete_the_selected_log_type"))) {
+						._("Sure_you_want_to_delete_the_selected_log_type"))) {
 					LogType selected = (LogType) lstTypes.getSelectedValue();
 					File file = new File(selected.getPath());
 					System.out.printf("Trying to delete '%s'...\n",
 							file.getAbsolutePath());
 					if (!file.delete()) {
 						DialogFactory.showErrorMessage(getParent(),
-								Translator.t("Unable_to_delete_the_log_type"));
+								Translator._("Unable_to_delete_the_log_type"));
 					}
 
 					updateLogTypes();
@@ -173,7 +173,7 @@ public class ListingPanel extends JPanel {
 	}
 
 	private void placeComponents() {
-		JLabel lblTypes = new JLabel(Translator.t("Log types"));
+		JLabel lblTypes = new JLabel(Translator._("Log types"));
 
 		SpringLayout layout = new SpringLayout();
 		setLayout(layout);

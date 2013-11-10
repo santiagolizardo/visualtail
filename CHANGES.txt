@@ -1,6 +1,19 @@
 CHANGES
 
-Version 1.7.1 (november 2013)
+Version 1.7.3 (2013/11/10)
+
+	- Added an option to limit the last number of lines to show of certain file. (like tail -n)
+	- Added a checkbox on the Log window which allows to stop/resume watching a file. 
+	- AUTHORS and CREDITS files have been merged.
+	- About dialog now includes link to authors.
+	- Tiny aesthetic improvement in about dialog.
+	- New Java requirement is 1.7.
+
+Version 1.7.2 (2013/11/07)
+
+	- Dialogs are now well centered.
+
+Version 1.7.1 (2013/11/06)
 
 	- Improved internal testing
 	- Small performance improvement

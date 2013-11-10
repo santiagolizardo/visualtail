@@ -186,14 +186,14 @@ public class Controller {
 	}
 
 	public static void initRecents() {
-		JMenuItem cleanRecents = new JMenuItem(Translator.t("Clean_recents"));
+		JMenuItem cleanRecents = new JMenuItem(Translator._("Clean_recents"));
 		cleanRecents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				Controller.cleanRecents();
 			}
 		});
 
-		ArraysUtil.recentsMenu = new JMenu(Translator.t("Open_recents"));
+		ArraysUtil.recentsMenu = new JMenu(Translator._("Open_recents"));
 		ArraysUtil.recentsMenu.setIcon(EmptyIcon.SIZE_16);
 		ArraysUtil.recentsMenu.add(cleanRecents);
 		ArraysUtil.recentsMenu.addSeparator();

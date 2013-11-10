@@ -33,14 +33,14 @@ public class FileUtil {
 	
 	public static void isReadable(File file) throws Exception {
 		if (!file.exists()) {
-			throw new Exception(Translator.t("The_file_doesnt_exists"));
+			throw new Exception(Translator._("The_file_doesnt_exists"));
 		}
 		if (file.isDirectory()) {
-			throw new Exception(Translator.t("Cannot_open_a_directory"));
+			throw new Exception(Translator._("Cannot_open_a_directory"));
 		}
 		if (!file.canRead()) {
 			throw new Exception(Translator
-					.t("You_dont_have_permission_to_read_this_file"));
+					._("You_dont_have_permission_to_read_this_file"));
 		}
 	}
 

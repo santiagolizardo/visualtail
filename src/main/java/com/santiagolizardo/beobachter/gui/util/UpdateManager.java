@@ -17,6 +17,8 @@
  */
 package com.santiagolizardo.beobachter.gui.util;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -24,7 +26,6 @@ import java.text.MessageFormat;
 
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.MainGUI;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class UpdateManager extends Thread {
 
@@ -34,14 +35,11 @@ public class UpdateManager extends Thread {
 	}
 
 	private UpdateManager() {
-
 	}
 
 	public void run() {
 		try {
-			// @TODO Find a definite URL.
-			URL url = new URL(
-					"http://www.sourceforge.net/projects/beobachter/files/beobachter_version.html");
+			URL url = new URL(Constants.APP_UPDATE_URL);
 			InputStreamReader reader = new InputStreamReader(url.openStream());
 			BufferedReader buffer = new BufferedReader(reader);
 			String version = buffer.readLine();
@@ -49,27 +47,28 @@ public class UpdateManager extends Thread {
 			reader.close();
 			int serverVersion = Integer.valueOf(version.replaceAll("\\.", ""))
 					.intValue();
+			System.out.println(serverVersion);
 			int currentVersion = Integer.valueOf(
 					Constants.APP_VERSION.replaceAll("\\.", "")).intValue();
+			System.out.println(currentVersion);
 			if (serverVersion > currentVersion) {
 				StringBuilder sb = new StringBuilder();
 				sb.append(
-						MessageFormat.format(
-								Translator.t("New_version_0_available"),
+						MessageFormat.format(_("New_version_0_available"),
 								new Object[] { version }))
 						.append(Constants.LINE_SEP).append(Constants.LINE_SEP);
-				sb.append(Translator.t("Please_visit_us_on_sourceforge"))
-						.append(Constants.LINE_SEP);
+				sb.append(_("Please_visit_us_on_sourceforge")).append(
+						Constants.LINE_SEP);
 				DialogFactory.showInformationMessage(MainGUI.instance,
 						sb.toString());
 			} else if (serverVersion <= currentVersion) {
 				DialogFactory.showInformationMessage(MainGUI.instance,
-						Translator.t("There_are_not_updates_available"));
+						_("There_are_not_updates_available"));
 			}
 
 		} catch (Exception e) {
 			DialogFactory.showErrorMessage(MainGUI.instance,
-					Translator.t("Unable_to_fetch_server_information"));
+					_("Unable_to_fetch_server_information"));
 		}
 
 	}

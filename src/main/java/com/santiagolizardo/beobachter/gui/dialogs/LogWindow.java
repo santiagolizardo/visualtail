@@ -39,9 +39,13 @@ import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
@@ -65,21 +69,24 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private static final long serialVersionUID = -108911942974722973L;
 
-	private static final int MAX_BUFFER = 128;
-
 	private File file;
+
+	private int numberDisplayedLines;
 
 	private JScrollPane scrollableList;
 
 	private JToolBar toolbar;
 
-	private DefaultListModel linesModel;
+	private DefaultListModel<String> linesModel;
 
-	public JList lines;
+	public JList<String> lines;
 
-	private JCheckBox followTail;
+	private JCheckBox cbCheckChanges;
+	private JCheckBox cbScrollNewLines;
 
-	private JComboBox logTypes;
+	private JSpinner spNumberDisplayerLines;
+
+	private JComboBox<LogType> logTypes;
 
 	private Tail tail;
 
@@ -93,8 +100,21 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		MainGUI.instance.configManager.setLastPath(fileName);
 
-		linesModel = new DefaultListModel();
-		lines = new JList(linesModel);
+		numberDisplayedLines = 64;
+
+		spNumberDisplayerLines = new JSpinner(new SpinnerNumberModel(
+				numberDisplayedLines, 1, 999, 1));
+		spNumberDisplayerLines.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				numberDisplayedLines = (int) spNumberDisplayerLines.getValue();
+				trimLines();
+			}
+		});
+
+		linesModel = new DefaultListModel<String>();
+		lines = new JList<String>(linesModel);
 		lines.setCellRenderer(new LineRenderer());
 		if (logType != null) {
 			setRendererRules(logType.getRules());
@@ -119,25 +139,47 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		Dimension dim = new Dimension(320, 200);
 		scrollableList.setSize(dim);
 		scrollableList.setPreferredSize(dim);
+		scrollableList.getVerticalScrollBar().addMouseListener(
+				new MouseAdapter() {
+
+					@Override
+					public void mousePressed(MouseEvent e) {
+						cbScrollNewLines.setSelected(false);
+					}
+				});
 
 		toolbar = new JToolBar();
 		toolbar.setFloatable(false);
-		followTail = new JCheckBox(Translator.t("Follow_tail"));
 
-		DefaultComboBoxModel logTypesModel = new DefaultComboBoxModel(
+		cbCheckChanges = new JCheckBox(Translator._("Check for changes"));
+		cbCheckChanges.setSelected(true);
+		cbCheckChanges.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				boolean selected = cbCheckChanges.isSelected();
+				tail.setEnabled(selected);
+				if (selected) {
+					new Thread(tail).start();
+				}
+			}
+		});
+
+		cbScrollNewLines = new JCheckBox(Translator._("Scroll to new lines"));
+
+		DefaultComboBoxModel<LogType> logTypesModel = new DefaultComboBoxModel<LogType>(
 				ArraysUtil.arrayLogTypes());
-		logTypes = new JComboBox(logTypesModel);
+		logTypes = new JComboBox<LogType>(logTypesModel);
 		logTypes.setRenderer(new LogTypeListRenderer());
 		logTypes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				JComboBox combo = (JComboBox) event.getSource();
-				LogType logType = (LogType) combo.getSelectedItem();
+				LogType logType = (LogType) logTypes.getSelectedItem();
 				setRendererRules(logType.getRules());
 			}
 		});
 		logTypes.setSelectedItem(logType);
 
-		JButton btnClear = new JButton(Translator.t("Clear_buffer"));
+		JButton btnClear = new JButton(Translator._("Clear_buffer"));
 		btnClear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -145,8 +187,10 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			}
 		});
 
-		toolbar.add(followTail);
+		toolbar.add(cbCheckChanges);
+		toolbar.add(cbScrollNewLines);
 		toolbar.add(logTypes);
+		toolbar.add(spNumberDisplayerLines);
 		addPrintMenuItem();
 		toolbar.add(btnClear);
 
@@ -156,7 +200,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		tail = new Tail(fileName, logType.getRefreshInterval());
 		tail.addListener(this);
-		tail.start();
+		new Thread(tail).start();
 
 		setMaximizable(true);
 		setIconifiable(true);
@@ -175,7 +219,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			final Desktop desktop = Desktop.getDesktop();
 			if (desktop.isSupported(Action.PRINT)) {
 
-				JButton btnPrint = new JButton(Translator.t("Print_this_file"));
+				JButton btnPrint = new JButton(Translator._("Print_this_file"));
 				btnPrint.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
@@ -198,10 +242,9 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			@Override
 			public void run() {
 				linesModel.addElement(tailEvent.getLine());
-				if (linesModel.size() > MAX_BUFFER)
-					linesModel.remove(0);
-				if (followTail.isSelected()) {
-					int lastIndex = linesModel.getSize() - 1;
+				trimLines();
+				if (cbScrollNewLines.isSelected()) {
+					int lastIndex = linesModel.size() - 1;
 					if (lastIndex >= 0) {
 						lines.ensureIndexIsVisible(lastIndex);
 					}
@@ -234,7 +277,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		}
 		if (searchIndex >= linesSize
 				&& DialogFactory.showQuestionDialog(this,
-						Translator.t("Do_you_want_to_search_again"))) {
+						Translator._("Do_you_want_to_search_again"))) {
 			searchIndex = 0;
 			searchAgainText();
 		}
@@ -264,4 +307,10 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		this.file = file;
 	}
 
+	private void trimLines() {
+		int numLines = linesModel.size();
+		if (numLines > numberDisplayedLines) {
+			linesModel.removeRange(0, numLines - numberDisplayedLines - 1);
+		}
+	}
 }

@@ -60,8 +60,8 @@ public class SessionsDialog extends AbstractDialog {
 
 	private static final long serialVersionUID = -8601498821660138035L;
 
-	private DefaultListModel listModel;
-	private JList list;
+	private DefaultListModel<String> listModel;
+	private JList<String> list;
 
 	private JButton btnOpen;
 	private JButton btnRemove;
@@ -69,12 +69,12 @@ public class SessionsDialog extends AbstractDialog {
 	public SessionsDialog(JFrame parentFrame) {
 		super(parentFrame);
 
-		setTitle(Translator.t("Sessions"));
+		setTitle(Translator._("Sessions"));
 		setModal(true);
 		setSize(320, 240);
 
-		listModel = new DefaultListModel();
-		list = new JList(listModel);
+		listModel = new DefaultListModel<String>();
+		list = new JList<String>(listModel);
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -92,7 +92,7 @@ public class SessionsDialog extends AbstractDialog {
 			}
 		});
 
-		btnOpen = new JButton(Translator.t("Open"));
+		btnOpen = new JButton(Translator._("Open"));
 		btnOpen.setEnabled(false);
 		btnOpen.addActionListener(new ActionListener() {
 			@Override
@@ -101,16 +101,16 @@ public class SessionsDialog extends AbstractDialog {
 			}
 		});
 
-		btnRemove = new JButton(Translator.t("Remove"));
+		btnRemove = new JButton(Translator._("Remove"));
 		btnRemove.setEnabled(false);
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String sessionName = list.getSelectedValue().toString();
+				String sessionName = list.getSelectedValue();
 				int resp = JOptionPane.showConfirmDialog(
 						getParent(),
 						Translator
-								.t("Are you sure you want to delete this session?"));
+								._("Are you sure you want to delete this session?"));
 				if (resp == JOptionPane.YES_OPTION) {
 					File file = new File(Constants.FOLDER_SESSIONS + "/"
 							+ sessionName + ".txt");

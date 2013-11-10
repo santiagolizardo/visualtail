@@ -71,7 +71,7 @@ public class OpenFileDialog extends AbstractDialog {
 	public OpenFileDialog(JFrame parentFrame) {
 		super(parentFrame);
 		
-		setTitle(Translator.t("Open file..."));
+		setTitle(Translator._("Open file..."));
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setModal(true);
 
@@ -89,7 +89,7 @@ public class OpenFileDialog extends AbstractDialog {
 
 	private void initComponents() {
 		tfFilePath = new JTextField(50);
-		btnBrowse = new JButton(Translator.t("Browse..."));
+		btnBrowse = new JButton(Translator._("Browse..."));
 
 		logTypesModel = new DefaultComboBoxModel<LogType>();
 		Iterator<LogType> logTypes = ArraysUtil.arrayLogTypes().iterator();
@@ -100,13 +100,13 @@ public class OpenFileDialog extends AbstractDialog {
 		cbLogTypes = new JComboBox<LogType>(logTypesModel);
 		cbLogTypes.setRenderer(new LogTypeListRenderer());
 
-		btnOpen = new JButton(Translator.t("Open"));
-		btnCancel = new JButton(Translator.t("Cancel"));
+		btnOpen = new JButton(Translator._("Open"));
+		btnCancel = new JButton(Translator._("Cancel"));
 	}
 
 	private void placeComponents() {
-		JLabel lFilePath = new JLabel(Translator.t("File path"));
-		JLabel lLogType = new JLabel(Translator.t("Log type"));
+		JLabel lFilePath = new JLabel(Translator._("File path"));
+		JLabel lLogType = new JLabel(Translator._("Log type"));
 
 		Container container = getContentPane();
 		((JPanel) container).setBorder(BorderFactory.createEmptyBorder(10, 10,

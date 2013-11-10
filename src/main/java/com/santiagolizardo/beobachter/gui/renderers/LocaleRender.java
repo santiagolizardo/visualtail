@@ -32,8 +32,8 @@ public class LocaleRender extends DefaultListCellRenderer {
 	 */
 	private static final long serialVersionUID = -6554618278841155838L;
 
-	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-		return super.getListCellRendererComponent(list, LocaleUtil.getDisplayName(value.toString()), index, isSelected,
+	public Component getListCellRendererComponent(JList<? extends String> list, String value, int index, boolean isSelected, boolean cellHasFocus) {
+		return super.getListCellRendererComponent(list, LocaleUtil.getDisplayName(value), index, isSelected,
 				cellHasFocus);
 	}
 }

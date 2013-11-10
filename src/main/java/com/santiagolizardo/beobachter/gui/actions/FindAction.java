@@ -38,7 +38,7 @@ public class FindAction extends AbstractAction {
 	public FindAction() {
 		
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("find.png"));
-		putValue(AbstractAction.NAME, Translator.t("Find..."));
+		putValue(AbstractAction.NAME, Translator._("Find..."));
 		putValue(AbstractAction.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
 				KeyEvent.VK_F, KeyEvent.CTRL_MASK));
 	}

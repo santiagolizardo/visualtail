@@ -24,7 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class Tail extends Thread {
+public class Tail implements Runnable {
 
 	private static final Logger logger = Logger.getLogger(Tail.class.getName());
 
@@ -36,20 +36,22 @@ public class Tail extends Thread {
 
 	private int refreshInterval;
 
+	private File file;
+	private long currentSize;
+
 	public Tail(String fileName, int refreshInterval) {
-		setName("Tail");
-		
+
 		listeners = new LinkedList<TailListener>();
 		enabled = true;
+
+		file = new File(fileName);
+		currentSize = file.length();
 
 		this.fileName = fileName;
 		this.refreshInterval = refreshInterval;
 	}
 
 	public void run() {
-		File file = new File(fileName);
-		long currentSize = file.length();
-
 		while (enabled) {
 			if (file.length() > currentSize) {
 

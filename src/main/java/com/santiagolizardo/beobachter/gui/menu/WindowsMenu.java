@@ -37,10 +37,10 @@ public class WindowsMenu extends JMenu {
 
 	public WindowsMenu() {
 
-		setText(Translator.t("Windows"));
+		setText(Translator._("Windows"));
 		setMnemonic(KeyEvent.VK_W);
 
-		JMenuItem itemCascade = new JMenuItem(Translator.t("Cascade_windows"));
+		JMenuItem itemCascade = new JMenuItem(Translator._("Cascade_windows"));
 		itemCascade.setIcon(IconFactory.getImage("application_double.png"));
 		itemCascade.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
 				KeyEvent.CTRL_MASK));
@@ -51,7 +51,7 @@ public class WindowsMenu extends JMenu {
 		});
 
 		JMenuItem itemTileVer = new JMenuItem(Translator
-				.t("Tile_windows_vertically"));
+				._("Tile_windows_vertically"));
 		itemTileVer.setIcon(IconFactory
 				.getImage("application_tile_vertical.png"));
 		itemTileVer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,
@@ -65,7 +65,7 @@ public class WindowsMenu extends JMenu {
 		});
 
 		JMenuItem itemTileHor = new JMenuItem(Translator
-				.t("Tile_windows_horizontally"));
+				._("Tile_windows_horizontally"));
 		itemTileHor.setIcon(IconFactory
 				.getImage("application_tile_horizontal.png"));
 		itemTileHor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,

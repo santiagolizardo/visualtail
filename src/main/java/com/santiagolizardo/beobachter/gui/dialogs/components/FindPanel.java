@@ -78,7 +78,7 @@ public class FindPanel extends JPanel {
 		BoxLayout box = new BoxLayout(this, BoxLayout.X_AXIS);
 		setLayout(box);
 
-		JLabel _search = new JLabel(Translator.t("Search") + ":");
+		JLabel _search = new JLabel(Translator._("Search") + ":");
 
 		add(_search);
 		add(search);

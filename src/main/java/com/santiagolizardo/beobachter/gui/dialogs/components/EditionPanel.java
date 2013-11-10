@@ -99,7 +99,7 @@ public class EditionPanel extends JPanel {
 					Object value, boolean isSelected, boolean hasFocus,
 					int row, int column) {
 				Color[] colors = (Color[]) value;
-				JLabel label = new JLabel(Translator.t("Example"));
+				JLabel label = new JLabel(Translator._("Example"));
 				label.setOpaque(true);
 				label.setBackground(colors[0]);
 				label.setForeground(colors[1]);
@@ -110,7 +110,7 @@ public class EditionPanel extends JPanel {
 
 		scrollRules = new JScrollPane(tblRules);
 
-		btnAddRule = new JButton(Translator.t("Add rule"));
+		btnAddRule = new JButton(Translator._("Add rule"));
 		btnAddRule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				btnApply.setEnabled(true);
@@ -119,7 +119,7 @@ public class EditionPanel extends JPanel {
 			};
 		});
 
-		btnRemoveRule = new JButton(Translator.t("Remove rule"));
+		btnRemoveRule = new JButton(Translator._("Remove rule"));
 		btnRemoveRule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				btnApply.setEnabled(true);
@@ -128,12 +128,12 @@ public class EditionPanel extends JPanel {
 					modelRules.removeRule(selectedRow);
 				} else {
 					DialogFactory.showErrorMessage(getParent(), Translator
-							.t("Please_select_a_rule_first"));
+							._("Please_select_a_rule_first"));
 				}
 			}
 		});
 
-		btnApply = new JButton(Translator.t("Apply changes"));
+		btnApply = new JButton(Translator._("Apply changes"));
 		btnApply.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -196,15 +196,15 @@ public class EditionPanel extends JPanel {
 	private CardLayout cardLayout;
 
 	private void placeComponents() {
-		JLabel lblName = new JLabel(Translator.t("Name"));
-		JLabel lblRefresh = new JLabel(Translator.t("Refresh_interval_in_milliseconds"));
-		JLabel lblRules = new JLabel(Translator.t("Formatting_rules"));
+		JLabel lblName = new JLabel(Translator._("Name"));
+		JLabel lblRefresh = new JLabel(Translator._("Refresh_interval_in_milliseconds"));
+		JLabel lblRules = new JLabel(Translator._("Formatting_rules"));
 
 		cardLayout = new CardLayout();
 		setLayout(cardLayout);
 
 		JPanel panelA = new JPanel();
-		panelA.add(new JLabel(Translator.t("Select_a_log_type_on_the_left_to_edit_it")),
+		panelA.add(new JLabel(Translator._("Select_a_log_type_on_the_left_to_edit_it")),
 				BorderLayout.CENTER);
 
 		add(panelA, "A");

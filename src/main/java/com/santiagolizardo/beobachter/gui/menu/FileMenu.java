@@ -47,10 +47,10 @@ public class FileMenu extends JMenu {
 	private static final long serialVersionUID = -9095266179967845006L;
 
 	public FileMenu(final JFrame parentFrame) {
-		setText(Translator.t("File"));
+		setText(Translator._("File"));
 		setMnemonic(KeyEvent.VK_F);
 
-		JMenuItem open = new JMenuItem(Translator.t("Open..."));
+		JMenuItem open = new JMenuItem(Translator._("Open..."));
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 				KeyEvent.CTRL_MASK));
 		open.addActionListener(new ActionListener() {
@@ -65,7 +65,7 @@ public class FileMenu extends JMenu {
 		JMenuItem exit = new JMenuItem(new ExitAction());
 		exit.setIcon(IconFactory.getImage("exit.png"));
 
-		JMenuItem loadSession = new JMenuItem(Translator.t("Load_session..."));
+		JMenuItem loadSession = new JMenuItem(Translator._("Load_session..."));
 		loadSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -75,7 +75,7 @@ public class FileMenu extends JMenu {
 		});
 
 		JMenuItem saveSession = new JMenuItem(
-				Translator.t("Save_current_session"));
+				Translator._("Save_current_session"));
 		saveSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

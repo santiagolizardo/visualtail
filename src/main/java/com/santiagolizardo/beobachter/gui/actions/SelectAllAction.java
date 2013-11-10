@@ -39,7 +39,7 @@ class SelectAllAction extends AbstractAction {
 	public SelectAllAction() {
 
 		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
-		putValue(AbstractAction.NAME, Translator.t("Select_all"));
+		putValue(AbstractAction.NAME, Translator._("Select_all"));
 		putValue(AbstractAction.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
 				KeyEvent.VK_A, KeyEvent.CTRL_MASK));
 	}

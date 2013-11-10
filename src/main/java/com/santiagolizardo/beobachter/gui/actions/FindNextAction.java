@@ -39,7 +39,7 @@ public class FindNextAction extends AbstractAction {
 	public FindNextAction() {
 
 		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
-		putValue(AbstractAction.NAME, Translator.t("Find_next"));
+		putValue(AbstractAction.NAME, Translator._("Find_next"));
 		putValue(AbstractAction.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
 				KeyEvent.VK_F3, 0));
 	}

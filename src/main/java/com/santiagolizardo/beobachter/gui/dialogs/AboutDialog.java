@@ -17,21 +17,19 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Desktop;
-import java.awt.Desktop.Action;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.resources.ResourcesLoader;
@@ -44,8 +42,8 @@ public class AboutDialog extends AbstractDialog {
 	public AboutDialog(JFrame parentFrame) {
 		super(parentFrame);
 
-		setTitle(Translator.t("About_this_application"));
-		setSize(320, 270);
+		setTitle(Translator._("About_this_application"));
+		setSize(720, 480);
 		setModal(true);
 		setResizable(false);
 
@@ -54,56 +52,53 @@ public class AboutDialog extends AbstractDialog {
 
 	private void defineLayout() {
 		Container container = getContentPane();
-		container.setBackground(Color.WHITE);
-		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
+
+		String versionUrl = String
+				.format("<strong>%s</strong> <em>v%s</em><br />More info about the project at <a href=\"%s\">%s</a>.",
+						Constants.APP_NAME, Constants.APP_VERSION,
+						Constants.APP_URL, Constants.APP_URL);
+		JEditorPane lblVersion = new HtmlLabel(versionUrl);
+		lblVersion.setOpaque(false);
 
 		String credits = ResourcesLoader.readResource(AboutDialog.class,
-				"CREDITS.html");
-
-		JLabel lblName = new JLabel(Constants.APP_NAME);
-		Font fontName = lblName.getFont();
-		fontName = fontName.deriveFont(25f);
-		lblName.setFont(fontName);
-		JLabel lblVersion = new JLabel("Version " + Constants.APP_VERSION);
-		Font fontVersion = lblVersion.getFont();
-		fontVersion = fontVersion.deriveFont(Font.ITALIC);
-		lblVersion.setFont(fontVersion);
-		JLabel lblCredits = new JLabel(credits);
+				"credits.html");
+		JEditorPane lblCredits = new HtmlLabel(credits);
 
 		JScrollPane scrollPane = new JScrollPane(lblCredits);
 		scrollPane
 				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-		container.add(lblName);
 		container.add(lblVersion);
 		container.add(scrollPane);
 
-		final Desktop desktop = Desktop.getDesktop();
+		setLocationRelativeTo(parentFrame);
+	}
+}
 
-		if (desktop.isSupported(Action.BROWSE)) {
-			JButton btnWebsite = new JButton(Translator.t("Visit_the_website"));
-			btnWebsite.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
+class HtmlLabel extends JEditorPane {
+
+	private static final long serialVersionUID = 1L;
+
+	public HtmlLabel(String text) {
+		super("text/html", text);
+
+		setEditable(false);
+		setHighlighter(null);
+
+		addHyperlinkListener(new HyperlinkListener() {
+
+			@Override
+			public void hyperlinkUpdate(HyperlinkEvent ev) {
+				if (ev.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 					try {
-						URI uri = new URI(
-								"http://sourceforge.net/projects/beobachter/");
-						desktop.browse(uri);
-					} catch (Exception e) {
+						URI uri = ev.getURL().toURI();
+						Desktop.getDesktop().browse(uri);
+					} catch (IOException | URISyntaxException e) {
 						e.printStackTrace();
 					}
 				}
-			});
-
-			container.add(btnWebsite);
-		} else {
-			JLabel lblWebsite = new JLabel(
-					"http://sourceforge.net/projects/beobachter/");
-			lblWebsite.setForeground(Color.BLUE);
-
-			container.add(lblWebsite);
-		}
-		
-		setLocationRelativeTo(parentFrame);
+			}
+		});
 	}
 }

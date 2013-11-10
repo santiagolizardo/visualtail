@@ -60,7 +60,7 @@ public class MainGUI extends JFrame {
 		} catch (IOException ex) {
 			System.err.println(ex.getMessage());
 		}
-		
+
 		try {
 			configManager = new ConfigManager(Constants.CONFIG_FILE);
 			configManager.loadConfiguration();

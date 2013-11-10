@@ -72,9 +72,9 @@ public class RuleDialog extends JDialog {
 
 		pattern = new JTextField(20);
 		regularExpression = new JCheckBox(Translator
-				.t("Regular_expression"));
+				._("Regular_expression"));
 
-		pickBackgroundColor = new JButton(Translator.t("Pick"));
+		pickBackgroundColor = new JButton(Translator._("Pick"));
 		pickBackgroundColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				ColorChooser colorChooser = new ColorChooser(RuleDialog.this,
@@ -91,7 +91,7 @@ public class RuleDialog extends JDialog {
 		backgroundColor.setBackground(Color.WHITE);
 		backgroundColor.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		pickForegroundColor = new JButton(Translator.t("Pick"));
+		pickForegroundColor = new JButton(Translator._("Pick"));
 		pickForegroundColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				ColorChooser colorChooser = new ColorChooser(RuleDialog.this,
@@ -108,15 +108,15 @@ public class RuleDialog extends JDialog {
 		foregroundColor.setBackground(Color.BLACK);
 		foregroundColor.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		ignoreCase = new JCheckBox(Translator.t("Ignore_case"));
+		ignoreCase = new JCheckBox(Translator._("Ignore_case"));
 
-		btnOk = new JButton(Translator.t("Ok"));
+		btnOk = new JButton(Translator._("Ok"));
 		getRootPane().setDefaultButton(btnOk);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				if ("".equals(pattern.getText().trim())) {
 					DialogFactory.showErrorMessage(RuleDialog.this, Translator
-							.t("Please_complete_the_field_pattern"));
+							._("Please_complete_the_field_pattern"));
 					pattern.requestFocus();
 					return;
 				}
@@ -133,7 +133,7 @@ public class RuleDialog extends JDialog {
 			}
 		});
 
-		btnCancel = new JButton(Translator.t("Cancel"));
+		btnCancel = new JButton(Translator._("Cancel"));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				setVisible(false);
@@ -150,11 +150,11 @@ public class RuleDialog extends JDialog {
 		Container contentPane = getContentPane();
 		contentPane.setLayout(layout);
 
-		JLabel _pattern = new JLabel(Translator.t("Pattern"));
+		JLabel _pattern = new JLabel(Translator._("Pattern"));
 		JLabel _backgroundColor = new JLabel(Translator
-				.t("Background_color"));
+				._("Background_color"));
 		JLabel _foregroundColor = new JLabel(Translator
-				.t("Foreground_color"));
+				._("Foreground_color"));
 
 		contentPane.add(_pattern);
 		contentPane.add(pattern);

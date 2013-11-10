@@ -22,6 +22,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
@@ -44,7 +45,7 @@ class CopyAction extends AbstractAction {
 	public CopyAction() {
 
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("copy.png"));
-		putValue(AbstractAction.NAME, Translator.t("Copy"));
+		putValue(AbstractAction.NAME, Translator._("Copy"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
 
@@ -54,10 +55,10 @@ class CopyAction extends AbstractAction {
 	public void actionPerformed(ActionEvent event) {
 		LogWindow log = (LogWindow) MainGUI.instance.desktop.getSelectedFrame();
 		if (log != null) {
-			Object[] selected = log.lines.getSelectedValues();
+			List<String> selectedLines = log.lines.getSelectedValuesList();
 			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < selected.length; i++) {
-				sb.append(selected[i].toString());
+			for (String selectedLine : selectedLines ) {
+				sb.append(selectedLine);
 				sb.append(Constants.LINE_SEP);
 			}
 			clipboard

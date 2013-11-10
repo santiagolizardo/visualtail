@@ -71,7 +71,7 @@ public class PreferencesDialog extends AbstractDialog {
 
 		final ConfigManager configManager = MainGUI.instance.configManager;
 
-		setTitle(Translator.t("Preferences"));
+		setTitle(Translator._("Preferences"));
 		setResizable(false);
 		setModal(true);
 
@@ -105,7 +105,7 @@ public class PreferencesDialog extends AbstractDialog {
 		size = new JSpinner(new SpinnerNumberModel(configManager.getFontSize(),
 				8, 18, 1));
 
-		btnOk = new JButton(Translator.t("Ok"));
+		btnOk = new JButton(Translator._("Ok"));
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				setVisible(false);
@@ -129,7 +129,7 @@ public class PreferencesDialog extends AbstractDialog {
 			}
 		});
 
-		btnCancel = new JButton(Translator.t("Cancel"));
+		btnCancel = new JButton(Translator._("Cancel"));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				setVisible(false);
@@ -152,10 +152,10 @@ public class PreferencesDialog extends AbstractDialog {
 		SpringLayout layout = new SpringLayout();
 		container.setLayout(layout);
 
-		JLabel _lookAndFeel = new JLabel(Translator.t("Look_and_feel"));
-		JLabel _language = new JLabel(Translator.t("Language"));
-		JLabel _font = new JLabel(Translator.t("Font_family"));
-		JLabel _size = new JLabel(Translator.t("Font_size"));
+		JLabel _lookAndFeel = new JLabel(Translator._("Look_and_feel"));
+		JLabel _language = new JLabel(Translator._("Language"));
+		JLabel _font = new JLabel(Translator._("Font_family"));
+		JLabel _size = new JLabel(Translator._("Font_size"));
 
 		container.add(_lookAndFeel);
 		container.add(lookAndFeel);

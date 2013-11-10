@@ -36,11 +36,11 @@ public class HelpMenu extends JMenu {
 
 	public HelpMenu(final JFrame parentFrame) {
 
-		setText(Translator.t("Help"));
+		setText(Translator._("Help"));
 		setMnemonic(KeyEvent.VK_H);
 
 		JMenuItem checkForUpdates = new JMenuItem(
-				Translator.t("Check_for_updates"));
+				Translator._("Check_for_updates"));
 		checkForUpdates.setIcon(IconFactory.getImage("check_for_updates.png"));
 		checkForUpdates.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -48,7 +48,7 @@ public class HelpMenu extends JMenu {
 			}
 		});
 		JMenuItem about = new JMenuItem(
-				Translator.t("About_this_application..."));
+				Translator._("About_this_application..."));
 		about.setIcon(IconFactory.getImage("help.png"));
 		about.setMnemonic(KeyEvent.VK_F1);
 		about.addActionListener(new ActionListener() {

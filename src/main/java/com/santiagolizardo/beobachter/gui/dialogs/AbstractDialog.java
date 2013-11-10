@@ -12,6 +12,8 @@ import javax.swing.KeyStroke;
 
 public abstract class AbstractDialog extends JDialog {
 
+	private static final long serialVersionUID = -8559961506669731891L;
+
 	protected JFrame parentFrame;
 
 	public AbstractDialog(JFrame parentFrame) {

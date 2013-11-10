@@ -37,7 +37,7 @@ public class EditMenu extends JMenu {
 
 	public EditMenu() {
 
-		setText(Translator.t("Edit"));
+		setText(Translator._("Edit"));
 		setMnemonic(KeyEvent.VK_E);
 
 		JMenuItem copy = new JMenuItem(ActionFactory.createCopyAction());

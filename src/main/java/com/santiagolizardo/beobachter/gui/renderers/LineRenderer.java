@@ -17,7 +17,6 @@
  */
 package com.santiagolizardo.beobachter.gui.renderers;
 
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -31,7 +30,7 @@ import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.beans.Rule;
 import com.santiagolizardo.beobachter.config.ConfigManager;
 
-public class LineRenderer extends JLabel implements ListCellRenderer {
+public class LineRenderer extends JLabel implements ListCellRenderer<String> {
 
 	/**
 	 * 
@@ -54,9 +53,9 @@ public class LineRenderer extends JLabel implements ListCellRenderer {
 		this.rules = rules;
 	}
 
-	public Component getListCellRendererComponent(JList list, Object value,
-			int index, boolean isSelected, boolean hasFocus) {
-		setText(value.toString());
+	public Component getListCellRendererComponent(JList<? extends String> list,
+			String value, int index, boolean isSelected, boolean hasFocus) {
+		setText(value);
 		setBackground(Color.WHITE);
 		setForeground(Color.BLACK);
 
@@ -64,7 +63,7 @@ public class LineRenderer extends JLabel implements ListCellRenderer {
 			setBackground(Color.BLUE);
 			setForeground(Color.WHITE);
 		} else {
-			for(Rule rule : rules) {
+			for (Rule rule : rules) {
 				if (rule.match(getText())) {
 					setBackground(rule.getBackgroundColor());
 					setForeground(rule.getForegroundColor());

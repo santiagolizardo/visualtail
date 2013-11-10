@@ -17,7 +17,6 @@
  */
 package com.santiagolizardo.beobachter.gui.renderers;
 
-
 import java.awt.Component;
 
 import javax.swing.DefaultListCellRenderer;
@@ -30,10 +29,9 @@ public class LogTypeListRenderer extends DefaultListCellRenderer {
 	private static final long serialVersionUID = 6231566595982380949L;
 
 	@Override
-	public Component getListCellRendererComponent(JList list, Object value,
+	public Component getListCellRendererComponent(JList<?> list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
-		String name = ((LogType) value).getName();
-		return super.getListCellRendererComponent(list, name, index,
-				isSelected, cellHasFocus);
+		return super.getListCellRendererComponent(list,
+				((LogType) value).getName(), index, isSelected, cellHasFocus);
 	}
 }

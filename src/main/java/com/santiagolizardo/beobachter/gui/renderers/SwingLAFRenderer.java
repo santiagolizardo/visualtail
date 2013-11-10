@@ -17,7 +17,6 @@
  */
 package com.santiagolizardo.beobachter.gui.renderers;
 
-
 import java.awt.Component;
 
 import javax.swing.DefaultListCellRenderer;
@@ -27,13 +26,12 @@ import com.santiagolizardo.beobachter.beans.SwingLookAndFeel;
 
 public class SwingLAFRenderer extends DefaultListCellRenderer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3175998803653741072L;
 
-	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-		return super.getListCellRendererComponent(list, ((SwingLookAndFeel)value).getName(), index, isSelected,
-				cellHasFocus);
+	public Component getListCellRendererComponent(JList<SwingLookAndFeel> list,
+			SwingLookAndFeel value, int index, boolean isSelected,
+			boolean cellHasFocus) {
+		return super.getListCellRendererComponent(list, value.getName(), index,
+				isSelected, cellHasFocus);
 	}
 }

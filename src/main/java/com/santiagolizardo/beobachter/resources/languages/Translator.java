@@ -17,10 +17,10 @@
  */
 package com.santiagolizardo.beobachter.resources.languages;
 
-
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 import com.santiagolizardo.beobachter.config.ConfigManager;
 
@@ -34,17 +34,24 @@ public class Translator {
 
 	private static ResourceBundle bundle;
 
+	private static final Logger logger = Logger.getLogger(Translator.class
+			.getName());
+
 	public static void start(ConfigManager configManager) {
 		String[] locales = configManager.getLanguage().split("_");
 		Locale locale = new Locale(locales[0], locales[1]);
-		bundle = ResourceBundle.getBundle("com.santiagolizardo.beobachter.resources.languages.Translation", locale);
+		bundle = ResourceBundle
+				.getBundle(
+						"com.santiagolizardo.beobachter.resources.languages.Translation",
+						locale);
 	}
 
-	public static String t(String key) {
+	public static String _(String key) {
 		try {
 			return bundle.getString(key);
 		} catch (MissingResourceException mre) {
-			return "!".concat(key);
+			logger.warning("Missing translation: " + key);
+			return key;
 		}
 	}
 }

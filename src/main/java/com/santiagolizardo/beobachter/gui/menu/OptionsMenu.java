@@ -37,11 +37,11 @@ public class OptionsMenu extends JMenu {
 
 	public OptionsMenu(final JFrame parentFrame) {
 
-		setText(Translator.t("Options"));
+		setText(Translator._("Options"));
 		setMnemonic(KeyEvent.VK_O);
 
 		JMenuItem manageLogTypes = new JMenuItem(
-				Translator.t("Manage_log_types..."));
+				Translator._("Manage_log_types..."));
 		manageLogTypes.setIcon(IconFactory.getImage("manage_log_types.png"));
 		manageLogTypes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -50,7 +50,7 @@ public class OptionsMenu extends JMenu {
 			}
 		});
 
-		JMenuItem preferences = new JMenuItem(Translator.t("Preferences..."));
+		JMenuItem preferences = new JMenuItem(Translator._("Preferences..."));
 		preferences.setIcon(IconFactory.getImage("preferences.png"));
 		preferences.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
 				KeyEvent.CTRL_MASK));

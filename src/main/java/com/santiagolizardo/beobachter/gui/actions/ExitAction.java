@@ -36,7 +36,7 @@ public class ExitAction extends AbstractAction {
 
 	public ExitAction() {
 
-		putValue(AbstractAction.NAME, Translator.t("Exit"));
+		putValue(AbstractAction.NAME, Translator._("Exit"));
 		putValue(AbstractAction.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
 				KeyEvent.VK_F4, KeyEvent.ALT_MASK));
 	}
