@@ -1,6 +1,6 @@
 /**
  * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
- * Copyright (C) 2011 Santiago Lizardo (http://www.santiagolizardo.com)
+ * Copyright (C) 2013 Santiago Lizardo (http://www.santiagolizardo.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,14 +17,9 @@
  */
 package com.santiagolizardo.beobachter.util;
 
-
 import java.io.File;
 import java.io.FileFilter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Vector;
-import java.util.regex.Pattern;
 
 import javax.swing.JMenu;
 
@@ -33,8 +28,6 @@ import org.apache.commons.configuration.ConfigurationException;
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.config.EntitiesConfiguration;
-import com.santiagolizardo.beobachter.resources.ResourcesLoader;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class ArraysUtil {
 
@@ -47,26 +40,6 @@ public class ArraysUtil {
 	static {
 		recents = new Vector<String>();
 		logTypes = new Vector<LogType>();
-	}
-
-	public static String[] arrayLanguages() {
-		ArrayList<String> result = new ArrayList<String>();
-
-		Translator.class.getResource("languages");
-
-		final Pattern pattern = Pattern
-				.compile("^.*Translation_([^.]+)?.properties$");
-		Collection<String> files;
-		try {
-			files = ResourcesLoader.getResources(pattern);
-			for (String fileName : files) {
-				result.add(fileName);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return (String[]) result.toArray(new String[] {});
 	}
 
 	public static Vector<String> arrayRecentFiles() {

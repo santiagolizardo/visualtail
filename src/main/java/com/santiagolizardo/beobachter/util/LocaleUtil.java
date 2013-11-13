@@ -1,6 +1,6 @@
 /**
  * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
- * Copyright (C) 2011 Santiago Lizardo (http://www.santiagolizardo.com)
+ * Copyright (C) 2013 Santiago Lizardo (http://www.santiagolizardo.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,15 @@
  */
 package com.santiagolizardo.beobachter.util;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
+
+import com.santiagolizardo.beobachter.resources.ResourcesLoader;
 
 /**
  * Utilities for locale, regional settings.
@@ -26,6 +34,9 @@ import java.util.Locale;
  * 
  */
 public class LocaleUtil {
+
+	private static final Logger logger = Logger.getLogger(LocaleUtil.class
+			.getName());
 
 	/**
 	 * Get the display name for an specific locale.
@@ -40,5 +51,25 @@ public class LocaleUtil {
 		Locale locale = parts.length == 1 ? new Locale(parts[0]) : new Locale(
 				parts[0], parts[1]);
 		return locale.getDisplayName();
+	}
+
+	public static String[] getAvailableLocales() {
+		List<String> languages = new ArrayList<String>();
+
+		Pattern pattern = Pattern
+				.compile("^.*Translation_([^.]+)?.properties$");
+
+		Collection<String> files = null;
+		try {
+			files = ResourcesLoader.getResources(pattern);
+			for (String fileName : files) {
+				languages.add(fileName);
+			}
+		} catch (IOException e) {
+			logger.warning(e.getMessage());
+			return new String[] {};
+		}
+
+		return (String[]) languages.toArray(new String[] {});
 	}
 }

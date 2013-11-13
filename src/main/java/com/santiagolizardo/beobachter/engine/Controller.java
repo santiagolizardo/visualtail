@@ -1,6 +1,6 @@
 /**
  * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
- * Copyright (C) 2011 Santiago Lizardo (http://www.santiagolizardo.com)
+ * Copyright (C) 2013 Santiago Lizardo (http://www.santiagolizardo.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,16 +25,11 @@ import java.io.File;
 import java.util.Vector;
 import java.util.logging.Logger;
 
-import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import org.apache.commons.configuration.ConfigurationException;
-
 import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.beans.LogType;
-import com.santiagolizardo.beobachter.config.ConfigManager;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
@@ -44,121 +39,7 @@ import com.santiagolizardo.beobachter.util.ArraysUtil;
 
 public class Controller {
 
-	public static final int EXIT_SUCCESS = 0;
-	public static final int EXIT_FAILURE = 1;
-
 	private static Logger logger = Logger.getLogger(Controller.class.getName());
-
-	/**
-	 * This method relocates all frames contained on the desktop and sets them
-	 * on cascade.
-	 */
-	public static void setWindowsOnCascade(JDesktopPane desktop) {
-		JInternalFrame[] frames = desktop.getAllFrames();
-		if (frames.length == 0)
-			return;
-
-		short frameWidth = (short) ((desktop.getWidth() * 75) / 100);
-		short frameHeight = (short) ((desktop.getHeight() * 75) / 100);
-
-		short diffWidth = (short) (((desktop.getWidth() * 25) / 100) / frames.length);
-		short diffHeight = (short) (((desktop.getHeight() * 25) / 100) / frames.length);
-
-		short x = 0;
-		short y = 0;
-
-		for (byte i = 0; i < frames.length; i++) {
-			try {
-				frames[i].setMaximum(false);
-				frames[i].setIcon(false);
-			} catch (PropertyVetoException e) {
-				logger.warning("Unable to set frame properties.");
-			}
-
-			frames[i].setSize(frameWidth, frameHeight);
-			frames[i].setLocation(x, y);
-
-			x += diffWidth;
-			y += diffHeight;
-		}
-	}
-
-	/**
-	 * This method relocates all frames contained on the desktop and sets them
-	 * on vertical tile.
-	 */
-	public static void setWindowsOnTileVertical(JDesktopPane desktop) {
-		JInternalFrame[] frames = desktop.getAllFrames();
-		if (frames.length == 0)
-			return;
-
-		short frameWidth = (short) desktop.getWidth();
-		short frameHeight = (short) (desktop.getHeight() / frames.length);
-
-		for (short i = 0; i < frames.length; i++) {
-			try {
-				frames[i].setMaximum(false);
-				frames[i].setIcon(false);
-			} catch (PropertyVetoException e) {
-				logger.warning("Unable to set frame properties.");
-			}
-
-			frames[i].setSize(frameWidth, frameHeight);
-			frames[i].setLocation(0, i * frameHeight);
-		}
-	}
-
-	/**
-	 * This method relocates all frames contained on the desktop and sets them
-	 * on tile horizontal.
-	 */
-	public static void setWindowsOnTileHorizontal(JDesktopPane desktop) {
-		JInternalFrame[] frames = desktop.getAllFrames();
-		if (frames.length == 0)
-			return;
-
-		short frameWidth = (short) (desktop.getWidth() / frames.length);
-		short frameHeight = (short) desktop.getHeight();
-
-		for (short i = 0; i < frames.length; i++) {
-			try {
-				frames[i].setMaximum(false);
-				frames[i].setIcon(false);
-			} catch (PropertyVetoException e) {
-				logger.warning("Unable to set frame properties.");
-			}
-
-			frames[i].setSize(frameWidth, frameHeight);
-			frames[i].setLocation(i * frameWidth, 0);
-		}
-	}
-
-	/**
-	 * This method terminates the application and saves all the runtime
-	 * information on the filesystem.
-	 */
-	public static void exit() {
-		int errCode = EXIT_FAILURE;
-
-		try {
-			MainGUI beobachter = MainGUI.instance;
-			beobachter.setVisible(false);
-			beobachter.dispose();
-
-			ConfigManager config = beobachter.configManager;
-			config.setWindowHeight(beobachter.getHeight());
-			config.setWindowWidth(beobachter.getWidth());
-			config.setWindowX(beobachter.getX());
-			config.setWindowY(beobachter.getY());
-			config.saveConfiguration();
-
-			errCode = EXIT_SUCCESS;
-		} catch (ConfigurationException e) {
-			logger.severe(e.getMessage());
-		}
-
-		System.exit(errCode);
-	}
 
 	public static void addRecent(String fileName) {
 		if (!ArraysUtil.recents.contains(fileName)) {
@@ -177,7 +58,7 @@ public class Controller {
 						return;
 					}
 
-					Controller.openFile(filePath);
+					Controller.openFile(filePath, new LogType("Default"));
 				}
 			});
 			ArraysUtil.recents.add(fileName);
@@ -197,7 +78,7 @@ public class Controller {
 		ArraysUtil.recentsMenu.setIcon(EmptyIcon.SIZE_16);
 		ArraysUtil.recentsMenu.add(cleanRecents);
 		ArraysUtil.recentsMenu.addSeparator();
-		// Beobachter.instance.configManager.loadRecents();
+		//MainGUI.instance.configManager.loadRecents();
 	}
 
 	public static void cleanRecents() {
@@ -206,15 +87,6 @@ public class Controller {
 		for (int i = count - 1; i > 1; i--) {
 			ArraysUtil.recentsMenu.remove(i);
 		}
-	}
-
-	/**
-	 * Invoked from "Recents" menu.
-	 * 
-	 * @param fileName
-	 */
-	public static void openFile(String fileName) {
-		openFile(fileName, new LogType("Default"));
 	}
 
 	/**

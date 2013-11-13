@@ -1,6 +1,6 @@
 /**
  * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
- * Copyright (C) 2011 Santiago Lizardo (http://www.santiagolizardo.com)
+ * Copyright (C) 2013 Santiago Lizardo (http://www.santiagolizardo.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,14 +19,15 @@ package com.santiagolizardo.beobachter.gui.menu;
 
 import javax.swing.Box;
 import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+
+import com.santiagolizardo.beobachter.MainGUI;
 
 public class Menu extends JMenuBar {
 
 	private static final long serialVersionUID = -1490576137341648743L;
 
-	public Menu(final JDesktopPane pane, JFrame parentFrame) {
+	public Menu(final JDesktopPane pane, MainGUI parentFrame) {
 
 		FileMenu fileMenu = new FileMenu(parentFrame);
 		EditMenu editMenu = new EditMenu();

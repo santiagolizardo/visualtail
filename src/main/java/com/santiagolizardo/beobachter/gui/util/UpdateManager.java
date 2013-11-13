@@ -1,6 +1,6 @@
 /**
  * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
- * Copyright (C) 2011 Santiago Lizardo (http://www.santiagolizardo.com)
+ * Copyright (C) 2013 Santiago Lizardo (http://www.santiagolizardo.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,10 +47,8 @@ public class UpdateManager extends Thread {
 			reader.close();
 			int serverVersion = Integer.valueOf(version.replaceAll("\\.", ""))
 					.intValue();
-			System.out.println(serverVersion);
 			int currentVersion = Integer.valueOf(
 					Constants.APP_VERSION.replaceAll("\\.", "")).intValue();
-			System.out.println(currentVersion);
 			if (serverVersion > currentVersion) {
 				StringBuilder sb = new StringBuilder();
 				sb.append(

@@ -1,6 +1,6 @@
 /**
  * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
- * Copyright (C) 2011 Santiago Lizardo (http://www.santiagolizardo.com)
+ * Copyright (C) 2013 Santiago Lizardo (http://www.santiagolizardo.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,22 +20,18 @@ package com.santiagolizardo.beobachter;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.IOException;
-import java.util.Properties;
-import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+import org.apache.commons.configuration.ConfigurationException;
+
 import com.santiagolizardo.beobachter.config.ConfigManager;
-import com.santiagolizardo.beobachter.engine.Controller;
+import com.santiagolizardo.beobachter.gui.components.DesktopPanel;
 import com.santiagolizardo.beobachter.gui.dialogs.components.FindPanel;
 import com.santiagolizardo.beobachter.gui.menu.Menu;
-import com.santiagolizardo.beobachter.gui.util.SwingUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 /**
  * This is the main application entry point. It constructs the initial window.
@@ -49,50 +45,18 @@ public class MainGUI extends JFrame {
 
 	public static MainGUI instance = null;
 
-	public static void main(String[] args) {
-		ConfigManager configManager = null;
-
-		try {
-			Properties prop = System.getProperties();
-			prop.setProperty("java.util.logging.config.file",
-					"logging.properties");
-			LogManager.getLogManager().readConfiguration();
-		} catch (IOException ex) {
-			System.err.println(ex.getMessage());
-		}
-
-		try {
-			configManager = new ConfigManager(Constants.CONFIG_FILE);
-			configManager.loadConfiguration();
-
-			SwingUtil.setLookAndFeel(configManager.getWindowLAF());
-
-			Translator.start(configManager);
-
-			File dirLogTypes = new File(Constants.FOLDER_LOG_TYPES);
-			if (!dirLogTypes.exists()) {
-				dirLogTypes.mkdirs();
-			}
-			File dirSessions = new File(Constants.FOLDER_SESSIONS);
-			if (!dirSessions.exists()) {
-				dirSessions.mkdirs();
-			}
-
-			instance = new MainGUI(configManager);
-			instance.setVisible(true);
-		} catch (Exception ioe) {
-			ioe.printStackTrace();
-		}
-	}
-
 	public ConfigManager configManager;
-	public JDesktopPane desktop;
+	public DesktopPanel desktop;
 	private FindPanel findPanel;
+
+	private Logger logger;
 
 	public MainGUI(ConfigManager configManager) {
 		this.configManager = configManager;
 
-		desktop = new JDesktopPane();
+		logger = Logger.getLogger(MainGUI.class.getName());
+
+		desktop = new DesktopPanel();
 		Menu menu = new Menu(desktop, this);
 		setJMenuBar(menu);
 		setTitle(Constants.APP_NAME);
@@ -103,21 +67,12 @@ public class MainGUI extends JFrame {
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent event) {
-				super.windowClosing(event);
-				Controller.exit();
+				quit();
 			}
 		});
 
 		JScrollPane scroll = new JScrollPane(desktop);
 		getContentPane().add(scroll);
-	}
-
-	public ConfigManager getConfigManager() {
-		return configManager;
-	}
-
-	public void setConfigManager(ConfigManager configManager) {
-		this.configManager = configManager;
 	}
 
 	public void addFindPanel() {
@@ -136,5 +91,28 @@ public class MainGUI extends JFrame {
 		getContentPane().validate();
 
 		findPanel = null;
+	}
+
+	/**
+	 * This method terminates the application and saves all the runtime
+	 * information on the filesystem.
+	 */
+	public void quit() {
+
+		try {
+			setVisible(false);
+
+			configManager.setWindowHeight(getHeight());
+			configManager.setWindowWidth(getWidth());
+			configManager.setWindowX(getX());
+			configManager.setWindowY(getY());
+			configManager.saveConfiguration();
+
+			dispose();
+
+		} catch (ConfigurationException e) {
+			logger.severe(e.getMessage());
+			System.exit(1);
+		}
 	}
 }

@@ -1,6 +1,6 @@
 /**
  * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
- * Copyright (C) 2011 Santiago Lizardo (http://www.santiagolizardo.com)
+ * Copyright (C) 2013 Santiago Lizardo (http://www.santiagolizardo.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -27,7 +26,6 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import com.santiagolizardo.beobachter.MainGUI;
-import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 
@@ -45,35 +43,33 @@ public class WindowsMenu extends JMenu {
 		itemCascade.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
 				KeyEvent.CTRL_MASK));
 		itemCascade.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				Controller.setWindowsOnCascade(MainGUI.instance.desktop);
+			public void actionPerformed(ActionEvent ev) {
+				MainGUI.instance.desktop.setWindowsOnCascade();
 			}
 		});
 
-		JMenuItem itemTileVer = new JMenuItem(Translator
-				._("Tile_windows_vertically"));
+		JMenuItem itemTileVer = new JMenuItem(
+				Translator._("Tile_windows_vertically"));
 		itemTileVer.setIcon(IconFactory
 				.getImage("application_tile_vertical.png"));
 		itemTileVer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,
 				KeyEvent.CTRL_MASK));
 		itemTileVer.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent event) {
-				Controller
-						.setWindowsOnTileVertical(MainGUI.instance.desktop);
+			public void actionPerformed(ActionEvent ev) {
+				MainGUI.instance.desktop.setWindowsOnTileVertical();
 			}
 		});
 
-		JMenuItem itemTileHor = new JMenuItem(Translator
-				._("Tile_windows_horizontally"));
+		JMenuItem itemTileHor = new JMenuItem(
+				Translator._("Tile_windows_horizontally"));
 		itemTileHor.setIcon(IconFactory
 				.getImage("application_tile_horizontal.png"));
 		itemTileHor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
 				KeyEvent.CTRL_MASK));
 		itemTileHor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				Controller
-						.setWindowsOnTileHorizontal(MainGUI.instance.desktop);
+			public void actionPerformed(ActionEvent ev) {
+				MainGUI.instance.desktop.setWindowsOnTileHorizontal();
 			}
 		});
 
