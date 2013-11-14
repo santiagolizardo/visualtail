@@ -1,5 +1,11 @@
 CHANGES
 
+Version 1.7.4 (2013/11/14)
+
+	- Extend the Open file dialog to be able to select multiple files to open at a time.
+	- Minor bugfixes.
+	- Performance improvements.
+
 Version 1.7.3 (2013/11/10)
 
 	- Added an option to limit the last number of lines to show of certain file. (like tail -n)

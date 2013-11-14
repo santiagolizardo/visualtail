@@ -45,14 +45,9 @@ public class SwingUtil {
 	public static void setLookAndFeel(String className) {
 		try {
 			UIManager.setLookAndFeel(className);
-		} catch (ClassNotFoundException cnf) {
-			cnf.printStackTrace();
-		} catch (UnsupportedLookAndFeelException ulaf) {
-			ulaf.printStackTrace();
-		} catch (IllegalAccessException ia) {
-			ia.printStackTrace();
-		} catch (InstantiationException i) {
-			i.printStackTrace();
+		} catch (ClassNotFoundException | UnsupportedLookAndFeelException
+				| IllegalAccessException | InstantiationException ex) {
+			ex.printStackTrace();
 		}
 	}
 }

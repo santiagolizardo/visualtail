@@ -33,7 +33,7 @@ public class WindowsMenu extends JMenu {
 
 	private static final long serialVersionUID = 3376590111106134179L;
 
-	public WindowsMenu() {
+	public WindowsMenu(final MainGUI parentFrame) {
 
 		setText(Translator._("Windows"));
 		setMnemonic(KeyEvent.VK_W);
@@ -44,7 +44,7 @@ public class WindowsMenu extends JMenu {
 				KeyEvent.CTRL_MASK));
 		itemCascade.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				MainGUI.instance.desktop.setWindowsOnCascade();
+				parentFrame.desktop.setWindowsOnCascade();
 			}
 		});
 
@@ -57,7 +57,7 @@ public class WindowsMenu extends JMenu {
 		itemTileVer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				MainGUI.instance.desktop.setWindowsOnTileVertical();
+				parentFrame.desktop.setWindowsOnTileVertical();
 			}
 		});
 
@@ -69,12 +69,25 @@ public class WindowsMenu extends JMenu {
 				KeyEvent.CTRL_MASK));
 		itemTileHor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				MainGUI.instance.desktop.setWindowsOnTileHorizontal();
+				parentFrame.desktop.setWindowsOnTileHorizontal();
+			}
+		});
+
+		JMenuItem miCloseAllWindows = new JMenuItem(
+				Translator._("Close all windows"));
+		miCloseAllWindows.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
+				KeyEvent.CTRL_MASK));
+		miCloseAllWindows.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				parentFrame.desktop.removeAll();
+				parentFrame.desktop.repaint();
 			}
 		});
 
 		add(itemCascade);
 		add(itemTileHor);
 		add(itemTileVer);
+		addSeparator();
+		add(miCloseAllWindows);
 	}
 }

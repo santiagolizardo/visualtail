@@ -17,21 +17,16 @@
  */
 package com.santiagolizardo.beobachter.config;
 
-
-import java.io.File;
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.UIManager;
 
-import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
 import com.santiagolizardo.beobachter.MainGUI;
-import com.santiagolizardo.beobachter.engine.Controller;
-import com.santiagolizardo.beobachter.gui.util.FileUtil;
-import com.santiagolizardo.beobachter.util.ArraysUtil;
 
-public class ConfigManager {
+public class ConfigData {
 
 	// Window properties
 	private final String WINDOW_POSITION_X = "window.position.x";
@@ -58,20 +53,18 @@ public class ConfigManager {
 
 	private PropertiesConfiguration configuration;
 
-	private String fileName;
-
-	public ConfigManager(String fileName) {
-		this.fileName = fileName;
+	public ConfigData() {
 	}
 
-	public void loadRecents() {
+	public List<String> getRecentFiles() {
+		List<String> recentFiles = new ArrayList<String>();
 		for (byte i = 0; i < 10; i++) {
-			String recent = configuration.getString("recent." + i
+			String recentFile = configuration.getString("recent." + i
 					+ ".file_name");
-			if (recent != null) {
-				Controller.addRecent(recent);
-			}
+			if (recentFile != null)
+				recentFiles.add(recentFile);
 		}
+		return recentFiles;
 	}
 
 	public int getWindowWidth() {
@@ -165,33 +158,11 @@ public class ConfigManager {
 		configuration.setProperty(FONT_SIZE, fontSize);
 	}
 
-	public void loadConfiguration() throws ConfigurationException {
-		File file = new File(fileName);
-		File dir = file.getParentFile();
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		if (!file.exists()) {
-			InputStream is = ConfigManager.class.getResourceAsStream(
-			"default_config.properties");
-			FileUtil.copy(is, file);
-		}
-
-		configuration = new PropertiesConfiguration(fileName);
+	public PropertiesConfiguration getConfiguration() {
+		return configuration;
 	}
 
-	public void saveConfiguration() throws ConfigurationException {
-		byte i = 0;
-		for (; i < ArraysUtil.recents.size(); i++) {
-			String propertyName = "recent." + i + ".file_name";
-			configuration.setProperty(propertyName, ArraysUtil.recents.get(i)
-					.toString());
-		}
-		for (; i < 10; i++) {
-			String propertyName = "recent." + i + ".file_name";
-			configuration.clearProperty(propertyName);
-		}
-
-		configuration.save();
+	public void setConfiguration(PropertiesConfiguration configuration) {
+		this.configuration = configuration;
 	}
 }

@@ -27,7 +27,8 @@ import javax.swing.JScrollPane;
 
 import org.apache.commons.configuration.ConfigurationException;
 
-import com.santiagolizardo.beobachter.config.ConfigManager;
+import com.santiagolizardo.beobachter.config.ConfigData;
+import com.santiagolizardo.beobachter.config.ConfigPersistence;
 import com.santiagolizardo.beobachter.gui.components.DesktopPanel;
 import com.santiagolizardo.beobachter.gui.dialogs.components.FindPanel;
 import com.santiagolizardo.beobachter.gui.menu.Menu;
@@ -45,14 +46,14 @@ public class MainGUI extends JFrame {
 
 	public static MainGUI instance = null;
 
-	public ConfigManager configManager;
+	public ConfigData configData;
 	public DesktopPanel desktop;
 	private FindPanel findPanel;
 
 	private Logger logger;
 
-	public MainGUI(ConfigManager configManager) {
-		this.configManager = configManager;
+	public MainGUI(ConfigData configData) {
+		this.configData = configData;
 
 		logger = Logger.getLogger(MainGUI.class.getName());
 
@@ -60,10 +61,10 @@ public class MainGUI extends JFrame {
 		Menu menu = new Menu(desktop, this);
 		setJMenuBar(menu);
 		setTitle(Constants.APP_NAME);
-		setSize(configManager.getWindowWidth(), configManager.getWindowHeight());
-		setLocation(configManager.getWindowX(), configManager.getWindowY());
-		setIconImage(IconFactory.getImage("logo.png").getImage());
-		desktop.setDragMode(configManager.getDragMode());
+		setSize(configData.getWindowWidth(), configData.getWindowHeight());
+		setLocation(configData.getWindowX(), configData.getWindowY());
+		setIconImage(IconFactory.getImage("icon.png").getImage());
+		desktop.setDragMode(configData.getDragMode());
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent event) {
@@ -102,11 +103,13 @@ public class MainGUI extends JFrame {
 		try {
 			setVisible(false);
 
-			configManager.setWindowHeight(getHeight());
-			configManager.setWindowWidth(getWidth());
-			configManager.setWindowX(getX());
-			configManager.setWindowY(getY());
-			configManager.saveConfiguration();
+			configData.setWindowHeight(getHeight());
+			configData.setWindowWidth(getWidth());
+			configData.setWindowX(getX());
+			configData.setWindowY(getY());
+
+			ConfigPersistence configPersistence = new ConfigPersistence();
+			configPersistence.saveProperties(configData.getConfiguration());
 
 			dispose();
 

@@ -22,8 +22,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JFrame;
+import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -32,19 +34,21 @@ import javax.swing.KeyStroke;
 
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.actions.ExitAction;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
-import com.santiagolizardo.beobachter.gui.dialogs.OpenFileDialog;
 import com.santiagolizardo.beobachter.gui.dialogs.SessionsDialog;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
+import com.santiagolizardo.beobachter.gui.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
-import com.santiagolizardo.beobachter.util.ArraysUtil;
 
 public class FileMenu extends JMenu {
 
 	private static final long serialVersionUID = -9095266179967845006L;
+
+	public static RecentsMenu recentsMenu;
 
 	public FileMenu(final MainGUI parentFrame) {
 		setText(Translator._("File"));
@@ -54,13 +58,50 @@ public class FileMenu extends JMenu {
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 				KeyEvent.CTRL_MASK));
 		open.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				OpenFileDialog ofDialog = new OpenFileDialog(parentFrame);
-				ofDialog.setVisible(true);
+			public void actionPerformed(ActionEvent ev) {
+				File lastSelected = new File(parentFrame.configData
+						.getLastPath());
+
+				JFileChooser chooser = new JFileChooser();
+				chooser.setSelectedFile(lastSelected);
+				chooser.setMultiSelectionEnabled(true);
+				int resp = chooser.showOpenDialog(parentFrame);
+				if (resp == JFileChooser.APPROVE_OPTION) {
+					File[] files = chooser.getSelectedFiles();
+					LogType logType = new LogType("Default");
+
+					List<File> unreadableFiles = new ArrayList<File>();
+
+					for (File file : files) {
+
+						try {
+							FileUtil.tryReading(file);
+						} catch (Exception ex) {
+							unreadableFiles.add(file);
+							continue;
+						}
+
+						recentsMenu.addRecent(file.getAbsolutePath());
+						Controller.openFile(file.getAbsolutePath(), logType);
+					}
+
+					parentFrame.desktop.setWindowsOnTileHorizontal();
+
+					if (unreadableFiles.size() > 0) {
+						StringBuffer message = new StringBuffer();
+						message.append("These files could not be opened for reading:\n");
+						for (File file : unreadableFiles)
+							message.append("    - ")
+									.append(file.getAbsolutePath())
+									.append("\n");
+						DialogFactory.showErrorMessage(parentFrame,
+								message.toString());
+					}
+				}
 			}
 		});
 
-		Controller.initRecents();
+		recentsMenu = new RecentsMenu(parentFrame.configData);
 
 		JMenuItem exit = new JMenuItem(new ExitAction(parentFrame));
 		exit.setIcon(IconFactory.getImage("exit.png"));
@@ -93,26 +134,30 @@ public class FileMenu extends JMenu {
 
 				name = name.trim();
 
-				if (name.length() > 0) {
-					try {
-						File file = new File(Constants.FOLDER_SESSIONS
-								+ Constants.DIR_SEP + name + ".txt");
-						FileWriter writer = new FileWriter(file);
-						for (JInternalFrame frame : frames) {
-							LogWindow window = (LogWindow) frame;
-							writer.write(String.format("%s\n", window.getFile()
-									.getAbsolutePath()));
-						}
-						writer.close();
-					} catch (Exception e) {
-						e.printStackTrace();
+				if (name.length() == 0) {
+					DialogFactory.showErrorMessage(null,
+							Translator._("Invalid session name"));
+					return;
+				}
+
+				try {
+					File file = new File(Constants.FOLDER_SESSIONS
+							+ Constants.DIR_SEP + name + ".txt");
+					FileWriter writer = new FileWriter(file);
+					for (JInternalFrame frame : frames) {
+						LogWindow window = (LogWindow) frame;
+						writer.write(String.format("%s\n", window.getFile()
+								.getAbsolutePath()));
 					}
+					writer.close();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		});
 
 		add(open);
-		add(ArraysUtil.recentsMenu);
+		add(recentsMenu);
 		addSeparator();
 		add(loadSession);
 		add(saveSession);

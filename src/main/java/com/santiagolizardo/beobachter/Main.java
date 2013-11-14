@@ -22,7 +22,10 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.LogManager;
 
-import com.santiagolizardo.beobachter.config.ConfigManager;
+import javax.swing.SwingUtilities;
+
+import com.santiagolizardo.beobachter.config.ConfigData;
+import com.santiagolizardo.beobachter.config.ConfigPersistence;
 import com.santiagolizardo.beobachter.gui.util.SwingUtil;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 
@@ -44,28 +47,35 @@ public class Main {
 			System.err.println(ex.getMessage());
 		}
 
-		ConfigManager configManager = null;
+		final ConfigData configData = new ConfigData();
+		ConfigPersistence configPersistence = new ConfigPersistence();
 		try {
-			configManager = new ConfigManager(Constants.CONFIG_FILE);
-			configManager.loadConfiguration();
-
-			SwingUtil.setLookAndFeel(configManager.getWindowLAF());
-
-			Translator.start(configManager);
-
-			File dirLogTypes = new File(Constants.FOLDER_LOG_TYPES);
-			if (!dirLogTypes.exists()) {
-				dirLogTypes.mkdirs();
-			}
-			File dirSessions = new File(Constants.FOLDER_SESSIONS);
-			if (!dirSessions.exists()) {
-				dirSessions.mkdirs();
-			}
-
-			MainGUI instance = new MainGUI(configManager);
-			instance.setVisible(true);
-		} catch (Exception ioe) {
-			ioe.printStackTrace();
+			configData.setConfiguration(configPersistence
+					.loadProperties(Constants.CONFIG_FILE));
+		} catch (Exception ex) {
+			System.err.println(ex.getMessage());
 		}
+
+		Translator.start(configData.getLanguage());
+
+		File dirLogTypes = new File(Constants.FOLDER_LOG_TYPES);
+		if (!dirLogTypes.exists()) {
+			dirLogTypes.mkdirs();
+		}
+		File dirSessions = new File(Constants.FOLDER_SESSIONS);
+		if (!dirSessions.exists()) {
+			dirSessions.mkdirs();
+		}
+
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				SwingUtil.setLookAndFeel(configData.getWindowLAF());
+
+				MainGUI.instance = new MainGUI(configData);
+				MainGUI.instance.setVisible(true);
+			}
+		});
 	}
 }

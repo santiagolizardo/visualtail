@@ -22,8 +22,6 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import com.santiagolizardo.beobachter.config.ConfigManager;
-
 /**
  * This class is the responsible of translate every literal on the GUI
  * 
@@ -34,11 +32,11 @@ public class Translator {
 
 	private static final Logger logger = Logger.getLogger(Translator.class
 			.getName());
-	
+
 	private static ResourceBundle bundle;
 
-	public static void start(ConfigManager configManager) {
-		String[] locales = configManager.getLanguage().split("_");
+	public static void start(String language) {
+		String[] locales = language.split("_");
 		Locale locale = new Locale(locales[0], locales[1]);
 		bundle = ResourceBundle
 				.getBundle(

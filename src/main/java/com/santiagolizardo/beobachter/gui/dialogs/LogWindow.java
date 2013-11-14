@@ -98,7 +98,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		setResizable(true);
 		setFrameIcon(IconFactory.getImage("log_window.png"));
 
-		MainGUI.instance.configManager.setLastPath(fileName);
+		MainGUI.instance.configData.setLastPath(fileName);
 
 		numberDisplayedLines = 64;
 

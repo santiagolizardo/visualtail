@@ -1,5 +1,3 @@
 TODO
 
-	- Extend the Open file dialog to be able to select multiple files to open at a time.
-	- Split Config from ConfigManager.
-
+	- Migrate the current translations based on .properties files to a one more flexible and with support for plurals.

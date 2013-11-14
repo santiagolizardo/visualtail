@@ -102,15 +102,22 @@ public class ListingPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String name = JOptionPane.showInputDialog(getParent(),
 						Translator._("Enter_the_name_of_the_new_log_type"));
-				if (name != null && name.trim().length() > 0) {
-					LogType logType = new LogType(name);
-					try {
-						EntitiesConfiguration.saveToFile(logType);
+				if (name == null) {
+					return;
+				}
+				name = name.trim();
+				if (name.length() == 0) {
+					DialogFactory.showErrorMessage(null,
+							Translator._("Invalid log type name"));
+					return;
+				}
+				LogType logType = new LogType(name);
+				try {
+					EntitiesConfiguration.saveToFile(logType);
 
-						updateLogTypes();
-					} catch (Exception ee) {
-						ee.printStackTrace();
-					}
+					updateLogTypes();
+				} catch (Exception ee) {
+					ee.printStackTrace();
 				}
 			}
 		});

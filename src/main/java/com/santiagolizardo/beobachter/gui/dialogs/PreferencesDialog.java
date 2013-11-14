@@ -40,9 +40,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import org.apache.commons.configuration.ConfigurationException;
+
 import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.beans.SwingLookAndFeel;
-import com.santiagolizardo.beobachter.config.ConfigManager;
+import com.santiagolizardo.beobachter.config.ConfigData;
+import com.santiagolizardo.beobachter.config.ConfigPersistence;
 import com.santiagolizardo.beobachter.gui.renderers.LocaleRender;
 import com.santiagolizardo.beobachter.gui.renderers.SwingLAFRenderer;
 import com.santiagolizardo.beobachter.gui.util.SwingUtil;
@@ -69,7 +72,7 @@ public class PreferencesDialog extends AbstractDialog {
 	public PreferencesDialog(JFrame parentFrame) {
 		super(parentFrame);
 
-		final ConfigManager configManager = MainGUI.instance.configManager;
+		final ConfigData configManager = MainGUI.instance.configData;
 
 		setTitle(Translator._("Preferences"));
 		setResizable(false);
@@ -109,6 +112,7 @@ public class PreferencesDialog extends AbstractDialog {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				setVisible(false);
+
 				SwingLookAndFeel laf = ((SwingLookAndFeel) lookAndFeel
 						.getSelectedItem());
 				configManager.setWindowLAF(laf.getClassName());
@@ -120,11 +124,15 @@ public class PreferencesDialog extends AbstractDialog {
 						.toString());
 				configManager.setFontSize(Integer.parseInt(size.getValue()
 						.toString()));
+
+				ConfigPersistence configPersistence = new ConfigPersistence();
 				try {
-					configManager.saveConfiguration();
-				} catch (Exception e) {
-					e.printStackTrace();
+					configPersistence.saveProperties(configManager
+							.getConfiguration());
+				} catch (ConfigurationException ex) {
+					logger.warning(ex.getMessage());
 				}
+
 				dispose();
 			}
 		});

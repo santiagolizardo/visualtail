@@ -32,7 +32,7 @@ public class Menu extends JMenuBar {
 		FileMenu fileMenu = new FileMenu(parentFrame);
 		EditMenu editMenu = new EditMenu();
 		OptionsMenu optionsMenu = new OptionsMenu(parentFrame);
-		WindowsMenu windowMenu = new WindowsMenu();
+		WindowsMenu windowMenu = new WindowsMenu(parentFrame);
 		HelpMenu helpMenu = new HelpMenu(parentFrame);
 
 		add(fileMenu);
