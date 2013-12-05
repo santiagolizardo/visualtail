@@ -47,7 +47,7 @@ import com.santiagolizardo.beobachter.config.EntitiesConfiguration;
 import com.santiagolizardo.beobachter.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
-import com.santiagolizardo.beobachter.util.ArraysUtil;
+import com.santiagolizardo.beobachter.util.LogTypes;
 
 public class ListingPanel extends JPanel {
 
@@ -210,7 +210,9 @@ public class ListingPanel extends JPanel {
 
 	public void updateLogTypes() {
 		modelTypes.clear();
-		Vector<LogType> logTypes = ArraysUtil.arrayLogTypes();
+		
+		LogTypes logTypesLoader = LogTypes.getInstance();
+		Vector<LogType> logTypes = logTypesLoader.getAll();
 		for (LogType logType : logTypes) {
 			if (!"Default".equals(logType.getName())) {
 				modelTypes.addElement(logType);

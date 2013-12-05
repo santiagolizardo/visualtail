@@ -118,8 +118,11 @@ public class PreferencesDialog extends AbstractDialog {
 				configManager.setWindowLAF(laf.getClassName());
 				SwingUtil.setLookAndFeel(laf.getClassName());
 				SwingUtilities.updateComponentTreeUI(MainGUI.instance);
-				configManager.setLanguage(languagesList.getSelectedItem()
-						.toString());
+
+				Object selectedLanguage = languagesList.getSelectedItem();
+				if (null != selectedLanguage)
+					configManager.setLanguage(selectedLanguage.toString());
+
 				configManager.setFontFamily(fontsList.getSelectedItem()
 						.toString());
 				configManager.setFontSize(Integer.parseInt(size.getValue()
@@ -167,8 +170,12 @@ public class PreferencesDialog extends AbstractDialog {
 
 		container.add(_lookAndFeel);
 		container.add(lookAndFeel);
-		container.add(_language);
-		container.add(languagesList);
+
+		if (languagesList.getModel().getSize() > 0) {
+			container.add(_language);
+			container.add(languagesList);
+		}
+
 		container.add(_font);
 		container.add(fontsList);
 		container.add(_size);

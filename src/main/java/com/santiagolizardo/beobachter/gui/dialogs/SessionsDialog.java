@@ -35,7 +35,6 @@ import java.io.FileReader;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -48,13 +47,11 @@ import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.engine.Controller;
+import com.santiagolizardo.beobachter.gui.menu.RecentsMenu;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 /**
  * This class creates a window with the list of sessions available to open
- * 
- * @author slizardo
- * 
  */
 public class SessionsDialog extends AbstractDialog {
 
@@ -66,12 +63,16 @@ public class SessionsDialog extends AbstractDialog {
 	private JButton btnOpen;
 	private JButton btnRemove;
 
-	public SessionsDialog(JFrame parentFrame) {
+	private RecentsMenu recentsMenu;
+	
+	public SessionsDialog(MainGUI parentFrame, RecentsMenu recentsMenu) {
 		super(parentFrame);
 
 		setTitle(Translator._("Sessions"));
 		setModal(true);
 		setSize(320, 240);
+		
+		this.recentsMenu = recentsMenu;
 
 		listModel = new DefaultListModel<String>();
 		list = new JList<String>(listModel);
@@ -173,6 +174,8 @@ public class SessionsDialog extends AbstractDialog {
 	}
 
 	private void openSession() {
+		setVisible(false);
+
 		String path = list.getSelectedValue().toString().concat(".txt");
 		File file = new File(Constants.FOLDER_SESSIONS + Constants.DIR_SEP
 				+ path);
@@ -180,6 +183,7 @@ public class SessionsDialog extends AbstractDialog {
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
+				recentsMenu.addRecent(line);
 				Controller.openFile(line, new LogType("Default"));
 			}
 			reader.close();
@@ -187,9 +191,8 @@ public class SessionsDialog extends AbstractDialog {
 			ee.printStackTrace();
 		}
 
-		MainGUI.instance.desktop.setWindowsOnCascade();
+		((MainGUI)parentFrame).desktop.setWindowsOnCascade();
 
-		setVisible(false);
 		dispose();
 	}
 }

@@ -100,6 +100,8 @@ public class MainGUI extends JFrame {
 	 */
 	public void quit() {
 
+		int exitCode = 1;
+
 		try {
 			setVisible(false);
 
@@ -112,10 +114,12 @@ public class MainGUI extends JFrame {
 			configPersistence.saveProperties(configData.getConfiguration());
 
 			dispose();
+			exitCode = 0;
 
 		} catch (ConfigurationException e) {
 			logger.severe(e.getMessage());
-			System.exit(1);
 		}
+
+		System.exit(exitCode);
 	}
 }

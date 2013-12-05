@@ -21,10 +21,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.gui.dialogs.AboutDialog;
 import com.santiagolizardo.beobachter.gui.util.UpdateManager;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
@@ -34,7 +34,7 @@ public class HelpMenu extends JMenu {
 
 	private static final long serialVersionUID = -3653494784002339461L;
 
-	public HelpMenu(final JFrame parentFrame) {
+	public HelpMenu(final MainGUI mainGUI) {
 
 		setText(Translator._("Help"));
 		setMnemonic(KeyEvent.VK_H);
@@ -44,7 +44,8 @@ public class HelpMenu extends JMenu {
 		checkForUpdates.setIcon(IconFactory.getImage("check_for_updates.png"));
 		checkForUpdates.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				UpdateManager.checkForUpdate();
+				UpdateManager updateManager = new UpdateManager(mainGUI);
+				updateManager.checkForUpdate();
 			}
 		});
 		JMenuItem about = new JMenuItem(
@@ -53,7 +54,7 @@ public class HelpMenu extends JMenu {
 		about.setMnemonic(KeyEvent.VK_F1);
 		about.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				AboutDialog aboutDialog = new AboutDialog(parentFrame);
+				AboutDialog aboutDialog = new AboutDialog(mainGUI);
 				aboutDialog.setVisible(true);
 			}
 		});

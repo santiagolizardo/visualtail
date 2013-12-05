@@ -29,12 +29,14 @@ import com.santiagolizardo.beobachter.MainGUI;
 
 public class UpdateManager extends Thread {
 
-	public static void checkForUpdate() {
-		UpdateManager updateManager = new UpdateManager();
-		updateManager.start();
+	private MainGUI mainGUI;
+
+	public UpdateManager(MainGUI mainGUI) {
+		this.mainGUI = mainGUI;
 	}
 
-	private UpdateManager() {
+	public void checkForUpdate() {
+		start();
 	}
 
 	public void run() {
@@ -57,15 +59,14 @@ public class UpdateManager extends Thread {
 						.append(Constants.LINE_SEP).append(Constants.LINE_SEP);
 				sb.append(_("Please_visit_us_on_sourceforge")).append(
 						Constants.LINE_SEP);
-				DialogFactory.showInformationMessage(MainGUI.instance,
-						sb.toString());
+				DialogFactory.showInformationMessage(mainGUI, sb.toString());
 			} else if (serverVersion <= currentVersion) {
-				DialogFactory.showInformationMessage(MainGUI.instance,
+				DialogFactory.showInformationMessage(mainGUI,
 						_("There_are_not_updates_available"));
 			}
 
 		} catch (Exception e) {
-			DialogFactory.showErrorMessage(MainGUI.instance,
+			DialogFactory.showErrorMessage(mainGUI,
 					_("Unable_to_fetch_server_information"));
 		}
 

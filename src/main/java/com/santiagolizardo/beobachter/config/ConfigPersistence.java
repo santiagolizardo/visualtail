@@ -10,7 +10,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.IOUtils;
 
-import com.santiagolizardo.beobachter.util.ArraysUtil;
+import com.santiagolizardo.beobachter.util.RecentFiles;
 
 public class ConfigPersistence {
 
@@ -33,9 +33,10 @@ public class ConfigPersistence {
 	public void saveProperties(PropertiesConfiguration configuration)
 			throws ConfigurationException {
 		byte i = 0;
-		for (; i < ArraysUtil.recents.size(); i++) {
+		RecentFiles arraysUtil = RecentFiles.getInstance();
+		for (; i < arraysUtil.list.size(); i++) {
 			String propertyName = "recent." + i + ".file_name";
-			configuration.setProperty(propertyName, ArraysUtil.recents.get(i)
+			configuration.setProperty(propertyName, arraysUtil.list.get(i)
 					.toString());
 		}
 		for (; i < 10; i++) {

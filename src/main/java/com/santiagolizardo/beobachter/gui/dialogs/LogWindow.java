@@ -63,7 +63,7 @@ import com.santiagolizardo.beobachter.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
-import com.santiagolizardo.beobachter.util.ArraysUtil;
+import com.santiagolizardo.beobachter.util.LogTypes;
 
 public class LogWindow extends JInternalFrame implements TailListener {
 
@@ -167,8 +167,10 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		cbScrollNewLines = new JCheckBox(Translator._("Scroll to new lines"));
 
+		LogTypes logTypesLoader = LogTypes.getInstance();
+		
 		DefaultComboBoxModel<LogType> logTypesModel = new DefaultComboBoxModel<LogType>(
-				ArraysUtil.arrayLogTypes());
+				logTypesLoader.getAll());
 		logTypes = new JComboBox<LogType>(logTypesModel);
 		logTypes.setRenderer(new LogTypeListRenderer());
 		logTypes.addActionListener(new ActionListener() {

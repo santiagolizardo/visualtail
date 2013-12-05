@@ -17,6 +17,8 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -48,7 +50,7 @@ public class FileMenu extends JMenu {
 
 	private static final long serialVersionUID = -9095266179967845006L;
 
-	public static RecentsMenu recentsMenu;
+	private RecentsMenu recentsMenu;
 
 	public FileMenu(final MainGUI parentFrame) {
 		setText(Translator._("File"));
@@ -110,7 +112,8 @@ public class FileMenu extends JMenu {
 		loadSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SessionsDialog dialog = new SessionsDialog(parentFrame);
+				SessionsDialog dialog = new SessionsDialog(parentFrame,
+						recentsMenu);
 				dialog.setVisible(true);
 			}
 		});
@@ -123,12 +126,15 @@ public class FileMenu extends JMenu {
 				JInternalFrame[] frames = MainGUI.instance.desktop
 						.getAllFrames();
 				if (frames.length == 0) {
-					DialogFactory.showErrorMessage(getParent(),
-							"You can not save a session with no opened files");
+					DialogFactory
+							.showErrorMessage(
+									getParent(),
+									_("You can not save a session with no opened files"));
 					return;
 				}
 				String name = JOptionPane.showInputDialog(getParent()
-						.getParent(), "Please enter the session name:");
+						.getParent(), _("Please enter the session name:"),
+						_("Session name"),JOptionPane.QUESTION_MESSAGE);
 				if (name == null)
 					return;
 
@@ -163,5 +169,9 @@ public class FileMenu extends JMenu {
 		add(saveSession);
 		addSeparator();
 		add(exit);
+	}
+
+	public RecentsMenu getRecentsMenu() {
+		return recentsMenu;
 	}
 }

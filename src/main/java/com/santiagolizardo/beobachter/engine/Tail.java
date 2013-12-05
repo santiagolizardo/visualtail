@@ -62,7 +62,9 @@ public class Tail implements Runnable {
 
 					String line = accessFile.readLine();
 					do {
-						notifyListeners(line);
+						if (!line.isEmpty()) {
+							notifyListeners(line);
+						}
 					} while ((line = accessFile.readLine()) != null);
 
 					currentSize = file.length();

@@ -21,32 +21,30 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.Vector;
 
-import javax.swing.JMenu;
-
 import org.apache.commons.configuration.ConfigurationException;
 
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.config.EntitiesConfiguration;
 
-public class ArraysUtil {
+public class LogTypes {
 
-	public static Vector<String> recents = null;
+	private static LogTypes singleton;
 
-	public static JMenu recentsMenu = null;
+	public static final LogTypes getInstance() {
+		if (null == singleton) {
+			singleton = new LogTypes();
+		}
+		return singleton;
+	}
 
-	public static Vector<LogType> logTypes = null;
+	private Vector<LogType> logTypes;
 
-	static {
-		recents = new Vector<String>();
+	private LogTypes() {
 		logTypes = new Vector<LogType>();
 	}
 
-	public static Vector<String> arrayRecentFiles() {
-		return recents;
-	}
-
-	public static Vector<LogType> arrayLogTypes() {
+	public Vector<LogType> getAll() {
 		logTypes.clear();
 		logTypes.add(new LogType("Default"));
 

@@ -18,9 +18,7 @@
 package com.santiagolizardo.beobachter.util;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -54,22 +52,16 @@ public class LocaleUtil {
 	}
 
 	public static String[] getAvailableLocales() {
-		List<String> languages = new ArrayList<String>();
-
 		Pattern pattern = Pattern
 				.compile("^.*Translation_([^.]+)?.properties$");
 
 		Collection<String> files = null;
 		try {
 			files = ResourcesLoader.getResources(pattern);
-			for (String fileName : files) {
-				languages.add(fileName);
-			}
+			return files.toArray(new String[] {});
 		} catch (IOException e) {
 			logger.warning(e.getMessage());
 			return new String[] {};
 		}
-
-		return (String[]) languages.toArray(new String[] {});
 	}
 }

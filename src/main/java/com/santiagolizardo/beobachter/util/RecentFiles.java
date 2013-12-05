@@ -15,29 +15,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.santiagolizardo.beobachter.engine;
+package com.santiagolizardo.beobachter.util;
 
-import java.beans.PropertyVetoException;
+import java.util.Vector;
 
-import com.santiagolizardo.beobachter.MainGUI;
-import com.santiagolizardo.beobachter.beans.LogType;
-import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
+public class RecentFiles {
 
-public class Controller {
+	private static RecentFiles singleton;
 
-	/**
-	 * Invoked from the "Open" dialog.
-	 * 
-	 * @param fileName
-	 * @param logType
-	 */
-	public static void openFile(String fileName, LogType logType) {
-		LogWindow logWindow = new LogWindow(fileName, logType);
-		MainGUI.instance.desktop.add(logWindow);
-		try {
-			logWindow.setSelected(true);
-		} catch (PropertyVetoException pve) {
-			pve.printStackTrace();
+	public static final RecentFiles getInstance() {
+		if (null == singleton) {
+			singleton = new RecentFiles();
 		}
+		return singleton;
+	}
+
+	public Vector<String> list;
+
+	private RecentFiles() {
+		list = new Vector<String>();
 	}
 }
