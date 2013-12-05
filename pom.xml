@@ -4,7 +4,7 @@
 
 	<groupId>com.santiagolizardo.beobachter</groupId>
 	<artifactId>Beobachter</artifactId>
-	<version>1.7.3</version>
+	<version>1.7.4</version>
 	<packaging>jar</packaging>
 
 	<name>Beobachter</name>
@@ -28,7 +28,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.santiagolizardo.beobachter.MainGUI</mainClass>
+							<mainClass>com.santiagolizardo.beobachter.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
