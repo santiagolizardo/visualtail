@@ -18,10 +18,11 @@
 package com.santiagolizardo.beobachter.engine;
 
 /**
- * This is an interface which should be implemented
- * by objects interested on file modifications. 
+ * This is an interface which should be implemented by objects interested on
+ * file modifications.
+ * 
  * @author Santiago Lizardo
- *
+ * 
  */
 public interface TailListener {
 

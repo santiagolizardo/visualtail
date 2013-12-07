@@ -17,6 +17,8 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+
 import java.awt.Container;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -42,7 +44,7 @@ public class AboutDialog extends AbstractDialog {
 	public AboutDialog(JFrame parentFrame) {
 		super(parentFrame);
 
-		setTitle(Translator._("About_this_application"));
+		setTitle(Translator._("About this application"));
 		setSize(720, 480);
 		setModal(true);
 		setResizable(false);
@@ -55,9 +57,12 @@ public class AboutDialog extends AbstractDialog {
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
 		String versionUrl = String
-				.format("<strong>%s</strong> <em>v%s</em><br />More info about the project at <a href=\"%s\">%s</a>.",
-						Constants.APP_NAME, Constants.APP_VERSION,
-						Constants.APP_URL, Constants.APP_URL);
+				.format("<strong>%s</strong> <em>v%s</em><br />%s",
+						Constants.APP_NAME,
+						Constants.APP_VERSION,
+						String.format(
+								_("More info about the project at <a href=\"%s\">%s</a>."),
+								Constants.APP_URL, Constants.APP_URL));
 		JEditorPane lblVersion = new HtmlLabel(versionUrl);
 		lblVersion.setOpaque(false);
 

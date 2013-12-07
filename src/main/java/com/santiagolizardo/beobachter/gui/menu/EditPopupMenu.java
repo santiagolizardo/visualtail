@@ -17,7 +17,6 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
-
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -33,7 +32,8 @@ public class EditPopupMenu extends JPopupMenu {
 	public EditPopupMenu() {
 
 		JMenuItem copy = new JMenuItem(ActionFactory.createCopyAction());
-		JMenuItem selectAll = new JMenuItem(ActionFactory.createSelectAllAction());
+		JMenuItem selectAll = new JMenuItem(
+				ActionFactory.createSelectAllAction());
 
 		add(copy);
 		addSeparator();

@@ -17,6 +17,7 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
 import java.awt.event.KeyEvent;
 
@@ -26,22 +27,19 @@ import javax.swing.JMenuItem;
 import com.santiagolizardo.beobachter.gui.actions.ActionFactory;
 import com.santiagolizardo.beobachter.gui.actions.FindAction;
 import com.santiagolizardo.beobachter.gui.actions.FindNextAction;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class EditMenu extends JMenu {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8897022931984447153L;
 
 	public EditMenu() {
 
-		setText(Translator._("Edit"));
+		setText(_("Edit"));
 		setMnemonic(KeyEvent.VK_E);
 
 		JMenuItem copy = new JMenuItem(ActionFactory.createCopyAction());
-		JMenuItem selectAll = new JMenuItem(ActionFactory.createSelectAllAction());
+		JMenuItem selectAll = new JMenuItem(
+				ActionFactory.createSelectAllAction());
 
 		JMenuItem find = new JMenuItem(new FindAction());
 		JMenuItem findNext = new JMenuItem(new FindNextAction());

@@ -17,6 +17,7 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -26,7 +27,6 @@ import javax.swing.KeyStroke;
 
 import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class FindAction extends AbstractAction {
 
@@ -36,13 +36,13 @@ public class FindAction extends AbstractAction {
 	private static final long serialVersionUID = 2244429466145757856L;
 
 	public FindAction() {
-		
+
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("find.png"));
-		putValue(AbstractAction.NAME, Translator._("Find..."));
-		putValue(AbstractAction.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
-				KeyEvent.VK_F, KeyEvent.CTRL_MASK));
+		putValue(AbstractAction.NAME, _("Find..."));
+		putValue(AbstractAction.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_MASK));
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		MainGUI.instance.addFindPanel();
 	}

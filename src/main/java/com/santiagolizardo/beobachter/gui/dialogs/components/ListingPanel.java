@@ -17,6 +17,7 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs.components;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 import static javax.swing.SpringLayout.EAST;
 import static javax.swing.SpringLayout.NORTH;
 import static javax.swing.SpringLayout.SOUTH;
@@ -101,7 +102,7 @@ public class ListingPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String name = JOptionPane.showInputDialog(getParent(),
-						Translator._("Enter_the_name_of_the_new_log_type"));
+						Translator._("Enter the name of the new log type"));
 				if (name == null) {
 					return;
 				}
@@ -129,7 +130,7 @@ public class ListingPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				LogType selected = (LogType) lstTypes.getSelectedValue();
 				String newName = JOptionPane.showInputDialog(getParent(),
-						"Enter the new name of the log type:",
+						_("Enter the new name of the log type:"),
 						selected.getName());
 				if (newName == null)
 					return;
@@ -155,14 +156,12 @@ public class ListingPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (DialogFactory.showQuestionDialog(getParent(), Translator
-						._("Sure_you_want_to_delete_the_selected_log_type"))) {
+						._("Are you sure you want to delete the selected log type?"))) {
 					LogType selected = (LogType) lstTypes.getSelectedValue();
 					File file = new File(selected.getPath());
-					System.out.printf("Trying to delete '%s'...\n",
-							file.getAbsolutePath());
 					if (!file.delete()) {
 						DialogFactory.showErrorMessage(getParent(),
-								Translator._("Unable_to_delete_the_log_type"));
+								Translator._("Unable to delete the log type"));
 					}
 
 					updateLogTypes();
@@ -210,7 +209,7 @@ public class ListingPanel extends JPanel {
 
 	public void updateLogTypes() {
 		modelTypes.clear();
-		
+
 		LogTypes logTypesLoader = LogTypes.getInstance();
 		Vector<LogType> logTypes = logTypesLoader.getAll();
 		for (LogType logType : logTypes) {

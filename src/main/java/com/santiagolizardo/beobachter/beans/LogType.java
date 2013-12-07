@@ -38,7 +38,7 @@ public class LogType {
 
 	public LogType(String name, int refreshInterval) {
 		setName(name);
-		setRefreshInterval( refreshInterval );
+		setRefreshInterval(refreshInterval);
 
 		rules = new ArrayList<Rule>();
 	}
@@ -53,8 +53,8 @@ public class LogType {
 	}
 
 	public void setName(String name) {
-		if( name == null ) {
-			throw new IllegalArgumentException( "name can not be null" );
+		if (name == null) {
+			throw new IllegalArgumentException("name can not be null");
 		}
 		this.name = name;
 	}
@@ -64,8 +64,10 @@ public class LogType {
 	}
 
 	public void setRefreshInterval(int refreshInterval) {
-		if( refreshInterval < MINIMUM_REFRESH_INTERVAL_MS ) {
-			throw new IllegalArgumentException( "refreshInterval has to be greater than " + MINIMUM_REFRESH_INTERVAL_MS + " ms" );
+		if (refreshInterval < MINIMUM_REFRESH_INTERVAL_MS) {
+			throw new IllegalArgumentException(
+					"refreshInterval has to be greater than "
+							+ MINIMUM_REFRESH_INTERVAL_MS + " ms");
 		}
 		this.refreshInterval = refreshInterval;
 	}
@@ -75,8 +77,8 @@ public class LogType {
 	}
 
 	public void addRule(Rule rule) {
-		if( null == rule ) {
-			throw new IllegalArgumentException( "rule can not be null" );
+		if (null == rule) {
+			throw new IllegalArgumentException("rule can not be null");
 		}
 		rules.add(rule);
 	}
@@ -103,4 +105,3 @@ public class LogType {
 				refreshInterval);
 	}
 }
-

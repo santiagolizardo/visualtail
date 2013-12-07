@@ -21,16 +21,16 @@ public class ActionFactory {
 
 	private static CopyAction copyAction = null;
 	private static SelectAllAction selectAllAction = null;
-	
+
 	public static CopyAction createCopyAction() {
-		if(copyAction == null) {
+		if (copyAction == null) {
 			copyAction = new CopyAction();
 		}
 		return copyAction;
 	}
 
 	public static SelectAllAction createSelectAllAction() {
-		if(selectAllAction == null) {
+		if (selectAllAction == null) {
 			selectAllAction = new SelectAllAction();
 		}
 		return selectAllAction;

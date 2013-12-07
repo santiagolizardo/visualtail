@@ -25,14 +25,15 @@ public class FileUtil {
 
 	public static void tryReading(File file) throws Exception {
 		if (!file.exists()) {
-			throw new Exception(Translator._("The_file_doesnt_exists"));
+			throw new Exception(Translator._("The file does not exist"));
 		}
 		if (file.isDirectory()) {
-			throw new Exception(Translator._("Cannot_open_a_directory"));
+			throw new Exception(Translator._("Cannot open a directory"));
 		}
 		if (!file.canRead()) {
 			throw new Exception(
-					Translator._("You_dont_have_permission_to_read_this_file"));
+					Translator._("You do not have permissions to read this file"));
 		}
 	}
 }
+

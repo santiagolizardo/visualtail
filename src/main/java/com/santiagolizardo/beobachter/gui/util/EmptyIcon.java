@@ -25,19 +25,20 @@ import javax.swing.Icon;
 public class EmptyIcon implements Icon {
 
 	public final static EmptyIcon SIZE_16 = new EmptyIcon(16);
-	
+
 	private int size;
-	
+
 	public EmptyIcon(int size) {
 		this.size = size;
 	}
-	
+
 	public int getIconHeight() {
 		return size;
 	}
 
 	public int getIconWidth() {
-		return size;	}
+		return size;
+	}
 
 	public void paintIcon(Component arg0, Graphics arg1, int arg2, int arg3) {
 	}

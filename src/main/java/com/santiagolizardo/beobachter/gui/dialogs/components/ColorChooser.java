@@ -27,19 +27,19 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 
-public class ColorChooser  {
+public class ColorChooser {
 
 	private JColorChooser colorChooser;
 	private JDialog dialog;
 	private Color returnColor;
-	
+
 	public ColorChooser(Component parent, String title, Color initialColor) {
 		colorChooser = new JColorChooser(initialColor);
 		colorChooser.setPreviewPanel(new JPanel());
 
 		AbstractColorChooserPanel[] panel = { colorChooser.getChooserPanels()[0] };
 		colorChooser.setChooserPanels(panel);
-		dialog = JColorChooser.createDialog(parent, title, true, colorChooser, 
+		dialog = JColorChooser.createDialog(parent, title, true, colorChooser,
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						returnColor = colorChooser.getColor();
@@ -57,7 +57,7 @@ public class ColorChooser  {
 		dialog.pack();
 		dialog.setVisible(true);
 	}
-	
+
 	public Color pickColor() {
 		return returnColor;
 	}

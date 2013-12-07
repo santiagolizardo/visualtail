@@ -17,7 +17,6 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -42,6 +41,7 @@ import com.santiagolizardo.beobachter.gui.dialogs.components.ColorChooser;
 import com.santiagolizardo.beobachter.gui.dialogs.components.RulesTableModel;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
 public class RuleDialog extends JDialog {
 
@@ -71,8 +71,7 @@ public class RuleDialog extends JDialog {
 		setModal(true);
 
 		pattern = new JTextField(20);
-		regularExpression = new JCheckBox(Translator
-				._("Regular_expression"));
+		regularExpression = new JCheckBox(Translator._("Regular expression"));
 
 		pickBackgroundColor = new JButton(Translator._("Pick"));
 		pickBackgroundColor.addActionListener(new ActionListener() {
@@ -95,7 +94,7 @@ public class RuleDialog extends JDialog {
 		pickForegroundColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				ColorChooser colorChooser = new ColorChooser(RuleDialog.this,
-						"Pick the foreground color", foregroundColor
+						_("Pick the foreground color"), foregroundColor
 								.getBackground());
 				Color color = colorChooser.pickColor();
 				if (color != null) {
@@ -108,15 +107,15 @@ public class RuleDialog extends JDialog {
 		foregroundColor.setBackground(Color.BLACK);
 		foregroundColor.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		ignoreCase = new JCheckBox(Translator._("Ignore_case"));
+		ignoreCase = new JCheckBox(Translator._("Ignore case"));
 
 		btnOk = new JButton(Translator._("Ok"));
 		getRootPane().setDefaultButton(btnOk);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				if ("".equals(pattern.getText().trim())) {
-					DialogFactory.showErrorMessage(RuleDialog.this, Translator
-							._("Please_complete_the_field_pattern"));
+					DialogFactory.showErrorMessage(RuleDialog.this,
+							Translator._("Please complete the field pattern"));
 					pattern.requestFocus();
 					return;
 				}
@@ -151,10 +150,8 @@ public class RuleDialog extends JDialog {
 		contentPane.setLayout(layout);
 
 		JLabel _pattern = new JLabel(Translator._("Pattern"));
-		JLabel _backgroundColor = new JLabel(Translator
-				._("Background_color"));
-		JLabel _foregroundColor = new JLabel(Translator
-				._("Foreground_color"));
+		JLabel _backgroundColor = new JLabel(Translator._("Background color"));
+		JLabel _foregroundColor = new JLabel(Translator._("Foreground color"));
 
 		contentPane.add(_pattern);
 		contentPane.add(pattern);
@@ -191,8 +188,8 @@ public class RuleDialog extends JDialog {
 				SpringLayout.SOUTH, _foregroundColor);
 		layout.putConstraint(SpringLayout.NORTH, btnOk, 5, SpringLayout.SOUTH,
 				pickForegroundColor);
-		layout.putConstraint(SpringLayout.NORTH, btnCancel, 5, SpringLayout.SOUTH,
-				pickForegroundColor);
+		layout.putConstraint(SpringLayout.NORTH, btnCancel, 5,
+				SpringLayout.SOUTH, pickForegroundColor);
 
 		layout.putConstraint(SpringLayout.WEST, _pattern, 5, SpringLayout.WEST,
 				contentPane);
@@ -216,16 +213,18 @@ public class RuleDialog extends JDialog {
 				SpringLayout.EAST, foregroundColor);
 		layout.putConstraint(SpringLayout.WEST, btnOk, 5, SpringLayout.WEST,
 				contentPane);
-		layout.putConstraint(SpringLayout.WEST, btnCancel, 5, SpringLayout.EAST,
-				btnOk);
-		
+		layout.putConstraint(SpringLayout.WEST, btnCancel, 5,
+				SpringLayout.EAST, btnOk);
+
 		Constraints panelCons = layout.getConstraints(contentPane);
 		Constraints okCons = layout.getConstraints(btnOk);
 		Constraints patternCons = layout.getConstraints(pattern);
-		
-		panelCons.setHeight(Spring.sum(Spring.constant(5), okCons.getConstraint(SpringLayout.SOUTH)));
-		panelCons.setWidth(Spring.sum(Spring.constant(5), patternCons.getConstraint(SpringLayout.EAST)));
-		
+
+		panelCons.setHeight(Spring.sum(Spring.constant(5),
+				okCons.getConstraint(SpringLayout.SOUTH)));
+		panelCons.setWidth(Spring.sum(Spring.constant(5),
+				patternCons.getConstraint(SpringLayout.EAST)));
+
 		pack();
 	}
 

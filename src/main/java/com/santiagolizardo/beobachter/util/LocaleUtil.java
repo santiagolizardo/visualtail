@@ -27,9 +27,6 @@ import com.santiagolizardo.beobachter.resources.ResourcesLoader;
 
 /**
  * Utilities for locale, regional settings.
- * 
- * @author slizardo
- * 
  */
 public class LocaleUtil {
 
@@ -45,15 +42,19 @@ public class LocaleUtil {
 	public static String getDisplayName(String localeCode) {
 		if (localeCode == null)
 			throw new IllegalArgumentException("Argument can not be null.");
-		String[] parts = localeCode.split("_");
-		Locale locale = parts.length == 1 ? new Locale(parts[0]) : new Locale(
-				parts[0], parts[1]);
+		Locale locale = fromString(localeCode);
 		return locale.getDisplayName();
 	}
 
+	public static Locale fromString(String localeCode) {
+		String[] parts = localeCode.split("_");
+		Locale locale = parts.length == 1 ? new Locale(parts[0]) : new Locale(
+				parts[0], parts[1]);
+		return locale;
+	}
+
 	public static String[] getAvailableLocales() {
-		Pattern pattern = Pattern
-				.compile("^.*Translation_([^.]+)?.properties$");
+		Pattern pattern = Pattern.compile("^.*Translator_([a-zA-Z_]+).class$");
 
 		Collection<String> files = null;
 		try {

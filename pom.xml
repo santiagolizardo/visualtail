@@ -4,7 +4,7 @@
 
 	<groupId>com.santiagolizardo.beobachter</groupId>
 	<artifactId>Beobachter</artifactId>
-	<version>1.7.5</version>
+	<version>1.7.6</version>
 	<packaging>jar</packaging>
 
 	<name>Beobachter</name>
@@ -15,6 +15,16 @@
 	</properties>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.xnap.commons</groupId>
+				<artifactId>maven-gettext-plugin</artifactId>
+				<version>1.2.3</version>
+				<configuration>
+					<poDirectory>${project.build.sourceDirectory}/../resources/com/santiagolizardo/beobachter/resources/languages</poDirectory>
+					<targetBundle>com.santiagolizardo.beobachter.resources.languages.Translator</targetBundle>
+					<keywords>-k_</keywords>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -81,5 +91,16 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.googlecode.gettext-commons</groupId>
+			<artifactId>gettext-commons</artifactId>
+			<version>0.9.8</version>
+		</dependency>
 	</dependencies>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>gettext-commons-site</id>
+			<url>http://gettext-commons.googlecode.com/svn/maven-repository</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>

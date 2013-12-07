@@ -17,6 +17,7 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -27,7 +28,6 @@ import javax.swing.KeyStroke;
 import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class FindNextAction extends AbstractAction {
 
@@ -39,15 +39,14 @@ public class FindNextAction extends AbstractAction {
 	public FindNextAction() {
 
 		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
-		putValue(AbstractAction.NAME, Translator._("Find_next"));
-		putValue(AbstractAction.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
-				KeyEvent.VK_F3, 0));
+		putValue(AbstractAction.NAME, _("Find next"));
+		putValue(AbstractAction.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 	}
-	
+
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) MainGUI.instance.desktop
-		.getSelectedFrame();
-		if(log != null) {
+		LogWindow log = (LogWindow) MainGUI.instance.desktop.getSelectedFrame();
+		if (log != null) {
 			log.searchAgainText();
 		}
 	}

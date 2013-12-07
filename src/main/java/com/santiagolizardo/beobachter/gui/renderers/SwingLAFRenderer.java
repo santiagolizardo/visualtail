@@ -28,10 +28,11 @@ public class SwingLAFRenderer extends DefaultListCellRenderer {
 
 	private static final long serialVersionUID = 3175998803653741072L;
 
-	public Component getListCellRendererComponent(JList<SwingLookAndFeel> list,
-			SwingLookAndFeel value, int index, boolean isSelected,
-			boolean cellHasFocus) {
-		return super.getListCellRendererComponent(list, value.getName(), index,
-				isSelected, cellHasFocus);
+	@Override
+	public Component getListCellRendererComponent(JList<?> list, Object value,
+			int index, boolean isSelected, boolean cellHasFocus) {
+		SwingLookAndFeel lookAndFeel = (SwingLookAndFeel) value;
+		return super.getListCellRendererComponent(list, lookAndFeel.getName(),
+				index, isSelected, cellHasFocus);
 	}
 }

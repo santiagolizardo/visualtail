@@ -17,7 +17,6 @@
  */
 package com.santiagolizardo.beobachter.gui.util;
 
-
 import java.awt.Component;
 
 import javax.swing.JOptionPane;

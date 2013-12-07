@@ -17,6 +17,7 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 import static javax.swing.SpringLayout.EAST;
 import static javax.swing.SpringLayout.NORTH;
 import static javax.swing.SpringLayout.SOUTH;
@@ -64,14 +65,14 @@ public class SessionsDialog extends AbstractDialog {
 	private JButton btnRemove;
 
 	private RecentsMenu recentsMenu;
-	
+
 	public SessionsDialog(MainGUI parentFrame, RecentsMenu recentsMenu) {
 		super(parentFrame);
 
 		setTitle(Translator._("Sessions"));
 		setModal(true);
 		setSize(320, 240);
-		
+
 		this.recentsMenu = recentsMenu;
 
 		listModel = new DefaultListModel<String>();
@@ -145,7 +146,7 @@ public class SessionsDialog extends AbstractDialog {
 	private void placeComponents() {
 		SpringLayout spring = new SpringLayout();
 
-		JLabel lblList = new JLabel("Session list");
+		JLabel lblList = new JLabel(_("Session list"));
 
 		JScrollPane scrollList = new JScrollPane(list);
 		scrollList.setPreferredSize(new Dimension(160, 170));
@@ -191,7 +192,7 @@ public class SessionsDialog extends AbstractDialog {
 			ee.printStackTrace();
 		}
 
-		((MainGUI)parentFrame).desktop.setWindowsOnCascade();
+		((MainGUI) parentFrame).desktop.setWindowsOnCascade();
 
 		dispose();
 	}

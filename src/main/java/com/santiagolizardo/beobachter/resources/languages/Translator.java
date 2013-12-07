@@ -19,8 +19,12 @@ package com.santiagolizardo.beobachter.resources.languages;
 
 import java.util.Locale;
 import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 import java.util.logging.Logger;
+
+import org.xnap.commons.i18n.I18n;
+import org.xnap.commons.i18n.I18nFactory;
+
+import com.santiagolizardo.beobachter.util.LocaleUtil;
 
 /**
  * This class is the responsible of translate every literal on the GUI
@@ -33,20 +37,24 @@ public class Translator {
 	private static final Logger logger = Logger.getLogger(Translator.class
 			.getName());
 
-	private static ResourceBundle bundle;
+	private static I18n i18n;
 
 	public static void start(String language) {
-		String[] locales = language.split("_");
-		Locale locale = new Locale(locales[0], locales[1]);
-		bundle = ResourceBundle
-				.getBundle(
-						"com.santiagolizardo.beobachter.resources.languages.Translation",
-						locale);
+		Locale locale = LocaleUtil.fromString(language);
+
+		try {
+			i18n = I18nFactory.getI18n(Translator.class, locale);
+		} catch (MissingResourceException mre) {
+			mre.printStackTrace();
+		}
 	}
 
 	public static String _(String key) {
+		if (null == i18n)
+			return key;
+
 		try {
-			return bundle.getString(key);
+			return i18n.tr(key);
 		} catch (MissingResourceException mre) {
 			logger.warning("Missing translation: " + key);
 			return key;

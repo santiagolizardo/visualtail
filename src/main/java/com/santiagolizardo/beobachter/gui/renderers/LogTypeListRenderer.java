@@ -31,7 +31,8 @@ public class LogTypeListRenderer extends DefaultListCellRenderer {
 	@Override
 	public Component getListCellRendererComponent(JList<?> list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
-		return super.getListCellRendererComponent(list,
-				((LogType) value).getName(), index, isSelected, cellHasFocus);
+		LogType logType = (LogType) value;
+		return super.getListCellRendererComponent(list, logType.getName(), index,
+				isSelected, cellHasFocus);
 	}
 }

@@ -17,6 +17,8 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -29,7 +31,6 @@ import javax.swing.KeyStroke;
 import com.santiagolizardo.beobachter.gui.dialogs.LogTypesDialog;
 import com.santiagolizardo.beobachter.gui.dialogs.PreferencesDialog;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class OptionsMenu extends JMenu {
 
@@ -37,11 +38,10 @@ public class OptionsMenu extends JMenu {
 
 	public OptionsMenu(final JFrame parentFrame) {
 
-		setText(Translator._("Options"));
+		setText(_("Options"));
 		setMnemonic(KeyEvent.VK_O);
 
-		JMenuItem manageLogTypes = new JMenuItem(
-				Translator._("Manage_log_types..."));
+		JMenuItem manageLogTypes = new JMenuItem(_("Manage log types..."));
 		manageLogTypes.setIcon(IconFactory.getImage("manage_log_types.png"));
 		manageLogTypes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -50,7 +50,7 @@ public class OptionsMenu extends JMenu {
 			}
 		});
 
-		JMenuItem preferences = new JMenuItem(Translator._("Preferences..."));
+		JMenuItem preferences = new JMenuItem(_("Preferences..."));
 		preferences.setIcon(IconFactory.getImage("preferences.png"));
 		preferences.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
 				KeyEvent.CTRL_MASK));

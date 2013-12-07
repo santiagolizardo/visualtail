@@ -19,10 +19,15 @@ package com.santiagolizardo.beobachter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.logging.LogManager;
 
 import javax.swing.SwingUtilities;
+
+import org.xnap.commons.i18n.I18n;
+import org.xnap.commons.i18n.I18nFactory;
 
 import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.config.ConfigPersistence;
@@ -38,6 +43,12 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		try {
+			I18n i18n = I18nFactory.getI18n(Main.class, Locale.ENGLISH);
+		} catch (MissingResourceException mre) {
+			mre.printStackTrace();
+		}
+		
 		try {
 			Properties prop = System.getProperties();
 			prop.setProperty("java.util.logging.config.file",

@@ -17,7 +17,6 @@
  */
 package com.santiagolizardo.beobachter.gui.renderers;
 
-
 import java.awt.Component;
 
 import javax.swing.DefaultListCellRenderer;
@@ -27,13 +26,14 @@ import com.santiagolizardo.beobachter.util.LocaleUtil;
 
 public class LocaleRender extends DefaultListCellRenderer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6554618278841155838L;
 
-	public Component getListCellRendererComponent(JList<? extends String> list, String value, int index, boolean isSelected, boolean cellHasFocus) {
-		return super.getListCellRendererComponent(list, LocaleUtil.getDisplayName(value), index, isSelected,
+	@Override
+	public Component getListCellRendererComponent(JList<?> list, Object value,
+			int index, boolean isSelected, boolean cellHasFocus) {
+		String locale = (String) value;
+		return super.getListCellRendererComponent(list,
+				LocaleUtil.getDisplayName(locale), index, isSelected,
 				cellHasFocus);
 	}
 }

@@ -20,9 +20,10 @@ package com.santiagolizardo.beobachter.beans;
 import java.util.List;
 
 /**
- * A session represents one or more files opened at the same time. 
+ * A session represents one or more files opened at the same time.
+ * 
  * @author slizardo
- *
+ * 
  */
 public class Session {
 

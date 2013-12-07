@@ -3,3 +3,5 @@ pom.xml.versionsBackup
 .settings
 .project
 .classpath
+*.mo
+*.pot

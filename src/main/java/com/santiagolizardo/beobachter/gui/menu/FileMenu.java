@@ -44,7 +44,6 @@ import com.santiagolizardo.beobachter.gui.dialogs.SessionsDialog;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.gui.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class FileMenu extends JMenu {
 
@@ -53,10 +52,10 @@ public class FileMenu extends JMenu {
 	private RecentsMenu recentsMenu;
 
 	public FileMenu(final MainGUI parentFrame) {
-		setText(Translator._("File"));
+		setText(_("File"));
 		setMnemonic(KeyEvent.VK_F);
 
-		JMenuItem open = new JMenuItem(Translator._("Open..."));
+		JMenuItem open = new JMenuItem(_("Open..."));
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 				KeyEvent.CTRL_MASK));
 		open.addActionListener(new ActionListener() {
@@ -91,7 +90,8 @@ public class FileMenu extends JMenu {
 
 					if (unreadableFiles.size() > 0) {
 						StringBuffer message = new StringBuffer();
-						message.append("These files could not be opened for reading:\n");
+						message.append(_("These files could not be opened for reading:")
+								+ "\n");
 						for (File file : unreadableFiles)
 							message.append("    - ")
 									.append(file.getAbsolutePath())
@@ -108,7 +108,7 @@ public class FileMenu extends JMenu {
 		JMenuItem exit = new JMenuItem(new ExitAction(parentFrame));
 		exit.setIcon(IconFactory.getImage("exit.png"));
 
-		JMenuItem loadSession = new JMenuItem(Translator._("Load_session..."));
+		JMenuItem loadSession = new JMenuItem(_("Load session..."));
 		loadSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -118,8 +118,7 @@ public class FileMenu extends JMenu {
 			}
 		});
 
-		JMenuItem saveSession = new JMenuItem(
-				Translator._("Save_current_session"));
+		JMenuItem saveSession = new JMenuItem(_("Save current session"));
 		saveSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -134,7 +133,7 @@ public class FileMenu extends JMenu {
 				}
 				String name = JOptionPane.showInputDialog(getParent()
 						.getParent(), _("Please enter the session name:"),
-						_("Session name"),JOptionPane.QUESTION_MESSAGE);
+						_("Session name"), JOptionPane.QUESTION_MESSAGE);
 				if (name == null)
 					return;
 
@@ -142,7 +141,7 @@ public class FileMenu extends JMenu {
 
 				if (name.length() == 0) {
 					DialogFactory.showErrorMessage(null,
-							Translator._("Invalid session name"));
+							_("Invalid session name"));
 					return;
 				}
 

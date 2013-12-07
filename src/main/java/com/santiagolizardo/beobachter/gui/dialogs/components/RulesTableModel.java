@@ -31,7 +31,7 @@ public class RulesTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -3824360112995729445L;
 
 	private String columns[] = new String[] { Translator._("Pattern"),
-			Translator._("Colors"), Translator._("Ignore_case") };
+			Translator._("Colors"), Translator._("Ignore case") };
 
 	private List<Rule> rules;
 

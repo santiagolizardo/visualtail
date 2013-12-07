@@ -168,7 +168,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		cbScrollNewLines = new JCheckBox(Translator._("Scroll to new lines"));
 
 		LogTypes logTypesLoader = LogTypes.getInstance();
-		
+
 		DefaultComboBoxModel<LogType> logTypesModel = new DefaultComboBoxModel<LogType>(
 				logTypesLoader.getAll());
 		logTypes = new JComboBox<LogType>(logTypesModel);
@@ -181,7 +181,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		});
 		logTypes.setSelectedItem(logType);
 
-		JButton btnClear = new JButton(Translator._("Clear_buffer"));
+		JButton btnClear = new JButton(Translator._("Clear buffer"));
 		btnClear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -221,7 +221,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			final Desktop desktop = Desktop.getDesktop();
 			if (desktop.isSupported(Action.PRINT)) {
 
-				JButton btnPrint = new JButton(Translator._("Print_this_file"));
+				JButton btnPrint = new JButton(Translator._("Print this file"));
 				btnPrint.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
@@ -279,7 +279,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		}
 		if (searchIndex >= linesSize
 				&& DialogFactory.showQuestionDialog(this,
-						Translator._("Do_you_want_to_search_again"))) {
+						Translator._("Do you want to search again?"))) {
 			searchIndex = 0;
 			searchAgainText();
 		}

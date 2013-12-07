@@ -17,6 +17,7 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -27,7 +28,6 @@ import javax.swing.KeyStroke;
 import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 class SelectAllAction extends AbstractAction {
 
@@ -39,17 +39,16 @@ class SelectAllAction extends AbstractAction {
 	public SelectAllAction() {
 
 		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
-		putValue(AbstractAction.NAME, Translator._("Select_all"));
-		putValue(AbstractAction.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
-				KeyEvent.VK_A, KeyEvent.CTRL_MASK));
+		putValue(AbstractAction.NAME, _("Select all"));
+		putValue(AbstractAction.ACCELERATOR_KEY,
+				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK));
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) MainGUI.instance.desktop
-				.getSelectedFrame();
+		LogWindow log = (LogWindow) MainGUI.instance.desktop.getSelectedFrame();
 		if (log != null) {
 			int numLines = log.lines.getModel().getSize();
-			if(numLines > 0)
+			if (numLines > 0)
 				log.lines.setSelectionInterval(0, numLines - 1);
 		}
 	}

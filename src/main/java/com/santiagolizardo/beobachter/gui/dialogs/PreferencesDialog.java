@@ -108,7 +108,7 @@ public class PreferencesDialog extends AbstractDialog {
 		size = new JSpinner(new SpinnerNumberModel(configManager.getFontSize(),
 				8, 18, 1));
 
-		btnOk = new JButton(Translator._("Ok"));
+		btnOk = new JButton(Translator._("Save"));
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				setVisible(false);
@@ -163,10 +163,10 @@ public class PreferencesDialog extends AbstractDialog {
 		SpringLayout layout = new SpringLayout();
 		container.setLayout(layout);
 
-		JLabel _lookAndFeel = new JLabel(Translator._("Look_and_feel"));
+		JLabel _lookAndFeel = new JLabel(Translator._("Look and feel"));
 		JLabel _language = new JLabel(Translator._("Language"));
-		JLabel _font = new JLabel(Translator._("Font_family"));
-		JLabel _size = new JLabel(Translator._("Font_size"));
+		JLabel _font = new JLabel(Translator._("Font family"));
+		JLabel _size = new JLabel(Translator._("Font size"));
 
 		container.add(_lookAndFeel);
 		container.add(lookAndFeel);

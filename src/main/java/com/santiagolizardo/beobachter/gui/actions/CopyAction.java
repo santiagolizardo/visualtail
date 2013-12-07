@@ -17,6 +17,8 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -31,13 +33,9 @@ import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 class CopyAction extends AbstractAction {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2226006120048433873L;
 
 	private Clipboard clipboard;
@@ -45,7 +43,7 @@ class CopyAction extends AbstractAction {
 	public CopyAction() {
 
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("copy.png"));
-		putValue(AbstractAction.NAME, Translator._("Copy"));
+		putValue(AbstractAction.NAME, _("Copy"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
 
@@ -57,7 +55,7 @@ class CopyAction extends AbstractAction {
 		if (log != null) {
 			List<String> selectedLines = log.lines.getSelectedValuesList();
 			StringBuilder sb = new StringBuilder();
-			for (String selectedLine : selectedLines ) {
+			for (String selectedLine : selectedLines) {
 				sb.append(selectedLine);
 				sb.append(Constants.LINE_SEP);
 			}

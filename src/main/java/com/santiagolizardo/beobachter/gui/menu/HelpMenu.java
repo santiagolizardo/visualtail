@@ -17,6 +17,8 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -28,7 +30,6 @@ import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.gui.dialogs.AboutDialog;
 import com.santiagolizardo.beobachter.gui.util.UpdateManager;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class HelpMenu extends JMenu {
 
@@ -36,11 +37,10 @@ public class HelpMenu extends JMenu {
 
 	public HelpMenu(final MainGUI mainGUI) {
 
-		setText(Translator._("Help"));
+		setText(_("Help"));
 		setMnemonic(KeyEvent.VK_H);
 
-		JMenuItem checkForUpdates = new JMenuItem(
-				Translator._("Check_for_updates"));
+		JMenuItem checkForUpdates = new JMenuItem(_("Check for updates"));
 		checkForUpdates.setIcon(IconFactory.getImage("check_for_updates.png"));
 		checkForUpdates.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -48,8 +48,7 @@ public class HelpMenu extends JMenu {
 				updateManager.checkForUpdate();
 			}
 		});
-		JMenuItem about = new JMenuItem(
-				Translator._("About_this_application..."));
+		JMenuItem about = new JMenuItem(_("About this application..."));
 		about.setIcon(IconFactory.getImage("help.png"));
 		about.setMnemonic(KeyEvent.VK_F1);
 		about.addActionListener(new ActionListener() {

@@ -22,7 +22,6 @@ import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.text.MessageFormat;
 
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.MainGUI;
@@ -54,20 +53,19 @@ public class UpdateManager extends Thread {
 			if (serverVersion > currentVersion) {
 				StringBuilder sb = new StringBuilder();
 				sb.append(
-						MessageFormat.format(_("New_version_0_available"),
-								new Object[] { version }))
+						String.format(_("New version %s is available"), version))
 						.append(Constants.LINE_SEP).append(Constants.LINE_SEP);
-				sb.append(_("Please_visit_us_on_sourceforge")).append(
+				sb.append(_("Please visit the project website")).append(
 						Constants.LINE_SEP);
 				DialogFactory.showInformationMessage(mainGUI, sb.toString());
 			} else if (serverVersion <= currentVersion) {
 				DialogFactory.showInformationMessage(mainGUI,
-						_("There_are_not_updates_available"));
+						_("There are not updates available"));
 			}
 
 		} catch (Exception e) {
 			DialogFactory.showErrorMessage(mainGUI,
-					_("Unable_to_fetch_server_information"));
+					_("Unable to fetch server information"));
 		}
 
 	}

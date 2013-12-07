@@ -17,6 +17,7 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs.components;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 import static javax.swing.SpringLayout.EAST;
 import static javax.swing.SpringLayout.NORTH;
 import static javax.swing.SpringLayout.SOUTH;
@@ -127,8 +128,8 @@ public class EditionPanel extends JPanel {
 				if (selectedRow != -1) {
 					modelRules.removeRule(selectedRow);
 				} else {
-					DialogFactory.showErrorMessage(getParent(), Translator
-							._("Please_select_a_rule_first"));
+					DialogFactory.showErrorMessage(getParent(),
+							Translator._("Please select a rule first"));
 				}
 			}
 		});
@@ -175,12 +176,13 @@ public class EditionPanel extends JPanel {
 		DecimalFormat formatter = new DecimalFormat("#0.0");
 		double _refresh = Double.parseDouble(spnRefresh.getValue().toString());
 		double _seconds = _refresh / 1000;
-		lblSeconds.setText(formatter.format(_seconds).concat(" seconds"));
+		lblSeconds.setText(formatter.format(_seconds)
+				.concat(" " + _("seconds")));
 	}
 
 	public void setLogType(LogType logType) {
 		btnApply.setEnabled(false);
-		
+
 		this.logType = logType;
 
 		txtName.setText(logType.getName());
@@ -197,14 +199,17 @@ public class EditionPanel extends JPanel {
 
 	private void placeComponents() {
 		JLabel lblName = new JLabel(Translator._("Name"));
-		JLabel lblRefresh = new JLabel(Translator._("Refresh_interval_in_milliseconds"));
-		JLabel lblRules = new JLabel(Translator._("Formatting_rules"));
+		JLabel lblRefresh = new JLabel(
+				Translator._("Refresh interval in milliseconds"));
+		JLabel lblRules = new JLabel(Translator._("Formatting rules"));
 
 		cardLayout = new CardLayout();
 		setLayout(cardLayout);
 
 		JPanel panelA = new JPanel();
-		panelA.add(new JLabel(Translator._("Select_a_log_type_on_the_left_to_edit_it")),
+		panelA.add(
+				new JLabel(Translator
+						._("Select a log type on the left to edit it")),
 				BorderLayout.CENTER);
 
 		add(panelA, "A");

@@ -26,15 +26,17 @@ public class SwingLookAndFeel {
 
 	/**
 	 * Instantiates a new look and feel from its class name.
+	 * 
 	 * @param className
 	 * @return The instantiated look and feel
-	 * @throws Exception in case of an error
+	 * @throws Exception
+	 *             in case of an error
 	 */
 	public static SwingLookAndFeel forName(String className) throws Exception {
 		LookAndFeel lookAndFeel = (LookAndFeel) Class.forName(className)
 				.newInstance();
-		return new SwingLookAndFeel(lookAndFeel.getName(), lookAndFeel.getClass()
-				.getName());
+		return new SwingLookAndFeel(lookAndFeel.getName(), lookAndFeel
+				.getClass().getName());
 	}
 
 	public SwingLookAndFeel(String name, String className) {

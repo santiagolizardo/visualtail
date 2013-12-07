@@ -36,7 +36,7 @@ import com.santiagolizardo.beobachter.resources.languages.Translator;
 public class FindPanel extends JPanel {
 
 	private static final long serialVersionUID = -750096502886630895L;
-	
+
 	private JTextField search;
 	private JButton close;
 

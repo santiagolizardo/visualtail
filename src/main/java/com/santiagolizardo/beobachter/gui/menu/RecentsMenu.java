@@ -1,5 +1,7 @@
 package com.santiagolizardo.beobachter.gui.menu;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -14,7 +16,6 @@ import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
 import com.santiagolizardo.beobachter.gui.util.FileUtil;
-import com.santiagolizardo.beobachter.resources.languages.Translator;
 import com.santiagolizardo.beobachter.util.RecentFiles;
 
 public class RecentsMenu extends JMenu {
@@ -22,11 +23,11 @@ public class RecentsMenu extends JMenu {
 	private static final long serialVersionUID = 1L;
 
 	public RecentsMenu(ConfigData configData) {
-		super(Translator._("Open_recents"));
+		super(_("Open recents"));
 
 		setIcon(EmptyIcon.SIZE_16);
 
-		JMenuItem cleanRecents = new JMenuItem(Translator._("Clean_recents"));
+		JMenuItem cleanRecents = new JMenuItem(_("Clean recents"));
 		cleanRecents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				RecentFiles arraysUtil = RecentFiles.getInstance();
