@@ -78,7 +78,7 @@ public class MainGUI extends JFrame {
 
 	public void addFindPanel() {
 		if (findPanel == null) {
-			findPanel = new FindPanel();
+			findPanel = new FindPanel(this);
 
 			getContentPane().add(findPanel, BorderLayout.PAGE_END);
 			getContentPane().validate();

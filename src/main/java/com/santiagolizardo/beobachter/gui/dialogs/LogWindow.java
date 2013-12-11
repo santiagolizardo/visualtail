@@ -51,9 +51,9 @@ import javax.swing.event.InternalFrameEvent;
 
 import org.apache.commons.io.FileUtils;
 
-import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.beans.Rule;
+import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.engine.Tail;
 import com.santiagolizardo.beobachter.engine.TailEvent;
 import com.santiagolizardo.beobachter.engine.TailListener;
@@ -93,12 +93,12 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	private int searchIndex = 0;
 	private String searchText = null;
 
-	public LogWindow(String fileName, LogType logType) {
+	public LogWindow(ConfigData configData, String fileName, LogType logType) {
 
 		setResizable(true);
 		setFrameIcon(IconFactory.getImage("log_window.png"));
 
-		MainGUI.instance.configData.setLastPath(fileName);
+		configData.setLastPath(fileName);
 
 		numberDisplayedLines = 64;
 
@@ -115,7 +115,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		linesModel = new DefaultListModel<String>();
 		lines = new JList<String>(linesModel);
-		lines.setCellRenderer(new LineRenderer());
+		lines.setCellRenderer(new LineRenderer(configData));
 		if (logType != null) {
 			setRendererRules(logType.getRules());
 		}

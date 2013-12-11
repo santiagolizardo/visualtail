@@ -26,7 +26,6 @@ import java.util.logging.LogManager;
 
 import javax.swing.SwingUtilities;
 
-import org.xnap.commons.i18n.I18n;
 import org.xnap.commons.i18n.I18nFactory;
 
 import com.santiagolizardo.beobachter.config.ConfigData;
@@ -44,7 +43,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		try {
-			I18n i18n = I18nFactory.getI18n(Main.class, Locale.ENGLISH);
+			I18nFactory.getI18n(Main.class, Locale.ENGLISH);
 		} catch (MissingResourceException mre) {
 			mre.printStackTrace();
 		}

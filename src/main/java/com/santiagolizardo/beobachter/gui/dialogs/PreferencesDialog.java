@@ -28,7 +28,6 @@ import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRootPane;
 import javax.swing.JSpinner;
@@ -69,10 +68,10 @@ public class PreferencesDialog extends AbstractDialog {
 	private JButton btnOk;
 	private JButton btnCancel;
 
-	public PreferencesDialog(JFrame parentFrame) {
-		super(parentFrame);
+	public PreferencesDialog(final MainGUI mainGUI) {
+		super(mainGUI);
 
-		final ConfigData configManager = MainGUI.instance.configData;
+		final ConfigData configManager = mainGUI.configData;
 
 		setTitle(Translator._("Preferences"));
 		setResizable(false);
@@ -117,7 +116,7 @@ public class PreferencesDialog extends AbstractDialog {
 						.getSelectedItem());
 				configManager.setWindowLAF(laf.getClassName());
 				SwingUtil.setLookAndFeel(laf.getClassName());
-				SwingUtilities.updateComponentTreeUI(MainGUI.instance);
+				SwingUtilities.updateComponentTreeUI(mainGUI);
 
 				Object selectedLanguage = languagesList.getSelectedItem();
 				if (null != selectedLanguage)
@@ -200,10 +199,10 @@ public class PreferencesDialog extends AbstractDialog {
 				container);
 		layout.putConstraint(SpringLayout.WEST, size, 5, SpringLayout.WEST,
 				container);
-		layout.putConstraint(SpringLayout.WEST, btnOk, 5, SpringLayout.WEST,
-				container);
-		layout.putConstraint(SpringLayout.WEST, btnCancel, 5,
-				SpringLayout.EAST, btnOk);
+		layout.putConstraint(SpringLayout.EAST, btnOk, -5, SpringLayout.WEST,
+				btnCancel);
+		layout.putConstraint(SpringLayout.EAST, btnCancel, -5,
+				SpringLayout.EAST, container);
 
 		layout.putConstraint(SpringLayout.NORTH, _lookAndFeel, 5,
 				SpringLayout.NORTH, container);

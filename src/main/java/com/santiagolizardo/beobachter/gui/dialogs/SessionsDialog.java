@@ -18,13 +18,10 @@
 package com.santiagolizardo.beobachter.gui.dialogs;
 
 import static com.santiagolizardo.beobachter.resources.languages.Translator._;
-import static javax.swing.SpringLayout.EAST;
-import static javax.swing.SpringLayout.NORTH;
-import static javax.swing.SpringLayout.SOUTH;
-import static javax.swing.SpringLayout.WEST;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -39,8 +36,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SpringLayout;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -54,7 +51,7 @@ import com.santiagolizardo.beobachter.resources.languages.Translator;
 /**
  * This class creates a window with the list of sessions available to open
  */
-public class SessionsDialog extends AbstractDialog {
+public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 	private static final long serialVersionUID = -8601498821660138035L;
 
@@ -96,31 +93,11 @@ public class SessionsDialog extends AbstractDialog {
 
 		btnOpen = new JButton(Translator._("Open"));
 		btnOpen.setEnabled(false);
-		btnOpen.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				openSession();
-			}
-		});
+		btnOpen.addActionListener(this);
 
 		btnRemove = new JButton(Translator._("Remove"));
 		btnRemove.setEnabled(false);
-		btnRemove.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String sessionName = list.getSelectedValue();
-				int resp = JOptionPane.showConfirmDialog(
-						getParent(),
-						Translator
-								._("Are you sure you want to delete this session?"));
-				if (resp == JOptionPane.YES_OPTION) {
-					File file = new File(Constants.FOLDER_SESSIONS + "/"
-							+ sessionName + ".txt");
-					file.delete();
-				}
-				updateList();
-			}
-		});
+		btnRemove.addActionListener(this);
 
 		placeComponents();
 
@@ -144,34 +121,33 @@ public class SessionsDialog extends AbstractDialog {
 	}
 
 	private void placeComponents() {
-		SpringLayout spring = new SpringLayout();
+		Container container = getContentPane();
 
-		JLabel lblList = new JLabel(_("Session list"));
+		JPanel introPanel = new JPanel();
+		JLabel introLabel = new JLabel(
+				_("Please select the session you want to open or remove:"));
+		introPanel.add(introLabel);
+		container.add(introPanel, BorderLayout.NORTH);
 
 		JScrollPane scrollList = new JScrollPane(list);
-		scrollList.setPreferredSize(new Dimension(160, 170));
+		container.add(scrollList, BorderLayout.CENTER);
 
-		Container container = getContentPane();
-		container.setLayout(spring);
-
-		spring.putConstraint(NORTH, lblList, 5, WEST, container);
-		spring.putConstraint(NORTH, scrollList, 5, SOUTH, lblList);
-		spring.putConstraint(NORTH, btnOpen, 5, SOUTH, lblList);
-		spring.putConstraint(NORTH, btnRemove, 5, SOUTH, btnOpen);
-
-		spring.putConstraint(WEST, lblList, 5, WEST, container);
-		spring.putConstraint(WEST, scrollList, 5, WEST, container);
-		spring.putConstraint(WEST, btnOpen, 5, EAST, scrollList);
-		spring.putConstraint(EAST, btnOpen, -5, EAST, container);
-		spring.putConstraint(WEST, btnRemove, 5, EAST, scrollList);
-		spring.putConstraint(EAST, btnRemove, -5, EAST, container);
-
-		container.add(lblList);
-		container.add(scrollList);
-		container.add(btnOpen);
-		container.add(btnRemove);
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		panel.add(btnOpen);
+		panel.add(btnRemove);
+		container.add(panel, BorderLayout.SOUTH);
 
 		setLocationRelativeTo(parentFrame);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent ev) {
+		if (btnOpen == ev.getSource()) {
+			openSession();
+		} else if (btnRemove == ev.getSource()) {
+			removeSession();
+		}
 	}
 
 	private void openSession() {
@@ -195,5 +171,17 @@ public class SessionsDialog extends AbstractDialog {
 		((MainGUI) parentFrame).desktop.setWindowsOnCascade();
 
 		dispose();
+	}
+
+	private void removeSession() {
+		String sessionName = list.getSelectedValue();
+		int resp = JOptionPane.showConfirmDialog(getParent(),
+				Translator._("Are you sure you want to delete this session?"));
+		if (resp == JOptionPane.YES_OPTION) {
+			File file = new File(Constants.FOLDER_SESSIONS + "/" + sessionName
+					+ ".txt");
+			file.delete();
+			updateList();
+		}
 	}
 }

@@ -40,8 +40,7 @@ public class FindPanel extends JPanel {
 	private JTextField search;
 	private JButton close;
 
-	public FindPanel() {
-		final MainGUI mainGUI = MainGUI.instance;
+	public FindPanel(final MainGUI mainGUI) {
 
 		search = new JTextField(20);
 		search.addKeyListener(new KeyAdapter() {

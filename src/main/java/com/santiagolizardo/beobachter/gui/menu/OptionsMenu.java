@@ -23,11 +23,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.gui.dialogs.LogTypesDialog;
 import com.santiagolizardo.beobachter.gui.dialogs.PreferencesDialog;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
@@ -36,7 +36,7 @@ public class OptionsMenu extends JMenu {
 
 	private static final long serialVersionUID = 4390929385204480673L;
 
-	public OptionsMenu(final JFrame parentFrame) {
+	public OptionsMenu(final MainGUI parentFrame) {
 
 		setText(_("Options"));
 		setMnemonic(KeyEvent.VK_O);

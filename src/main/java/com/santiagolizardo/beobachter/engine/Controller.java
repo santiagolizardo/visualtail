@@ -32,8 +32,9 @@ public class Controller {
 	 * @param logType
 	 */
 	public static void openFile(String fileName, LogType logType) {
-		LogWindow logWindow = new LogWindow(fileName, logType);
-		MainGUI.instance.desktop.add(logWindow);
+		MainGUI mainGUI = MainGUI.instance;
+		LogWindow logWindow = new LogWindow(mainGUI.configData, fileName, logType);
+		mainGUI.desktop.add(logWindow);
 		try {
 			logWindow.setSelected(true);
 		} catch (PropertyVetoException pve) {
