@@ -29,7 +29,6 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JRootPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.Spring;
@@ -150,13 +149,6 @@ public class PreferencesDialog extends AbstractDialog {
 		defineLayout();
 	}
 
-	@Override
-	protected JRootPane createRootPane() {
-		JRootPane rootPane = super.createRootPane();
-		rootPane.setDefaultButton(btnOk);
-		return rootPane;
-	}
-
 	private void defineLayout() {
 		Container container = getContentPane();
 		SpringLayout layout = new SpringLayout();
@@ -234,7 +226,9 @@ public class PreferencesDialog extends AbstractDialog {
 		containerCons.setHeight(Spring.sum(Spring.constant(5),
 				okCons.getConstraint(SOUTH)));
 
+		getRootPane().setDefaultButton(btnOk);
+
 		pack();
-		setLocationRelativeTo(parentFrame);
+		setLocationRelativeTo(getOwner());
 	}
 }

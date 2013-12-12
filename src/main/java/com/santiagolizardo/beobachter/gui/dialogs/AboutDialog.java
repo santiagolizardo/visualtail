@@ -77,7 +77,7 @@ public class AboutDialog extends AbstractDialog {
 		container.add(lblVersion);
 		container.add(scrollPane);
 
-		setLocationRelativeTo(parentFrame);
+		setLocationRelativeTo(getOwner());
 	}
 }
 

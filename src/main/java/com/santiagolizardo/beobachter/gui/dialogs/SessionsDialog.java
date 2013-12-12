@@ -66,7 +66,7 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 	public SessionsDialog(MainGUI parentFrame, RecentsMenu recentsMenu) {
 		super(parentFrame);
 
-		setTitle(Translator._("Sessions"));
+		setTitle(Translator._("Session management"));
 		setModal(true);
 		setSize(320, 240);
 
@@ -138,7 +138,9 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 		panel.add(btnRemove);
 		container.add(panel, BorderLayout.SOUTH);
 
-		setLocationRelativeTo(parentFrame);
+		getRootPane().setDefaultButton(btnOpen);
+		
+		setLocationRelativeTo(getOwner());
 	}
 
 	@Override
@@ -168,7 +170,7 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 			ee.printStackTrace();
 		}
 
-		((MainGUI) parentFrame).desktop.setWindowsOnCascade();
+		((MainGUI) getOwner()).desktop.setWindowsOnCascade();
 
 		dispose();
 	}

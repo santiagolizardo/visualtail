@@ -1,367 +1,371 @@
 msgid ""
-msgstr ""
-"Project-Id-Version: beobachter\n"
+msgstr "Project-Id-Version: beobachter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-07 12:06+0100\n"
-"PO-Revision-Date: 2013-12-07 12:11+0100\n"
-"Last-Translator: Santiago Lizardo <santiago.lizardo@gmail.com>\n"
+"POT-Creation-Date: 2013-12-12 20:11+0000\n"
+"PO-Revision-Date: 2013-12-12 15:23-0500\n"
+"Last-Translator: santiagolizardo <santiago.lizardo@gmail.com>\n"
 "Language-Team: Spanish\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: crowdin.net\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es_ES\n"
 "X-Poedit-SearchPath-0: ../../../../../../java\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:26
+#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:26
 msgid "Open recents"
 msgstr "Abrir recientes"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:30
+#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:30
 msgid "Clean recents"
 msgstr "Borrar recientes"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:39
+#: com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:39
 msgid "Windows"
 msgstr "Ventanas"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:42
+#: com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:42
 msgid "Cascade windows"
 msgstr "Organizar ventanas en cascada"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:52
+#: com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:52
 msgid "Tile windows vertically"
 msgstr "Organizar ventanas en mosaicos verticales"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:64
+#: com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:64
 msgid "Tile windows horizontally"
 msgstr "Organizar ventanas en mosaicos horizontales"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:75
+#: com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:75
 msgid "Close all windows"
 msgstr "Cerrar todas las ventanas"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/EditMenu.java:37
+#: com/santiagolizardo/beobachter/gui/menu/EditMenu.java:37
 msgid "Edit"
 msgstr "Editar"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/HelpMenu.java:40
+#: com/santiagolizardo/beobachter/gui/menu/HelpMenu.java:40
 msgid "Help"
 msgstr "Ayuda"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/HelpMenu.java:43
+#: com/santiagolizardo/beobachter/gui/menu/HelpMenu.java:43
 msgid "Check for updates"
 msgstr "Comprobar actualizaciones"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/HelpMenu.java:51
+#: com/santiagolizardo/beobachter/gui/menu/HelpMenu.java:51
 msgid "About this application..."
 msgstr "Sobre esta aplicación..."
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/FileMenu.java:55
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:55
 msgid "File"
 msgstr "Fichero"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/FileMenu.java:58
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:58
 msgid "Open..."
 msgstr "Abrir..."
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/FileMenu.java:93
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:93
 msgid "These files could not be opened for reading:"
 msgstr "Estos ficheros no pudieron ser abiertos para lectura:"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/FileMenu.java:111
-msgid "Load session..."
-msgstr "Abrir sesión..."
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:111
+msgid "Manage sessions..."
+msgstr "Administrar sesiones..."
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/FileMenu.java:121
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:121
 msgid "Save current session"
 msgstr "Guardar sesión actual"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/FileMenu.java:131
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:133
 msgid "You can not save a session with no opened files"
 msgstr "No puede guardar una sesión sin ficheros abiertos"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/FileMenu.java:135
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:137
 msgid "Please enter the session name:"
 msgstr "Por favor ingrese un nombre de sesión:"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/FileMenu.java:136
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:138
 msgid "Session name"
 msgstr "Nombre de sesión"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/FileMenu.java:144
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:146
 msgid "Invalid session name"
 msgstr "Nombre de sesión inválido"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:41
+#: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:48
 msgid "Options"
 msgstr "Opciones"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:44
+#: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:53
+msgid "Always on top"
+msgstr "Siempre por encima"
+
+#: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:56
 msgid "Manage log types..."
 msgstr "Administrar tipos de ficheros..."
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:53
+#: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:60
 msgid "Preferences..."
 msgstr "Preferencias..."
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/util/FileUtil.java:28
+#: com/santiagolizardo/beobachter/gui/util/FileUtil.java:28
 msgid "The file does not exist"
 msgstr "El fichero no existe"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/util/FileUtil.java:31
+#: com/santiagolizardo/beobachter/gui/util/FileUtil.java:31
 msgid "Cannot open a directory"
 msgstr "No es posible abrir un directorio"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/util/FileUtil.java:35
+#: com/santiagolizardo/beobachter/gui/util/FileUtil.java:35
 msgid "You do not have permissions to read this file"
 msgstr "No tiene permisos para leer el fichero seleccionado"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/util/UpdateManager.java:56
+#: com/santiagolizardo/beobachter/gui/util/UpdateManager.java:56
 msgid "New version %s is available"
 msgstr "Una nueva versión %s está disponible"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/util/UpdateManager.java:58
+#: com/santiagolizardo/beobachter/gui/util/UpdateManager.java:58
 msgid "Please visit the project website"
 msgstr "Por favor visite la página Web del proyecto"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/util/UpdateManager.java:63
+#: com/santiagolizardo/beobachter/gui/util/UpdateManager.java:63
 msgid "There are not updates available"
 msgstr "No hay actualizaciones disponibles"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/util/UpdateManager.java:68
+#: com/santiagolizardo/beobachter/gui/util/UpdateManager.java:68
 msgid "Unable to fetch server information"
 msgstr "No fue posible obtener información del servidor"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:77
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:75
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:111
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:109
 msgid "Save"
 msgstr "Guardar"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:143
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:135
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:141
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:135
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:166
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:157
 msgid "Look and feel"
 msgstr "Apariencia"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:167
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:158
 msgid "Language"
 msgstr "Idioma"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:168
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:159
 msgid "Font family"
 msgstr "Tipo de letra"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:169
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:160
 msgid "Font size"
 msgstr "Tamaño de letra"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:74
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:74
 msgid "Regular expression"
 msgstr "Expresión regular"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:76
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:93
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:76
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:93
 msgid "Pick"
 msgstr "Seleccionar"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:97
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:97
 msgid "Pick the foreground color"
 msgstr "Seleccionar el color de letra"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:110
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:34
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:110
+#: com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:34
 msgid "Ignore case"
 msgstr "Ignorar mayúsculas y minúsculas"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:112
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:112
 msgid "Ok"
 msgstr "Aceptar"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:118
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:118
 msgid "Please complete the field pattern"
 msgstr "Por favor complete el campo patrón"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:152
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:33
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:152
+#: com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:33
 msgid "Pattern"
 msgstr "Patrón"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:153
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:153
 msgid "Background color"
 msgstr "Color de fondo"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:154
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:154
 msgid "Foreground color"
 msgstr "Color de letra"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:154
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:154
 msgid "Check for changes"
 msgstr "Comprobar cambios"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:168
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:168
 msgid "Scroll to new lines"
 msgstr "Desplazarse a nuevas líneas"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:184
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:184
 msgid "Clear buffer"
 msgstr "Borrar contenido"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:224
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:224
 msgid "Print this file"
 msgstr "Imprimir este fichero"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:282
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:282
 msgid "Do you want to search again?"
 msgstr "¿Quiere buscar nuevamente?"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/LogTypesDialog.java:40
-msgid "Log types configuration"
-msgstr "Configuración de tipos de ficheros"
-
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:47
-msgid "About this application"
-msgstr "Sobre esta aplicación"
-
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:64
-msgid "More info about the project at <a href=\"%s\">%s</a>."
-msgstr "Más información sobre el proyecto en <a href=\"%s\">%s</a>."
-
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:72
-msgid "Sessions"
-msgstr "Sesiones"
-
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:97
-msgid "Open"
-msgstr "Abrir"
-
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:106
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:153
-msgid "Remove"
-msgstr "Eliminar"
-
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:115
-msgid "Are you sure you want to delete this session?"
-msgstr "¿Esta seguro que desea eliminar esta sesión?"
-
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:149
-msgid "Session list"
-msgstr "Lista de sesiones"
-
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/FindPanel.java:81
+#: com/santiagolizardo/beobachter/gui/dialogs/components/FindPanel.java:80
 msgid "Search"
 msgstr "Buscar"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:100
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:100
 msgid "Add"
 msgstr "Agregar"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:105
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:105
 msgid "Enter the name of the new log type"
 msgstr "Ingrese el nombre del nuevo tipo de fichero"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:112
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:112
 msgid "Invalid log type name"
 msgstr "Nombre de fichero inválido"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:126
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:126
 msgid "Rename"
 msgstr "Renombrar"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:133
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:133
 msgid "Enter the new name of the log type:"
 msgstr "Ingrese el nombre del nuevo tipo de fichero:"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:159
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:153
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:98
+msgid "Remove"
+msgstr "Eliminar"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:159
 msgid "Are you sure you want to delete the selected log type?"
 msgstr "¿Esta seguro que desea eliminar el tipo de fichero seleccionado?"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:164
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:164
 msgid "Unable to delete the log type"
 msgstr "No fue posible eliminar el tipo de fichero"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:182
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:182
 msgid "Log types"
 msgstr "Tipos de fichero"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:34
+#: com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:34
 msgid "Colors"
 msgstr "Colores"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:103
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:103
 msgid "Example"
 msgstr "Ejemplo"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:114
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:114
 msgid "Add rule"
 msgstr "Añadir regla"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:123
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:123
 msgid "Remove rule"
 msgstr "Eliminar regla"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:132
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:132
 msgid "Please select a rule first"
 msgstr "Por favor seleccione primero una regla"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:137
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:137
 msgid "Apply changes"
 msgstr "Aplicar cambios"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:180
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:180
 msgid "seconds"
 msgstr "segundos"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:201
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:201
 msgid "Name"
 msgstr "Nombre"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:203
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:203
 msgid "Refresh interval in milliseconds"
 msgstr "Intervalo de actualización en milisegundos"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:204
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:204
 msgid "Formatting rules"
 msgstr "Reglas de formateo"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:212
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:212
 msgid "Select a log type on the left to edit it"
 msgstr "Seleccione un tipo de registro a la izquierda para editarlo"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/actions/SelectAllAction.java:42
+#: com/santiagolizardo/beobachter/gui/dialogs/LogTypesDialog.java:41
+msgid "Log types management"
+msgstr "Administracion de tipos de logs"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:47
+msgid "About this application"
+msgstr "Sobre esta aplicación"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:64
+msgid "More info about the project at <a href=\"%s\">%s</a>."
+msgstr "Más información sobre el proyecto en <a href=\"%s\">%s</a>."
+
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:69
+msgid "Session management"
+msgstr "Administración de sesiones"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:94
+msgid "Open"
+msgstr "Abrir"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:128
+msgid "Please select the session you want to open or remove:"
+msgstr "Por favor seleccione la sesión que desea abrir o eliminar:"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:181
+msgid "Are you sure you want to delete this session?"
+msgstr "¿Esta seguro que desea eliminar esta sesión?"
+
+#: com/santiagolizardo/beobachter/gui/actions/SelectAllAction.java:42
 msgid "Select all"
 msgstr "Seleccionar todo"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/actions/FindAction.java:41
+#: com/santiagolizardo/beobachter/gui/actions/FindAction.java:41
 msgid "Find..."
 msgstr "Buscar..."
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/actions/CopyAction.java:46
+#: com/santiagolizardo/beobachter/gui/actions/CopyAction.java:46
 msgid "Copy"
 msgstr "Copiar"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/actions/ExitAction.java:39
+#: com/santiagolizardo/beobachter/gui/actions/ExitAction.java:39
 msgid "Exit"
 msgstr "Salir"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/gui/actions/FindNextAction.java:42
+#: com/santiagolizardo/beobachter/gui/actions/FindNextAction.java:42
 msgid "Find next"
 msgstr "Buscar siguiente"
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/config/EntitiesConfiguration.java:53
+#: com/santiagolizardo/beobachter/config/EntitiesConfiguration.java:53
 msgid "rule."
 msgstr "regla."
 
-#: ../../../../../../java/com/santiagolizardo/beobachter/config/ConfigData.java:62
+#: com/santiagolizardo/beobachter/config/ConfigData.java:62
 msgid "recent."
 msgstr "reciente."
+

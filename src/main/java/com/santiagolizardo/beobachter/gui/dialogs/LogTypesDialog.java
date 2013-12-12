@@ -19,6 +19,7 @@ package com.santiagolizardo.beobachter.gui.dialogs;
 
 import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 
 import javax.swing.BoxLayout;
@@ -37,8 +38,9 @@ public class LogTypesDialog extends AbstractDialog {
 	public LogTypesDialog(JFrame parentFrame) {
 		super(parentFrame);
 
-		setTitle(_("Log types configuration"));
+		setTitle(_("Log types management"));
 		setModal(true);
+		setResizable(false);
 
 		editionPanel = new EditionPanel();
 
@@ -48,8 +50,8 @@ public class LogTypesDialog extends AbstractDialog {
 		Container container = getContentPane();
 		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 
-		container.add(listingPanel);
-		container.add(editionPanel);
+		container.add(listingPanel, BorderLayout.LINE_START);
+		container.add(editionPanel, BorderLayout.CENTER);
 
 		pack();
 		setLocationRelativeTo(parentFrame);

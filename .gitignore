@@ -5,3 +5,4 @@ pom.xml.versionsBackup
 .classpath
 *.mo
 *.pot
+*.po.~*

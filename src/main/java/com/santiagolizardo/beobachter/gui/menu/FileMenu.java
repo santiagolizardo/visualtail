@@ -108,7 +108,7 @@ public class FileMenu extends JMenu {
 		JMenuItem exit = new JMenuItem(new ExitAction(parentFrame));
 		exit.setIcon(IconFactory.getImage("exit.png"));
 
-		JMenuItem loadSession = new JMenuItem(_("Load session..."));
+		JMenuItem loadSession = new JMenuItem(_("Manage sessions..."));
 		loadSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -119,6 +119,8 @@ public class FileMenu extends JMenu {
 		});
 
 		JMenuItem saveSession = new JMenuItem(_("Save current session"));
+		saveSession.setIcon(IconFactory.getImage("disk.png"));
+
 		saveSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
@@ -32,37 +33,53 @@ import com.santiagolizardo.beobachter.gui.dialogs.LogTypesDialog;
 import com.santiagolizardo.beobachter.gui.dialogs.PreferencesDialog;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 
-public class OptionsMenu extends JMenu {
+public class OptionsMenu extends JMenu implements ActionListener {
 
 	private static final long serialVersionUID = 4390929385204480673L;
 
-	public OptionsMenu(final MainGUI parentFrame) {
+	private MainGUI mainGUI;
+
+	private JMenuItem alwaysOnTop;
+	private JMenuItem manageLogTypes;
+	private JMenuItem preferences;
+
+	public OptionsMenu(MainGUI mainGUI) {
 
 		setText(_("Options"));
 		setMnemonic(KeyEvent.VK_O);
 
-		JMenuItem manageLogTypes = new JMenuItem(_("Manage log types..."));
-		manageLogTypes.setIcon(IconFactory.getImage("manage_log_types.png"));
-		manageLogTypes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				LogTypesDialog dialog = new LogTypesDialog(parentFrame);
-				dialog.setVisible(true);
-			}
-		});
+		this.mainGUI = mainGUI;
 
-		JMenuItem preferences = new JMenuItem(_("Preferences..."));
+		alwaysOnTop = new JCheckBoxMenuItem(_("Always on top"));
+		alwaysOnTop.addActionListener(this);
+
+		manageLogTypes = new JMenuItem(_("Manage log types..."));
+		manageLogTypes.setIcon(IconFactory.getImage("manage_log_types.png"));
+		manageLogTypes.addActionListener(this);
+
+		preferences = new JMenuItem(_("Preferences..."));
 		preferences.setIcon(IconFactory.getImage("preferences.png"));
 		preferences.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
 				KeyEvent.CTRL_MASK));
-		preferences.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				PreferencesDialog dialog = new PreferencesDialog(parentFrame);
-				dialog.setVisible(true);
-			}
-		});
+		preferences.addActionListener(this);
 
+		add(alwaysOnTop);
+		addSeparator();
 		add(manageLogTypes);
 		addSeparator();
 		add(preferences);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent ev) {
+		if (alwaysOnTop == ev.getSource()) {
+			mainGUI.setAlwaysOnTop(alwaysOnTop.isSelected());
+		} else if (manageLogTypes == ev.getSource()) {
+			LogTypesDialog dialog = new LogTypesDialog(mainGUI);
+			dialog.setVisible(true);
+		} else if (preferences == ev.getSource()) {
+			PreferencesDialog dialog = new PreferencesDialog(mainGUI);
+			dialog.setVisible(true);
+		}
 	}
 }
