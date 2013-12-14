@@ -29,15 +29,17 @@ import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
 
-class SelectAllAction extends AbstractAction {
+public class SelectAllAction extends AbstractAction {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3272495186683089254L;
+	
+	private MainGUI mainGUI;
 
-	public SelectAllAction() {
+	public SelectAllAction(MainGUI mainGUI) {
+		this.mainGUI = mainGUI;
 
+		setEnabled(false);
+		
 		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
 		putValue(AbstractAction.NAME, _("Select all"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
@@ -45,7 +47,7 @@ class SelectAllAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) MainGUI.instance.desktop.getSelectedFrame();
+		LogWindow log = (LogWindow) mainGUI.desktop.getSelectedFrame();
 		if (log != null) {
 			int numLines = log.lines.getModel().getSize();
 			if (numLines > 0)

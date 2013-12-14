@@ -34,7 +34,7 @@ import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 
-class CopyAction extends AbstractAction {
+public class CopyAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2226006120048433873L;
 

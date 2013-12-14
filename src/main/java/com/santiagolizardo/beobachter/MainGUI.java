@@ -29,6 +29,7 @@ import org.apache.commons.configuration.ConfigurationException;
 
 import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.config.ConfigPersistence;
+import com.santiagolizardo.beobachter.gui.actions.ActionFactory;
 import com.santiagolizardo.beobachter.gui.components.DesktopPanel;
 import com.santiagolizardo.beobachter.gui.dialogs.components.FindPanel;
 import com.santiagolizardo.beobachter.gui.menu.Menu;
@@ -49,6 +50,8 @@ public class MainGUI extends JFrame {
 	public ConfigData configData;
 	public DesktopPanel desktop;
 	private FindPanel findPanel;
+	
+	public ActionFactory actionFactory;
 
 	private Logger logger;
 
@@ -56,16 +59,18 @@ public class MainGUI extends JFrame {
 		this.configData = configData;
 
 		logger = Logger.getLogger(MainGUI.class.getName());
+		
+		actionFactory = new ActionFactory(this);
 
 		desktop = new DesktopPanel();
+		
 		Menu menu = new Menu(desktop, this);
 		setJMenuBar(menu);
 		setTitle(Constants.APP_NAME);
 		setSize(configData.getWindowWidth(), configData.getWindowHeight());
 		setLocation(configData.getWindowX(), configData.getWindowY());
 		setIconImage(IconFactory.getImage("icon.png").getImage());
-		desktop.setDragMode(configData.getDragMode());
-
+		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent event) {
 				quit();
@@ -121,5 +126,11 @@ public class MainGUI extends JFrame {
 		}
 
 		System.exit(exitCode);
+	}
+	
+	public void updateActions(int delta) {
+		boolean areWindowsOpen = desktop.getAllFrames().length + delta > 0;
+		actionFactory.createSelectAllAction().setEnabled(areWindowsOpen);
+		((Menu)getJMenuBar()).getWindowMenu().setEnabled(areWindowsOpen);
 	}
 }

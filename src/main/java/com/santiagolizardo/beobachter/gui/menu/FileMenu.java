@@ -51,7 +51,7 @@ public class FileMenu extends JMenu {
 
 	private RecentsMenu recentsMenu;
 
-	public FileMenu(final MainGUI parentFrame) {
+	public FileMenu(final MainGUI mainGUI) {
 		setText(_("File"));
 		setMnemonic(KeyEvent.VK_F);
 
@@ -60,13 +60,13 @@ public class FileMenu extends JMenu {
 				KeyEvent.CTRL_MASK));
 		open.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				File lastSelected = new File(parentFrame.configData
+				File lastSelected = new File(mainGUI.configData
 						.getLastPath());
 
 				JFileChooser chooser = new JFileChooser();
 				chooser.setSelectedFile(lastSelected);
 				chooser.setMultiSelectionEnabled(true);
-				int resp = chooser.showOpenDialog(parentFrame);
+				int resp = chooser.showOpenDialog(mainGUI);
 				if (resp == JFileChooser.APPROVE_OPTION) {
 					File[] files = chooser.getSelectedFiles();
 					LogType logType = new LogType("Default");
@@ -83,10 +83,10 @@ public class FileMenu extends JMenu {
 						}
 
 						recentsMenu.addRecent(file.getAbsolutePath());
-						Controller.openFile(file.getAbsolutePath(), logType);
+						Controller.openFile(mainGUI, file.getAbsolutePath(), logType);
 					}
 
-					parentFrame.desktop.setWindowsOnTileHorizontal();
+					mainGUI.desktop.setWindowsOnTileHorizontal();
 
 					if (unreadableFiles.size() > 0) {
 						StringBuffer message = new StringBuffer();
@@ -96,23 +96,23 @@ public class FileMenu extends JMenu {
 							message.append("    - ")
 									.append(file.getAbsolutePath())
 									.append("\n");
-						DialogFactory.showErrorMessage(parentFrame,
+						DialogFactory.showErrorMessage(mainGUI,
 								message.toString());
 					}
 				}
 			}
 		});
 
-		recentsMenu = new RecentsMenu(parentFrame.configData);
+		recentsMenu = new RecentsMenu(mainGUI);
 
-		JMenuItem exit = new JMenuItem(new ExitAction(parentFrame));
+		JMenuItem exit = new JMenuItem(new ExitAction(mainGUI));
 		exit.setIcon(IconFactory.getImage("exit.png"));
 
 		JMenuItem loadSession = new JMenuItem(_("Manage sessions..."));
 		loadSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SessionsDialog dialog = new SessionsDialog(parentFrame,
+				SessionsDialog dialog = new SessionsDialog(mainGUI,
 						recentsMenu);
 				dialog.setVisible(true);
 			}
@@ -123,8 +123,8 @@ public class FileMenu extends JMenu {
 
 		saveSession.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				JInternalFrame[] frames = MainGUI.instance.desktop
+			public void actionPerformed(ActionEvent ev) {
+				JInternalFrame[] frames = mainGUI.desktop
 						.getAllFrames();
 				if (frames.length == 0) {
 					DialogFactory

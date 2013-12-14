@@ -23,8 +23,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 
+import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.gui.dialogs.components.EditionPanel;
 import com.santiagolizardo.beobachter.gui.dialogs.components.ListingPanel;
 
@@ -35,18 +35,18 @@ public class LogTypesDialog extends AbstractDialog {
 	private ListingPanel listingPanel;
 	private EditionPanel editionPanel;
 
-	public LogTypesDialog(JFrame parentFrame) {
-		super(parentFrame);
+	public LogTypesDialog(MainGUI mainGUI) {
+		super(mainGUI);
 
 		setTitle(_("Log types management"));
 		setModal(true);
 		setResizable(false);
 
-		editionPanel = new EditionPanel();
-
-		listingPanel = new ListingPanel();
+		listingPanel = new ListingPanel();		
+		
+		editionPanel = new EditionPanel(this);
 		listingPanel.setEditionPanel(editionPanel);
-
+		
 		Container container = getContentPane();
 		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 
@@ -54,6 +54,6 @@ public class LogTypesDialog extends AbstractDialog {
 		container.add(editionPanel, BorderLayout.CENTER);
 
 		pack();
-		setLocationRelativeTo(parentFrame);
+		setLocationRelativeTo(mainGUI);
 	}
 }

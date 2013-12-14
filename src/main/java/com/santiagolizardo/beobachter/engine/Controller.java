@@ -31,9 +31,8 @@ public class Controller {
 	 * @param fileName
 	 * @param logType
 	 */
-	public static void openFile(String fileName, LogType logType) {
-		MainGUI mainGUI = MainGUI.instance;
-		LogWindow logWindow = new LogWindow(mainGUI.configData, fileName, logType);
+	public static void openFile(MainGUI mainGUI, String fileName, LogType logType) {
+		LogWindow logWindow = new LogWindow(mainGUI, fileName, logType);
 		mainGUI.desktop.add(logWindow);
 		try {
 			logWindow.setSelected(true);

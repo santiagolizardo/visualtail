@@ -28,14 +28,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -51,13 +49,12 @@ import javax.swing.event.InternalFrameEvent;
 
 import org.apache.commons.io.FileUtils;
 
+import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.beans.LogType;
-import com.santiagolizardo.beobachter.beans.Rule;
-import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.engine.Tail;
 import com.santiagolizardo.beobachter.engine.TailEvent;
 import com.santiagolizardo.beobachter.engine.TailListener;
-import com.santiagolizardo.beobachter.gui.menu.EditPopupMenu;
+import com.santiagolizardo.beobachter.gui.adapters.LinesMouseAdapter;
 import com.santiagolizardo.beobachter.gui.renderers.LineRenderer;
 import com.santiagolizardo.beobachter.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
@@ -93,12 +90,12 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	private int searchIndex = 0;
 	private String searchText = null;
 
-	public LogWindow(ConfigData configData, String fileName, LogType logType) {
+	public LogWindow(final MainGUI mainGUI, String fileName, LogType logType) {
 
 		setResizable(true);
 		setFrameIcon(IconFactory.getImage("log_window.png"));
 
-		configData.setLastPath(fileName);
+		mainGUI.configData.setLastPath(fileName);
 
 		numberDisplayedLines = 64;
 
@@ -113,25 +110,18 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			}
 		});
 
+		mainGUI.updateActions(+1);
+
 		linesModel = new DefaultListModel<String>();
 		lines = new JList<String>(linesModel);
-		lines.setCellRenderer(new LineRenderer(configData));
-		if (logType != null) {
-			setRendererRules(logType.getRules());
-		}
+		lines.setCellRenderer(new LineRenderer(logType.getRules(),
+				mainGUI.configData));
 		lines.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		lines.addMouseListener(new MouseAdapter() {
-			public void mouseReleased(MouseEvent event) {
-				if (event.isPopupTrigger()) {
-					EditPopupMenu popupMenu = new EditPopupMenu();
-					popupMenu.show((JComponent) event.getSource(),
-							event.getX(), event.getY());
-				}
-			}
-		});
+		lines.addMouseListener(new LinesMouseAdapter(mainGUI));
 		addInternalFrameListener(new InternalFrameAdapter() {
-			public void internalFrameClosing(InternalFrameEvent event) {
+			public void internalFrameClosing(InternalFrameEvent ev) {
 				tail.setEnabled(false);
+				mainGUI.updateActions(-1);
 			}
 		});
 
@@ -176,7 +166,8 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		logTypes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				LogType logType = (LogType) logTypes.getSelectedItem();
-				setRendererRules(logType.getRules());
+				lines.setCellRenderer(new LineRenderer(logType.getRules(),
+						mainGUI.configData));
 			}
 		});
 		logTypes.setSelectedItem(logType);
@@ -294,11 +285,6 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	private void updateTitle() {
 		String byteCount = FileUtils.byteCountToDisplaySize(file.length());
 		setTitle(file.getName().concat(" - ").concat(byteCount));
-	}
-
-	public void setRendererRules(List<Rule> rules) {
-		LineRenderer lineRenderer = (LineRenderer) lines.getCellRenderer();
-		lineRenderer.setRules(rules);
 	}
 
 	public File getFile() {

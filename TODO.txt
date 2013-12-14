@@ -1,3 +1,0 @@
-TODO
-
-- Migrate the current translations based on .properties files to a one more flexible and with support for plurals.

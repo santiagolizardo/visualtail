@@ -34,6 +34,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -44,13 +45,14 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SpringLayout;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
 
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.beans.Rule;
 import com.santiagolizardo.beobachter.config.EntitiesConfiguration;
 import com.santiagolizardo.beobachter.gui.dialogs.RuleDialog;
-import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class EditionPanel extends JPanel {
@@ -72,7 +74,7 @@ public class EditionPanel extends JPanel {
 
 	private JButton btnApply;
 
-	public EditionPanel() {
+	public EditionPanel(final JDialog mainGUI) {
 		setPreferredSize(new Dimension(400, 340));
 
 		txtName = new JLabel();
@@ -108,36 +110,41 @@ public class EditionPanel extends JPanel {
 			}
 		};
 		tblRules.getColumnModel().getColumn(1).setCellRenderer(renderer);
+		tblRules.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+
+					@Override
+					public void valueChanged(ListSelectionEvent ev) {
+						btnRemoveRule.setEnabled(1 == tblRules
+								.getSelectedRowCount());
+					}
+				});
 
 		scrollRules = new JScrollPane(tblRules);
 
 		btnAddRule = new JButton(Translator._("Add rule"));
 		btnAddRule.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
+			public void actionPerformed(ActionEvent ev) {
 				btnApply.setEnabled(true);
-				RuleDialog dialog = new RuleDialog(modelRules);
+				RuleDialog dialog = new RuleDialog(mainGUI, modelRules);
 				dialog.setVisible(true);
 			};
 		});
 
 		btnRemoveRule = new JButton(Translator._("Remove rule"));
+		btnRemoveRule.setEnabled(false);
 		btnRemoveRule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				btnApply.setEnabled(true);
 				int selectedRow = tblRules.getSelectedRow();
-				if (selectedRow != -1) {
-					modelRules.removeRule(selectedRow);
-				} else {
-					DialogFactory.showErrorMessage(getParent(),
-							Translator._("Please select a rule first"));
-				}
+				modelRules.removeRule(selectedRow);
 			}
 		});
 
 		btnApply = new JButton(Translator._("Apply changes"));
 		btnApply.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent ev) {
 				short interval = Short
 						.valueOf(spnRefresh.getValue().toString()).shortValue();
 				logType.setRefreshInterval(interval);

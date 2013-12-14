@@ -20,7 +20,7 @@ package com.santiagolizardo.beobachter.gui.menu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import com.santiagolizardo.beobachter.gui.actions.ActionFactory;
+import com.santiagolizardo.beobachter.MainGUI;
 
 public class EditPopupMenu extends JPopupMenu {
 
@@ -29,11 +29,11 @@ public class EditPopupMenu extends JPopupMenu {
 	 */
 	private static final long serialVersionUID = 4858813412795446507L;
 
-	public EditPopupMenu() {
+	public EditPopupMenu(MainGUI mainGUI) {
 
-		JMenuItem copy = new JMenuItem(ActionFactory.createCopyAction());
+		JMenuItem copy = new JMenuItem(mainGUI.actionFactory.createCopyAction());
 		JMenuItem selectAll = new JMenuItem(
-				ActionFactory.createSelectAllAction());
+				mainGUI.actionFactory.createSelectAllAction());
 
 		add(copy);
 		addSeparator();

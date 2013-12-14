@@ -17,6 +17,8 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -41,7 +43,6 @@ import com.santiagolizardo.beobachter.gui.dialogs.components.ColorChooser;
 import com.santiagolizardo.beobachter.gui.dialogs.components.RulesTableModel;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
 public class RuleDialog extends JDialog {
 
@@ -64,8 +65,9 @@ public class RuleDialog extends JDialog {
 	private JButton btnOk;
 	private JButton btnCancel;
 
-	public RuleDialog(final RulesTableModel rules) {
-
+	public RuleDialog(JDialog mainGUI, final RulesTableModel rules) {
+		super(mainGUI);
+		
 		setTitle("Add rule");
 		setResizable(false);
 		setModal(true);
@@ -141,7 +143,7 @@ public class RuleDialog extends JDialog {
 		});
 
 		defineLayout();
-		setLocationRelativeTo(null);
+		setLocationRelativeTo(mainGUI);
 	}
 
 	private void defineLayout() {

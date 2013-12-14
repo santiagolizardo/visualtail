@@ -18,7 +18,6 @@
 package com.santiagolizardo.beobachter.beans;
 
 import java.awt.Color;
-import java.util.regex.Pattern;
 
 public class Rule {
 
@@ -73,21 +72,6 @@ public class Rule {
 
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
-	}
-
-	public boolean match(String text) {
-		if (null == text) {
-			return false;
-		}
-
-		String pattern = getPattern();
-
-		if (regularExpression) {
-			Pattern p = Pattern.compile(pattern);
-			return p.matcher(text).matches();
-		} else {
-			return (text.indexOf(pattern) != -1);
-		}
 	}
 
 	@Override

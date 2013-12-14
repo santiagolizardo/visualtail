@@ -17,22 +17,23 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
+import com.santiagolizardo.beobachter.MainGUI;
+
 public class ActionFactory {
 
-	private static CopyAction copyAction = null;
-	private static SelectAllAction selectAllAction = null;
+	private CopyAction copyAction;
+	private SelectAllAction selectAllAction;
 
-	public static CopyAction createCopyAction() {
-		if (copyAction == null) {
-			copyAction = new CopyAction();
-		}
+	public ActionFactory(MainGUI mainGUI) {
+		copyAction = new CopyAction();
+		selectAllAction = new SelectAllAction(mainGUI);
+	}
+
+	public CopyAction createCopyAction() {
 		return copyAction;
 	}
 
-	public static SelectAllAction createSelectAllAction() {
-		if (selectAllAction == null) {
-			selectAllAction = new SelectAllAction();
-		}
+	public SelectAllAction createSelectAllAction() {
 		return selectAllAction;
 	}
 }

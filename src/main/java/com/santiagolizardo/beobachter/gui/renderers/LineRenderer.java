@@ -27,27 +27,26 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 import com.santiagolizardo.beobachter.beans.Rule;
+import com.santiagolizardo.beobachter.beans.RuleMatcher;
 import com.santiagolizardo.beobachter.config.ConfigData;
 
 public class LineRenderer extends JLabel implements ListCellRenderer<String> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3132401719842667709L;
 
-	private List<Rule> rules;
+	private RuleMatcher[] ruleMatchers;
 
-	public LineRenderer(ConfigData configManager) {
+	public LineRenderer(List<Rule> rules, ConfigData configManager) {
 		Font font = new Font(configManager.getFontFamily(), Font.PLAIN,
 				configManager.getFontSize());
 
 		setOpaque(true);
 		setFont(font);
-	}
 
-	public void setRules(List<Rule> rules) {
-		this.rules = rules;
+		ruleMatchers = new RuleMatcher[rules.size()];
+		for (int i = 0; i < rules.size(); i++) {
+			ruleMatchers[i] = new RuleMatcher(rules.get(i));
+		}
 	}
 
 	public Component getListCellRendererComponent(JList<? extends String> list,
@@ -60,8 +59,9 @@ public class LineRenderer extends JLabel implements ListCellRenderer<String> {
 			setBackground(Color.BLUE);
 			setForeground(Color.WHITE);
 		} else {
-			for (Rule rule : rules) {
-				if (rule.match(getText())) {
+			for (RuleMatcher ruleMatcher : ruleMatchers) {
+				if (ruleMatcher.matches(getText())) {
+					Rule rule = ruleMatcher.getRule();
 					setBackground(rule.getBackgroundColor());
 					setForeground(rule.getForegroundColor());
 				}

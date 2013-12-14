@@ -21,9 +21,13 @@ import com.santiagolizardo.beobachter.util.RecentFiles;
 public class RecentsMenu extends JMenu {
 
 	private static final long serialVersionUID = 1L;
+	
+	private MainGUI mainGUI;
 
-	public RecentsMenu(ConfigData configData) {
+	public RecentsMenu(MainGUI mainGUI) {
 		super(_("Open recents"));
+		
+		this.mainGUI = mainGUI;
 
 		setIcon(EmptyIcon.SIZE_16);
 
@@ -42,6 +46,8 @@ public class RecentsMenu extends JMenu {
 		add(cleanRecents);
 		addSeparator();
 
+		ConfigData configData = mainGUI.configData;
+		
 		for (String fileName : configData.getRecentFiles()) {
 			addRecent(fileName);
 		}
@@ -60,12 +66,12 @@ public class RecentsMenu extends JMenu {
 					try {
 						FileUtil.tryReading(file);
 					} catch (Exception e) {
-						DialogFactory.showErrorMessage(MainGUI.instance,
+						DialogFactory.showErrorMessage(mainGUI,
 								e.getMessage());
 						return;
 					}
 
-					Controller.openFile(filePath, new LogType("Default"));
+					Controller.openFile(mainGUI, filePath, new LogType("Default"));
 				}
 			});
 			recentFiles.list.add(fileName);

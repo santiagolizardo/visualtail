@@ -154,6 +154,8 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 	private void openSession() {
 		setVisible(false);
+		
+		MainGUI mainGUI = (MainGUI) getOwner();
 
 		String path = list.getSelectedValue().toString().concat(".txt");
 		File file = new File(Constants.FOLDER_SESSIONS + Constants.DIR_SEP
@@ -163,14 +165,14 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				recentsMenu.addRecent(line);
-				Controller.openFile(line, new LogType("Default"));
+				Controller.openFile(mainGUI, line, new LogType("Default"));
 			}
 			reader.close();
 		} catch (Exception ee) {
 			ee.printStackTrace();
 		}
 
-		((MainGUI) getOwner()).desktop.setWindowsOnCascade();
+		mainGUI.desktop.setWindowsOnCascade();
 
 		dispose();
 	}

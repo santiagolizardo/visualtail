@@ -27,12 +27,17 @@ public class Menu extends JMenuBar {
 
 	private static final long serialVersionUID = -1490576137341648743L;
 
+	private WindowsMenu windowMenu;
+	
 	public Menu(final JDesktopPane pane, MainGUI parentFrame) {
 
 		FileMenu fileMenu = new FileMenu(parentFrame);
-		EditMenu editMenu = new EditMenu();
+		EditMenu editMenu = new EditMenu(parentFrame);
 		OptionsMenu optionsMenu = new OptionsMenu(parentFrame);
-		WindowsMenu windowMenu = new WindowsMenu(parentFrame);
+		
+		windowMenu = new WindowsMenu(parentFrame);
+		windowMenu.setEnabled(false);
+		
 		HelpMenu helpMenu = new HelpMenu(parentFrame);
 
 		add(fileMenu);
@@ -41,5 +46,9 @@ public class Menu extends JMenuBar {
 		add(windowMenu);
 		add(Box.createHorizontalGlue());
 		add(helpMenu);
+	}
+	
+	public WindowsMenu getWindowMenu() {
+		return windowMenu;
 	}
 }

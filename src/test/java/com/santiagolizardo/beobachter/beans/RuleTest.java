@@ -19,16 +19,4 @@ public class RuleTest {
 		assertFalse(rule.isRegularExpression());
 		assertFalse(rule.isIgnoreCase());
 	}
-
-	@Test
-	public void testPatternMatching() {
-		Rule rule = new Rule();
-		rule.setRegularExpression(true);
-		rule.setPattern("[a-z]{1,3}");
-
-		assertTrue(rule.match("abc"));
-		assertFalse(rule.match("123"));
-		assertFalse(rule.match("abcd"));
-		assertFalse(rule.match(null));
-	}
 }

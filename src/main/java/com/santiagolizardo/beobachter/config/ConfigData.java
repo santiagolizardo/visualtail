@@ -24,8 +24,6 @@ import javax.swing.UIManager;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-import com.santiagolizardo.beobachter.MainGUI;
-
 public class ConfigData {
 
 	// Window properties
@@ -41,8 +39,6 @@ public class ConfigData {
 
 	// App properties
 	private final String LANGUAGE = "language";
-
-	private final String DRAG_MODE = "drag_mode";
 
 	private final String LAST_PATH = "last_path";
 
@@ -123,15 +119,6 @@ public class ConfigData {
 
 	public void setLastPath(String lastPath) {
 		configuration.setProperty(LAST_PATH, lastPath);
-	}
-
-	public int getDragMode() {
-		return configuration.getInt(DRAG_MODE);
-	}
-
-	public void setDragMode(int dragMode) {
-		configuration.setProperty(DRAG_MODE, dragMode);
-		MainGUI.instance.desktop.setDragMode(dragMode);
 	}
 
 	public String getLanguage() {
