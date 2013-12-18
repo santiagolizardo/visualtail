@@ -83,8 +83,8 @@ public class Main {
 			public void run() {
 				SwingUtil.setLookAndFeel(configData.getWindowLAF());
 
-				MainGUI.instance = new MainGUI(configData);
-				MainGUI.instance.setVisible(true);
+				MainGUI mainGUI = new MainGUI(configData);
+				mainGUI.setVisible(true);
 			}
 		});
 	}

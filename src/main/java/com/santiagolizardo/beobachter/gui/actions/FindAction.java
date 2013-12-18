@@ -30,12 +30,13 @@ import com.santiagolizardo.beobachter.resources.images.IconFactory;
 
 public class FindAction extends AbstractAction {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2244429466145757856L;
 
-	public FindAction() {
+	private MainGUI mainGUI;
+
+	public FindAction(MainGUI mainGUI) {
+		
+		this.mainGUI = mainGUI;
 
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("find.png"));
 		putValue(AbstractAction.NAME, _("Find..."));
@@ -44,6 +45,6 @@ public class FindAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		MainGUI.instance.addFindPanel();
+		mainGUI.addFindPanel();
 	}
 }

@@ -41,8 +41,8 @@ public class EditMenu extends JMenu {
 		JMenuItem selectAll = new JMenuItem(
 				mainGUI.actionFactory.createSelectAllAction());
 
-		JMenuItem find = new JMenuItem(new FindAction());
-		JMenuItem findNext = new JMenuItem(new FindNextAction());
+		JMenuItem find = new JMenuItem(new FindAction(mainGUI));
+		JMenuItem findNext = new JMenuItem(new FindNextAction(mainGUI));
 
 		add(copy);
 		addSeparator();

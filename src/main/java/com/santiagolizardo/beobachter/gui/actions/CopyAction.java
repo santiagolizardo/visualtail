@@ -38,9 +38,13 @@ public class CopyAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2226006120048433873L;
 
+	private MainGUI mainGUI;
+
 	private Clipboard clipboard;
 
-	public CopyAction() {
+	public CopyAction(MainGUI mainGUI) {
+
+		this.mainGUI = mainGUI;
 
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("copy.png"));
 		putValue(AbstractAction.NAME, _("Copy"));
@@ -51,7 +55,7 @@ public class CopyAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) MainGUI.instance.desktop.getSelectedFrame();
+		LogWindow log = (LogWindow) mainGUI.desktop.getSelectedFrame();
 		if (log != null) {
 			List<String> selectedLines = log.lines.getSelectedValuesList();
 			StringBuilder sb = new StringBuilder();

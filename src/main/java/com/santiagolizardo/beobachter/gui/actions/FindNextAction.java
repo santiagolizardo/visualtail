@@ -31,12 +31,13 @@ import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
 
 public class FindNextAction extends AbstractAction {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2768042815624362464L;
+	
+	private MainGUI mainGUI;
 
-	public FindNextAction() {
+	public FindNextAction(MainGUI mainGUI) {
+
+		this.mainGUI = mainGUI;
 
 		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
 		putValue(AbstractAction.NAME, _("Find next"));
@@ -45,7 +46,7 @@ public class FindNextAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) MainGUI.instance.desktop.getSelectedFrame();
+		LogWindow log = (LogWindow) mainGUI.desktop.getSelectedFrame();
 		if (log != null) {
 			log.searchAgainText();
 		}

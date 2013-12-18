@@ -17,6 +17,7 @@
  */
 package com.santiagolizardo.beobachter.beans;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class LogType {
 	}
 
 	public String getPath() {
-		return Constants.FOLDER_LOG_TYPES + Constants.DIR_SEP + name
+		return Constants.FOLDER_LOG_TYPES + File.separator + name
 				+ ".properties";
 	}
 

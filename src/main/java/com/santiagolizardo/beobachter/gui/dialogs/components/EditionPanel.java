@@ -61,7 +61,6 @@ public class EditionPanel extends JPanel {
 
 	private LogType logType;
 
-	private JLabel txtName;
 	private JSpinner spnRefresh;
 	private JLabel lblSeconds;
 
@@ -75,9 +74,7 @@ public class EditionPanel extends JPanel {
 	private JButton btnApply;
 
 	public EditionPanel(final JDialog mainGUI) {
-		setPreferredSize(new Dimension(400, 340));
-
-		txtName = new JLabel();
+		setPreferredSize(new Dimension(400, 300));
 
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(500, 100,
 				10000, 100);
@@ -192,7 +189,6 @@ public class EditionPanel extends JPanel {
 
 		this.logType = logType;
 
-		txtName.setText(logType.getName());
 		spnRefresh.setValue(logType.getRefreshInterval());
 
 		modelRules.clear();
@@ -205,7 +201,6 @@ public class EditionPanel extends JPanel {
 	private CardLayout cardLayout;
 
 	private void placeComponents() {
-		JLabel lblName = new JLabel(Translator._("Name"));
 		JLabel lblRefresh = new JLabel(
 				Translator._("Refresh interval in milliseconds"));
 		JLabel lblRules = new JLabel(Translator._("Formatting rules"));
@@ -226,9 +221,7 @@ public class EditionPanel extends JPanel {
 		SpringLayout layout = new SpringLayout();
 		panel.setLayout(layout);
 
-		layout.putConstraint(NORTH, lblName, 5, NORTH, this);
-		layout.putConstraint(NORTH, txtName, 5, SOUTH, lblName);
-		layout.putConstraint(NORTH, lblRefresh, 5, SOUTH, txtName);
+		layout.putConstraint(NORTH, lblRefresh, 5, NORTH, this);
 		layout.putConstraint(NORTH, spnRefresh, 5, SOUTH, lblRefresh);
 		layout.putConstraint(NORTH, lblSeconds, 5, SOUTH, spnRefresh);
 		layout.putConstraint(NORTH, lblRules, 5, SOUTH, lblSeconds);
@@ -237,8 +230,6 @@ public class EditionPanel extends JPanel {
 		layout.putConstraint(NORTH, btnRemoveRule, 5, SOUTH, scrollRules);
 		layout.putConstraint(NORTH, btnApply, 5, SOUTH, btnAddRule);
 
-		layout.putConstraint(WEST, lblName, 5, WEST, this);
-		layout.putConstraint(WEST, txtName, 5, WEST, this);
 		layout.putConstraint(WEST, lblRefresh, 5, WEST, this);
 		layout.putConstraint(WEST, spnRefresh, 5, WEST, this);
 		layout.putConstraint(WEST, lblSeconds, 5, WEST, this);
@@ -249,8 +240,6 @@ public class EditionPanel extends JPanel {
 		layout.putConstraint(WEST, btnRemoveRule, 5, EAST, btnAddRule);
 		layout.putConstraint(EAST, btnApply, -5, EAST, this);
 
-		panel.add(lblName);
-		panel.add(txtName);
 		panel.add(lblRefresh);
 		panel.add(spnRefresh);
 		panel.add(lblSeconds);

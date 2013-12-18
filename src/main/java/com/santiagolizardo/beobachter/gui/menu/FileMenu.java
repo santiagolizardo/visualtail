@@ -50,6 +50,7 @@ public class FileMenu extends JMenu {
 	private static final long serialVersionUID = -9095266179967845006L;
 
 	private RecentsMenu recentsMenu;
+	private JMenuItem saveSessionMenuItem;
 
 	public FileMenu(final MainGUI mainGUI) {
 		setText(_("File"));
@@ -60,8 +61,7 @@ public class FileMenu extends JMenu {
 				KeyEvent.CTRL_MASK));
 		open.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				File lastSelected = new File(mainGUI.configData
-						.getLastPath());
+				File lastSelected = new File(mainGUI.configData.getLastPath());
 
 				JFileChooser chooser = new JFileChooser();
 				chooser.setSelectedFile(lastSelected);
@@ -83,7 +83,8 @@ public class FileMenu extends JMenu {
 						}
 
 						recentsMenu.addRecent(file.getAbsolutePath());
-						Controller.openFile(mainGUI, file.getAbsolutePath(), logType);
+						Controller.openFile(mainGUI, file.getAbsolutePath(),
+								logType);
 					}
 
 					mainGUI.desktop.setWindowsOnTileHorizontal();
@@ -112,20 +113,19 @@ public class FileMenu extends JMenu {
 		loadSession.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SessionsDialog dialog = new SessionsDialog(mainGUI,
-						recentsMenu);
+				SessionsDialog dialog = new SessionsDialog(mainGUI, recentsMenu);
 				dialog.setVisible(true);
 			}
 		});
 
-		JMenuItem saveSession = new JMenuItem(_("Save current session"));
-		saveSession.setIcon(IconFactory.getImage("disk.png"));
+		saveSessionMenuItem = new JMenuItem(_("Save current session"));
+		saveSessionMenuItem.setIcon(IconFactory.getImage("disk.png"));
+		saveSessionMenuItem.setEnabled(false);
 
-		saveSession.addActionListener(new ActionListener() {
+		saveSessionMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				JInternalFrame[] frames = mainGUI.desktop
-						.getAllFrames();
+				JInternalFrame[] frames = mainGUI.desktop.getAllFrames();
 				if (frames.length == 0) {
 					DialogFactory
 							.showErrorMessage(
@@ -149,7 +149,7 @@ public class FileMenu extends JMenu {
 
 				try {
 					File file = new File(Constants.FOLDER_SESSIONS
-							+ Constants.DIR_SEP + name + ".txt");
+							+ File.separator + name + ".txt");
 					FileWriter writer = new FileWriter(file);
 					for (JInternalFrame frame : frames) {
 						LogWindow window = (LogWindow) frame;
@@ -167,12 +167,16 @@ public class FileMenu extends JMenu {
 		add(recentsMenu);
 		addSeparator();
 		add(loadSession);
-		add(saveSession);
+		add(saveSessionMenuItem);
 		addSeparator();
 		add(exit);
 	}
 
 	public RecentsMenu getRecentsMenu() {
 		return recentsMenu;
+	}
+
+	public JMenuItem getSaveSessionMenuItem() {
+		return saveSessionMenuItem;
 	}
 }

@@ -66,7 +66,7 @@ public class ListingPanel extends JPanel {
 	private JButton btnRemove;
 
 	public ListingPanel() {
-		setPreferredSize(new Dimension(180, 340));
+		setPreferredSize(new Dimension(180, 300));
 
 		modelTypes = new DefaultListModel<LogType>();
 		lstTypes = new JList<LogType>(modelTypes);

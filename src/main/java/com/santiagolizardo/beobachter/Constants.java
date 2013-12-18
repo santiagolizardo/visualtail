@@ -25,26 +25,24 @@ import java.io.File;
 public class Constants {
 
 	public static final String APP_NAME = "Beobachter";
-	public static final String APP_VERSION = "1.7.6";
+	public static final String APP_VERSION = "1.7.7";
 	public static final String APP_URL = "http://sourceforge.net/projects/beobachter/";
 	public static final String APP_UPDATE_URL = "http://beobachter.sourceforge.net/version.html";
 
 	public static final int RECENTS_LIMIT = 5;
 
 	public static final String LINE_SEP = System.getProperty("line.separator");
-	public static final String DIR_SEP = File.separator;
 
 	public static final String USER_HOME = System.getProperty("user.home");
 
-	public static final String HOME_PATH = USER_HOME + DIR_SEP + ".beobachter";
-	public static final String DATA_PATH = HOME_PATH + DIR_SEP + "data";
-	public static final String FOLDER_LOG_TYPES = DATA_PATH + DIR_SEP
+	public static final String HOME_PATH = USER_HOME + File.separator
+			+ ".beobachter";
+	public static final String DATA_PATH = HOME_PATH + File.separator + "data";
+	public static final String FOLDER_LOG_TYPES = DATA_PATH + File.separator
 			+ "logTypes";
-	public static final String FOLDER_SESSIONS = DATA_PATH + DIR_SEP
+	public static final String FOLDER_SESSIONS = DATA_PATH + File.separator
 			+ "sessions";
 
-	public static final String CONFIG_FILE = Constants.HOME_PATH
-			+ Constants.DIR_SEP + "config.properties";
-
-	public static final String FOLDER_LANGUAGES = "languages";
+	public static final String CONFIG_FILE = HOME_PATH + File.separator
+			+ "config.properties";
 }

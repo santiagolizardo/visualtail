@@ -1,5 +1,20 @@
 CHANGES
 
+Version 1.7.7 (2013/12/18)
+
+	- Fix on find panel not returning results.
+	- New languages: Russian, Portuguese, Ucranian, German
+
+Version 1.7.6 (2013/12/14)
+
+Version 1.7.5 (2013/12/4)
+
+Version 1.7.4 (2013/11/14)
+
+	- Extend the Open file dialog to be able to select multiple files to open at a time.
+	- Minor bugfixes.
+	- Performance improvements.
+
 Version 1.7.4 (2013/11/14)
 
 	- Extend the Open file dialog to be able to select multiple files to open at a time.

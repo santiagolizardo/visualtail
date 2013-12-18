@@ -1,0 +1,371 @@
+msgid ""
+msgstr "Project-Id-Version: beobachter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-12 20:11+0000\n"
+"PO-Revision-Date: 2013-12-17 17:13-0500\n"
+"Last-Translator: santiagolizardo <santiago.lizardo@gmail.com>\n"
+"Language-Team: Ukrainian\n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: crowdin.net\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ../../../../../../java\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:26
+msgid "Open recents"
+msgstr "Вiдкрити недавнi"
+
+#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:30
+msgid "Clean recents"
+msgstr "Очистити недавнi"
+
+#: com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:39
+msgid "Windows"
+msgstr "Вiкна"
+
+#: com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:42
+msgid "Cascade windows"
+msgstr "Розташувати вiкна каскадом"
+
+#: com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:52
+msgid "Tile windows vertically"
+msgstr "Впорядкувати вікна без перекривання по вертикалі"
+
+#: com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:64
+msgid "Tile windows horizontally"
+msgstr "Вікна зверху донизу"
+
+#: com/santiagolizardo/beobachter/gui/menu/WindowsMenu.java:75
+msgid "Close all windows"
+msgstr "Закрити усi вiкна"
+
+#: com/santiagolizardo/beobachter/gui/menu/EditMenu.java:37
+msgid "Edit"
+msgstr "Редагувати"
+
+#: com/santiagolizardo/beobachter/gui/menu/HelpMenu.java:40
+msgid "Help"
+msgstr "Допомога"
+
+#: com/santiagolizardo/beobachter/gui/menu/HelpMenu.java:43
+msgid "Check for updates"
+msgstr "Перевiрити наявнiсть оновлень"
+
+#: com/santiagolizardo/beobachter/gui/menu/HelpMenu.java:51
+msgid "About this application..."
+msgstr "Про цей додаток..."
+
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:55
+msgid "File"
+msgstr "Файл"
+
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:58
+msgid "Open..."
+msgstr "Вiдкрити..."
+
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:93
+msgid "These files could not be opened for reading:"
+msgstr "Цi файли неможливо вiдкрити для читання:"
+
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:111
+msgid "Manage sessions..."
+msgstr "Керувати сесiями..."
+
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:121
+msgid "Save current session"
+msgstr "Зберегти поточну сесiю"
+
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:133
+msgid "You can not save a session with no opened files"
+msgstr "Ви не можете зберегти сесiю без вiдкритих файлiв"
+
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:137
+msgid "Please enter the session name:"
+msgstr "Будь ласка, введiть назву сесii:"
+
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:138
+msgid "Session name"
+msgstr "Назва сесii"
+
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:146
+msgid "Invalid session name"
+msgstr "Невiрна назва сесii"
+
+#: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:48
+msgid "Options"
+msgstr "Опцii"
+
+#: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:53
+msgid "Always on top"
+msgstr "Завжди нагорi"
+
+#: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:56
+msgid "Manage log types..."
+msgstr "Керувати типами журналiв..."
+
+#: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:60
+msgid "Preferences..."
+msgstr "Налаштування..."
+
+#: com/santiagolizardo/beobachter/gui/util/FileUtil.java:28
+msgid "The file does not exist"
+msgstr "Файл не iснуэ"
+
+#: com/santiagolizardo/beobachter/gui/util/FileUtil.java:31
+msgid "Cannot open a directory"
+msgstr "Не можу вiдкрити директорiю"
+
+#: com/santiagolizardo/beobachter/gui/util/FileUtil.java:35
+msgid "You do not have permissions to read this file"
+msgstr "У вас нема дозволу на читання цього файлу"
+
+#: com/santiagolizardo/beobachter/gui/util/UpdateManager.java:56
+msgid "New version %s is available"
+msgstr "Нова версiя %s доступна"
+
+#: com/santiagolizardo/beobachter/gui/util/UpdateManager.java:58
+msgid "Please visit the project website"
+msgstr "Будь ласка зайдiть на сайт проекту"
+
+#: com/santiagolizardo/beobachter/gui/util/UpdateManager.java:63
+msgid "There are not updates available"
+msgstr "Нема доступних оновлень"
+
+#: com/santiagolizardo/beobachter/gui/util/UpdateManager.java:68
+msgid "Unable to fetch server information"
+msgstr "Не вдалося отримати iнформацiю вiд сервера"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:75
+msgid "Preferences"
+msgstr "Налаштування"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:109
+msgid "Save"
+msgstr "Зберегти"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:141
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:135
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:157
+msgid "Look and feel"
+msgstr "Зовнішній вигляд"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:158
+msgid "Language"
+msgstr "Мова"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:159
+msgid "Font family"
+msgstr "Гарнітура"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:160
+msgid "Font size"
+msgstr "Розмір шрифту"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:74
+msgid "Regular expression"
+msgstr "Регулярний вираз"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:76
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:93
+msgid "Pick"
+msgstr "Вибрати"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:97
+msgid "Pick the foreground color"
+msgstr "Вибрати колір переднього плану"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:110
+#: com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:34
+msgid "Ignore case"
+msgstr "Ігнорувати регистр"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:112
+msgid "Ok"
+msgstr "ОК"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:118
+msgid "Please complete the field pattern"
+msgstr "Будь ласка, закiнчить маску поля"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:152
+#: com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:33
+msgid "Pattern"
+msgstr "Шаблон"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:153
+msgid "Background color"
+msgstr "Колір фону"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:154
+msgid "Foreground color"
+msgstr "Колір переднього плану"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:154
+msgid "Check for changes"
+msgstr "Перевірити наявність змін"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:168
+msgid "Scroll to new lines"
+msgstr "Перейдіть до нових ліній"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:184
+msgid "Clear buffer"
+msgstr "Очистити буфер"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:224
+msgid "Print this file"
+msgstr "Надрукувати цей файл"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:282
+msgid "Do you want to search again?"
+msgstr "Ви хочете, щоб виконати пошук знову?"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/FindPanel.java:80
+msgid "Search"
+msgstr "Пошук"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:100
+msgid "Add"
+msgstr "Додати"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:105
+msgid "Enter the name of the new log type"
+msgstr "Введіть ім'я нового типу журналу"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:112
+msgid "Invalid log type name"
+msgstr "Неправильне ім'я журналу"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:126
+msgid "Rename"
+msgstr "Перейменувати"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:133
+msgid "Enter the new name of the log type:"
+msgstr "Введіть нове ім'я типу журналу:"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:153
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:98
+msgid "Remove"
+msgstr "Видалити"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:159
+msgid "Are you sure you want to delete the selected log type?"
+msgstr "Ви дійсно бажаєте видалити вибраний тип журналу?"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:164
+msgid "Unable to delete the log type"
+msgstr "Не вдалося видалити тип журнал"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:182
+msgid "Log types"
+msgstr "Типи журналiв"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:34
+msgid "Colors"
+msgstr "Кольори"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:103
+msgid "Example"
+msgstr "Приклад"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:114
+msgid "Add rule"
+msgstr "Додати правило"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:123
+msgid "Remove rule"
+msgstr "Видаліть правило"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:132
+msgid "Please select a rule first"
+msgstr "Будь ласка, виберіть правило спочатку"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:137
+msgid "Apply changes"
+msgstr "Застосувати зміни"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:180
+msgid "seconds"
+msgstr "секунд"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:201
+msgid "Name"
+msgstr "Ім’я"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:203
+msgid "Refresh interval in milliseconds"
+msgstr "Інтервал оновлення у мілісекундах"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:204
+msgid "Formatting rules"
+msgstr "Правила форматування"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:212
+msgid "Select a log type on the left to edit it"
+msgstr "Виберіть тип журналу ліворуч щоб його змінити"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/LogTypesDialog.java:41
+msgid "Log types management"
+msgstr "Керування типами журналів"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:47
+msgid "About this application"
+msgstr "Про цей додаток"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:64
+msgid "More info about the project at <a href=\"%s\">%s</a>."
+msgstr "Детальніше про проект на <a href=\"%s\"> %s</a>."
+
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:69
+msgid "Session management"
+msgstr "Управлiння сесіями"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:94
+msgid "Open"
+msgstr "Вiдкрити"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:128
+msgid "Please select the session you want to open or remove:"
+msgstr "Будь ласка, виберіть сесії, ви хочете, щоб відкрити або видалити:"
+
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:181
+msgid "Are you sure you want to delete this session?"
+msgstr "Ви дійсно бажаєте видалити цю сесiю?"
+
+#: com/santiagolizardo/beobachter/gui/actions/SelectAllAction.java:42
+msgid "Select all"
+msgstr "Виділити все"
+
+#: com/santiagolizardo/beobachter/gui/actions/FindAction.java:41
+msgid "Find..."
+msgstr "Знайти..."
+
+#: com/santiagolizardo/beobachter/gui/actions/CopyAction.java:46
+msgid "Copy"
+msgstr "Копіювати"
+
+#: com/santiagolizardo/beobachter/gui/actions/ExitAction.java:39
+msgid "Exit"
+msgstr "Вихід"
+
+#: com/santiagolizardo/beobachter/gui/actions/FindNextAction.java:42
+msgid "Find next"
+msgstr "Знайти наступне"
+
+#: com/santiagolizardo/beobachter/config/EntitiesConfiguration.java:53
+msgid "rule."
+msgstr "правило."
+
+#: com/santiagolizardo/beobachter/config/ConfigData.java:62
+msgid "recent."
+msgstr "Останні."
+

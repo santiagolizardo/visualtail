@@ -23,11 +23,11 @@ public class DesktopPanel extends JDesktopPane {
 		if (numFrames == 0)
 			return;
 
-		int frameWidth = (getWidth() * 75) / 100;
-		int frameHeight = (getHeight() * 75) / 100;
+		int frameWidth = (int) (getWidth() * .75);
+		int frameHeight = (int) (getHeight() * .75);
 
-		int diffWidth = ((getWidth() * 25) / 100) / numFrames;
-		int diffHeight = ((getHeight() * 25) / 100) / numFrames;
+		int diffWidth = (int) (getWidth() * .25) / numFrames;
+		int diffHeight = (int) (getHeight() * .25) / numFrames;
 
 		short x = 0;
 		short y = 0;

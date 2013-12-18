@@ -25,7 +25,7 @@ public class ActionFactory {
 	private SelectAllAction selectAllAction;
 
 	public ActionFactory(MainGUI mainGUI) {
-		copyAction = new CopyAction();
+		copyAction = new CopyAction(mainGUI);
 		selectAllAction = new SelectAllAction(mainGUI);
 	}
 

@@ -37,31 +37,29 @@ public class FindPanel extends JPanel {
 
 	private static final long serialVersionUID = -750096502886630895L;
 
-	private JTextField search;
-	private JButton close;
+	private JTextField searchTextField;
+	private JButton closeButton;
 
 	public FindPanel(final MainGUI mainGUI) {
 
-		search = new JTextField(20);
-		search.addKeyListener(new KeyAdapter() {
+		searchTextField = new JTextField(20);
+		searchTextField.addKeyListener(new KeyAdapter() {
 
-			public void keyReleased(KeyEvent e) {
-				int modifiers = e.getModifiers();
-				int keyCode = e.getKeyCode();
-				if (modifiers == KeyEvent.CTRL_MASK
-						&& keyCode == KeyEvent.VK_ENTER) {
+			public void keyReleased(KeyEvent ev) {
+				int keyCode = ev.getKeyCode();
+				if (keyCode == KeyEvent.VK_ENTER) {
 					LogWindow log = (LogWindow) mainGUI.desktop
 							.getSelectedFrame();
 					if (log != null) {
-						log.searchText(search.getText());
+						log.searchText(searchTextField.getText());
 					}
 				}
 			}
 		});
 
-		close = new JButton(IconFactory.getImage("close.png"));
-		close.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		closeButton = new JButton(IconFactory.getImage("close.png"));
+		closeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
 				mainGUI.removeFindPanel();
 			}
 		});
@@ -70,7 +68,7 @@ public class FindPanel extends JPanel {
 	}
 
 	public void focus() {
-		search.requestFocusInWindow();
+		searchTextField.requestFocusInWindow();
 	}
 
 	public void defineLayout() {
@@ -80,7 +78,7 @@ public class FindPanel extends JPanel {
 		JLabel _search = new JLabel(Translator._("Search") + ":");
 
 		add(_search);
-		add(search);
-		add(close);
+		add(searchTextField);
+		add(closeButton);
 	}
 }

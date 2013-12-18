@@ -21,6 +21,7 @@ import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
 import java.awt.Container;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,6 +29,8 @@ import java.net.URISyntaxException;
 import javax.swing.BoxLayout;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.HyperlinkEvent;
@@ -35,6 +38,7 @@ import javax.swing.event.HyperlinkListener;
 
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.resources.ResourcesLoader;
+import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class AboutDialog extends AbstractDialog {
@@ -45,38 +49,46 @@ public class AboutDialog extends AbstractDialog {
 		super(parentFrame);
 
 		setTitle(Translator._("About this application"));
-		setSize(720, 480);
 		setModal(true);
-		setResizable(false);
 
 		defineLayout();
 	}
 
 	private void defineLayout() {
 		Container container = getContentPane();
-		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
+		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 
-		String versionUrl = String
-				.format("<strong>%s</strong> <em>v%s</em><br />%s",
-						Constants.APP_NAME,
-						Constants.APP_VERSION,
-						String.format(
-								_("More info about the project at <a href=\"%s\">%s</a>."),
-								Constants.APP_URL, Constants.APP_URL));
-		JEditorPane lblVersion = new HtmlLabel(versionUrl);
-		lblVersion.setOpaque(false);
+		JLabel iconPanel = new JLabel(IconFactory.getImage("icon.png"));
+		iconPanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
+		container.add(iconPanel);
 
-		String credits = ResourcesLoader.readResource(AboutDialog.class,
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+		String headlineText = String.format("<h1>%s <em>v%s</em></h1>",
+				Constants.APP_NAME, Constants.APP_VERSION);
+		String infoText = String.format("<p>%s</p>", String.format(
+				_("More info about the project at <a href=\"%s\">%s</a>."),
+				Constants.APP_URL, Constants.APP_URL));
+		String creditsText = ResourcesLoader.readResource(AboutDialog.class,
 				"credits.html");
-		JEditorPane lblCredits = new HtmlLabel(credits);
+
+		String content = headlineText.concat(infoText).concat(creditsText);
+		JEditorPane lblCredits = new HtmlLabel(content);
+		lblCredits.setCaretPosition(0);
+		lblCredits.setOpaque(false);
 
 		JScrollPane scrollPane = new JScrollPane(lblCredits);
+		scrollPane.setPreferredSize(new Dimension(380, 240));
 		scrollPane
 				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-		container.add(lblVersion);
-		container.add(scrollPane);
+		panel.setAlignmentY(JPanel.TOP_ALIGNMENT);
+		panel.add(scrollPane);
 
+		container.add(panel);
+
+		pack();
 		setLocationRelativeTo(getOwner());
 	}
 }

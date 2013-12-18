@@ -45,12 +45,10 @@ public class MainGUI extends JFrame {
 
 	private static final long serialVersionUID = -349295815866572937L;
 
-	public static MainGUI instance = null;
-
 	public ConfigData configData;
 	public DesktopPanel desktop;
 	private FindPanel findPanel;
-	
+
 	public ActionFactory actionFactory;
 
 	private Logger logger;
@@ -59,18 +57,18 @@ public class MainGUI extends JFrame {
 		this.configData = configData;
 
 		logger = Logger.getLogger(MainGUI.class.getName());
-		
+
 		actionFactory = new ActionFactory(this);
 
 		desktop = new DesktopPanel();
-		
+
 		Menu menu = new Menu(desktop, this);
 		setJMenuBar(menu);
 		setTitle(Constants.APP_NAME);
 		setSize(configData.getWindowWidth(), configData.getWindowHeight());
 		setLocation(configData.getWindowX(), configData.getWindowY());
 		setIconImage(IconFactory.getImage("icon.png").getImage());
-		
+
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent event) {
 				quit();
@@ -127,10 +125,14 @@ public class MainGUI extends JFrame {
 
 		System.exit(exitCode);
 	}
-	
+
 	public void updateActions(int delta) {
 		boolean areWindowsOpen = desktop.getAllFrames().length + delta > 0;
 		actionFactory.createSelectAllAction().setEnabled(areWindowsOpen);
-		((Menu)getJMenuBar()).getWindowMenu().setEnabled(areWindowsOpen);
+
+		Menu mainMenu = ((Menu) getJMenuBar());
+		mainMenu.getWindowMenu().setEnabled(areWindowsOpen);
+		mainMenu.getFileMenu().getSaveSessionMenuItem()
+				.setEnabled(areWindowsOpen);
 	}
 }

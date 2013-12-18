@@ -139,7 +139,7 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 		container.add(panel, BorderLayout.SOUTH);
 
 		getRootPane().setDefaultButton(btnOpen);
-		
+
 		setLocationRelativeTo(getOwner());
 	}
 
@@ -154,12 +154,11 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 	private void openSession() {
 		setVisible(false);
-		
+
 		MainGUI mainGUI = (MainGUI) getOwner();
 
 		String path = list.getSelectedValue().toString().concat(".txt");
-		File file = new File(Constants.FOLDER_SESSIONS + Constants.DIR_SEP
-				+ path);
+		File file = new File(Constants.FOLDER_SESSIONS + File.separator + path);
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line = null;
