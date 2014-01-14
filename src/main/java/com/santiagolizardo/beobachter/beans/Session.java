@@ -17,6 +17,7 @@
  */
 package com.santiagolizardo.beobachter.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,10 +29,10 @@ import java.util.List;
 public class Session {
 
 	private String name;
-	private List<LogType> logTypes;
+	private List<String> fileNames;
 
 	public Session() {
-		name = null;
+		fileNames = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -42,11 +43,7 @@ public class Session {
 		this.name = name;
 	}
 
-	public List<LogType> getLogTypes() {
-		return logTypes;
-	}
-
-	public void setLogTypes(List<LogType> logTypes) {
-		this.logTypes = logTypes;
+	public List<String> getFileNames() {
+		return fileNames;
 	}
 }

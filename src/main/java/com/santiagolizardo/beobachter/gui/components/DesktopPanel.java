@@ -12,7 +12,7 @@ public class DesktopPanel extends JDesktopPane {
 
 	private static final Logger logger = Logger.getLogger(DesktopPanel.class
 			.getName());
-
+	
 	/**
 	 * This method relocates all frames contained on the desktop and sets them
 	 * on cascade.

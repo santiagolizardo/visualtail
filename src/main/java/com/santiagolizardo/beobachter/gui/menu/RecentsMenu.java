@@ -5,6 +5,7 @@ import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Vector;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -16,46 +17,38 @@ import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
 import com.santiagolizardo.beobachter.gui.util.FileUtil;
-import com.santiagolizardo.beobachter.util.RecentFiles;
 
-public class RecentsMenu extends JMenu {
+public class RecentsMenu extends JMenu implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private MainGUI mainGUI;
+
+	private JMenuItem cleanRecentsMenuItem;
 
 	public RecentsMenu(MainGUI mainGUI) {
 		super(_("Open recents"));
-		
+
 		this.mainGUI = mainGUI;
 
 		setIcon(EmptyIcon.SIZE_16);
 
-		JMenuItem cleanRecents = new JMenuItem(_("Clean recents"));
-		cleanRecents.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ev) {
-				RecentFiles arraysUtil = RecentFiles.getInstance();
-				arraysUtil.list.clear();
-				int count = getMenuComponentCount();
-				for (int i = count - 1; i > 1; i--) {
-					remove(i);
-				}
-			}
-		});
+		cleanRecentsMenuItem = new JMenuItem(_("Clean recents"));
+		cleanRecentsMenuItem.addActionListener(this);
 
-		add(cleanRecents);
+		add(cleanRecentsMenuItem);
 		addSeparator();
 
-		ConfigData configData = mainGUI.configData;
-		
+		ConfigData configData = mainGUI.getConfigData();
+
 		for (String fileName : configData.getRecentFiles()) {
 			addRecent(fileName);
 		}
 	}
 
 	public void addRecent(String fileName) {
-		RecentFiles recentFiles = RecentFiles.getInstance();
-		if (!recentFiles.list.contains(fileName)) {
+		Vector<String> recentFiles = mainGUI.getRecentFiles();
+		if (!recentFiles.contains(fileName)) {
 			JMenuItem item = new JMenuItem(fileName);
 			item.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
@@ -66,16 +59,29 @@ public class RecentsMenu extends JMenu {
 					try {
 						FileUtil.tryReading(file);
 					} catch (Exception e) {
-						DialogFactory.showErrorMessage(mainGUI,
-								e.getMessage());
+						DialogFactory.showErrorMessage(mainGUI, e.getMessage());
 						return;
 					}
 
-					Controller.openFile(mainGUI, filePath, new LogType("Default"));
+					Controller.openFile(mainGUI, filePath, new LogType(
+							"Default"));
 				}
 			});
-			recentFiles.list.add(fileName);
+			recentFiles.add(fileName);
 			add(item);
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent ev) {
+		if (cleanRecentsMenuItem == ev.getSource()) {
+			mainGUI.getRecentFiles().clear();
+			int count = getMenuComponentCount();
+			for (int i = count - 1; i > 1; i--) {
+				remove(i);
+			}
+			
+			setEnabled(false);
 		}
 	}
 }

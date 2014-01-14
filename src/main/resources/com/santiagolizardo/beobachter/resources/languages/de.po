@@ -1,7 +1,8 @@
 msgid ""
-msgstr "Project-Id-Version: beobachter\n"
+msgstr ""
+"Project-Id-Version: beobachter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-12 20:11+0000\n"
+"POT-Creation-Date: 2014-01-14 22:39+0000\n"
 "PO-Revision-Date: 2013-12-17 17:13-0500\n"
 "Last-Translator: santiagolizardo <santiago.lizardo@gmail.com>\n"
 "Language-Team: German\n"
@@ -16,11 +17,11 @@ msgstr "Project-Id-Version: beobachter\n"
 "X-Poedit-SearchPath-0: ../../../../../../java\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:26
+#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:30
 msgid "Open recents"
 msgstr "zuletzt geöffnet"
 
-#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:30
+#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:36
 msgid "Clean recents"
 msgstr "Verlauf löschen"
 
@@ -44,7 +45,7 @@ msgstr "Fenster waagerecht anordnen"
 msgid "Close all windows"
 msgstr "Alle Fenster schliessen"
 
-#: com/santiagolizardo/beobachter/gui/menu/EditMenu.java:37
+#: com/santiagolizardo/beobachter/gui/menu/EditMenu.java:40
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -60,39 +61,39 @@ msgstr "Nach Updates suchen"
 msgid "About this application..."
 msgstr "Über..."
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:55
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:56
 msgid "File"
 msgstr "Datei"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:58
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:59
 msgid "Open..."
 msgstr "Öffnen..."
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:93
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:96
 msgid "These files could not be opened for reading:"
 msgstr "Diese Dateien konnten nicht geöffnet werden:"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:111
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:115
 msgid "Manage sessions..."
 msgstr "Sitzungen verwalten..."
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:121
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:124
 msgid "Save current session"
 msgstr "Aktuelle Sitzung speichern"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:133
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:136
 msgid "You can not save a session with no opened files"
 msgstr "Sitzung kann nur gespeichert werden, wenn Dateien geöffnet sind"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:137
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:140
 msgid "Please enter the session name:"
 msgstr "Name der Sitzung:"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:138
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:141
 msgid "Session name"
 msgstr "Sitzungsname"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:146
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:149
 msgid "Invalid session name"
 msgstr "Sitzungsname ungültig"
 
@@ -149,7 +150,7 @@ msgid "Save"
 msgstr "Speichern"
 
 #: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:141
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:135
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:137
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -169,66 +170,66 @@ msgstr "Zeichensatz Familie"
 msgid "Font size"
 msgstr "Zeichensatz Größe"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:74
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:76
 msgid "Regular expression"
 msgstr "Regular expression"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:76
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:93
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:78
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:95
 msgid "Pick"
 msgstr "Auswählen"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:97
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:99
 msgid "Pick the foreground color"
 msgstr "Vordergrund Farbe auswählen"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:110
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:112
 #: com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:34
 msgid "Ignore case"
 msgstr "Groß/Kleinschreibung ignorieren"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:112
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:114
 msgid "Ok"
 msgstr "OK"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:118
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:120
 msgid "Please complete the field pattern"
 msgstr "Bitte das Muster-Feld vervollständigen"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:152
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:154
 #: com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:33
 msgid "Pattern"
 msgstr "Muster"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:153
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:155
 msgid "Background color"
 msgstr "Hintergrund Farbe"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:154
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:156
 msgid "Foreground color"
 msgstr "Vordergrund Farbe"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:154
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:155
 msgid "Check for changes"
 msgstr "Auf Änderungen überprüfen"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:168
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:169
 msgid "Scroll to new lines"
 msgstr "Zu neuen Zeilen blättern"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:184
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:186
 msgid "Clear buffer"
 msgstr "Puffer löschen"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:224
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:250
 msgid "Print this file"
 msgstr "Datei drucken"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:282
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:308
 msgid "Do you want to search again?"
 msgstr "Willst du nochmal suchen?"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/FindPanel.java:80
+#: com/santiagolizardo/beobachter/gui/dialogs/components/FindPanel.java:78
 msgid "Search"
 msgstr "Suchen"
 
@@ -253,13 +254,14 @@ msgid "Enter the new name of the log type:"
 msgstr "Big den neuen Namen für den Protokolltyp ein:"
 
 #: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:153
-#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:98
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:155
 msgid "Remove"
 msgstr "Entfernen"
 
 #: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:159
 msgid "Are you sure you want to delete the selected log type?"
-msgstr "Bist du sicher, dass du den Typ des ausgewählten Protokolls löschen möchtest?"
+msgstr ""
+"Bist du sicher, dass du den Typ des ausgewählten Protokolls löschen möchtest?"
 
 #: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:164
 msgid "Unable to delete the log type"
@@ -273,83 +275,80 @@ msgstr "Protokoll-Typen"
 msgid "Colors"
 msgstr "Farben"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:103
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:102
 msgid "Example"
 msgstr "Beispiel"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:114
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:122
 msgid "Add rule"
 msgstr "Regel hinzufügen"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:123
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:131
 msgid "Remove rule"
 msgstr "Regel entfernen"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:132
-msgid "Please select a rule first"
-msgstr "Bitte wähle zuerst eine Regel aus"
-
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:137
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:141
 msgid "Apply changes"
 msgstr "Änderungen übernehmen"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:180
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:184
 msgid "seconds"
 msgstr "Sekunden"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:201
-msgid "Name"
-msgstr "Name"
-
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:203
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:205
 msgid "Refresh interval in milliseconds"
 msgstr "Aktualisierungsintervall in Millisekunden"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:204
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:206
 msgid "Formatting rules"
 msgstr "Formatierungsregeln"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:212
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:214
 msgid "Select a log type on the left to edit it"
-msgstr "Wähle auf der linken Seite einen Protokolltyp aus, den du bearbeiten möchtest"
+msgstr ""
+"Wähle auf der linken Seite einen Protokolltyp aus, den du bearbeiten möchtest"
 
 #: com/santiagolizardo/beobachter/gui/dialogs/LogTypesDialog.java:41
 msgid "Log types management"
 msgstr "Verwalten von Protokolltypen"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:47
+#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:51
 msgid "About this application"
 msgstr "Über"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:64
+#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:71
 msgid "More info about the project at <a href=\"%s\">%s</a>."
 msgstr "Mehr Infos über das Projekt unter der <a href=\"%s\"> Adresse %s</a>."
 
-#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:69
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:121
 msgid "Session management"
 msgstr "Sitzungen verwalten"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:94
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:151
 msgid "Open"
 msgstr "Öffnen"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:128
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:177
 msgid "Please select the session you want to open or remove:"
 msgstr "Wähle die Sitzung aus, die du öffnen oder entfernen möchtest:"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:181
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:221
 msgid "Are you sure you want to delete this session?"
 msgstr "Bist du sicher, dass du diese Sitzung löschen möchtest?"
 
-#: com/santiagolizardo/beobachter/gui/actions/SelectAllAction.java:42
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:242
+msgid "%d file(s)"
+msgstr ""
+
+#: com/santiagolizardo/beobachter/gui/actions/SelectAllAction.java:44
 msgid "Select all"
 msgstr "Alle auswählen"
 
-#: com/santiagolizardo/beobachter/gui/actions/FindAction.java:41
+#: com/santiagolizardo/beobachter/gui/actions/FindAction.java:42
 msgid "Find..."
 msgstr "Suchen..."
 
-#: com/santiagolizardo/beobachter/gui/actions/CopyAction.java:46
+#: com/santiagolizardo/beobachter/gui/actions/CopyAction.java:50
 msgid "Copy"
 msgstr "Kopieren"
 
@@ -357,7 +356,7 @@ msgstr "Kopieren"
 msgid "Exit"
 msgstr "Beenden"
 
-#: com/santiagolizardo/beobachter/gui/actions/FindNextAction.java:42
+#: com/santiagolizardo/beobachter/gui/actions/FindNextAction.java:43
 msgid "Find next"
 msgstr "Weitersuchen"
 
@@ -365,7 +364,12 @@ msgstr "Weitersuchen"
 msgid "rule."
 msgstr "Regel."
 
-#: com/santiagolizardo/beobachter/config/ConfigData.java:62
+#: com/santiagolizardo/beobachter/config/ConfigData.java:58
 msgid "recent."
 msgstr "Zuletzt."
 
+#~ msgid "Please select a rule first"
+#~ msgstr "Bitte wähle zuerst eine Regel aus"
+
+#~ msgid "Name"
+#~ msgstr "Name"

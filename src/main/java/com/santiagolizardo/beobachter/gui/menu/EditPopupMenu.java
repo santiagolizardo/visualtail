@@ -21,6 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.actions.ActionFactory;
 
 public class EditPopupMenu extends JPopupMenu {
 
@@ -31,9 +32,11 @@ public class EditPopupMenu extends JPopupMenu {
 
 	public EditPopupMenu(MainGUI mainGUI) {
 
-		JMenuItem copy = new JMenuItem(mainGUI.actionFactory.createCopyAction());
+		ActionFactory actionFactory = mainGUI.getActionFactory();
+
+		JMenuItem copy = new JMenuItem(actionFactory.createCopyAction());
 		JMenuItem selectAll = new JMenuItem(
-				mainGUI.actionFactory.createSelectAllAction());
+				actionFactory.createSelectAllAction());
 
 		add(copy);
 		addSeparator();

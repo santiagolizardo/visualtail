@@ -61,7 +61,7 @@ public class FileMenu extends JMenu {
 				KeyEvent.CTRL_MASK));
 		open.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				File lastSelected = new File(mainGUI.configData.getLastPath());
+				File lastSelected = new File(mainGUI.getConfigData().getLastPath());
 
 				JFileChooser chooser = new JFileChooser();
 				chooser.setSelectedFile(lastSelected);
@@ -82,9 +82,11 @@ public class FileMenu extends JMenu {
 							continue;
 						}
 
-						recentsMenu.addRecent(file.getAbsolutePath());
 						Controller.openFile(mainGUI, file.getAbsolutePath(),
 								logType);
+						
+						recentsMenu.addRecent(file.getAbsolutePath());
+						recentsMenu.setEnabled(true);
 					}
 
 					mainGUI.desktop.setWindowsOnTileHorizontal();
@@ -105,6 +107,7 @@ public class FileMenu extends JMenu {
 		});
 
 		recentsMenu = new RecentsMenu(mainGUI);
+		recentsMenu.setEnabled(!mainGUI.getConfigData().getRecentFiles().isEmpty());
 
 		JMenuItem exit = new JMenuItem(new ExitAction(mainGUI));
 		exit.setIcon(IconFactory.getImage("exit.png"));

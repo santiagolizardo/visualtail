@@ -20,6 +20,7 @@ package com.santiagolizardo.beobachter.gui.dialogs;
 import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -30,7 +31,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -44,9 +48,53 @@ import javax.swing.event.ListSelectionListener;
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.beans.LogType;
+import com.santiagolizardo.beobachter.beans.Session;
 import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.menu.RecentsMenu;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
+
+class SessionManager {
+
+	public List<Session> getSessions() {
+		List<Session> sessions = new ArrayList<>();
+
+		File folder = new File(Constants.FOLDER_SESSIONS);
+		FileFilter filter = new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return (pathname.getName().endsWith(".txt"));
+			}
+		};
+		File[] files = folder.listFiles(filter);
+		for (File file : files) {
+			String name = file.getName().replaceAll("\\.txt", "");
+
+			Session session = new Session();
+			session.setName(name);
+
+			try {
+				BufferedReader reader = new BufferedReader(new FileReader(file));
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					session.getFileNames().add(line);
+				}
+				reader.close();
+			} catch (Exception ee) {
+				ee.printStackTrace();
+			}
+
+			sessions.add(session);
+		}
+
+		return sessions;
+	}
+
+	public boolean delete(String name) {
+		File file = new File(Constants.FOLDER_SESSIONS + File.separator + name
+				+ ".txt");
+		return file.delete();
+	}
+}
 
 /**
  * This class creates a window with the list of sessions available to open
@@ -55,25 +103,34 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 	private static final long serialVersionUID = -8601498821660138035L;
 
-	private DefaultListModel<String> listModel;
-	private JList<String> list;
+	private DefaultListModel<Session> listModel;
+	private JList<Session> list;
 
 	private JButton btnOpen;
 	private JButton btnRemove;
 
 	private RecentsMenu recentsMenu;
 
-	public SessionsDialog(MainGUI parentFrame, RecentsMenu recentsMenu) {
-		super(parentFrame);
+	private SessionManager sessionManager;
+
+	private MainGUI mainGUI;
+
+	public SessionsDialog(MainGUI mainGUI, RecentsMenu recentsMenu) {
+		super(mainGUI);
 
 		setTitle(Translator._("Session management"));
 		setModal(true);
-		setSize(320, 240);
+		setSize(520, 320);
+
+		this.mainGUI = mainGUI;
+
+		sessionManager = new SessionManager();
 
 		this.recentsMenu = recentsMenu;
 
-		listModel = new DefaultListModel<String>();
-		list = new JList<String>(listModel);
+		listModel = new DefaultListModel<Session>();
+		list = new JList<Session>(listModel);
+		list.setCellRenderer(new SessionListCellRenderer());
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -107,16 +164,8 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 	private void updateList() {
 		listModel.clear();
 
-		File folder = new File(Constants.FOLDER_SESSIONS);
-		FileFilter filter = new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				return (pathname.getName().endsWith(".txt"));
-			}
-		};
-		File[] files = folder.listFiles(filter);
-		for (File file : files) {
-			listModel.addElement(file.getName().replaceAll("\\.txt", ""));
+		for (Session session : sessionManager.getSessions()) {
+			listModel.addElement(session);
 		}
 	}
 
@@ -155,20 +204,10 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 	private void openSession() {
 		setVisible(false);
 
-		MainGUI mainGUI = (MainGUI) getOwner();
-
-		String path = list.getSelectedValue().toString().concat(".txt");
-		File file = new File(Constants.FOLDER_SESSIONS + File.separator + path);
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				recentsMenu.addRecent(line);
-				Controller.openFile(mainGUI, line, new LogType("Default"));
-			}
-			reader.close();
-		} catch (Exception ee) {
-			ee.printStackTrace();
+		Session session = list.getSelectedValue();
+		for (String fileName : session.getFileNames()) {
+			recentsMenu.addRecent(fileName);
+			Controller.openFile(mainGUI, fileName, new LogType("Default"));
 		}
 
 		mainGUI.desktop.setWindowsOnCascade();
@@ -177,14 +216,39 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 	}
 
 	private void removeSession() {
-		String sessionName = list.getSelectedValue();
+		String sessionName = list.getSelectedValue().getName();
 		int resp = JOptionPane.showConfirmDialog(getParent(),
 				Translator._("Are you sure you want to delete this session?"));
 		if (resp == JOptionPane.YES_OPTION) {
-			File file = new File(Constants.FOLDER_SESSIONS + "/" + sessionName
-					+ ".txt");
-			file.delete();
+			sessionManager.delete(sessionName);
 			updateList();
 		}
+	}
+}
+
+class SessionListCellRenderer extends DefaultListCellRenderer {
+
+	@Override
+	public Component getListCellRendererComponent(JList list, Object value,
+			int index, boolean isSelected, boolean cellHasFocus) {
+
+		JLabel label = (JLabel) super.getListCellRendererComponent(list, value,
+				index, isSelected, cellHasFocus);
+		Session session = (Session) value;
+
+		StringBuffer text = new StringBuffer();
+		text.append("<html>");
+		text.append(String.format("<strong>%s</strong> ", session.getName()));
+		text.append(String.format(_("%d file(s)"), session.getFileNames()
+				.size()));
+		text.append("<br />");
+		for (String fileName : session.getFileNames()) {
+			text.append(String.format("- %s<br />", fileName));
+		}
+		text.append("</html>");
+
+		label.setText(text.toString());
+
+		return label;
 	}
 }

@@ -20,6 +20,7 @@ package com.santiagolizardo.beobachter;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Vector;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
@@ -45,26 +46,37 @@ public class MainGUI extends JFrame {
 
 	private static final long serialVersionUID = -349295815866572937L;
 
-	public ConfigData configData;
+	private ConfigData configData;
 	public DesktopPanel desktop;
 	private FindPanel findPanel;
 
-	public ActionFactory actionFactory;
+	private ActionFactory actionFactory;
 
 	private Logger logger;
+
+	private Menu menu;
+
+	/**
+	 * @todo Move this to a better place.
+	 */
+	private Vector<String> recentFiles;
 
 	public MainGUI(ConfigData configData) {
 		this.configData = configData;
 
 		logger = Logger.getLogger(MainGUI.class.getName());
 
+		recentFiles = new Vector<String>();
+
 		actionFactory = new ActionFactory(this);
 
 		desktop = new DesktopPanel();
 
-		Menu menu = new Menu(desktop, this);
+		menu = new Menu(desktop, this);
 		setJMenuBar(menu);
+
 		setTitle(Constants.APP_NAME);
+
 		setSize(configData.getWindowWidth(), configData.getWindowHeight());
 		setLocation(configData.getWindowX(), configData.getWindowY());
 		setIconImage(IconFactory.getImage("icon.png").getImage());
@@ -77,6 +89,10 @@ public class MainGUI extends JFrame {
 
 		JScrollPane scroll = new JScrollPane(desktop);
 		getContentPane().add(scroll);
+	}
+
+	public void setTitle(String title, String fileName) {
+		setTitle(title + " - " + fileName);
 	}
 
 	public void addFindPanel() {
@@ -114,7 +130,8 @@ public class MainGUI extends JFrame {
 			configData.setWindowY(getY());
 
 			ConfigPersistence configPersistence = new ConfigPersistence();
-			configPersistence.saveProperties(configData.getConfiguration());
+			configPersistence.saveProperties(this,
+					configData.getConfiguration());
 
 			dispose();
 			exitCode = 0;
@@ -134,5 +151,21 @@ public class MainGUI extends JFrame {
 		mainMenu.getWindowMenu().setEnabled(areWindowsOpen);
 		mainMenu.getFileMenu().getSaveSessionMenuItem()
 				.setEnabled(areWindowsOpen);
+	}
+
+	public Vector<String> getRecentFiles() {
+		return recentFiles;
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public ConfigData getConfigData() {
+		return configData;
+	}
+
+	public ActionFactory getActionFactory() {
+		return actionFactory;
 	}
 }

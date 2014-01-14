@@ -1,5 +1,15 @@
 CHANGES
 
+Version 1.7.8 (2014/01/14)
+
+	- Disable open recents on empty list
+	- Window title shows the current file
+	- Increase default lines from 64 to 256
+	- White about window
+	- Disable copy menu item on empty selections
+	- Manage sessions dialog shows how many files a session has
+	- More unit tests
+
 Version 1.7.7 (2013/12/18)
 
 	- Fix on find panel not returning results.

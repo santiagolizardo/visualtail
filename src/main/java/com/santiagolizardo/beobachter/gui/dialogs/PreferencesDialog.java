@@ -70,7 +70,7 @@ public class PreferencesDialog extends AbstractDialog {
 	public PreferencesDialog(final MainGUI mainGUI) {
 		super(mainGUI);
 
-		final ConfigData configManager = mainGUI.configData;
+		final ConfigData configManager = mainGUI.getConfigData();
 
 		setTitle(Translator._("Preferences"));
 		setResizable(false);
@@ -128,8 +128,8 @@ public class PreferencesDialog extends AbstractDialog {
 
 				ConfigPersistence configPersistence = new ConfigPersistence();
 				try {
-					configPersistence.saveProperties(configManager
-							.getConfiguration());
+					configPersistence.saveProperties(mainGUI,
+							configManager.getConfiguration());
 				} catch (ConfigurationException ex) {
 					logger.warning(ex.getMessage());
 				}

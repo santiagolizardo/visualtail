@@ -5,12 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Vector;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.IOUtils;
 
-import com.santiagolizardo.beobachter.util.RecentFiles;
+import com.santiagolizardo.beobachter.MainGUI;
 
 public class ConfigPersistence {
 
@@ -30,13 +31,15 @@ public class ConfigPersistence {
 		return new PropertiesConfiguration(fileName);
 	}
 
-	public void saveProperties(PropertiesConfiguration configuration)
+	public void saveProperties(MainGUI mainGUI,
+			PropertiesConfiguration configuration)
 			throws ConfigurationException {
 		byte i = 0;
-		RecentFiles arraysUtil = RecentFiles.getInstance();
-		for (; i < arraysUtil.list.size(); i++) {
+
+		Vector<String> recentFiles = mainGUI.getRecentFiles();
+		for (; i < recentFiles.size(); i++) {
 			String propertyName = "recent." + i + ".file_name";
-			configuration.setProperty(propertyName, arraysUtil.list.get(i)
+			configuration.setProperty(propertyName, recentFiles.get(i)
 					.toString());
 		}
 		for (; i < 10; i++) {

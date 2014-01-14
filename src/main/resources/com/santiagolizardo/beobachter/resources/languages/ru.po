@@ -1,7 +1,8 @@
 msgid ""
-msgstr "Project-Id-Version: beobachter\n"
+msgstr ""
+"Project-Id-Version: beobachter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-12 20:11+0000\n"
+"POT-Creation-Date: 2014-01-14 22:39+0000\n"
 "PO-Revision-Date: 2013-12-17 17:13-0500\n"
 "Last-Translator: santiagolizardo <santiago.lizardo@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -14,13 +15,14 @@ msgstr "Project-Id-Version: beobachter\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../../../../../../java\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:26
+#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:30
 msgid "Open recents"
 msgstr "Открыть последние"
 
-#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:30
+#: com/santiagolizardo/beobachter/gui/menu/RecentsMenu.java:36
 msgid "Clean recents"
 msgstr "Очистить последние"
 
@@ -44,7 +46,7 @@ msgstr "Расположить окна горизонтально"
 msgid "Close all windows"
 msgstr "Закрыть все окна"
 
-#: com/santiagolizardo/beobachter/gui/menu/EditMenu.java:37
+#: com/santiagolizardo/beobachter/gui/menu/EditMenu.java:40
 msgid "Edit"
 msgstr "Правка"
 
@@ -60,39 +62,39 @@ msgstr "Проверить обновления"
 msgid "About this application..."
 msgstr "О программе..."
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:55
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:56
 msgid "File"
 msgstr "Файл"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:58
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:59
 msgid "Open..."
 msgstr "Открыть..."
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:93
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:96
 msgid "These files could not be opened for reading:"
 msgstr "Эти файлы не могут быть открыты для чтения:"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:111
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:115
 msgid "Manage sessions..."
 msgstr "Управление сессиями..."
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:121
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:124
 msgid "Save current session"
 msgstr "Сохранить текущую сессию"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:133
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:136
 msgid "You can not save a session with no opened files"
 msgstr "Вы не можете сохранить сессию без открытых файлов"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:137
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:140
 msgid "Please enter the session name:"
 msgstr "Пожалуйста, введите имя сессии:"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:138
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:141
 msgid "Session name"
 msgstr "Имя сессии"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:146
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:149
 msgid "Invalid session name"
 msgstr "Недопустимое имя сессии"
 
@@ -149,7 +151,7 @@ msgid "Save"
 msgstr "Сохранить"
 
 #: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:141
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:135
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:137
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -169,66 +171,66 @@ msgstr "Шрифт"
 msgid "Font size"
 msgstr "Размер шрифта"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:74
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:76
 msgid "Regular expression"
 msgstr "Регулярное выражение"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:76
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:93
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:78
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:95
 msgid "Pick"
 msgstr "Выбрать"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:97
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:99
 msgid "Pick the foreground color"
 msgstr "Выбрать цвет переднего плана"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:110
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:112
 #: com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:34
 msgid "Ignore case"
 msgstr "Игнорировать регистр"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:112
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:114
 msgid "Ok"
 msgstr "Принять"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:118
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:120
 msgid "Please complete the field pattern"
 msgstr "Пожалуйста, заполните поле шаблона"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:152
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:154
 #: com/santiagolizardo/beobachter/gui/dialogs/components/RulesTableModel.java:33
 msgid "Pattern"
 msgstr "Шаблон"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:153
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:155
 msgid "Background color"
 msgstr "Цвет фона"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:154
+#: com/santiagolizardo/beobachter/gui/dialogs/RuleDialog.java:156
 msgid "Foreground color"
 msgstr "Цвет переднего плана"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:154
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:155
 msgid "Check for changes"
 msgstr "Проверить на изменения"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:168
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:169
 msgid "Scroll to new lines"
 msgstr "Пролистать"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:184
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:186
 msgid "Clear buffer"
 msgstr "Очистить буфер"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:224
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:250
 msgid "Print this file"
 msgstr "Распечатать этот файл"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:282
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:308
 msgid "Do you want to search again?"
 msgstr "Начать поиск сначала?"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/FindPanel.java:80
+#: com/santiagolizardo/beobachter/gui/dialogs/components/FindPanel.java:78
 msgid "Search"
 msgstr "Поиск"
 
@@ -253,7 +255,7 @@ msgid "Enter the new name of the log type:"
 msgstr "Введите новое имя типа журнала:"
 
 #: com/santiagolizardo/beobachter/gui/dialogs/components/ListingPanel.java:153
-#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:98
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:155
 msgid "Remove"
 msgstr "Удалить"
 
@@ -273,43 +275,35 @@ msgstr "Типы журналов"
 msgid "Colors"
 msgstr "Цвета"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:103
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:102
 msgid "Example"
 msgstr "Пример"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:114
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:122
 msgid "Add rule"
 msgstr "Добавить правило"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:123
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:131
 msgid "Remove rule"
 msgstr "Удалить правило"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:132
-msgid "Please select a rule first"
-msgstr "Пожалуйста, выберите сначала правило"
-
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:137
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:141
 msgid "Apply changes"
 msgstr "Применить изменения"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:180
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:184
 msgid "seconds"
 msgstr "секунды"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:201
-msgid "Name"
-msgstr "Имя"
-
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:203
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:205
 msgid "Refresh interval in milliseconds"
 msgstr "Интервал обновления в миллисекундах"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:204
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:206
 msgid "Formatting rules"
 msgstr "Правила форматирования"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:212
+#: com/santiagolizardo/beobachter/gui/dialogs/components/EditionPanel.java:214
 msgid "Select a log type on the left to edit it"
 msgstr "Выберите тип журнала слева для его редактирования"
 
@@ -317,39 +311,43 @@ msgstr "Выберите тип журнала слева для его реда
 msgid "Log types management"
 msgstr "Управление типами журналов"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:47
+#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:51
 msgid "About this application"
 msgstr "О программе"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:64
+#: com/santiagolizardo/beobachter/gui/dialogs/AboutDialog.java:71
 msgid "More info about the project at <a href=\"%s\">%s</a>."
 msgstr "Более подробная информация о проекте на <a href=\"%s\"> %s</a>."
 
-#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:69
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:121
 msgid "Session management"
 msgstr "Управление сессиями"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:94
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:151
 msgid "Open"
 msgstr "Открыть"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:128
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:177
 msgid "Please select the session you want to open or remove:"
 msgstr "Пожалуйста, выберите сессию, которую вы хотите открыть или удалить:"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:181
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:221
 msgid "Are you sure you want to delete this session?"
 msgstr "Вы уверены, что хотите удалить эту сессию?"
 
-#: com/santiagolizardo/beobachter/gui/actions/SelectAllAction.java:42
+#: com/santiagolizardo/beobachter/gui/dialogs/SessionsDialog.java:242
+msgid "%d file(s)"
+msgstr ""
+
+#: com/santiagolizardo/beobachter/gui/actions/SelectAllAction.java:44
 msgid "Select all"
 msgstr "Выбрать все"
 
-#: com/santiagolizardo/beobachter/gui/actions/FindAction.java:41
+#: com/santiagolizardo/beobachter/gui/actions/FindAction.java:42
 msgid "Find..."
 msgstr "Найти..."
 
-#: com/santiagolizardo/beobachter/gui/actions/CopyAction.java:46
+#: com/santiagolizardo/beobachter/gui/actions/CopyAction.java:50
 msgid "Copy"
 msgstr "Копировать"
 
@@ -357,7 +355,7 @@ msgstr "Копировать"
 msgid "Exit"
 msgstr "Выход"
 
-#: com/santiagolizardo/beobachter/gui/actions/FindNextAction.java:42
+#: com/santiagolizardo/beobachter/gui/actions/FindNextAction.java:43
 msgid "Find next"
 msgstr "Найти далее"
 
@@ -365,7 +363,12 @@ msgstr "Найти далее"
 msgid "rule."
 msgstr "правило."
 
-#: com/santiagolizardo/beobachter/config/ConfigData.java:62
+#: com/santiagolizardo/beobachter/config/ConfigData.java:58
 msgid "recent."
 msgstr "последние."
 
+#~ msgid "Please select a rule first"
+#~ msgstr "Пожалуйста, выберите сначала правило"
+
+#~ msgid "Name"
+#~ msgstr "Имя"

@@ -25,6 +25,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.actions.ActionFactory;
 import com.santiagolizardo.beobachter.gui.actions.FindAction;
 import com.santiagolizardo.beobachter.gui.actions.FindNextAction;
 
@@ -32,23 +33,27 @@ public class EditMenu extends JMenu {
 
 	private static final long serialVersionUID = -8897022931984447153L;
 
+	private JMenuItem copyMenuItem;
+
 	public EditMenu(MainGUI mainGUI) {
 
 		setText(_("Edit"));
 		setMnemonic(KeyEvent.VK_E);
 
-		JMenuItem copy = new JMenuItem(mainGUI.actionFactory.createCopyAction());
-		JMenuItem selectAll = new JMenuItem(
-				mainGUI.actionFactory.createSelectAllAction());
+		ActionFactory actionFactory = mainGUI.getActionFactory();
 
-		JMenuItem find = new JMenuItem(new FindAction(mainGUI));
-		JMenuItem findNext = new JMenuItem(new FindNextAction(mainGUI));
+		copyMenuItem = new JMenuItem(actionFactory.createCopyAction());
+		JMenuItem selectAllMenuItem = new JMenuItem(
+				actionFactory.createSelectAllAction());
 
-		add(copy);
+		JMenuItem findMenuItem = new JMenuItem(new FindAction(mainGUI));
+		JMenuItem findNextMenuItem = new JMenuItem(new FindNextAction(mainGUI));
+
+		add(copyMenuItem);
 		addSeparator();
-		add(selectAll);
+		add(selectAllMenuItem);
 		addSeparator();
-		add(find);
-		add(findNext);
+		add(findMenuItem);
+		add(findNextMenuItem);
 	}
 }

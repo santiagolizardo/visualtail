@@ -51,13 +51,15 @@ public class CopyAction extends AbstractAction {
 		putValue(AbstractAction.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
 
+		setEnabled(false);
+		
 		clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 	}
 
 	public void actionPerformed(ActionEvent event) {
 		LogWindow log = (LogWindow) mainGUI.desktop.getSelectedFrame();
 		if (log != null) {
-			List<String> selectedLines = log.lines.getSelectedValuesList();
+			List<String> selectedLines = log.linesList.getSelectedValuesList();
 			StringBuilder sb = new StringBuilder();
 			for (String selectedLine : selectedLines) {
 				sb.append(selectedLine);

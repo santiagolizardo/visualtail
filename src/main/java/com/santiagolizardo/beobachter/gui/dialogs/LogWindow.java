@@ -46,9 +46,12 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.commons.io.FileUtils;
 
+import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.MainGUI;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.engine.Tail;
@@ -76,7 +79,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private DefaultListModel<String> linesModel;
 
-	public JList<String> lines;
+	public JList<String> linesList;
 
 	private JCheckBox cbCheckChanges;
 	private JCheckBox cbScrollNewLines;
@@ -90,14 +93,18 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	private int searchIndex = 0;
 	private String searchText = null;
 
+	private MainGUI mainGUI;
+
 	public LogWindow(final MainGUI mainGUI, String fileName, LogType logType) {
 
 		setResizable(true);
 		setFrameIcon(IconFactory.getImage("log_window.png"));
 
-		mainGUI.configData.setLastPath(fileName);
+		this.mainGUI = mainGUI;
 
-		numberDisplayedLines = 64;
+		mainGUI.getConfigData().setLastPath(fileName);
+
+		numberDisplayedLines = 256;
 
 		spNumberDisplayerLines = new JSpinner(new SpinnerNumberModel(
 				numberDisplayedLines, 1, 999, 1));
@@ -113,19 +120,23 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		mainGUI.updateActions(+1);
 
 		linesModel = new DefaultListModel<String>();
-		lines = new JList<String>(linesModel);
-		lines.setCellRenderer(new LineRenderer(logType.getRules(),
-				mainGUI.configData));
-		lines.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		lines.addMouseListener(new LinesMouseAdapter(mainGUI));
-		addInternalFrameListener(new InternalFrameAdapter() {
-			public void internalFrameClosing(InternalFrameEvent ev) {
-				tail.setEnabled(false);
-				mainGUI.updateActions(-1);
-			}
-		});
+		linesList = new JList<String>(linesModel);
+		linesList.setCellRenderer(new LineRenderer(logType.getRules(), mainGUI
+				.getConfigData()));
+		linesList
+				.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		linesList.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
 
-		scrollableList = new JScrollPane(lines);
+					@Override
+					public void valueChanged(ListSelectionEvent ev) {
+						if (ev.getValueIsAdjusting() == false)
+							updateSelections();
+					}
+				});
+		linesList.addMouseListener(new LinesMouseAdapter(mainGUI));
+
+		scrollableList = new JScrollPane(linesList);
 		Dimension dim = new Dimension(320, 200);
 		scrollableList.setSize(dim);
 		scrollableList.setPreferredSize(dim);
@@ -164,10 +175,10 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		logTypes = new JComboBox<LogType>(logTypesModel);
 		logTypes.setRenderer(new LogTypeListRenderer());
 		logTypes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
+			public void actionPerformed(ActionEvent ev) {
 				LogType logType = (LogType) logTypes.getSelectedItem();
-				lines.setCellRenderer(new LineRenderer(logType.getRules(),
-						mainGUI.configData));
+				linesList.setCellRenderer(new LineRenderer(logType.getRules(),
+						mainGUI.getConfigData()));
 			}
 		});
 		logTypes.setSelectedItem(logType);
@@ -175,7 +186,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		JButton btnClear = new JButton(Translator._("Clear buffer"));
 		btnClear.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent ev) {
 				linesModel.clear();
 			}
 		});
@@ -202,6 +213,30 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		defineLayout();
 
 		setVisible(true);
+
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameActivated(InternalFrameEvent e) {
+				super.internalFrameActivated(e);
+
+				mainGUI.setTitle(Constants.APP_NAME, file.getName());
+				
+				updateSelections();
+			}
+
+			@Override
+			public void internalFrameDeactivated(InternalFrameEvent e) {
+				super.internalFrameDeactivated(e);
+
+				mainGUI.setTitle(Constants.APP_NAME);
+			}
+
+			@Override
+			public void internalFrameClosing(InternalFrameEvent ev) {
+				tail.setEnabled(false);
+				mainGUI.updateActions(-1);
+			}
+		});
 	}
 
 	/**
@@ -239,7 +274,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 				if (cbScrollNewLines.isSelected()) {
 					int lastIndex = linesModel.size() - 1;
 					if (lastIndex >= 0) {
-						lines.ensureIndexIsVisible(lastIndex);
+						linesList.ensureIndexIsVisible(lastIndex);
 					}
 				}
 				updateTitle();
@@ -262,8 +297,8 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		for (; searchIndex < linesSize; searchIndex++) {
 			String line = linesModel.get(searchIndex).toString();
 			if (line.indexOf(searchText) != -1) {
-				lines.ensureIndexIsVisible(searchIndex);
-				lines.setSelectedIndex(searchIndex);
+				linesList.ensureIndexIsVisible(searchIndex);
+				linesList.setSelectedIndex(searchIndex);
 				searchIndex++;
 				break;
 			}
@@ -300,5 +335,10 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		if (numLines > numberDisplayedLines) {
 			linesModel.removeRange(0, numLines - numberDisplayedLines - 1);
 		}
+	}
+
+	private void updateSelections() {
+		mainGUI.getActionFactory().createCopyAction()
+				.setEnabled(linesList.getSelectedValuesList().size() > 0);
 	}
 }

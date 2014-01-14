@@ -76,7 +76,6 @@ public class AboutDialog extends AbstractDialog {
 		String content = headlineText.concat(infoText).concat(creditsText);
 		JEditorPane lblCredits = new HtmlLabel(content);
 		lblCredits.setCaretPosition(0);
-		lblCredits.setOpaque(false);
 
 		JScrollPane scrollPane = new JScrollPane(lblCredits);
 		scrollPane.setPreferredSize(new Dimension(380, 240));

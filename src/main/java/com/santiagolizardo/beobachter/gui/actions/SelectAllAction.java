@@ -49,9 +49,9 @@ public class SelectAllAction extends AbstractAction {
 	public void actionPerformed(ActionEvent event) {
 		LogWindow log = (LogWindow) mainGUI.desktop.getSelectedFrame();
 		if (log != null) {
-			int numLines = log.lines.getModel().getSize();
+			int numLines = log.linesList.getModel().getSize();
 			if (numLines > 0)
-				log.lines.setSelectionInterval(0, numLines - 1);
+				log.linesList.setSelectionInterval(0, numLines - 1);
 		}
 	}
 }
