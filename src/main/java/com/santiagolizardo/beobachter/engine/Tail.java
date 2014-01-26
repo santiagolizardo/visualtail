@@ -1,18 +1,17 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.engine;
 
@@ -28,63 +27,46 @@ public class Tail implements Runnable {
 
 	private static final Logger logger = Logger.getLogger(Tail.class.getName());
 
-	private boolean enabled;
-
 	private List<TailListener> listeners;
 
 	private String fileName;
 
-	private int refreshInterval;
-
 	private File file;
-	private long currentSize;
+	private long savedSize;
 
-	public Tail(String fileName, int refreshInterval) {
-
+	public Tail(String fileName) {
 		listeners = new LinkedList<>();
-		enabled = true;
 
 		file = new File(fileName);
-		currentSize = file.length();
+		savedSize = file.length();
 
 		this.fileName = fileName;
-		this.refreshInterval = refreshInterval;
 	}
 
+	@Override
 	public void run() {
-		while (enabled) {
-			if (file.length() > currentSize) {
-
-				try {
-					RandomAccessFile accessFile = new RandomAccessFile(
-							fileName, "r");
-					accessFile.seek(currentSize);
-
-					String line = accessFile.readLine();
-					do {
-						if (!line.isEmpty()) {
-							notifyListeners(line);
-						}
-					} while ((line = accessFile.readLine()) != null);
-
-					currentSize = file.length();
-
-					accessFile.close();
-				} catch (IOException e) {
-					logger.severe(e.getMessage());
-				}
-			}
+		long currentSize = file.length();
+		if (currentSize > savedSize) {
 
 			try {
-				Thread.sleep(refreshInterval);
-			} catch (InterruptedException e) {
-				logger.warning(e.getMessage());
+				RandomAccessFile accessFile = new RandomAccessFile(
+						fileName, "r");
+				accessFile.seek(savedSize);
+
+				String line = accessFile.readLine();
+				do {
+					if (!line.isEmpty()) {
+						notifyListeners(line);
+					}
+				} while ((line = accessFile.readLine()) != null);
+
+				savedSize = currentSize;
+
+				accessFile.close();
+			} catch (IOException e) {
+				logger.severe(e.getMessage());
 			}
 		}
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	public void addListener(TailListener listener) {

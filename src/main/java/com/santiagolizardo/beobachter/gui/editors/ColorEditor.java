@@ -17,6 +17,7 @@
 package com.santiagolizardo.beobachter.gui.editors;
 
 import com.santiagolizardo.beobachter.gui.dialogs.components.ColorChooser;
+import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -46,7 +47,7 @@ public class ColorEditor extends AbstractCellEditor
 		
 		currentColor = Color.WHITE;
 
-		chooser = new ColorChooser(parent, "saasf", currentColor, this);
+		chooser = new ColorChooser(parent, _("Pick a color"), currentColor, this);
 	}
 
 	@Override
