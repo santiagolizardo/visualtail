@@ -21,7 +21,6 @@ import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Vector;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -33,6 +32,7 @@ import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
 import com.santiagolizardo.beobachter.gui.util.FileUtil;
+import java.util.List;
 
 public class RecentsMenu extends JMenu implements ActionListener {
 
@@ -63,10 +63,11 @@ public class RecentsMenu extends JMenu implements ActionListener {
 	}
 
 	public void addRecent(String fileName) {
-		Vector<String> recentFiles = mainGUI.getRecentFiles();
+		List<String> recentFiles = mainGUI.getRecentFiles();
 		if (!recentFiles.contains(fileName)) {
 			JMenuItem item = new JMenuItem(fileName);
 			item.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent event) {
 					JMenuItem item = (JMenuItem) event.getSource();
 					String filePath = item.getText();

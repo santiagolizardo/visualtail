@@ -21,12 +21,16 @@ import java.beans.PropertyVetoException;
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
+import java.util.logging.Logger;
 
 public class Controller {
+	
+	private static final Logger logger = Logger.getLogger(Controller.class.getName());
 
 	/**
 	 * Invoked from the "Open" dialog.
 	 * 
+	 * @param mainGUI
 	 * @param fileName
 	 * @param logType
 	 */
@@ -36,7 +40,7 @@ public class Controller {
 		try {
 			logWindow.setSelected(true);
 		} catch (PropertyVetoException pve) {
-			pve.printStackTrace();
+			logger.warning(pve.getMessage());
 		}
 	}
 }

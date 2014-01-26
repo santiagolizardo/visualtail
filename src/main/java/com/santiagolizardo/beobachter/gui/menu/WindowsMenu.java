@@ -16,6 +16,7 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
+import com.santiagolizardo.beobachter.Constants;
 import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
 import java.awt.event.ActionEvent;
@@ -43,6 +44,7 @@ public class WindowsMenu extends JMenu {
 		itemCascade.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
 				KeyEvent.CTRL_MASK));
 		itemCascade.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ev) {
 				parentFrame.desktop.setWindowsOnCascade();
 			}
@@ -66,6 +68,7 @@ public class WindowsMenu extends JMenu {
 		itemTileHor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
 				KeyEvent.CTRL_MASK));
 		itemTileHor.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ev) {
 				parentFrame.desktop.setWindowsOnTileHorizontal();
 			}
@@ -75,9 +78,13 @@ public class WindowsMenu extends JMenu {
 		miCloseAllWindows.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
 				KeyEvent.CTRL_MASK));
 		miCloseAllWindows.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ev) {
 				parentFrame.desktop.removeAll();
 				parentFrame.desktop.repaint();
+
+				parentFrame.setTitle(Constants.APP_NAME);
+				parentFrame.updateActions(0);
 			}
 		});
 

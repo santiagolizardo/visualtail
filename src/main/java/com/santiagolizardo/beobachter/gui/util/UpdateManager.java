@@ -24,6 +24,7 @@ import java.net.URL;
 
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.gui.MainWindow;
+import java.io.IOException;
 
 public class UpdateManager extends Thread {
 
@@ -37,6 +38,7 @@ public class UpdateManager extends Thread {
 		start();
 	}
 
+	@Override
 	public void run() {
 		try {
 			URL url = new URL(Constants.APP_UPDATE_URL);
@@ -62,7 +64,7 @@ public class UpdateManager extends Thread {
 						_("There are not updates available"));
 			}
 
-		} catch (Exception e) {
+		} catch (IOException | NumberFormatException e) {
 			DialogFactory.showErrorMessage(mainGUI,
 					_("Unable to fetch server information"));
 		}

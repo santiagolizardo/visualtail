@@ -61,7 +61,6 @@ import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 import org.apache.commons.configuration.ConfigurationException;
 
 public class EditionPanel extends JPanel {
@@ -288,8 +287,6 @@ public class EditionPanel extends JPanel {
 	public void setColumnWidths() {
 		(((DefaultTableCellRenderer) tblRules.getTableHeader().getDefaultRenderer())).setHorizontalAlignment(SwingConstants.CENTER);
 		
-
-		//tblRules.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		Dimension tableSize = tblRules.getSize();
 		double w = tableSize.getWidth();
 		for (int i = 0; i < tblRules.getColumnCount(); i++) {

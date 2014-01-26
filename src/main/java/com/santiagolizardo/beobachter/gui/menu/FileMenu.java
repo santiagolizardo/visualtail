@@ -1,18 +1,17 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
@@ -43,10 +42,14 @@ import com.santiagolizardo.beobachter.gui.dialogs.SessionsDialog;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.gui.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 public class FileMenu extends JMenu {
 
 	private static final long serialVersionUID = -9095266179967845006L;
+
+	private static final Logger logger = Logger.getLogger(FileMenu.class.getName());
 
 	private RecentsMenu recentsMenu;
 	private JMenuItem saveSessionMenuItem;
@@ -59,6 +62,7 @@ public class FileMenu extends JMenu {
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 				KeyEvent.CTRL_MASK));
 		open.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ev) {
 				File lastSelected = new File(mainGUI.getConfigData().getLastPath());
 
@@ -70,7 +74,7 @@ public class FileMenu extends JMenu {
 					File[] files = chooser.getSelectedFiles();
 					LogType logType = new LogType("Default");
 
-					List<File> unreadableFiles = new ArrayList<File>();
+					List<File> unreadableFiles = new ArrayList<>();
 
 					for (File file : files) {
 
@@ -83,7 +87,7 @@ public class FileMenu extends JMenu {
 
 						Controller.openFile(mainGUI, file.getAbsolutePath(),
 								logType);
-						
+
 						recentsMenu.addRecent(file.getAbsolutePath());
 						recentsMenu.setEnabled(true);
 					}
@@ -91,13 +95,14 @@ public class FileMenu extends JMenu {
 					mainGUI.desktop.setWindowsOnTileHorizontal();
 
 					if (unreadableFiles.size() > 0) {
-						StringBuffer message = new StringBuffer();
+						StringBuilder message = new StringBuilder();
 						message.append(_("These files could not be opened for reading:")
 								+ "\n");
-						for (File file : unreadableFiles)
+						for (File file : unreadableFiles) {
 							message.append("    - ")
 									.append(file.getAbsolutePath())
 									.append("\n");
+						}
 						DialogFactory.showErrorMessage(mainGUI,
 								message.toString());
 					}
@@ -127,19 +132,12 @@ public class FileMenu extends JMenu {
 		saveSessionMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				JInternalFrame[] frames = mainGUI.desktop.getAllFrames();
-				if (frames.length == 0) {
-					DialogFactory
-							.showErrorMessage(
-									getParent(),
-									_("You can not save a session with no opened files"));
-					return;
-				}
 				String name = JOptionPane.showInputDialog(getParent()
 						.getParent(), _("Please enter the session name:"),
 						_("Session name"), JOptionPane.QUESTION_MESSAGE);
-				if (name == null)
+				if (name == null) {
 					return;
+				}
 
 				name = name.trim();
 
@@ -153,14 +151,15 @@ public class FileMenu extends JMenu {
 					File file = new File(Constants.FOLDER_SESSIONS
 							+ File.separator + name + ".txt");
 					FileWriter writer = new FileWriter(file);
+					JInternalFrame[] frames = mainGUI.desktop.getAllFrames();
 					for (JInternalFrame frame : frames) {
 						LogWindow window = (LogWindow) frame;
 						writer.write(String.format("%s\n", window.getFile()
 								.getAbsolutePath()));
 					}
 					writer.close();
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (IOException e) {
+					logger.warning(e.getMessage());
 				}
 			}
 		});

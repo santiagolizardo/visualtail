@@ -44,6 +44,7 @@ public class FindPanel extends JPanel {
 		searchTextField = new JTextField(20);
 		searchTextField.addKeyListener(new KeyAdapter() {
 
+			@Override
 			public void keyReleased(KeyEvent ev) {
 				int keyCode = ev.getKeyCode();
 				if (keyCode == KeyEvent.VK_ENTER) {
@@ -58,6 +59,7 @@ public class FindPanel extends JPanel {
 
 		closeButton = new JButton(IconFactory.getImage("close.png"));
 		closeButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ev) {
 				mainGUI.removeFindPanel();
 			}
@@ -74,9 +76,9 @@ public class FindPanel extends JPanel {
 		BoxLayout box = new BoxLayout(this, BoxLayout.X_AXIS);
 		setLayout(box);
 
-		JLabel _search = new JLabel(Translator._("Search") + ":");
+		JLabel searchLabel = new JLabel(Translator._("Search") + ":");
 
-		add(_search);
+		add(searchLabel);
 		add(searchTextField);
 		add(closeButton);
 	}

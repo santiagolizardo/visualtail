@@ -26,7 +26,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Vector;
 
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
@@ -48,11 +47,15 @@ import com.santiagolizardo.beobachter.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 import com.santiagolizardo.beobachter.util.LogTypes;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class ListingPanel extends JPanel {
 
 	private static final long serialVersionUID = -4713179101047059768L;
 
+	private static final Logger logger = Logger.getLogger(ListingPanel.class.getName());
+	
 	private EditionPanel editionPanel;
 
 	private DefaultListModel<LogType> modelTypes;
@@ -67,8 +70,8 @@ public class ListingPanel extends JPanel {
 	public ListingPanel() {
 		setPreferredSize(new Dimension(180, 300));
 
-		modelTypes = new DefaultListModel<LogType>();
-		lstTypes = new JList<LogType>(modelTypes);
+		modelTypes = new DefaultListModel<>();
+		lstTypes = new JList<>(modelTypes);
 		lstTypes.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 		lstTypes.setCellRenderer(new LogTypeListRenderer());
 		lstTypes.addListSelectionListener(new ListSelectionListener() {
@@ -84,8 +87,8 @@ public class ListingPanel extends JPanel {
 					try {
 						logType = EntitiesConfiguration.loadFromFile(logType
 								.getName());
-					} catch (ConfigurationException e1) {
-						e1.printStackTrace();
+					} catch (ConfigurationException ce) {
+						logger.warning(ce.getMessage());
 					}
 					editionPanel.setLogType(logType);
 					btnRename.setEnabled(true);
@@ -141,8 +144,8 @@ public class ListingPanel extends JPanel {
 					file.renameTo(newFile);
 					try {
 						EntitiesConfiguration.saveToFile(selected);
-					} catch (Exception e) {
-						e.printStackTrace();
+					} catch (ConfigurationException ce) {
+						logger.warning(ce.getMessage());
 					}
 					updateLogTypes();
 				}
@@ -210,7 +213,7 @@ public class ListingPanel extends JPanel {
 		modelTypes.clear();
 
 		LogTypes logTypesLoader = LogTypes.getInstance();
-		Vector<LogType> logTypes = logTypesLoader.getAll();
+		List<LogType> logTypes = logTypesLoader.getAll();
 		for (LogType logType : logTypes) {
 			if (!"Default".equals(logType.getName())) {
 				modelTypes.addElement(logType);

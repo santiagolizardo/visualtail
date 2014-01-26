@@ -21,13 +21,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Vector;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.IOUtils;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
+import java.util.List;
 
 public class ConfigPersistence {
 
@@ -52,7 +52,7 @@ public class ConfigPersistence {
 			throws ConfigurationException {
 		byte i = 0;
 
-		Vector<String> recentFiles = mainGUI.getRecentFiles();
+		List<String> recentFiles = mainGUI.getRecentFiles();
 		for (; i < recentFiles.size(); i++) {
 			String propertyName = "recent." + i + ".file_name";
 			configuration.setProperty(propertyName, recentFiles.get(i)

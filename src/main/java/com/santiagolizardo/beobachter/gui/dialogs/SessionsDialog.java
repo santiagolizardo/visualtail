@@ -51,8 +51,12 @@ import com.santiagolizardo.beobachter.beans.Session;
 import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.menu.RecentsMenu;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 class SessionManager {
+	
+	private static final Logger logger = Logger.getLogger(SessionManager.class.getName());
 
 	public List<Session> getSessions() {
 		List<Session> sessions = new ArrayList<>();
@@ -72,14 +76,14 @@ class SessionManager {
 			session.setName(name);
 
 			try {
-				BufferedReader reader = new BufferedReader(new FileReader(file));
-				String line = null;
-				while ((line = reader.readLine()) != null) {
-					session.getFileNames().add(line);
+				try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+					String line;
+					while ((line = reader.readLine()) != null) {
+						session.getFileNames().add(line);
+					}
 				}
-				reader.close();
-			} catch (Exception ee) {
-				ee.printStackTrace();
+			} catch (IOException ee) {
+				logger.warning(ee.getMessage());
 			}
 
 			sessions.add(session);
@@ -128,7 +132,7 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 		this.recentsMenu = recentsMenu;
 
 		listModel = new DefaultListModel<Session>();
-		list = new JList<Session>(listModel);
+		list = new JList<>(listModel);
 		list.setCellRenderer(new SessionListCellRenderer());
 		list.addMouseListener(new MouseAdapter() {
 			@Override
@@ -235,7 +239,7 @@ class SessionListCellRenderer extends DefaultListCellRenderer {
 				index, isSelected, cellHasFocus);
 		Session session = (Session) value;
 
-		StringBuffer text = new StringBuffer();
+		StringBuilder text = new StringBuilder();
 		text.append("<html>");
 		text.append(String.format("<strong>%s</strong> ", session.getName()));
 		text.append(String.format(_("%d file(s)"), session.getFileNames()

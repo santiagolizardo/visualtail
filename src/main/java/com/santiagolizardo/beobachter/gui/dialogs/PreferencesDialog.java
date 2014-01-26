@@ -81,7 +81,7 @@ public class PreferencesDialog extends AbstractDialog {
 			LookAndFeelInfo info = infos[i];
 			lafs[i] = new SwingLookAndFeel(info.getName(), info.getClassName());
 		}
-		lookAndFeel = new JComboBox<SwingLookAndFeel>(lafs);
+		lookAndFeel = new JComboBox<>(lafs);
 		lookAndFeel.setRenderer(new SwingLAFRenderer());
 		try {
 			SwingLookAndFeel look = SwingLookAndFeel.forName(configManager
@@ -93,13 +93,13 @@ public class PreferencesDialog extends AbstractDialog {
 
 		String[] languages = LocaleUtil.getAvailableLocales();
 
-		languagesList = new JComboBox<String>(languages);
+		languagesList = new JComboBox<>(languages);
 		languagesList.setSelectedItem(configManager.getLanguage());
 		languagesList.setRenderer(new LocaleRender());
 
 		String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment()
 				.getAvailableFontFamilyNames();
-		fontsList = new JComboBox<String>(fonts);
+		fontsList = new JComboBox<>(fonts);
 		fontsList.setSelectedItem(configManager.getFontFamily());
 
 		size = new JSpinner(new SpinnerNumberModel(configManager.getFontSize(),
@@ -107,6 +107,7 @@ public class PreferencesDialog extends AbstractDialog {
 
 		btnOk = new JButton(Translator._("Save"));
 		btnOk.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent event) {
 				setVisible(false);
 
@@ -139,6 +140,7 @@ public class PreferencesDialog extends AbstractDialog {
 
 		btnCancel = new JButton(Translator._("Cancel"));
 		btnCancel.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent event) {
 				setVisible(false);
 				dispose();

@@ -45,6 +45,7 @@ public class PreviewPanel extends JPanel implements ChangeListener {
 		chooser.getSelectionModel().addChangeListener(this);
 	}
 
+	@Override
 	public void stateChanged(ChangeEvent e) {
 		ColorSelectionModel model = (ColorSelectionModel) e.getSource();
 		label.setForeground(model.getSelectedColor());

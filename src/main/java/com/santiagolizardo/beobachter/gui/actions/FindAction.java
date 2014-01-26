@@ -43,6 +43,7 @@ public class FindAction extends AbstractAction {
 				KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_MASK));
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		mainGUI.addFindPanel();
 	}

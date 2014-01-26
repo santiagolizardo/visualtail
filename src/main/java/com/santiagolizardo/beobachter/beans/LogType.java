@@ -40,7 +40,7 @@ public class LogType {
 		setName(name);
 		setRefreshInterval(refreshInterval);
 
-		rules = new ArrayList<Rule>();
+		rules = new ArrayList<>();
 	}
 
 	public String getPath() {
@@ -87,6 +87,7 @@ public class LogType {
 		this.rules = rules;
 	}
 
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof LogType) {
 			LogType logType = (LogType) o;
@@ -96,10 +97,12 @@ public class LogType {
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return getName().hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return String.format("LogType [ name(%s), refreshInterval(%d) ]", name,
 				refreshInterval);

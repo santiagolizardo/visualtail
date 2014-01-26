@@ -40,6 +40,7 @@ public class ExitAction extends AbstractAction {
 				KeyStroke.getKeyStroke(KeyEvent.VK_F4, KeyEvent.ALT_MASK));
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent event) {
 		mainWindow.quit();
 	}

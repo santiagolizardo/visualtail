@@ -45,6 +45,7 @@ public class SelectAllAction extends AbstractAction {
 				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK));
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent event) {
 		LogWindow log = (LogWindow) mainGUI.desktop.getSelectedFrame();
 		if (log != null) {

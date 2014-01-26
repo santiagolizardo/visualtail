@@ -20,7 +20,6 @@ import com.santiagolizardo.beobachter.Constants;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Vector;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
@@ -35,6 +34,8 @@ import com.santiagolizardo.beobachter.gui.components.DesktopPanel;
 import com.santiagolizardo.beobachter.gui.dialogs.components.FindPanel;
 import com.santiagolizardo.beobachter.gui.menu.Menu;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is the main application entry point. It constructs the initial window.
@@ -59,14 +60,14 @@ public class MainWindow extends JFrame {
 	/**
 	 * @todo Move this to a better place.
 	 */
-	private Vector<String> recentFiles;
+	private List<String> recentFiles;
 
 	public MainWindow(ConfigData configData) {
 		this.configData = configData;
 
 		logger = Logger.getLogger(MainWindow.class.getName());
 
-		recentFiles = new Vector<>();
+		recentFiles = new ArrayList<>();
 
 		actionFactory = new ActionFactory(this);
 
@@ -82,6 +83,7 @@ public class MainWindow extends JFrame {
 		setIconImage(IconFactory.getImage("icon.png").getImage());
 
 		addWindowListener(new WindowAdapter() {
+			@Override
 			public void windowClosing(WindowEvent event) {
 				quit();
 			}
@@ -153,7 +155,7 @@ public class MainWindow extends JFrame {
 				.setEnabled(areWindowsOpen);
 	}
 
-	public Vector<String> getRecentFiles() {
+	public List<String> getRecentFiles() {
 		return recentFiles;
 	}
 

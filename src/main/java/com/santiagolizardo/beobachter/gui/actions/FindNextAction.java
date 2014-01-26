@@ -44,6 +44,7 @@ public class FindNextAction extends AbstractAction {
 				KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent event) {
 		LogWindow log = (LogWindow) mainGUI.desktop.getSelectedFrame();
 		if (log != null) {

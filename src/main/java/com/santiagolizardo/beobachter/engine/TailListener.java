@@ -19,11 +19,8 @@ package com.santiagolizardo.beobachter.engine;
 /**
  * This is an interface which should be implemented by objects interested on
  * file modifications.
- * 
- * @author Santiago Lizardo
- * 
  */
 public interface TailListener {
 
-	public void onFileChanges(TailEvent event);
+	public void onFileChanges(String line);
 }

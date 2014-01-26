@@ -55,7 +55,7 @@ public class LocaleUtil {
 	public static String[] getAvailableLocales() {
 		Pattern pattern = Pattern.compile("^.*Translator_([a-zA-Z_]+).class$");
 
-		Collection<String> files = null;
+		Collection<String> files;
 		try {
 			files = ResourcesLoader.getResources(pattern);
 			return files.toArray(new String[] {});

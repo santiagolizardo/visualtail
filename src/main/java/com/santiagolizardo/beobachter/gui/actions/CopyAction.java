@@ -55,6 +55,7 @@ public class CopyAction extends AbstractAction {
 		clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent event) {
 		LogWindow log = (LogWindow) mainGUI.desktop.getSelectedFrame();
 		if (log != null) {

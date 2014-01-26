@@ -21,7 +21,6 @@ import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 import java.awt.BorderLayout;
 import java.awt.Container;
 
-import javax.swing.BoxLayout;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.components.EditionPanel;
@@ -47,8 +46,6 @@ public class LogTypesDialog extends AbstractDialog {
 		listingPanel.setEditionPanel(editionPanel);
 		
 		Container container = getContentPane();
-		//container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-
 		container.add(listingPanel, BorderLayout.WEST);
 		container.add(editionPanel, BorderLayout.CENTER);
 

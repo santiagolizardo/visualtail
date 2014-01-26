@@ -39,6 +39,7 @@ import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.resources.ResourcesLoader;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
+import java.util.logging.Logger;
 
 public class AboutDialog extends AbstractDialog {
 
@@ -94,6 +95,8 @@ public class AboutDialog extends AbstractDialog {
 class HtmlLabel extends JEditorPane {
 
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger logger = Logger.getLogger(HtmlLabel.class.getName());
 
 	public HtmlLabel(String text) {
 		super("text/html", text);
@@ -110,7 +113,7 @@ class HtmlLabel extends JEditorPane {
 						URI uri = ev.getURL().toURI();
 						Desktop.getDesktop().browse(uri);
 					} catch (IOException | URISyntaxException e) {
-						e.printStackTrace();
+						logger.warning(e.getMessage());
 					}
 				}
 			}

@@ -51,6 +51,7 @@ public class HelpMenu extends JMenu {
 		about.setIcon(IconFactory.getImage("help.png"));
 		about.setMnemonic(KeyEvent.VK_F1);
 		about.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent event) {
 				AboutDialog aboutDialog = new AboutDialog(mainGUI);
 				aboutDialog.setVisible(true);

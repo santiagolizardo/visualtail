@@ -110,7 +110,7 @@ public class EntitiesConfiguration {
 		try {
 			String intColorString = configuration.getString(propertyName);
 			return Color.decode(intColorString);
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			LOGGER.warning(e.getMessage());
 			return null;
 		}

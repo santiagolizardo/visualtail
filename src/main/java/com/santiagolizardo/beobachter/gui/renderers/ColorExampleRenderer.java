@@ -19,7 +19,6 @@ package com.santiagolizardo.beobachter.gui.renderers;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 import java.awt.Color;
 import java.awt.Component;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 

@@ -1,18 +1,17 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.resources;
 
@@ -39,10 +38,8 @@ public class ResourcesLoader {
 	public static String readResource(Class<?> clazz, String name) {
 		String resourceContent = null;
 
-		try {
-			InputStream is = clazz.getResourceAsStream(name);
+		try (InputStream is = clazz.getResourceAsStream(name)) {
 			resourceContent = IOUtils.toString(is, "UTF-8");
-			is.close();
 		} catch (IOException ioe) {
 			logger.severe(ioe.getMessage());
 		}
@@ -52,7 +49,7 @@ public class ResourcesLoader {
 
 	public static Collection<String> getResources(Pattern pattern)
 			throws IOException {
-		List<String> names = new ArrayList<String>();
+		List<String> names = new ArrayList<>();
 
 		final String classPath = System.getProperty("java.class.path");
 		String path = classPath.split(File.pathSeparator)[0];
@@ -68,20 +65,20 @@ public class ResourcesLoader {
 
 	private static void addResourcesFromJar(List<String> names, File file,
 			Pattern pattern) throws IOException {
-		ZipFile zipFile = new ZipFile(file);
-		Enumeration<?> entries = zipFile.entries();
-		while (entries.hasMoreElements()) {
-			ZipEntry entry = (ZipEntry) entries.nextElement();
-			String fileName = entry.getName();
-			Matcher matcher = pattern.matcher(fileName);
-			if (matcher.matches()) {
-				String result = matcher.group(1);
-				if (!names.contains(result)) {
-					names.add(result);
+		try (ZipFile zipFile = new ZipFile(file)) {
+			Enumeration<?> entries = zipFile.entries();
+			while (entries.hasMoreElements()) {
+				ZipEntry entry = (ZipEntry) entries.nextElement();
+				String fileName = entry.getName();
+				Matcher matcher = pattern.matcher(fileName);
+				if (matcher.matches()) {
+					String result = matcher.group(1);
+					if (!names.contains(result)) {
+						names.add(result);
+					}
 				}
 			}
 		}
-		zipFile.close();
 	}
 
 	private static void addResourcesFromDirectory(List<String> names,

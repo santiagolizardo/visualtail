@@ -48,6 +48,7 @@ public class LineRenderer extends JLabel implements ListCellRenderer<String> {
 		}
 	}
 
+	@Override
 	public Component getListCellRendererComponent(JList<? extends String> list,
 			String value, int index, boolean isSelected, boolean hasFocus) {
 		setText(value);

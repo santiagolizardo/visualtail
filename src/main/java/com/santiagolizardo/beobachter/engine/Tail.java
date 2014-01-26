@@ -17,6 +17,7 @@
 package com.santiagolizardo.beobachter.engine;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -40,7 +41,7 @@ public class Tail implements Runnable {
 
 	public Tail(String fileName, int refreshInterval) {
 
-		listeners = new LinkedList<TailListener>();
+		listeners = new LinkedList<>();
 		enabled = true;
 
 		file = new File(fileName);
@@ -69,7 +70,7 @@ public class Tail implements Runnable {
 					currentSize = file.length();
 
 					accessFile.close();
-				} catch (Exception e) {
+				} catch (IOException e) {
 					logger.severe(e.getMessage());
 				}
 			}
@@ -77,7 +78,7 @@ public class Tail implements Runnable {
 			try {
 				Thread.sleep(refreshInterval);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				logger.warning(e.getMessage());
 			}
 		}
 	}
@@ -91,11 +92,10 @@ public class Tail implements Runnable {
 	}
 
 	private void notifyListeners(String line) {
-		TailEvent tailEvent = new TailEvent(line);
 		Iterator<TailListener> it = listeners.iterator();
 		while (it.hasNext()) {
 			TailListener listener = (TailListener) it.next();
-			listener.onFileChanges(tailEvent);
+			listener.onFileChanges(line);
 		}
 	}
 }

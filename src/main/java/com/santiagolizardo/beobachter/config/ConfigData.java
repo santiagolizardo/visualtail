@@ -52,7 +52,7 @@ public class ConfigData {
 	}
 
 	public List<String> getRecentFiles() {
-		List<String> recentFiles = new ArrayList<String>();
+		List<String> recentFiles = new ArrayList<>();
 		for (byte i = 0; i < 10; i++) {
 			String recentFile = configuration.getString("recent." + i
 					+ ".file_name");

@@ -17,11 +17,14 @@
 package com.santiagolizardo.beobachter.gui.util;
 
 import java.awt.Toolkit;
+import java.util.logging.Logger;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class SwingUtil {
+	
+	private static final Logger logger = Logger.getLogger(SwingUtil.class.getName());
 
 	private static Toolkit toolkit = null;
 
@@ -46,7 +49,7 @@ public class SwingUtil {
 			UIManager.setLookAndFeel(className);
 		} catch (ClassNotFoundException | UnsupportedLookAndFeelException
 				| IllegalAccessException | InstantiationException ex) {
-			ex.printStackTrace();
+			logger.warning(ex.getMessage());
 		}
 	}
 }
