@@ -40,7 +40,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.apache.commons.configuration.ConfigurationException;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.SwingLookAndFeel;
 import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.config.ConfigPersistence;
@@ -67,7 +67,7 @@ public class PreferencesDialog extends AbstractDialog {
 	private JButton btnOk;
 	private JButton btnCancel;
 
-	public PreferencesDialog(final MainGUI mainGUI) {
+	public PreferencesDialog(final MainWindow mainGUI) {
 		super(mainGUI);
 
 		final ConfigData configManager = mainGUI.getConfigData();

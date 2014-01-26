@@ -25,7 +25,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
 
@@ -33,9 +33,9 @@ public class FindNextAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2768042815624362464L;
 	
-	private MainGUI mainGUI;
+	private MainWindow mainGUI;
 
-	public FindNextAction(MainGUI mainGUI) {
+	public FindNextAction(MainWindow mainGUI) {
 
 		this.mainGUI = mainGUI;
 

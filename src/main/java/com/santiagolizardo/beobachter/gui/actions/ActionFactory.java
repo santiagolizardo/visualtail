@@ -17,14 +17,14 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 
 public class ActionFactory {
 
 	private CopyAction copyAction;
 	private SelectAllAction selectAllAction;
 
-	public ActionFactory(MainGUI mainGUI) {
+	public ActionFactory(MainWindow mainGUI) {
 		copyAction = new CopyAction(mainGUI);
 		selectAllAction = new SelectAllAction(mainGUI);
 	}

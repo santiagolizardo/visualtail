@@ -27,14 +27,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 
 public class WindowsMenu extends JMenu {
 
 	private static final long serialVersionUID = 3376590111106134179L;
 
-	public WindowsMenu(final MainGUI parentFrame) {
+	public WindowsMenu(final MainWindow parentFrame) {
 
 		setText(_("Windows"));
 		setMnemonic(KeyEvent.VK_W);

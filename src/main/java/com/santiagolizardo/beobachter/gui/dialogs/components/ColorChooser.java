@@ -2,18 +2,18 @@
  * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
  * Copyright (C) 2013 Santiago Lizardo (http://www.santiagolizardo.com)
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.gui.dialogs.components;
 
@@ -33,32 +33,41 @@ public class ColorChooser {
 	private JDialog dialog;
 	private Color returnColor;
 
-	public ColorChooser(Component parent, String title, Color initialColor) {
+	public ColorChooser(Component parent, String title, Color initialColor, final ActionListener actionListener) {
 		colorChooser = new JColorChooser(initialColor);
 		colorChooser.setPreviewPanel(new JPanel());
 
-		AbstractColorChooserPanel[] panel = { colorChooser.getChooserPanels()[0] };
+		AbstractColorChooserPanel[] panel = {colorChooser.getChooserPanels()[0]};
 		colorChooser.setChooserPanels(panel);
 		dialog = JColorChooser.createDialog(parent, title, true, colorChooser,
 				new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						returnColor = colorChooser.getColor();
-						colorChooser.setVisible(false);
-						dialog.dispose();
+						dialog.setVisible(false);
+						actionListener.actionPerformed(e);
 					}
 				}, new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						returnColor = null;
-						colorChooser.setVisible(false);
-						dialog.dispose();
+						dialog.setVisible(false);
+						actionListener.actionPerformed(e);
 					}
 				});
 		dialog.setResizable(false);
 		dialog.pack();
-		dialog.setVisible(true);
 	}
 
-	public Color pickColor() {
+	public void setVisible(boolean visible) {
+		dialog.setVisible(visible);
+	}
+
+	public Color getSelectedColor() {
 		return returnColor;
+	}
+
+	public JColorChooser getColorChooser() {
+		return colorChooser;
 	}
 }

@@ -46,7 +46,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.santiagolizardo.beobachter.Constants;
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.beans.Session;
 import com.santiagolizardo.beobachter.engine.Controller;
@@ -113,9 +113,9 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 	private SessionManager sessionManager;
 
-	private MainGUI mainGUI;
+	private MainWindow mainGUI;
 
-	public SessionsDialog(MainGUI mainGUI, RecentsMenu recentsMenu) {
+	public SessionsDialog(MainWindow mainGUI, RecentsMenu recentsMenu) {
 		super(mainGUI);
 
 		setTitle(Translator._("Session management"));

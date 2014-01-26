@@ -1,22 +1,22 @@
 /**
- * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
- * Copyright (C) 2013 Santiago Lizardo (http://www.santiagolizardo.com)
+ *  This file is part of Beobachter, a graphical log file monitor.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ *  Beobachter is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *  Beobachter is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  You should have received a copy of the GNU General Public License
+ *  along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter;
 
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
@@ -32,11 +32,10 @@ import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.config.ConfigPersistence;
 import com.santiagolizardo.beobachter.gui.util.SwingUtil;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
+import org.apache.commons.configuration.ConfigurationException;
 
 /**
  * This is the main application entry point. It initializes the main window.
- * 
- * @author slizardo
  */
 public class Main {
 
@@ -45,7 +44,7 @@ public class Main {
 		try {
 			I18nFactory.getI18n(Main.class, Locale.ENGLISH);
 		} catch (MissingResourceException mre) {
-			mre.printStackTrace();
+			System.err.println(mre.getMessage());
 		}
 		
 		try {
@@ -62,7 +61,7 @@ public class Main {
 		try {
 			configData.setConfiguration(configPersistence
 					.loadProperties(Constants.CONFIG_FILE));
-		} catch (Exception ex) {
+		} catch (ConfigurationException | IOException ex) {
 			System.err.println(ex.getMessage());
 		}
 
@@ -83,7 +82,7 @@ public class Main {
 			public void run() {
 				SwingUtil.setLookAndFeel(configData.getWindowLAF());
 
-				MainGUI mainGUI = new MainGUI(configData);
+				MainWindow mainGUI = new MainWindow(configData);
 				mainGUI.setVisible(true);
 			}
 		});

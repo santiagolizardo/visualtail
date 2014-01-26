@@ -35,7 +35,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import com.santiagolizardo.beobachter.Constants;
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.actions.ExitAction;
@@ -52,7 +52,7 @@ public class FileMenu extends JMenu {
 	private RecentsMenu recentsMenu;
 	private JMenuItem saveSessionMenuItem;
 
-	public FileMenu(final MainGUI mainGUI) {
+	public FileMenu(final MainWindow mainGUI) {
 		setText(_("File"));
 		setMnemonic(KeyEvent.VK_F);
 

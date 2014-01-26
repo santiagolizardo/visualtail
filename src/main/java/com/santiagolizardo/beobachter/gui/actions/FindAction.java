@@ -25,16 +25,16 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 
 public class FindAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2244429466145757856L;
 
-	private MainGUI mainGUI;
+	private MainWindow mainGUI;
 
-	public FindAction(MainGUI mainGUI) {
+	public FindAction(MainWindow mainGUI) {
 		
 		this.mainGUI = mainGUI;
 

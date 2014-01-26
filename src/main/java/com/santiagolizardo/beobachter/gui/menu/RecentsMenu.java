@@ -10,7 +10,7 @@ import java.util.Vector;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.engine.Controller;
@@ -22,11 +22,11 @@ public class RecentsMenu extends JMenu implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
-	private MainGUI mainGUI;
+	private MainWindow mainGUI;
 
 	private JMenuItem cleanRecentsMenuItem;
 
-	public RecentsMenu(MainGUI mainGUI) {
+	public RecentsMenu(MainWindow mainGUI) {
 		super(_("Open recents"));
 
 		this.mainGUI = mainGUI;

@@ -15,8 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.santiagolizardo.beobachter;
+package com.santiagolizardo.beobachter.gui;
 
+import com.santiagolizardo.beobachter.Constants;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -42,7 +43,7 @@ import com.santiagolizardo.beobachter.resources.images.IconFactory;
  * @author slizardo
  * 
  */
-public class MainGUI extends JFrame {
+public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = -349295815866572937L;
 
@@ -61,12 +62,12 @@ public class MainGUI extends JFrame {
 	 */
 	private Vector<String> recentFiles;
 
-	public MainGUI(ConfigData configData) {
+	public MainWindow(ConfigData configData) {
 		this.configData = configData;
 
-		logger = Logger.getLogger(MainGUI.class.getName());
+		logger = Logger.getLogger(MainWindow.class.getName());
 
-		recentFiles = new Vector<String>();
+		recentFiles = new Vector<>();
 
 		actionFactory = new ActionFactory(this);
 

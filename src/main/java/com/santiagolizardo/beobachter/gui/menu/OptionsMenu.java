@@ -28,7 +28,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.LogTypesDialog;
 import com.santiagolizardo.beobachter.gui.dialogs.PreferencesDialog;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
@@ -37,13 +37,13 @@ public class OptionsMenu extends JMenu implements ActionListener {
 
 	private static final long serialVersionUID = 4390929385204480673L;
 
-	private MainGUI mainGUI;
+	private MainWindow mainGUI;
 
 	private JMenuItem alwaysOnTop;
 	private JMenuItem manageLogTypes;
 	private JMenuItem preferences;
 
-	public OptionsMenu(MainGUI mainGUI) {
+	public OptionsMenu(MainWindow mainGUI) {
 
 		setText(_("Options"));
 		setMnemonic(KeyEvent.VK_O);

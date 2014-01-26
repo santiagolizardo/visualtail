@@ -19,7 +19,7 @@ package com.santiagolizardo.beobachter.engine;
 
 import java.beans.PropertyVetoException;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 
@@ -31,7 +31,7 @@ public class Controller {
 	 * @param fileName
 	 * @param logType
 	 */
-	public static void openFile(MainGUI mainGUI, String fileName, LogType logType) {
+	public static void openFile(MainWindow mainGUI, String fileName, LogType logType) {
 		LogWindow logWindow = new LogWindow(mainGUI, fileName, logType);
 		mainGUI.desktop.add(logWindow);
 		try {

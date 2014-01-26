@@ -52,7 +52,7 @@ import javax.swing.event.ListSelectionListener;
 import org.apache.commons.io.FileUtils;
 
 import com.santiagolizardo.beobachter.Constants;
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.engine.Tail;
 import com.santiagolizardo.beobachter.engine.TailEvent;
@@ -93,9 +93,9 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	private int searchIndex = 0;
 	private String searchText = null;
 
-	private MainGUI mainGUI;
+	private MainWindow mainGUI;
 
-	public LogWindow(final MainGUI mainGUI, String fileName, LogType logType) {
+	public LogWindow(final MainWindow mainGUI, String fileName, LogType logType) {
 
 		setResizable(true);
 		setFrameIcon(IconFactory.getImage("log_window.png"));

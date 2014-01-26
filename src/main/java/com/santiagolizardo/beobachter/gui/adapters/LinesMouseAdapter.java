@@ -5,14 +5,14 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JComponent;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.menu.EditPopupMenu;
 
 public class LinesMouseAdapter extends MouseAdapter {
 
 	private EditPopupMenu popupMenu;
 
-	public LinesMouseAdapter(MainGUI mainGUI) {
+	public LinesMouseAdapter(MainWindow mainGUI) {
 		super();
 
 		popupMenu = new EditPopupMenu(mainGUI);

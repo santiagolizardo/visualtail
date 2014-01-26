@@ -30,7 +30,7 @@ import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
 import com.santiagolizardo.beobachter.Constants;
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 
@@ -38,11 +38,11 @@ public class CopyAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2226006120048433873L;
 
-	private MainGUI mainGUI;
+	private MainWindow mainGUI;
 
 	private Clipboard clipboard;
 
-	public CopyAction(MainGUI mainGUI) {
+	public CopyAction(MainWindow mainGUI) {
 
 		this.mainGUI = mainGUI;
 

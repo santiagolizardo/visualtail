@@ -28,7 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
@@ -40,7 +40,7 @@ public class FindPanel extends JPanel {
 	private JTextField searchTextField;
 	private JButton closeButton;
 
-	public FindPanel(final MainGUI mainGUI) {
+	public FindPanel(final MainWindow mainGUI) {
 
 		searchTextField = new JTextField(20);
 		searchTextField.addKeyListener(new KeyAdapter() {

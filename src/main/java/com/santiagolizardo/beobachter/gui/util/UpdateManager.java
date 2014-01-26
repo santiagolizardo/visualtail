@@ -24,13 +24,13 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import com.santiagolizardo.beobachter.Constants;
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 
 public class UpdateManager extends Thread {
 
-	private MainGUI mainGUI;
+	private MainWindow mainGUI;
 
-	public UpdateManager(MainGUI mainGUI) {
+	public UpdateManager(MainWindow mainGUI) {
 		this.mainGUI = mainGUI;
 	}
 

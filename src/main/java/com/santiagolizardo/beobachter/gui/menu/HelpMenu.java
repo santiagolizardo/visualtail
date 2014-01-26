@@ -26,7 +26,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.AboutDialog;
 import com.santiagolizardo.beobachter.gui.util.UpdateManager;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
@@ -35,7 +35,7 @@ public class HelpMenu extends JMenu {
 
 	private static final long serialVersionUID = -3653494784002339461L;
 
-	public HelpMenu(final MainGUI mainGUI) {
+	public HelpMenu(final MainWindow mainGUI) {
 
 		setText(_("Help"));
 		setMnemonic(KeyEvent.VK_H);

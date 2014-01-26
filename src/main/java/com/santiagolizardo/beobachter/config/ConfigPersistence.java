@@ -11,7 +11,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.IOUtils;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 
 public class ConfigPersistence {
 
@@ -31,7 +31,7 @@ public class ConfigPersistence {
 		return new PropertiesConfiguration(fileName);
 	}
 
-	public void saveProperties(MainGUI mainGUI,
+	public void saveProperties(MainWindow mainGUI,
 			PropertiesConfiguration configuration)
 			throws ConfigurationException {
 		byte i = 0;

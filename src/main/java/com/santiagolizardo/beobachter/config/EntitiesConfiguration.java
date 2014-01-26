@@ -2,18 +2,18 @@
  * Beobachter is a logs watcher for the desktop. (a.k.a. full-featured tail)
  * Copyright (C) 2013 Santiago Lizardo (http://www.santiagolizardo.com)
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.config;
 
@@ -49,11 +49,12 @@ public class EntitiesConfiguration {
 		LogType logType = new LogType(name);
 		logType.setRefreshInterval(configuration.getShort(REFRESH_INTERVAL));
 
-		String pattern = null;
-		for (short i = 0; (pattern = configuration.getString("rule." + i
-				+ ".pattern")) != null; i++) {
+		for (short i = 0; configuration.getString("rule." + i
+				+ ".regular_expression") != null; i++) {
 			Rule rule = new Rule();
-			rule.setPattern(pattern);
+			String pattern = configuration.getString("rule." + i
+					+ ".pattern");
+			rule.setPattern(null == pattern ? "" : pattern);
 			rule.setRegularExpression(configuration.getBoolean("rule." + i
 					+ ".regular_expression"));
 			rule.setIgnoreCase(configuration.getBoolean("rule." + i

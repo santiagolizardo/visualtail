@@ -23,16 +23,16 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 
 public class ExitAction extends AbstractAction {
 
 	private static final long serialVersionUID = 9138179821476711088L;
 
-	private MainGUI mainWindow;
+	private MainWindow mainWindow;
 
-	public ExitAction(MainGUI mainGui) {
+	public ExitAction(MainWindow mainGui) {
 
 		this.mainWindow = mainGui;
 

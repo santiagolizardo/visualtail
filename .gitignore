@@ -6,3 +6,4 @@ pom.xml.versionsBackup
 *.mo
 *.pot
 *.po.~*
+nbactions.xml

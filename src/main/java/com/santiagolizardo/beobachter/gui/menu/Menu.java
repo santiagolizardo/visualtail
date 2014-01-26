@@ -21,7 +21,7 @@ import javax.swing.Box;
 import javax.swing.JDesktopPane;
 import javax.swing.JMenuBar;
 
-import com.santiagolizardo.beobachter.MainGUI;
+import com.santiagolizardo.beobachter.gui.MainWindow;
 
 public class Menu extends JMenuBar {
 
@@ -30,7 +30,7 @@ public class Menu extends JMenuBar {
 	private FileMenu fileMenu;
 	private WindowsMenu windowMenu;
 
-	public Menu(final JDesktopPane pane, MainGUI parentFrame) {
+	public Menu(final JDesktopPane pane, MainWindow parentFrame) {
 
 		fileMenu = new FileMenu(parentFrame);
 		EditMenu editMenu = new EditMenu(parentFrame);

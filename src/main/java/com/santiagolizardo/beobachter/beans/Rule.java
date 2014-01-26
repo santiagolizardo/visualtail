@@ -28,6 +28,7 @@ public class Rule {
 	private Color foregroundColor;
 
 	public Rule() {
+		pattern = "";
 		backgroundColor = Color.WHITE;
 		foregroundColor = Color.BLACK;
 		regularExpression = false;
