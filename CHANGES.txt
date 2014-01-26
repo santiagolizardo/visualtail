@@ -1,5 +1,15 @@
 CHANGES
 
+Version 1.7.9 (2014/01/26)
+
+	- Log rules are now editable
+	- Bugfix on close all windows option.
+	- Internal refactorings for a cleaner code
+	- Smaller program file due to the removal of some not hard dependencies.
+	- Memory consumption decreased.
+	- License header updated
+	- Google analytics tracking code added to the author link.
+
 Version 1.7.8 (2014/01/14)
 
 	- Disable open recents on empty list

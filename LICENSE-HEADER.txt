@@ -14,25 +14,3 @@
  * You should have received a copy of the GNU General Public License
  * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.santiagolizardo.beobachter.util;
-
-import junit.framework.TestCase;
-
-import com.santiagolizardo.beobachter.util.LocaleUtil;
-
-public class LocaleUtilTest extends TestCase {
-
-	public void testgetDisplayName() {
-		try {
-			LocaleUtil.getDisplayName(null);
-			fail("An IllegalArgumentException was expected.");
-		} catch (IllegalArgumentException iae) {
-			assertEquals("Argument can not be null.", iae.getMessage());
-		}
-
-		assertEquals("", LocaleUtil.getDisplayName(""));
-		assertEquals("foobar", LocaleUtil.getDisplayName("foobar"));
-		assertEquals("Spanish", LocaleUtil.getDisplayName("es"));
-		assertEquals("Spanish (Argentina)", LocaleUtil.getDisplayName("es_AR"));
-	}
-}
