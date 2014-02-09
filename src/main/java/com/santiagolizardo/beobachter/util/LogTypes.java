@@ -18,8 +18,6 @@ package com.santiagolizardo.beobachter.util;
 import java.io.File;
 import java.io.FileFilter;
 
-import org.apache.commons.configuration.ConfigurationException;
-
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.config.EntitiesConfiguration;
@@ -60,13 +58,9 @@ public class LogTypes {
 		File[] files = logTypesDir.listFiles(filter);
 		for (File file : files) {
 			String fileName = file.getName();
-			try {
-				String name = fileName.replaceAll(".properties", "");
-				LogType logType = EntitiesConfiguration.loadFromFile(name);
-				logTypes.add(logType);
-			} catch (ConfigurationException ioe) {
-				logger.warning(ioe.getMessage());
-			}
+			String name = fileName.replaceAll(".properties", "");
+			LogType logType = EntitiesConfiguration.loadFromFile(name);
+			logTypes.add(logType);
 		}
 
 		return logTypes;

@@ -40,134 +40,54 @@ import com.santiagolizardo.beobachter.gui.actions.ExitAction;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.SessionsDialog;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
-import com.santiagolizardo.beobachter.gui.util.FileUtil;
+import com.santiagolizardo.beobachter.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-public class FileMenu extends JMenu {
+public class FileMenu extends JMenu implements ActionListener {
 
 	private static final long serialVersionUID = -9095266179967845006L;
 
 	private static final Logger logger = Logger.getLogger(FileMenu.class.getName());
 
+	private MainWindow mainWindow;
+
 	private RecentsMenu recentsMenu;
+
+	private JMenuItem openMenuItem;
+	private JMenuItem loadSessionMenuItem;
 	private JMenuItem saveSessionMenuItem;
 
-	public FileMenu(final MainWindow mainGUI) {
+	public FileMenu(final MainWindow mainWindow) {
 		setText(_("File"));
 		setMnemonic(KeyEvent.VK_F);
 
-		JMenuItem open = new JMenuItem(_("Open..."));
-		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+		this.mainWindow = mainWindow;
+
+		openMenuItem = new JMenuItem(_("Open..."));
+		openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 				KeyEvent.CTRL_MASK));
-		open.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				File lastSelected = new File(mainGUI.getConfigData().getLastPath());
+		openMenuItem.addActionListener(this);
 
-				JFileChooser chooser = new JFileChooser();
-				chooser.setSelectedFile(lastSelected);
-				chooser.setMultiSelectionEnabled(true);
-				int resp = chooser.showOpenDialog(mainGUI);
-				if (resp == JFileChooser.APPROVE_OPTION) {
-					File[] files = chooser.getSelectedFiles();
-					LogType logType = new LogType("Default");
+		recentsMenu = new RecentsMenu(mainWindow);
+		recentsMenu.setEnabled(!mainWindow.getConfigData().getRecentFiles().isEmpty());
 
-					List<File> unreadableFiles = new ArrayList<>();
-
-					for (File file : files) {
-
-						try {
-							FileUtil.tryReading(file);
-						} catch (Exception ex) {
-							unreadableFiles.add(file);
-							continue;
-						}
-
-						Controller.openFile(mainGUI, file.getAbsolutePath(),
-								logType);
-
-						recentsMenu.addRecent(file.getAbsolutePath());
-						recentsMenu.setEnabled(true);
-					}
-
-					mainGUI.desktop.setWindowsOnTileHorizontal();
-
-					if (unreadableFiles.size() > 0) {
-						StringBuilder message = new StringBuilder();
-						message.append(_("These files could not be opened for reading:")
-								+ "\n");
-						for (File file : unreadableFiles) {
-							message.append("    - ")
-									.append(file.getAbsolutePath())
-									.append("\n");
-						}
-						DialogFactory.showErrorMessage(mainGUI,
-								message.toString());
-					}
-				}
-			}
-		});
-
-		recentsMenu = new RecentsMenu(mainGUI);
-		recentsMenu.setEnabled(!mainGUI.getConfigData().getRecentFiles().isEmpty());
-
-		JMenuItem exit = new JMenuItem(new ExitAction(mainGUI));
+		JMenuItem exit = new JMenuItem(new ExitAction(mainWindow));
 		exit.setIcon(IconFactory.getImage("exit.png"));
 
-		JMenuItem loadSession = new JMenuItem(_("Manage sessions..."));
-		loadSession.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SessionsDialog dialog = new SessionsDialog(mainGUI, recentsMenu);
-				dialog.setVisible(true);
-			}
-		});
+		loadSessionMenuItem = new JMenuItem(_("Manage sessions..."));
+		loadSessionMenuItem.addActionListener(this);
 
 		saveSessionMenuItem = new JMenuItem(_("Save current session"));
 		saveSessionMenuItem.setIcon(IconFactory.getImage("disk.png"));
 		saveSessionMenuItem.setEnabled(false);
+		saveSessionMenuItem.addActionListener(this);
 
-		saveSessionMenuItem.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				String name = JOptionPane.showInputDialog(getParent()
-						.getParent(), _("Please enter the session name:"),
-						_("Session name"), JOptionPane.QUESTION_MESSAGE);
-				if (name == null) {
-					return;
-				}
-
-				name = name.trim();
-
-				if (name.length() == 0) {
-					DialogFactory.showErrorMessage(null,
-							_("Invalid session name"));
-					return;
-				}
-
-				try {
-					File file = new File(Constants.FOLDER_SESSIONS
-							+ File.separator + name + ".txt");
-					FileWriter writer = new FileWriter(file);
-					JInternalFrame[] frames = mainGUI.desktop.getAllFrames();
-					for (JInternalFrame frame : frames) {
-						LogWindow window = (LogWindow) frame;
-						writer.write(String.format("%s\n", window.getFile()
-								.getAbsolutePath()));
-					}
-					writer.close();
-				} catch (IOException e) {
-					logger.warning(e.getMessage());
-				}
-			}
-		});
-
-		add(open);
+		add(openMenuItem);
 		add(recentsMenu);
 		addSeparator();
-		add(loadSession);
+		add(loadSessionMenuItem);
 		add(saveSessionMenuItem);
 		addSeparator();
 		add(exit);
@@ -179,5 +99,89 @@ public class FileMenu extends JMenu {
 
 	public JMenuItem getSaveSessionMenuItem() {
 		return saveSessionMenuItem;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent ev) {
+		if (openMenuItem == ev.getSource()) {
+			File lastSelected = new File(mainWindow.getConfigData().getLastPath());
+
+			JFileChooser chooser = new JFileChooser();
+			chooser.setSelectedFile(lastSelected);
+			chooser.setMultiSelectionEnabled(true);
+			int resp = chooser.showOpenDialog(mainWindow);
+			if (resp == JFileChooser.APPROVE_OPTION) {
+				File[] files = chooser.getSelectedFiles();
+				LogType logType = new LogType("Default");
+
+				List<File> unreadableFiles = new ArrayList<>();
+
+				for (File file : files) {
+
+					try {
+						FileUtil.tryReading(file);
+					} catch (Exception ex) {
+						unreadableFiles.add(file);
+						continue;
+					}
+
+					Controller.openFile(mainWindow, file.getAbsolutePath(),
+							logType);
+
+					recentsMenu.addRecent(file.getAbsolutePath());
+					recentsMenu.setEnabled(true);
+				}
+
+				mainWindow.desktop.setWindowsOnTileHorizontal();
+
+				if (unreadableFiles.size() > 0) {
+					StringBuilder message = new StringBuilder();
+					message.append(_("These files could not be opened for reading:")
+							+ "\n");
+					for (File file : unreadableFiles) {
+						message.append("    - ")
+								.append(file.getAbsolutePath())
+								.append("\n");
+					}
+					DialogFactory.showErrorMessage(mainWindow,
+							message.toString());
+				}
+			}
+		} else if (loadSessionMenuItem == ev.getSource()) {
+			SessionsDialog dialog = new SessionsDialog(mainWindow, recentsMenu);
+			dialog.setVisible(true);
+		} else if (saveSessionMenuItem
+				== ev.getSource()) {
+			String name = JOptionPane.showInputDialog(getParent()
+					.getParent(), _("Please enter the session name:"),
+					_("Session name"), JOptionPane.QUESTION_MESSAGE);
+			if (name == null) {
+				return;
+			}
+
+			name = name.trim();
+
+			if (name.length() == 0) {
+				DialogFactory.showErrorMessage(null,
+						_("Invalid session name"));
+				return;
+			}
+
+			try {
+				File file = new File(Constants.FOLDER_SESSIONS
+						+ File.separator + name + ".txt");
+				FileWriter writer = new FileWriter(file);
+				JInternalFrame[] frames = mainWindow.desktop.getAllFrames();
+				for (JInternalFrame frame : frames) {
+					LogWindow window = (LogWindow) frame;
+					writer.write(String.format("%s\n", window.getFile()
+							.getAbsolutePath()));
+				}
+				writer.close();
+			} catch (IOException e) {
+				logger.warning(e.getMessage());
+				DialogFactory.showErrorMessage(null, _("Invalid session name") + "\r\n" + e.getMessage());
+			}
+		}
 	}
 }

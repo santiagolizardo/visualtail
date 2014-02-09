@@ -1,36 +1,29 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.config;
 
-import java.awt.Color;
 import java.util.List;
 import java.util.logging.Logger;
-
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
 
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.beans.Rule;
+import java.io.IOException;
 
 public class EntitiesConfiguration {
-
-	private static final Logger LOGGER = Logger
-			.getLogger(EntitiesConfiguration.class.getName());
 
 	private static final String REFRESH_INTERVAL = "option.refresh_interval";
 
@@ -39,28 +32,27 @@ public class EntitiesConfiguration {
 				name);
 	}
 
-	public static LogType loadFromFile(String name)
-			throws ConfigurationException {
+	public static LogType loadFromFile(String name) {
 		String path = buildPath(name);
-		PropertiesConfiguration configuration = new PropertiesConfiguration(
+		PropertySet configuration = new PropertySet(
 				path);
 
 		LogType logType = new LogType(name);
 		logType.setRefreshInterval(configuration.getShort(REFRESH_INTERVAL));
 
-		for (short i = 0; configuration.getString("rule." + i
+		for (short i = 0; configuration.getProperty("rule." + i
 				+ ".regular_expression") != null; i++) {
 			Rule rule = new Rule();
-			String pattern = configuration.getString("rule." + i
+			String pattern = configuration.getProperty("rule." + i
 					+ ".pattern");
 			rule.setPattern(null == pattern ? "" : pattern);
 			rule.setRegularExpression(configuration.getBoolean("rule." + i
 					+ ".regular_expression"));
 			rule.setIgnoreCase(configuration.getBoolean("rule." + i
 					+ ".ignore_case"));
-			rule.setBackgroundColor(getColorProperty(configuration, "rule." + i
+			rule.setBackgroundColor(configuration.getColor("rule." + i
 					+ ".background_color"));
-			rule.setForegroundColor(getColorProperty(configuration, "rule." + i
+			rule.setForegroundColor(configuration.getColor("rule." + i
 					+ ".foreground_color"));
 
 			logType.addRule(rule);
@@ -69,9 +61,8 @@ public class EntitiesConfiguration {
 		return logType;
 	}
 
-	public static void saveToFile(LogType logType)
-			throws ConfigurationException {
-		PropertiesConfiguration configuration = new PropertiesConfiguration();
+	public static void saveToFile(LogType logType) throws IOException {
+		PropertySet configuration = new PropertySet();
 
 		configuration.setProperty(REFRESH_INTERVAL,
 				logType.getRefreshInterval());
@@ -85,34 +76,13 @@ public class EntitiesConfiguration {
 					rule.isRegularExpression());
 			configuration.setProperty("rule." + i + ".ignore_case",
 					rule.isIgnoreCase());
-			setColorProperty(configuration, "rule." + i + ".background_color",
+			configuration.setColor("rule." + i + ".background_color",
 					rule.getBackgroundColor());
-			setColorProperty(configuration, "rule." + i + ".foreground_color",
+			configuration.setColor("rule." + i + ".foreground_color",
 					rule.getForegroundColor());
 		}
 
 		String path = buildPath(logType.getName());
 		configuration.save(path);
-	}
-
-	public static void setColorProperty(PropertiesConfiguration configuration,
-			String propertyName, Color propertyValue) {
-		try {
-			String intColorString = String.valueOf(propertyValue.getRGB());
-			configuration.setProperty(propertyName, intColorString);
-		} catch (Exception e) {
-			LOGGER.warning(e.getMessage());
-		}
-	}
-
-	public static Color getColorProperty(PropertiesConfiguration configuration,
-			String propertyName) {
-		try {
-			String intColorString = configuration.getString(propertyName);
-			return Color.decode(intColorString);
-		} catch (NumberFormatException e) {
-			LOGGER.warning(e.getMessage());
-			return null;
-		}
 	}
 }

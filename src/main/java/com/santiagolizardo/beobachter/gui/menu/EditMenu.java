@@ -37,13 +37,14 @@ public class EditMenu extends JMenu {
 	public EditMenu(MainWindow mainGUI) {
 
 		setText(_("Edit"));
+		setEnabled(false);
 		setMnemonic(KeyEvent.VK_E);
 
 		ActionFactory actionFactory = mainGUI.getActionFactory();
 
-		copyMenuItem = new JMenuItem(actionFactory.createCopyAction());
+		copyMenuItem = new JMenuItem(actionFactory.getCopyAction());
 		JMenuItem selectAllMenuItem = new JMenuItem(
-				actionFactory.createSelectAllAction());
+				actionFactory.getSelectAllAction());
 
 		JMenuItem findMenuItem = new JMenuItem(new FindAction(mainGUI));
 		JMenuItem findNextMenuItem = new JMenuItem(new FindNextAction(mainGUI));

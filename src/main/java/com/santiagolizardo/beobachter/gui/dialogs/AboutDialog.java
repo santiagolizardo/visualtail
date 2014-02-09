@@ -19,11 +19,7 @@ package com.santiagolizardo.beobachter.gui.dialogs;
 import static com.santiagolizardo.beobachter.resources.languages.Translator._;
 
 import java.awt.Container;
-import java.awt.Desktop;
 import java.awt.Dimension;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JEditorPane;
@@ -32,14 +28,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 
 import com.santiagolizardo.beobachter.Constants;
+import com.santiagolizardo.beobachter.gui.components.HtmlLabel;
 import com.santiagolizardo.beobachter.resources.ResourcesLoader;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
-import java.util.logging.Logger;
 
 public class AboutDialog extends AbstractDialog {
 
@@ -59,8 +53,12 @@ public class AboutDialog extends AbstractDialog {
 		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 
 		JLabel iconPanel = new JLabel(IconFactory.getImage("icon.png"));
-		iconPanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
-		container.add(iconPanel);
+				
+		JPanel leftPanel = new JPanel();
+		leftPanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
+		leftPanel.add(iconPanel);
+	
+		container.add(leftPanel);
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -69,7 +67,7 @@ public class AboutDialog extends AbstractDialog {
 				Constants.APP_NAME, Constants.APP_VERSION);
 		String infoText = String.format("<p>%s</p>", String.format(
 				_("More info about the project at <a href=\"%s\">%s</a>."),
-				Constants.APP_URL, Constants.APP_URL));
+				Constants.APP_URL, Constants.APP_URL_DISPLAY));
 		String creditsText = ResourcesLoader.readResource(AboutDialog.class,
 				"credits.html");
 
@@ -92,31 +90,3 @@ public class AboutDialog extends AbstractDialog {
 	}
 }
 
-class HtmlLabel extends JEditorPane {
-
-	private static final long serialVersionUID = 1L;
-	
-	private static final Logger logger = Logger.getLogger(HtmlLabel.class.getName());
-
-	public HtmlLabel(String text) {
-		super("text/html", text);
-
-		setEditable(false);
-		setHighlighter(null);
-
-		addHyperlinkListener(new HyperlinkListener() {
-
-			@Override
-			public void hyperlinkUpdate(HyperlinkEvent ev) {
-				if (ev.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-					try {
-						URI uri = ev.getURL().toURI();
-						Desktop.getDesktop().browse(uri);
-					} catch (IOException | URISyntaxException e) {
-						logger.warning(e.getMessage());
-					}
-				}
-			}
-		});
-	}
-}

@@ -1,38 +1,37 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.config;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.io.IOUtils;
-
 import com.santiagolizardo.beobachter.gui.MainWindow;
+import java.nio.file.Files;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConfigPersistence {
 
-	public PropertiesConfiguration loadProperties(String fileName)
-			throws ConfigurationException, FileNotFoundException, IOException {
+	private static final Logger logger = Logger.getLogger(ConfigPersistence.class.getName());
+
+	public PropertySet loadProperties(String fileName)
+			throws FileNotFoundException, IOException {
 		File file = new File(fileName);
 		File dir = file.getParentFile();
 		if (!dir.exists()) {
@@ -41,15 +40,14 @@ public class ConfigPersistence {
 		if (!file.exists()) {
 			InputStream is = ConfigData.class
 					.getResourceAsStream("default_config.properties");
-			IOUtils.copy(is, new FileOutputStream(file));
+			Files.copy(is, file.toPath());
 		}
 
-		return new PropertiesConfiguration(fileName);
+		return new PropertySet(fileName);
 	}
 
 	public void saveProperties(MainWindow mainGUI,
-			PropertiesConfiguration configuration)
-			throws ConfigurationException {
+			PropertySet configuration) {
 		byte i = 0;
 
 		List<String> recentFiles = mainGUI.getRecentFiles();
@@ -60,9 +58,13 @@ public class ConfigPersistence {
 		}
 		for (; i < 10; i++) {
 			String propertyName = "recent." + i + ".file_name";
-			configuration.clearProperty(propertyName);
+			configuration.remove(propertyName);
 		}
 
-		configuration.save();
+		try {
+			configuration.save();
+		} catch (IOException ex) {
+			logger.severe(ex.getMessage());
+		}
 	}
 }

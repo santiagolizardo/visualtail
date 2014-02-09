@@ -1,18 +1,17 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.gui.dialogs.components;
 
@@ -39,15 +38,15 @@ import javax.swing.SpringLayout;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.apache.commons.configuration.ConfigurationException;
-
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.config.EntitiesConfiguration;
 import com.santiagolizardo.beobachter.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 import com.santiagolizardo.beobachter.util.LogTypes;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ListingPanel extends JPanel {
@@ -55,7 +54,7 @@ public class ListingPanel extends JPanel {
 	private static final long serialVersionUID = -4713179101047059768L;
 
 	private static final Logger logger = Logger.getLogger(ListingPanel.class.getName());
-	
+
 	private EditionPanel editionPanel;
 
 	private DefaultListModel<LogType> modelTypes;
@@ -84,12 +83,9 @@ public class ListingPanel extends JPanel {
 					btnRemove.setEnabled(false);
 				} else {
 					LogType logType = (LogType) lstTypes.getSelectedValue();
-					try {
-						logType = EntitiesConfiguration.loadFromFile(logType
-								.getName());
-					} catch (ConfigurationException ce) {
-						logger.warning(ce.getMessage());
-					}
+					logType = EntitiesConfiguration.loadFromFile(logType
+							.getName());
+
 					editionPanel.setLogType(logType);
 					btnRename.setEnabled(true);
 					btnRemove.setEnabled(true);
@@ -134,19 +130,22 @@ public class ListingPanel extends JPanel {
 				String newName = JOptionPane.showInputDialog(getParent(),
 						_("Enter the new name of the log type:"),
 						selected.getName());
-				if (newName == null)
+				if (newName == null) {
 					return;
+				}
 				newName = newName.trim();
 				if (newName.length() > 0 && !newName.equals(selected.getName())) {
 					File file = new File(selected.getPath());
 					selected.setName(newName);
 					File newFile = new File(selected.getPath());
 					file.renameTo(newFile);
+					
 					try {
 						EntitiesConfiguration.saveToFile(selected);
-					} catch (ConfigurationException ce) {
-						logger.warning(ce.getMessage());
+					} catch (IOException ex) {
+						logger.severe(ex.getMessage());
 					}
+
 					updateLogTypes();
 				}
 			}

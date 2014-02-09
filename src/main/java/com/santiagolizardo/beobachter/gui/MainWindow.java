@@ -1,18 +1,17 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.gui;
 
@@ -24,8 +23,6 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-
-import org.apache.commons.configuration.ConfigurationException;
 
 import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.config.ConfigPersistence;
@@ -39,9 +36,6 @@ import java.util.List;
 
 /**
  * This is the main application entry point. It constructs the initial window.
- * 
- * @author slizardo
- * 
  */
 public class MainWindow extends JFrame {
 
@@ -123,36 +117,32 @@ public class MainWindow extends JFrame {
 
 		int exitCode = 1;
 
-		try {
-			setVisible(false);
+		setVisible(false);
 
-			configData.setWindowHeight(getHeight());
-			configData.setWindowWidth(getWidth());
-			configData.setWindowX(getX());
-			configData.setWindowY(getY());
+		configData.setWindowHeight(getHeight());
+		configData.setWindowWidth(getWidth());
+		configData.setWindowX(getX());
+		configData.setWindowY(getY());
 
-			ConfigPersistence configPersistence = new ConfigPersistence();
-			configPersistence.saveProperties(this,
-					configData.getConfiguration());
+		ConfigPersistence configPersistence = new ConfigPersistence();
+		configPersistence.saveProperties(this,
+				configData.getConfiguration());
 
-			dispose();
-			exitCode = 0;
-
-		} catch (ConfigurationException e) {
-			logger.severe(e.getMessage());
-		}
+		dispose();
+		exitCode = 0;
 
 		System.exit(exitCode);
 	}
 
 	public void updateActions(int delta) {
 		boolean areWindowsOpen = desktop.getAllFrames().length + delta > 0;
-		actionFactory.createSelectAllAction().setEnabled(areWindowsOpen);
+		actionFactory.getSelectAllAction().setEnabled(areWindowsOpen);
 
 		Menu mainMenu = ((Menu) getJMenuBar());
-		mainMenu.getWindowMenu().setEnabled(areWindowsOpen);
 		mainMenu.getFileMenu().getSaveSessionMenuItem()
 				.setEnabled(areWindowsOpen);
+		mainMenu.getEditMenu().setEnabled(areWindowsOpen);
+		mainMenu.getWindowMenu().setEnabled(areWindowsOpen);
 	}
 
 	public List<String> getRecentFiles() {
@@ -169,5 +159,9 @@ public class MainWindow extends JFrame {
 
 	public ActionFactory getActionFactory() {
 		return actionFactory;
+	}
+
+	public DesktopPanel getDesktop() {
+		return desktop;
 	}
 }

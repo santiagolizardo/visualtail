@@ -31,7 +31,7 @@ import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
-import com.santiagolizardo.beobachter.gui.util.FileUtil;
+import com.santiagolizardo.beobachter.util.FileUtil;
 import java.util.List;
 
 public class RecentsMenu extends JMenu implements ActionListener {

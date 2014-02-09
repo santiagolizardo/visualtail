@@ -18,6 +18,7 @@ package com.santiagolizardo.beobachter.resources;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -28,23 +29,25 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.apache.commons.io.IOUtils;
-
 public class ResourcesLoader {
 
 	private static final Logger logger = Logger.getLogger(ResourcesLoader.class
 			.getName());
 
 	public static String readResource(Class<?> clazz, String name) {
-		String resourceContent = null;
+		Charset charset = Charset.forName("UTF-8");
+		StringBuilder resourceContent = new StringBuilder();
 
 		try (InputStream is = clazz.getResourceAsStream(name)) {
-			resourceContent = IOUtils.toString(is, "UTF-8");
+			byte[] bytes = new byte[1024];
+			while (is.read(bytes) > 0) {
+				resourceContent.append(new String(bytes, charset));
+			}
 		} catch (IOException ioe) {
 			logger.severe(ioe.getMessage());
 		}
 
-		return resourceContent;
+		return resourceContent.toString();
 	}
 
 	public static Collection<String> getResources(Pattern pattern)

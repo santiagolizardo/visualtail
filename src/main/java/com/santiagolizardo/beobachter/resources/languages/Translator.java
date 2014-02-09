@@ -27,9 +27,6 @@ import com.santiagolizardo.beobachter.util.LocaleUtil;
 
 /**
  * This class is the responsible of translate every literal on the GUI
- * 
- * @author slizardo
- * 
  */
 public class Translator {
 

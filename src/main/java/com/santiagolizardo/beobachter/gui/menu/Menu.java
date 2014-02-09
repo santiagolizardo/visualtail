@@ -27,12 +27,13 @@ public class Menu extends JMenuBar {
 	private static final long serialVersionUID = -1490576137341648743L;
 
 	private FileMenu fileMenu;
+	private EditMenu editMenu;
 	private WindowsMenu windowMenu;
 
 	public Menu(final JDesktopPane pane, MainWindow parentFrame) {
 
 		fileMenu = new FileMenu(parentFrame);
-		EditMenu editMenu = new EditMenu(parentFrame);
+		editMenu = new EditMenu(parentFrame);
 		OptionsMenu optionsMenu = new OptionsMenu(parentFrame);
 
 		windowMenu = new WindowsMenu(parentFrame);
@@ -50,6 +51,10 @@ public class Menu extends JMenuBar {
 
 	public FileMenu getFileMenu() {
 		return fileMenu;
+	}
+
+	public EditMenu getEditMenu() {
+		return editMenu;
 	}
 
 	public WindowsMenu getWindowMenu() {

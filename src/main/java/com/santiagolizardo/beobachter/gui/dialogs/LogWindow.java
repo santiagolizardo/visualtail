@@ -17,37 +17,21 @@ package com.santiagolizardo.beobachter.gui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Desktop;
-import java.awt.Desktop.Action;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.IOException;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import org.apache.commons.io.FileUtils;
 
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.gui.MainWindow;
@@ -55,84 +39,63 @@ import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.engine.Tail;
 import com.santiagolizardo.beobachter.engine.TailListener;
 import com.santiagolizardo.beobachter.gui.adapters.LinesMouseAdapter;
+import com.santiagolizardo.beobachter.gui.components.LogWindowToolbar;
 import com.santiagolizardo.beobachter.gui.renderers.LineRenderer;
-import com.santiagolizardo.beobachter.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
+import com.santiagolizardo.beobachter.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
-import com.santiagolizardo.beobachter.util.LogTypes;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 public class LogWindow extends JInternalFrame implements TailListener {
 
 	private static final long serialVersionUID = -108911942974722973L;
 
-	private static final Logger logger = Logger.getLogger(LogWindow.class.getName());
-
-	private File file;
-
-	private int numberDisplayedLines;
-
-	private JScrollPane scrollableList;
-
-	private JToolBar toolbar;
-
-	private DefaultListModel<String> linesModel;
-
-	public JList<String> linesList;
-
-	private JCheckBox cbCheckChanges;
-	private JCheckBox cbScrollNewLines;
-
-	private JSpinner spNumberDisplayerLines;
-
-	private JComboBox<LogType> logTypes;
-
-	private Tail tail;
+	private int numberLinesToDisplay;
 
 	private int searchIndex = 0;
 	private String searchText = null;
 
-	private MainWindow mainWindow;
+	private File file;
+
+	private Tail tail;
 
 	private ScheduledExecutorService scheduler;
 	private ScheduledFuture<?> task;
 
 	private LogType logType;
 
+	private JScrollPane scrollableList;
+
+	private LogWindowToolbar toolbar;
+
+	private DefaultListModel<String> linesModel;
+
+	public JList<String> linesList;
+
+	private MainWindow mainWindow;
+
 	public LogWindow(final MainWindow mainWindow, String fileName, LogType logType) {
 
 		setResizable(true);
 		setFrameIcon(IconFactory.getImage("log_window.png"));
 
+		numberLinesToDisplay = 256;
+
 		this.mainWindow = mainWindow;
 		this.logType = logType;
 
 		mainWindow.getConfigData().setLastPath(fileName);
-
-		numberDisplayedLines = 256;
-
-		spNumberDisplayerLines = new JSpinner(new SpinnerNumberModel(
-				numberDisplayedLines, 1, 999, 1));
-		spNumberDisplayerLines.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent arg0) {
-				numberDisplayedLines = (int) spNumberDisplayerLines.getValue();
-				trimLines();
-			}
-		});
-
 		mainWindow.updateActions(+1);
 
 		linesModel = new DefaultListModel<>();
 		linesList = new JList<>(linesModel);
-		linesList.setCellRenderer(new LineRenderer(logType.getRules(), mainWindow
-				.getConfigData()));
+
+		loadLogType(logType);
+
 		linesList
 				.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		linesList.getSelectionModel().addListSelectionListener(
@@ -156,59 +119,11 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 					@Override
 					public void mousePressed(MouseEvent e) {
-						cbScrollNewLines.setSelected(false);
+						toolbar.getScrollNewLinesCheckBox().setSelected(false);
 					}
 				});
 
-		toolbar = new JToolBar();
-		toolbar.setFloatable(false);
-
-		cbCheckChanges = new JCheckBox(Translator._("Check for changes"));
-		cbCheckChanges.setSelected(true);
-		cbCheckChanges.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				boolean selected = cbCheckChanges.isSelected();
-				task.cancel(true);
-				if (selected) {
-					launchTask();
-				}
-			}
-		});
-
-		cbScrollNewLines = new JCheckBox(Translator._("Scroll to new lines"));
-
-		LogTypes logTypesLoader = LogTypes.getInstance();
-
-		DefaultComboBoxModel<LogType> logTypesModel = new DefaultComboBoxModel<LogType>(
-				logTypesLoader.getAll().toArray(new LogType[]{}));
-		logTypes = new JComboBox<>(logTypesModel);
-		logTypes.setRenderer(new LogTypeListRenderer());
-		logTypes.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				LogType logType = (LogType) logTypes.getSelectedItem();
-				linesList.setCellRenderer(new LineRenderer(logType.getRules(),
-						mainWindow.getConfigData()));
-			}
-		});
-		logTypes.setSelectedItem(logType);
-
-		JButton btnClear = new JButton(Translator._("Clear buffer"));
-		btnClear.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				linesModel.clear();
-			}
-		});
-
-		toolbar.add(cbCheckChanges);
-		toolbar.add(cbScrollNewLines);
-		toolbar.add(logTypes);
-		toolbar.add(spNumberDisplayerLines);
-		addPrintMenuItem();
-		toolbar.add(btnClear);
+		toolbar = new LogWindowToolbar(this, logType);
 
 		file = new File(fileName);
 
@@ -253,32 +168,6 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		});
 	}
 
-	/**
-	 * Tries to add the print menu if the desktop supports it.
-	 */
-	private void addPrintMenuItem() {
-		if (Desktop.isDesktopSupported()) {
-			final Desktop desktop = Desktop.getDesktop();
-			if (desktop.isSupported(Action.PRINT)) {
-
-				JButton btnPrint = new JButton(Translator._("Print this file"));
-				btnPrint.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						try {
-							desktop.print(file);
-						} catch (IOException e) {
-							logger.warning(e.getMessage());
-						}
-					}
-				});
-
-				toolbar.add(btnPrint);
-			}
-		}
-
-	}
-
 	@Override
 	public void onFileChanges(final String line) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -286,11 +175,8 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			public void run() {
 				linesModel.addElement(line);
 				trimLines();
-				if (cbScrollNewLines.isSelected()) {
-					int lastIndex = linesModel.size() - 1;
-					if (lastIndex >= 0) {
-						linesList.ensureIndexIsVisible(lastIndex);
-					}
+				if (toolbar.getScrollNewLinesCheckBox().isSelected()) {
+					moveToNewLines();
 				}
 				updateTitle();
 			}
@@ -333,7 +219,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	}
 
 	private void updateTitle() {
-		String byteCount = FileUtils.byteCountToDisplaySize(file.length());
+		String byteCount = FileUtil.byteCountToDisplaySize(file.length());
 		setTitle(file.getName().concat(" - ").concat(byteCount));
 	}
 
@@ -345,19 +231,57 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		this.file = file;
 	}
 
-	private void trimLines() {
+	public void trimLines() {
 		int numLines = linesModel.size();
-		if (numLines > numberDisplayedLines) {
-			linesModel.removeRange(0, numLines - numberDisplayedLines - 1);
+		if (numLines > numberLinesToDisplay) {
+			linesModel.removeRange(0, numLines - numberLinesToDisplay - 1);
 		}
 	}
 
 	private void updateSelections() {
-		mainWindow.getActionFactory().createCopyAction()
+		mainWindow.getActionFactory().getCopyAction()
 				.setEnabled(linesList.getSelectedValuesList().size() > 0);
 	}
 
 	private void launchTask() {
 		task = scheduler.scheduleAtFixedRate(tail, 0, logType.getRefreshInterval(), TimeUnit.MILLISECONDS);
+	}
+
+	public void hideSelectedLines() {
+		int[] selectedIndexes = linesList.getSelectedIndices();
+		for (int i = selectedIndexes.length - 1; i >= 0; i--) {
+			linesModel.remove(selectedIndexes[i]);
+		}
+	}
+
+	public void checkForChanges() {
+		task.cancel(true);
+		if (toolbar.getCheckForChangesCheckBox().isSelected()) {
+			launchTask();
+		}
+	}
+
+	public void clear() {
+		linesModel.clear();
+	}
+
+	public void loadLogType(LogType logType) {
+		linesList.setCellRenderer(new LineRenderer(logType.getRules(),
+				mainWindow.getConfigData()));
+	}
+
+	public int getNumberLinesToDisplay() {
+		return numberLinesToDisplay;
+	}
+
+	public void setNumberLinesToDisplay(int numberLinesToDisplay) {
+		this.numberLinesToDisplay = numberLinesToDisplay;
+	}
+
+	public void moveToNewLines() {
+		int lastIndex = linesModel.size() - 1;
+		if (lastIndex >= 0) {
+			linesList.ensureIndexIsVisible(lastIndex);
+		}
 	}
 }

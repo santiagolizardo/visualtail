@@ -22,16 +22,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
-import com.santiagolizardo.beobachter.gui.menu.EditPopupMenu;
+import com.santiagolizardo.beobachter.gui.menu.ContextualMenu;
 
 public class LinesMouseAdapter extends MouseAdapter {
 
-	private EditPopupMenu popupMenu;
+	private ContextualMenu popupMenu;
 
 	public LinesMouseAdapter(MainWindow mainGUI) {
 		super();
 
-		popupMenu = new EditPopupMenu(mainGUI);
+		popupMenu = new ContextualMenu(mainGUI);
 	}
 
 	@Override

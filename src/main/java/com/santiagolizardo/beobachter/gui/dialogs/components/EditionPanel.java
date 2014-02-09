@@ -56,12 +56,13 @@ import com.santiagolizardo.beobachter.gui.renderers.ColorRenderer;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
-import org.apache.commons.configuration.ConfigurationException;
 
 public class EditionPanel extends JPanel {
 
@@ -300,12 +301,11 @@ public class EditionPanel extends JPanel {
 				.valueOf(spnRefresh.getValue().toString()).shortValue();
 		logType.setRefreshInterval(interval);
 		logType.setRules(modelRules.getRules());
-
+		
 		try {
 			EntitiesConfiguration.saveToFile(logType);
-		} catch (ConfigurationException e) {
-			logger.warning(e.getMessage());
+		} catch (IOException ex) {
+			logger.severe(ex.getMessage());
 		}
-
 	}
 }

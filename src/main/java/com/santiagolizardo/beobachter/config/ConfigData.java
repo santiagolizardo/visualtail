@@ -21,7 +21,6 @@ import java.util.List;
 
 import javax.swing.UIManager;
 
-import org.apache.commons.configuration.PropertiesConfiguration;
 
 public class ConfigData {
 
@@ -46,7 +45,7 @@ public class ConfigData {
 
 	private final String FONT_SIZE = "font.size";
 
-	private PropertiesConfiguration configuration;
+	private PropertySet configuration;
 
 	public ConfigData() {
 	}
@@ -54,7 +53,7 @@ public class ConfigData {
 	public List<String> getRecentFiles() {
 		List<String> recentFiles = new ArrayList<>();
 		for (byte i = 0; i < 10; i++) {
-			String recentFile = configuration.getString("recent." + i
+			String recentFile = configuration.getProperty("recent." + i
 					+ ".file_name");
 			if (recentFile != null)
 				recentFiles.add(recentFile);
@@ -79,7 +78,7 @@ public class ConfigData {
 	}
 
 	public String getWindowLAF() {
-		String laf = configuration.getString(WINDOW_LAF);
+		String laf = configuration.getProperty(WINDOW_LAF);
 		if (laf == null) {
 			laf = UIManager.getSystemLookAndFeelClassName();
 			configuration.setProperty(WINDOW_LAF, laf);
@@ -108,7 +107,7 @@ public class ConfigData {
 	}
 
 	public String getLastPath() {
-		String lastPath = configuration.getString(LAST_PATH);
+		String lastPath = configuration.getProperty(LAST_PATH);
 		if (lastPath == null) {
 			lastPath = System.getProperty("user.home");
 			configuration.setProperty(LAST_PATH, lastPath);
@@ -144,11 +143,11 @@ public class ConfigData {
 		configuration.setProperty(FONT_SIZE, fontSize);
 	}
 
-	public PropertiesConfiguration getConfiguration() {
+	public PropertySet getConfiguration() {
 		return configuration;
 	}
 
-	public void setConfiguration(PropertiesConfiguration configuration) {
+	public void setConfiguration(PropertySet configuration) {
 		this.configuration = configuration;
 	}
 }

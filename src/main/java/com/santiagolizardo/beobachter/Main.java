@@ -32,7 +32,6 @@ import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.config.ConfigPersistence;
 import com.santiagolizardo.beobachter.gui.util.SwingUtil;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
-import org.apache.commons.configuration.ConfigurationException;
 
 /**
  * This is the main application entry point. It initializes the main window.
@@ -61,7 +60,7 @@ public class Main {
 		try {
 			configData.setConfiguration(configPersistence
 					.loadProperties(Constants.CONFIG_FILE));
-		} catch (ConfigurationException | IOException ex) {
+		} catch (IOException ex) {
 			System.err.println(ex.getMessage());
 		}
 

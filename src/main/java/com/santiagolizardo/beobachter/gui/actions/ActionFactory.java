@@ -28,11 +28,11 @@ public class ActionFactory {
 		selectAllAction = new SelectAllAction(mainGUI);
 	}
 
-	public CopyAction createCopyAction() {
+	public CopyAction getCopyAction() {
 		return copyAction;
 	}
 
-	public SelectAllAction createSelectAllAction() {
+	public SelectAllAction getSelectAllAction() {
 		return selectAllAction;
 	}
 }
