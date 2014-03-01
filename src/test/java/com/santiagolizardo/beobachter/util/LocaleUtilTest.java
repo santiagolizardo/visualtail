@@ -16,9 +16,8 @@
  */
 package com.santiagolizardo.beobachter.util;
 
+import java.util.Locale;
 import junit.framework.TestCase;
-
-import com.santiagolizardo.beobachter.util.LocaleUtil;
 
 public class LocaleUtilTest extends TestCase {
 
@@ -30,6 +29,7 @@ public class LocaleUtilTest extends TestCase {
 			assertEquals("Argument can not be null.", iae.getMessage());
 		}
 
+		Locale.setDefault(Locale.ENGLISH);
 		assertEquals("", LocaleUtil.getDisplayName(""));
 		assertEquals("foobar", LocaleUtil.getDisplayName("foobar"));
 		assertEquals("Spanish", LocaleUtil.getDisplayName("es"));
