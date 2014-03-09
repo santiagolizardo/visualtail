@@ -1,22 +1,24 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.gui.components;
 
 import java.beans.PropertyVetoException;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.swing.JDesktopPane;
@@ -28,7 +30,7 @@ public class DesktopPanel extends JDesktopPane {
 
 	private static final Logger logger = Logger.getLogger(DesktopPanel.class
 			.getName());
-	
+
 	/**
 	 * This method relocates all frames contained on the desktop and sets them
 	 * on cascade.
@@ -36,8 +38,9 @@ public class DesktopPanel extends JDesktopPane {
 	public void setWindowsOnCascade() {
 		JInternalFrame[] frames = getAllFrames();
 		int numFrames = frames.length;
-		if (numFrames == 0)
+		if (numFrames == 0) {
 			return;
+		}
 
 		int frameWidth = (int) (getWidth() * .75);
 		int frameHeight = (int) (getHeight() * .75);
@@ -71,8 +74,9 @@ public class DesktopPanel extends JDesktopPane {
 	public void setWindowsOnTileVertical() {
 		JInternalFrame[] frames = getAllFrames();
 		int numFrames = frames.length;
-		if (numFrames == 0)
+		if (numFrames == 0) {
 			return;
+		}
 
 		int frameWidth = getWidth();
 		int frameHeight = getHeight() / numFrames;
@@ -97,8 +101,9 @@ public class DesktopPanel extends JDesktopPane {
 	public void setWindowsOnTileHorizontal() {
 		JInternalFrame[] frames = getAllFrames();
 		int numFrames = frames.length;
-		if (numFrames == 0)
+		if (numFrames == 0) {
 			return;
+		}
 
 		int frameWidth = (getWidth() / numFrames);
 		int frameHeight = getHeight();
@@ -113,6 +118,23 @@ public class DesktopPanel extends JDesktopPane {
 
 			frames[i].setSize(frameWidth, frameHeight);
 			frames[i].setLocation(i * frameWidth, 0);
+		}
+	}
+
+	@Override
+	public JInternalFrame[] getAllFrames() {
+		Set<JInternalFrame> uniqueFrames = new LinkedHashSet<>();
+		uniqueFrames.addAll(Arrays.asList(super.getAllFrames()));
+		return uniqueFrames.toArray(new JInternalFrame[]{});
+	}
+
+	public int getNumberOfWindows() {
+		return getAllFrames().length;
+	}
+
+	public void closeAllWindows() {
+		for (JInternalFrame frame : getAllFrames()) {
+			frame.doDefaultCloseAction();
 		}
 	}
 }

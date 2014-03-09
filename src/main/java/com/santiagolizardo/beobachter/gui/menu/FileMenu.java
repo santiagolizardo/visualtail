@@ -21,20 +21,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFileChooser;
-import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
+import com.santiagolizardo.beobachter.beans.SessionManager;
 import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.actions.ExitAction;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
@@ -44,6 +42,7 @@ import com.santiagolizardo.beobachter.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import java.io.IOException;
 import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
 
 public class FileMenu extends JMenu implements ActionListener {
 
@@ -72,6 +71,7 @@ public class FileMenu extends JMenu implements ActionListener {
 
 		recentsMenu = new RecentsMenu(mainWindow);
 		recentsMenu.setEnabled(!mainWindow.getConfigData().getRecentFiles().isEmpty());
+		recentsMenu.refresh();
 
 		JMenuItem exit = new JMenuItem(new ExitAction(mainWindow));
 		exit.setIcon(IconFactory.getImage("exit.png"));
@@ -128,11 +128,13 @@ public class FileMenu extends JMenu implements ActionListener {
 					Controller.openFile(mainWindow, file.getAbsolutePath(),
 							logType);
 
-					recentsMenu.addRecent(file.getAbsolutePath());
+					mainWindow.getRecentFiles().remove(file.getAbsolutePath());
+					mainWindow.getRecentFiles().add(file.getAbsolutePath());
+					recentsMenu.refresh();
 					recentsMenu.setEnabled(true);
 				}
 
-				mainWindow.desktop.setWindowsOnTileHorizontal();
+				mainWindow.getDesktop().setWindowsOnTileHorizontal();
 
 				if (unreadableFiles.size() > 0) {
 					StringBuilder message = new StringBuilder();
@@ -167,17 +169,17 @@ public class FileMenu extends JMenu implements ActionListener {
 				return;
 			}
 
+			List<String> filePaths = new ArrayList<>();
+			JInternalFrame[] frames = mainWindow.getDesktop().getAllFrames();
+			for (JInternalFrame frame : frames) {
+				LogWindow logWindow = (LogWindow) frame;
+				filePaths.add(logWindow.getFile()
+						.getAbsolutePath());
+			}
+
+			SessionManager sessionManager = new SessionManager();
 			try {
-				File file = new File(Constants.FOLDER_SESSIONS
-						+ File.separator + name + ".txt");
-				FileWriter writer = new FileWriter(file);
-				JInternalFrame[] frames = mainWindow.desktop.getAllFrames();
-				for (JInternalFrame frame : frames) {
-					LogWindow window = (LogWindow) frame;
-					writer.write(String.format("%s\n", window.getFile()
-							.getAbsolutePath()));
-				}
-				writer.close();
+				sessionManager.save(name, filePaths);
 			} catch (IOException e) {
 				logger.warning(e.getMessage());
 				DialogFactory.showErrorMessage(null, _("Invalid session name") + "\r\n" + e.getMessage());

@@ -15,6 +15,7 @@
  */
 package com.santiagolizardo.beobachter.config;
 
+import static com.santiagolizardo.beobachter.Constants.HOME_PATH;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,16 +24,18 @@ import java.io.InputStream;
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConfigPersistence {
 
 	private static final Logger logger = Logger.getLogger(ConfigPersistence.class.getName());
 
-	public PropertySet loadProperties(String fileName)
+	public static final String CONFIG_FILE_PATH = HOME_PATH + File.separator
+			+ "config.properties";
+
+	public PropertySet loadProperties()
 			throws FileNotFoundException, IOException {
-		File file = new File(fileName);
+		File file = new File(CONFIG_FILE_PATH);
 		File dir = file.getParentFile();
 		if (!dir.exists()) {
 			dir.mkdirs();
@@ -43,7 +46,7 @@ public class ConfigPersistence {
 			Files.copy(is, file.toPath());
 		}
 
-		return new PropertySet(fileName);
+		return new PropertySet(CONFIG_FILE_PATH);
 	}
 
 	public void saveProperties(MainWindow mainGUI,

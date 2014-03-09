@@ -46,7 +46,7 @@ public class WindowsMenu extends JMenu {
 		itemCascade.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				parentFrame.desktop.setWindowsOnCascade();
+				parentFrame.getDesktop().setWindowsOnCascade();
 			}
 		});
 
@@ -58,7 +58,7 @@ public class WindowsMenu extends JMenu {
 		itemTileVer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				parentFrame.desktop.setWindowsOnTileVertical();
+				parentFrame.getDesktop().setWindowsOnTileVertical();
 			}
 		});
 
@@ -70,7 +70,7 @@ public class WindowsMenu extends JMenu {
 		itemTileHor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				parentFrame.desktop.setWindowsOnTileHorizontal();
+				parentFrame.getDesktop().setWindowsOnTileHorizontal();
 			}
 		});
 
@@ -80,8 +80,7 @@ public class WindowsMenu extends JMenu {
 		miCloseAllWindows.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				parentFrame.desktop.removeAll();
-				parentFrame.desktop.repaint();
+				parentFrame.getDesktop().closeAllWindows();
 
 				parentFrame.setTitle(Constants.APP_NAME);
 				parentFrame.updateActions(0);

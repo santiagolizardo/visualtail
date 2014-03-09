@@ -48,7 +48,7 @@ public class FindPanel extends JPanel {
 			public void keyReleased(KeyEvent ev) {
 				int keyCode = ev.getKeyCode();
 				if (keyCode == KeyEvent.VK_ENTER) {
-					LogWindow log = (LogWindow) mainGUI.desktop
+					LogWindow log = (LogWindow) mainGUI.getDesktop()
 							.getSelectedFrame();
 					if (log != null) {
 						log.searchText(searchTextField.getText());

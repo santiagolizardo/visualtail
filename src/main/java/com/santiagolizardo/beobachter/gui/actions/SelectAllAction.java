@@ -47,7 +47,7 @@ public class SelectAllAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) mainGUI.desktop.getSelectedFrame();
+		LogWindow log = (LogWindow) mainGUI.getDesktop().getSelectedFrame();
 		if (log != null) {
 			int numLines = log.linesList.getModel().getSize();
 			if (numLines > 0)

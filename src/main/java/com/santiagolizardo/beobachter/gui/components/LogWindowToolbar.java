@@ -1,26 +1,26 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.gui.components;
 
 import com.santiagolizardo.beobachter.beans.LogType;
+import com.santiagolizardo.beobachter.engine.TailListener;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
-import com.santiagolizardo.beobachter.util.LogTypes;
+import com.santiagolizardo.beobachter.beans.LogTypeManager;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,7 +36,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class LogWindowToolbar extends JToolBar {
+public class LogWindowToolbar extends JToolBar implements TailListener {
 
 	private static final Logger logger = Logger.getLogger(LogWindowToolbar.class.getName());
 
@@ -61,7 +61,7 @@ public class LogWindowToolbar extends JToolBar {
 		spNumberDisplayerLines.addChangeListener(new ChangeListener() {
 
 			@Override
-			public void stateChanged(ChangeEvent arg0) {
+			public void stateChanged(ChangeEvent ev) {
 				int numberDisplayedLines = (int) spNumberDisplayerLines.getValue();
 				logWindow.setNumberLinesToDisplay(numberDisplayedLines);
 				logWindow.trimLines();
@@ -90,14 +90,16 @@ public class LogWindowToolbar extends JToolBar {
 		});
 
 		clearButton = new JButton(Translator._("Clear buffer"));
+		clearButton.setEnabled(false);
 		clearButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
 				logWindow.clear();
+				clearButton.setEnabled(false);
 			}
 		});
 
-		LogTypes logTypesLoader = LogTypes.getInstance();
+		LogTypeManager logTypesLoader = LogTypeManager.getInstance();
 		DefaultComboBoxModel<LogType> logTypesModel = new DefaultComboBoxModel<>(
 				logTypesLoader.getAll().toArray(new LogType[]{}));
 		logTypes = new JComboBox<>(logTypesModel);
@@ -123,25 +125,28 @@ public class LogWindowToolbar extends JToolBar {
 	 * Tries to add the print menu if the desktop supports it.
 	 */
 	private void addPrintMenuItem() {
-		if (Desktop.isDesktopSupported()) {
-			final Desktop desktop = Desktop.getDesktop();
-			if (desktop.isSupported(Desktop.Action.PRINT)) {
-
-				JButton btnPrint = new JButton(Translator._("Print this file"));
-				btnPrint.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent ev) {
-						try {
-							desktop.print(logWindow.getFile());
-						} catch (IOException e) {
-							logger.warning(e.getMessage());
-						}
-					}
-				});
-
-				add(btnPrint);
-			}
+		if (!Desktop.isDesktopSupported()) {
+			return;
 		}
+
+		final Desktop desktop = Desktop.getDesktop();
+		if (!desktop.isSupported(Desktop.Action.PRINT)) {
+			return;
+		}
+
+		JButton btnPrint = new JButton(Translator._("Print this file"));
+		btnPrint.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				try {
+					desktop.print(logWindow.getFile());
+				} catch (IOException e) {
+					logger.warning(e.getMessage());
+				}
+			}
+		});
+
+		add(btnPrint);
 	}
 
 	public JCheckBox getCheckForChangesCheckBox() {
@@ -150,5 +155,16 @@ public class LogWindowToolbar extends JToolBar {
 
 	public JCheckBox getScrollNewLinesCheckBox() {
 		return scrollNewLinesCheckBox;
+	}
+
+	@Override
+	public void onFileChanges(String line) {
+		if (!clearButton.isEnabled()) {
+			clearButton.setEnabled(true);
+		}
+	}
+
+	public JButton getClearButton() {
+		return clearButton;
 	}
 }

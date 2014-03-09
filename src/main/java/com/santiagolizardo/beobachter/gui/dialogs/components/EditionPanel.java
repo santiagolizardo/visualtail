@@ -1,18 +1,17 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.gui.dialogs.components;
 
@@ -49,15 +48,14 @@ import javax.swing.event.ListSelectionListener;
 
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.beans.Rule;
-import com.santiagolizardo.beobachter.config.EntitiesConfiguration;
 import com.santiagolizardo.beobachter.gui.editors.ColorEditor;
 import com.santiagolizardo.beobachter.gui.renderers.ColorExampleRenderer;
 import com.santiagolizardo.beobachter.gui.renderers.ColorRenderer;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
+import com.santiagolizardo.beobachter.beans.LogTypeManager;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
@@ -92,7 +90,7 @@ public class EditionPanel extends JPanel {
 		spnRefresh = new JSpinner(spinnerModel);
 		spnRefresh.addChangeListener(new ChangeListener() {
 			@Override
-			public void stateChanged(ChangeEvent arg0) {
+			public void stateChanged(ChangeEvent ev) {
 				updateSeconds();
 			}
 		});
@@ -287,7 +285,7 @@ public class EditionPanel extends JPanel {
 
 	public void setColumnWidths() {
 		(((DefaultTableCellRenderer) tblRules.getTableHeader().getDefaultRenderer())).setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		Dimension tableSize = tblRules.getSize();
 		double w = tableSize.getWidth();
 		for (int i = 0; i < tblRules.getColumnCount(); i++) {
@@ -301,9 +299,10 @@ public class EditionPanel extends JPanel {
 				.valueOf(spnRefresh.getValue().toString()).shortValue();
 		logType.setRefreshInterval(interval);
 		logType.setRules(modelRules.getRules());
-		
+
 		try {
-			EntitiesConfiguration.saveToFile(logType);
+			LogTypeManager logTypes = LogTypeManager.getInstance();
+			logTypes.saveToFile(logType);
 		} catch (IOException ex) {
 			logger.severe(ex.getMessage());
 		}

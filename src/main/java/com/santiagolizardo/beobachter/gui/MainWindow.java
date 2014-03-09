@@ -31,7 +31,6 @@ import com.santiagolizardo.beobachter.gui.components.DesktopPanel;
 import com.santiagolizardo.beobachter.gui.dialogs.components.FindPanel;
 import com.santiagolizardo.beobachter.gui.menu.Menu;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,27 +40,22 @@ public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = -349295815866572937L;
 
+	private static final Logger logger = Logger.getLogger(MainWindow.class.getName());
+
 	private ConfigData configData;
-	public DesktopPanel desktop;
+	private DesktopPanel desktop;
 	private FindPanel findPanel;
 
 	private ActionFactory actionFactory;
 
-	private Logger logger;
-
 	private Menu menu;
 
-	/**
-	 * @todo Move this to a better place.
-	 */
 	private List<String> recentFiles;
 
 	public MainWindow(ConfigData configData) {
 		this.configData = configData;
 
-		logger = Logger.getLogger(MainWindow.class.getName());
-
-		recentFiles = new ArrayList<>();
+		recentFiles = configData.getRecentFiles();
 
 		actionFactory = new ActionFactory(this);
 

@@ -24,7 +24,6 @@ import static javax.swing.SpringLayout.WEST;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
@@ -39,14 +38,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.santiagolizardo.beobachter.beans.LogType;
-import com.santiagolizardo.beobachter.config.EntitiesConfiguration;
 import com.santiagolizardo.beobachter.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
-import com.santiagolizardo.beobachter.util.LogTypes;
+import com.santiagolizardo.beobachter.beans.LogTypeManager;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ListingPanel extends JPanel {
@@ -83,7 +80,8 @@ public class ListingPanel extends JPanel {
 					btnRemove.setEnabled(false);
 				} else {
 					LogType logType = (LogType) lstTypes.getSelectedValue();
-					logType = EntitiesConfiguration.loadFromFile(logType
+					LogTypeManager logTypes = LogTypeManager.getInstance();
+					logType = logTypes.loadFromFile(logType
 							.getName());
 
 					editionPanel.setLogType(logType);
@@ -112,11 +110,12 @@ public class ListingPanel extends JPanel {
 				}
 				LogType logType = new LogType(name);
 				try {
-					EntitiesConfiguration.saveToFile(logType);
+					LogTypeManager logTypes = LogTypeManager.getInstance();
+					logTypes.saveToFile(logType);
 
 					updateLogTypes();
-				} catch (Exception ee) {
-					ee.printStackTrace();
+				} catch (IOException ee) {
+					logger.warning(ee.getMessage());
 				}
 			}
 		});
@@ -125,7 +124,7 @@ public class ListingPanel extends JPanel {
 		btnRename.setEnabled(false);
 		btnRename.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent ev) {
 				LogType selected = (LogType) lstTypes.getSelectedValue();
 				String newName = JOptionPane.showInputDialog(getParent(),
 						_("Enter the new name of the log type:"),
@@ -135,16 +134,8 @@ public class ListingPanel extends JPanel {
 				}
 				newName = newName.trim();
 				if (newName.length() > 0 && !newName.equals(selected.getName())) {
-					File file = new File(selected.getPath());
-					selected.setName(newName);
-					File newFile = new File(selected.getPath());
-					file.renameTo(newFile);
-					
-					try {
-						EntitiesConfiguration.saveToFile(selected);
-					} catch (IOException ex) {
-						logger.severe(ex.getMessage());
-					}
+					LogTypeManager logTypes = LogTypeManager.getInstance();
+					logTypes.rename(selected, newName);
 
 					updateLogTypes();
 				}
@@ -155,12 +146,12 @@ public class ListingPanel extends JPanel {
 		btnRemove.setEnabled(false);
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent ev) {
 				if (DialogFactory.showQuestionDialog(getParent(), Translator
 						._("Are you sure you want to delete the selected log type?"))) {
 					LogType selected = (LogType) lstTypes.getSelectedValue();
-					File file = new File(selected.getPath());
-					if (!file.delete()) {
+					LogTypeManager logTypes = LogTypeManager.getInstance();
+					if (!logTypes.remove(selected)) {
 						DialogFactory.showErrorMessage(getParent(),
 								Translator._("Unable to delete the log type"));
 					}
@@ -211,7 +202,7 @@ public class ListingPanel extends JPanel {
 	public void updateLogTypes() {
 		modelTypes.clear();
 
-		LogTypes logTypesLoader = LogTypes.getInstance();
+		LogTypeManager logTypesLoader = LogTypeManager.getInstance();
 		List<LogType> logTypes = logTypesLoader.getAll();
 		for (LogType logType : logTypes) {
 			if (!"Default".equals(logType.getName())) {

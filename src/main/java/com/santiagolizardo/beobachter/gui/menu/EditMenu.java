@@ -25,6 +25,8 @@ import javax.swing.JMenuItem;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.actions.ActionFactory;
+import com.santiagolizardo.beobachter.gui.actions.ClearAllBuffersAction;
+import com.santiagolizardo.beobachter.gui.actions.ClearSelectedBufferAction;
 import com.santiagolizardo.beobachter.gui.actions.FindAction;
 import com.santiagolizardo.beobachter.gui.actions.FindNextAction;
 
@@ -48,6 +50,9 @@ public class EditMenu extends JMenu {
 
 		JMenuItem findMenuItem = new JMenuItem(new FindAction(mainGUI));
 		JMenuItem findNextMenuItem = new JMenuItem(new FindNextAction(mainGUI));
+		
+		JMenuItem clearSelectedBufferMenuItem = new JMenuItem(new ClearSelectedBufferAction(mainGUI));
+		JMenuItem clearAllBuffersMenuItem = new JMenuItem(new ClearAllBuffersAction(mainGUI));
 
 		add(copyMenuItem);
 		addSeparator();
@@ -55,5 +60,8 @@ public class EditMenu extends JMenu {
 		addSeparator();
 		add(findMenuItem);
 		add(findNextMenuItem);
+		addSeparator();
+		add(clearSelectedBufferMenuItem);
+		add(clearAllBuffersMenuItem);
 	}
 }

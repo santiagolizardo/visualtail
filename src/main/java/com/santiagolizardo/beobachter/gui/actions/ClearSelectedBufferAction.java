@@ -26,29 +26,25 @@ import javax.swing.KeyStroke;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
-import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
 
-public class FindNextAction extends AbstractAction {
+public class ClearSelectedBufferAction extends AbstractAction {
 
-	private static final long serialVersionUID = 2768042815624362464L;
-	
+	private static final long serialVersionUID = 2244429466145757856L;
+
 	private MainWindow mainGUI;
 
-	public FindNextAction(MainWindow mainGUI) {
-
+	public ClearSelectedBufferAction(MainWindow mainGUI) {
+		
 		this.mainGUI = mainGUI;
 
-		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
-		putValue(AbstractAction.NAME, _("Find next"));
+		putValue(AbstractAction.NAME, _("Clear selected buffer"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
-				KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
+				KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_MASK));
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) mainGUI.getDesktop().getSelectedFrame();
-		if (log != null) {
-			log.searchAgainText();
-		}
+	public void actionPerformed(ActionEvent e) {
+		LogWindow logWindow = (LogWindow)mainGUI.getDesktop().getSelectedFrame();
+		logWindow.clear();
 	}
 }

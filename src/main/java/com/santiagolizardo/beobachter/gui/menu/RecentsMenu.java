@@ -1,18 +1,17 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
@@ -27,12 +26,13 @@ import javax.swing.JMenuItem;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
-import com.santiagolizardo.beobachter.config.ConfigData;
 import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
+import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.util.FileUtil;
 import java.util.List;
+import java.util.ListIterator;
 
 public class RecentsMenu extends JMenu implements ActionListener {
 
@@ -50,16 +50,8 @@ public class RecentsMenu extends JMenu implements ActionListener {
 		setIcon(EmptyIcon.SIZE_16);
 
 		cleanRecentsMenuItem = new JMenuItem(_("Clean recents"));
+		cleanRecentsMenuItem.setIcon(IconFactory.getImage("bin_empty.png"));
 		cleanRecentsMenuItem.addActionListener(this);
-
-		add(cleanRecentsMenuItem);
-		addSeparator();
-
-		ConfigData configData = mainGUI.getConfigData();
-
-		for (String fileName : configData.getRecentFiles()) {
-			addRecent(fileName);
-		}
 	}
 
 	public void addRecent(String fileName) {
@@ -68,8 +60,8 @@ public class RecentsMenu extends JMenu implements ActionListener {
 			JMenuItem item = new JMenuItem(fileName);
 			item.addActionListener(new ActionListener() {
 				@Override
-				public void actionPerformed(ActionEvent event) {
-					JMenuItem item = (JMenuItem) event.getSource();
+				public void actionPerformed(ActionEvent ev) {
+					JMenuItem item = (JMenuItem) ev.getSource();
 					String filePath = item.getText();
 					File file = new File(filePath);
 
@@ -84,7 +76,6 @@ public class RecentsMenu extends JMenu implements ActionListener {
 							"Default"));
 				}
 			});
-			recentFiles.add(fileName);
 			add(item);
 		}
 	}
@@ -93,12 +84,42 @@ public class RecentsMenu extends JMenu implements ActionListener {
 	public void actionPerformed(ActionEvent ev) {
 		if (cleanRecentsMenuItem == ev.getSource()) {
 			mainGUI.getRecentFiles().clear();
-			int count = getMenuComponentCount();
-			for (int i = count - 1; i > 1; i--) {
-				remove(i);
-			}
-			
+			refresh();
+
 			setEnabled(false);
 		}
+	}
+
+	public void refresh() {
+		removeAll();
+
+		List<String> recentFileNames = mainGUI.getRecentFiles();
+		ListIterator<String> it = recentFileNames.listIterator(recentFileNames.size());
+		while (it.hasPrevious()) {
+			String recentFilePath = it.previous();
+			JMenuItem item = new JMenuItem(recentFilePath);
+			item.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent ev) {
+					JMenuItem item = (JMenuItem) ev.getSource();
+					String filePath = item.getText();
+					File file = new File(filePath);
+
+					try {
+						FileUtil.tryReading(file);
+					} catch (Exception e) {
+						DialogFactory.showErrorMessage(mainGUI, e.getMessage());
+						return;
+					}
+
+					Controller.openFile(mainGUI, filePath, new LogType(
+							"Default"));
+				}
+			});
+			add(item);
+		}
+
+		addSeparator();
+		add(cleanRecentsMenuItem);
 	}
 }

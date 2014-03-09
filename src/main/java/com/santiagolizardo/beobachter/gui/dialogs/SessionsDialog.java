@@ -1,18 +1,17 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
@@ -26,12 +25,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -44,60 +37,13 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.beans.Session;
+import com.santiagolizardo.beobachter.beans.SessionManager;
 import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.menu.RecentsMenu;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
-import java.io.IOException;
-import java.util.logging.Logger;
-
-class SessionManager {
-	
-	private static final Logger logger = Logger.getLogger(SessionManager.class.getName());
-
-	public List<Session> getSessions() {
-		List<Session> sessions = new ArrayList<>();
-
-		File folder = new File(Constants.FOLDER_SESSIONS);
-		FileFilter filter = new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				return (pathname.getName().endsWith(".txt"));
-			}
-		};
-		File[] files = folder.listFiles(filter);
-		for (File file : files) {
-			String name = file.getName().replaceAll("\\.txt", "");
-
-			Session session = new Session();
-			session.setName(name);
-
-			try {
-				try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-					String line;
-					while ((line = reader.readLine()) != null) {
-						session.getFileNames().add(line);
-					}
-				}
-			} catch (IOException ee) {
-				logger.warning(ee.getMessage());
-			}
-
-			sessions.add(session);
-		}
-
-		return sessions;
-	}
-
-	public boolean delete(String name) {
-		File file = new File(Constants.FOLDER_SESSIONS + File.separator + name
-				+ ".txt");
-		return file.delete();
-	}
-}
 
 /**
  * This class creates a window with the list of sessions available to open
@@ -131,20 +77,20 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 		this.recentsMenu = recentsMenu;
 
-		listModel = new DefaultListModel<Session>();
+		listModel = new DefaultListModel<>();
 		list = new JList<>(listModel);
 		list.setCellRenderer(new SessionListCellRenderer());
 		list.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (!list.isSelectionEmpty() && e.getClickCount() == 2) {
+			public void mouseClicked(MouseEvent ev) {
+				if (!list.isSelectionEmpty() && ev.getClickCount() == 2) {
 					openSession();
 				}
 			}
 		});
 		list.addListSelectionListener(new ListSelectionListener() {
 			@Override
-			public void valueChanged(ListSelectionEvent e) {
+			public void valueChanged(ListSelectionEvent ev) {
 				boolean enable = !list.isSelectionEmpty();
 				btnOpen.setEnabled(enable);
 				btnRemove.setEnabled(enable);
@@ -209,11 +155,13 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 		Session session = list.getSelectedValue();
 		for (String fileName : session.getFileNames()) {
-			recentsMenu.addRecent(fileName);
+			mainGUI.getRecentFiles().remove(fileName);
+			mainGUI.getRecentFiles().add(fileName);
 			Controller.openFile(mainGUI, fileName, new LogType("Default"));
 		}
+		recentsMenu.refresh();
 
-		mainGUI.desktop.setWindowsOnCascade();
+		mainGUI.getDesktop().setWindowsOnCascade();
 
 		dispose();
 	}

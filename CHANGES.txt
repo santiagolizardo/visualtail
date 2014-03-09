@@ -1,5 +1,19 @@
 CHANGES
 
+Version 1.8.1 (2014/03/09)
+
+	- New shortcuts to clear selected log and clear all logs.
+	- New menu item on the Help menu to suggest new features and/or report bugs.
+	- Bugfix affecting the number of threads being created.
+	- Bugfix on the GTK+ look and feels counting frames wrongly. (reported by Carlos SS)
+	- New icons for some menu items.
+	- Recent files are ordered on reverse order (recent open files first)
+	- Small internal refactorings.
+	- Last modification date shown on title bar (optional).
+	- New unit tests were added.
+	- Data folder has been removed and logTypes and sessions folder now are located
+	under the .beobachter folder in the user's home.
+
 Version 1.8.0 (2014/02/09)
 
 	- Ability to hide selected lines.

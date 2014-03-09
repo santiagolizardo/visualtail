@@ -57,7 +57,7 @@ public class CopyAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) mainGUI.desktop.getSelectedFrame();
+		LogWindow log = (LogWindow) mainGUI.getDesktop().getSelectedFrame();
 		if (log != null) {
 			List<String> selectedLines = log.linesList.getSelectedValuesList();
 			StringBuilder sb = new StringBuilder();

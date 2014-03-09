@@ -13,27 +13,92 @@
  * You should have received a copy of the GNU General Public License along with
  * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.santiagolizardo.beobachter.config;
+package com.santiagolizardo.beobachter.beans;
 
+import java.io.File;
+import java.io.FileFilter;
+
+import static com.santiagolizardo.beobachter.Constants.HOME_PATH;
+import com.santiagolizardo.beobachter.config.PropertySet;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.santiagolizardo.beobachter.Constants;
-import com.santiagolizardo.beobachter.beans.LogType;
-import com.santiagolizardo.beobachter.beans.Rule;
-import java.io.IOException;
+public class LogTypeManager {
 
-public class EntitiesConfiguration {
+	private static final Logger logger = Logger.getLogger(LogTypeManager.class.getName());
+
+	public static final String FOLDER_LOG_TYPES = HOME_PATH + File.separator
+			+ "logTypes";
 
 	private static final String REFRESH_INTERVAL = "option.refresh_interval";
 
-	private static String buildPath(String name) {
-		return String.format("%s/%s.properties", Constants.FOLDER_LOG_TYPES,
-				name);
+	private static LogTypeManager singleton;
+
+	public static final LogTypeManager getInstance() {
+		if (null == singleton) {
+			singleton = new LogTypeManager();
+		}
+		return singleton;
 	}
 
-	public static LogType loadFromFile(String name) {
-		String path = buildPath(name);
+	private List<LogType> logTypes;
+
+	private LogTypeManager() {
+		logTypes = new ArrayList<>();
+
+		File dirLogTypes = new File(FOLDER_LOG_TYPES);
+		if (!dirLogTypes.exists()) {
+			dirLogTypes.mkdirs();
+		}
+	}
+
+	public List<LogType> getAll() {
+		logTypes.clear();
+		logTypes.add(new LogType("Default"));
+
+		File logTypesDir = new File(FOLDER_LOG_TYPES);
+		FileFilter filter = new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return (pathname.getName().endsWith(".properties"));
+			}
+		};
+		File[] files = logTypesDir.listFiles(filter);
+		for (File file : files) {
+			String fileName = file.getName();
+			String name = fileName.replaceAll(".properties", "");
+			LogType logType = loadFromFile(name);
+			logTypes.add(logType);
+		}
+
+		return logTypes;
+	}
+
+	public String getPath(String name) {
+		return FOLDER_LOG_TYPES + File.separator + name
+				+ ".properties";
+	}
+
+	public boolean remove(LogType logType) {
+		String path = getPath(logType.getName());
+		File file = new File(path);
+		return file.delete();
+	}
+
+	public boolean rename(LogType logType, String newName) {
+		String path = getPath(logType.getName());
+		File file = new File(path);
+
+		String newPath = getPath(newName);
+		File newFile = new File(newPath);
+
+		return file.renameTo(newFile);
+	}
+
+	public LogType loadFromFile(String name) {
+		String path = getPath(name);
 		PropertySet configuration = new PropertySet(
 				path);
 
@@ -61,7 +126,7 @@ public class EntitiesConfiguration {
 		return logType;
 	}
 
-	public static void saveToFile(LogType logType) throws IOException {
+	public void saveToFile(LogType logType) throws IOException {
 		PropertySet configuration = new PropertySet();
 
 		configuration.setProperty(REFRESH_INTERVAL,
@@ -82,7 +147,7 @@ public class EntitiesConfiguration {
 					rule.getForegroundColor());
 		}
 
-		String path = buildPath(logType.getName());
+		String path = getPath(logType.getName());
 		configuration.save(path);
 	}
 }

@@ -43,11 +43,6 @@ public class LogType {
 		rules = new ArrayList<>();
 	}
 
-	public String getPath() {
-		return Constants.FOLDER_LOG_TYPES + File.separator + name
-				+ ".properties";
-	}
-
 	public String getName() {
 		return name;
 	}

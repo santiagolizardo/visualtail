@@ -40,7 +40,7 @@ public abstract class AbstractDialog extends JDialog {
 
 		superRootPane.registerKeyboardAction(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent ev) {
 				setVisible(false);
 				dispose();
 			}

@@ -45,6 +45,7 @@ import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -56,8 +57,8 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private int numberLinesToDisplay;
 
-	private int searchIndex = 0;
-	private String searchText = null;
+	private int searchIndex;
+	private String searchText;
 
 	private File file;
 
@@ -80,9 +81,14 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	public LogWindow(final MainWindow mainWindow, String fileName, LogType logType) {
 
+		setIconifiable(false);
 		setResizable(true);
 		setFrameIcon(IconFactory.getImage("log_window.png"));
+		setMaximizable(true);
+		setClosable(true);
 
+		searchIndex = 0;
+		searchText = null;
 		numberLinesToDisplay = 256;
 
 		this.mainWindow = mainWindow;
@@ -131,13 +137,10 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		tail = new Tail(fileName);
 		tail.addListener(this);
+		tail.addListener(toolbar);
 
 		scheduler = Executors.newScheduledThreadPool(1);
 		launchTask();
-
-		setMaximizable(true);
-		setIconifiable(true);
-		setClosable(true);
 
 		defineLayout();
 
@@ -145,24 +148,20 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
-			public void internalFrameActivated(InternalFrameEvent e) {
-				super.internalFrameActivated(e);
-
+			public void internalFrameActivated(InternalFrameEvent ev) {
 				mainWindow.setTitle(Constants.APP_NAME, file.getName());
-
 				updateSelections();
 			}
 
 			@Override
-			public void internalFrameDeactivated(InternalFrameEvent e) {
-				super.internalFrameDeactivated(e);
-
+			public void internalFrameDeactivated(InternalFrameEvent ev) {
 				mainWindow.setTitle(Constants.APP_NAME);
 			}
 
 			@Override
 			public void internalFrameClosing(InternalFrameEvent ev) {
 				task.cancel(true);
+				scheduler.shutdown();
 				mainWindow.updateActions(-1);
 			}
 		});
@@ -219,8 +218,16 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	}
 
 	private void updateTitle() {
+		String title = file.getName();
+
 		String byteCount = FileUtil.byteCountToDisplaySize(file.length());
-		setTitle(file.getName().concat(" - ").concat(byteCount));
+		title = title.concat(" - ").concat(byteCount);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
+		String modDate = sdf.format(file.lastModified());
+		title = title.concat(" - ").concat(modDate);
+
+		setTitle(title);
 	}
 
 	public File getFile() {
@@ -263,6 +270,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	public void clear() {
 		linesModel.clear();
+		toolbar.getClearButton().setEnabled(false);
 	}
 
 	public void loadLogType(LogType logType) {

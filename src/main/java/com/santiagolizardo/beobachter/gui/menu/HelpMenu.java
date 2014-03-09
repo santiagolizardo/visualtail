@@ -30,10 +30,8 @@ import com.santiagolizardo.beobachter.gui.util.UpdateManager;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import java.awt.Desktop;
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HelpMenu extends JMenu implements ActionListener {
@@ -44,6 +42,7 @@ public class HelpMenu extends JMenu implements ActionListener {
 
 	private MainWindow mainWindow;
 
+	private JMenuItem reportBugFeatureRequestMenuItem;
 	private JMenuItem checkForUpdatesMenuItem;
 	private JMenuItem aboutThisAppMenuItem;
 
@@ -54,23 +53,35 @@ public class HelpMenu extends JMenu implements ActionListener {
 		setText(_("Help"));
 		setMnemonic(KeyEvent.VK_H);
 
+		reportBugFeatureRequestMenuItem = new JMenuItem(_("Report bug/Request feature"));
+		reportBugFeatureRequestMenuItem.setIcon(IconFactory.getImage("lightbulb.png"));
+		reportBugFeatureRequestMenuItem.addActionListener(this);
+
 		checkForUpdatesMenuItem = new JMenuItem(_("Check for updates"));
-		checkForUpdatesMenuItem.setIcon(IconFactory.getImage("check_for_updates.png"));
+		checkForUpdatesMenuItem.setIcon(IconFactory.getImage("arrow_rotate_clockwise.png"));
 		checkForUpdatesMenuItem.addActionListener(this);
 
 		aboutThisAppMenuItem = new JMenuItem(_("About this application..."));
-		aboutThisAppMenuItem.setIcon(IconFactory.getImage("help.png"));
+		aboutThisAppMenuItem.setIcon(IconFactory.getImage("information.png"));
 		aboutThisAppMenuItem.setMnemonic(KeyEvent.VK_F1);
 		aboutThisAppMenuItem.addActionListener(this);
 
-		add(checkForUpdatesMenuItem);
+		add(reportBugFeatureRequestMenuItem);
 		addSeparator();
+		add(checkForUpdatesMenuItem);
 		add(aboutThisAppMenuItem);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent ev) {
-		if (checkForUpdatesMenuItem == ev.getSource()) {
+		if (reportBugFeatureRequestMenuItem == ev.getSource()) {
+			try {
+				URI uri = new URI("https://sourceforge.net/p/beobachter/issues/");
+				Desktop.getDesktop().browse(uri);
+			} catch (URISyntaxException | IOException ex) {
+				logger.warning(ex.getMessage());
+			}
+		} else if (checkForUpdatesMenuItem == ev.getSource()) {
 			UpdateManager updateManager = new UpdateManager(mainWindow);
 			updateManager.checkForUpdate();
 		} else if (aboutThisAppMenuItem == ev.getSource()) {

@@ -1,18 +1,17 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter;
 
@@ -45,7 +44,7 @@ public class Main {
 		} catch (MissingResourceException mre) {
 			System.err.println(mre.getMessage());
 		}
-		
+
 		try {
 			Properties prop = System.getProperties();
 			prop.setProperty("java.util.logging.config.file",
@@ -59,21 +58,12 @@ public class Main {
 		ConfigPersistence configPersistence = new ConfigPersistence();
 		try {
 			configData.setConfiguration(configPersistence
-					.loadProperties(Constants.CONFIG_FILE));
+					.loadProperties());
 		} catch (IOException ex) {
 			System.err.println(ex.getMessage());
 		}
 
 		Translator.start(configData.getLanguage());
-
-		File dirLogTypes = new File(Constants.FOLDER_LOG_TYPES);
-		if (!dirLogTypes.exists()) {
-			dirLogTypes.mkdirs();
-		}
-		File dirSessions = new File(Constants.FOLDER_SESSIONS);
-		if (!dirSessions.exists()) {
-			dirSessions.mkdirs();
-		}
 
 		SwingUtilities.invokeLater(new Runnable() {
 

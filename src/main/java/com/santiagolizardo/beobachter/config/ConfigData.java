@@ -1,18 +1,17 @@
 /**
  * This file is part of Beobachter, a graphical log file monitor.
  *
- * Beobachter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Beobachter is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * Beobachter is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Beobachter is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.beobachter.config;
 
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.UIManager;
-
 
 public class ConfigData {
 
@@ -52,11 +50,12 @@ public class ConfigData {
 
 	public List<String> getRecentFiles() {
 		List<String> recentFiles = new ArrayList<>();
-		for (byte i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			String recentFile = configuration.getProperty("recent." + i
 					+ ".file_name");
-			if (recentFile != null)
+			if (recentFile != null) {
 				recentFiles.add(recentFile);
+			}
 		}
 		return recentFiles;
 	}
