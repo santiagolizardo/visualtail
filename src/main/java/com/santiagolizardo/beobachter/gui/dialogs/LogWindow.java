@@ -45,6 +45,7 @@ import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
+import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -75,7 +76,8 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private DefaultListModel<String> linesModel;
 
-	public JList<String> linesList;
+	private JList<String> linesList;
+	private LineRenderer lineListRenderer;
 
 	private MainWindow mainWindow;
 
@@ -90,6 +92,9 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		searchIndex = 0;
 		searchText = null;
 		numberLinesToDisplay = 256;
+
+		lineListRenderer = new LineRenderer(logType.getRules(),
+				mainWindow.getConfigData());
 
 		this.mainWindow = mainWindow;
 		this.logType = logType;
@@ -165,6 +170,11 @@ public class LogWindow extends JInternalFrame implements TailListener {
 				mainWindow.updateActions(-1);
 			}
 		});
+	}
+
+	public void updateFont(Font font) {
+		lineListRenderer.setFont(font);
+		linesList.updateUI();
 	}
 
 	@Override
@@ -274,8 +284,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	}
 
 	public void loadLogType(LogType logType) {
-		linesList.setCellRenderer(new LineRenderer(logType.getRules(),
-				mainWindow.getConfigData()));
+		linesList.setCellRenderer(lineListRenderer);
 	}
 
 	public int getNumberLinesToDisplay() {

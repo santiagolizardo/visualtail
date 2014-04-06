@@ -16,7 +16,6 @@
 package com.santiagolizardo.beobachter;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
-import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.MissingResourceException;

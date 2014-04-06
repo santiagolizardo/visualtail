@@ -53,15 +53,12 @@ public class PreferencesDialog extends AbstractDialog {
 	private static final Logger logger = Logger
 			.getLogger(PreferencesDialog.class.getName());
 
-	private JComboBox<SwingLookAndFeel> lookAndFeel;
+	private JComboBox<SwingLookAndFeel> lookAndFeelComboBox;
 
-	private JComboBox<String> languagesList;
-	private JComboBox<String> fontsList;
+	private JComboBox<String> languageComboBox;
 
-	private JSpinner size;
-
-	private JButton btnOk;
-	private JButton btnCancel;
+	private JButton okButton;
+	private JButton cancelButton;
 
 	public PreferencesDialog(final MainWindow mainGUI) {
 		super(mainGUI);
@@ -78,51 +75,38 @@ public class PreferencesDialog extends AbstractDialog {
 			LookAndFeelInfo info = infos[i];
 			lafs[i] = new SwingLookAndFeel(info.getName(), info.getClassName());
 		}
-		lookAndFeel = new JComboBox<>(lafs);
-		lookAndFeel.setRenderer(new SwingLAFRenderer());
+		lookAndFeelComboBox = new JComboBox<>(lafs);
+		lookAndFeelComboBox.setRenderer(new SwingLAFRenderer());
 		try {
 			SwingLookAndFeel look = SwingLookAndFeel.forName(configManager
 					.getWindowLAF());
-			lookAndFeel.setSelectedItem(look);
+			lookAndFeelComboBox.setSelectedItem(look);
 		} catch (Exception e) {
 			logger.warning("Unable to set the selected look&feel.");
 		}
 
 		String[] languages = LocaleUtil.getAvailableLocales();
 
-		languagesList = new JComboBox<>(languages);
-		languagesList.setSelectedItem(configManager.getLanguage());
-		languagesList.setRenderer(new LocaleRender());
+		languageComboBox = new JComboBox<>(languages);
+		languageComboBox.setSelectedItem(configManager.getLanguage());
+		languageComboBox.setRenderer(new LocaleRender());
 
-		String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment()
-				.getAvailableFontFamilyNames();
-		fontsList = new JComboBox<>(fonts);
-		fontsList.setSelectedItem(configManager.getFontFamily());
-
-		size = new JSpinner(new SpinnerNumberModel(configManager.getFontSize(),
-				8, 18, 1));
-
-		btnOk = new JButton(Translator._("Save"));
-		btnOk.addActionListener(new ActionListener() {
+		okButton = new JButton(Translator._("Save"));
+		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				setVisible(false);
 
-				SwingLookAndFeel laf = ((SwingLookAndFeel) lookAndFeel
+				SwingLookAndFeel laf = ((SwingLookAndFeel) lookAndFeelComboBox
 						.getSelectedItem());
 				configManager.setWindowLAF(laf.getClassName());
 				SwingUtil.setLookAndFeel(laf.getClassName());
 				SwingUtilities.updateComponentTreeUI(mainGUI);
 
-				Object selectedLanguage = languagesList.getSelectedItem();
+				Object selectedLanguage = languageComboBox.getSelectedItem();
 				if (null != selectedLanguage) {
 					configManager.setLanguage(selectedLanguage.toString());
 				}
-
-				configManager.setFontFamily(fontsList.getSelectedItem()
-						.toString());
-				configManager.setFontSize(Integer.parseInt(size.getValue()
-						.toString()));
 
 				ConfigPersistence configPersistence = new ConfigPersistence();
 				configPersistence.saveProperties(mainGUI,
@@ -132,8 +116,8 @@ public class PreferencesDialog extends AbstractDialog {
 			}
 		});
 
-		btnCancel = new JButton(Translator._("Cancel"));
-		btnCancel.addActionListener(new ActionListener() {
+		cancelButton = new JButton(Translator._("Cancel"));
+		cancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				setVisible(false);
@@ -151,77 +135,52 @@ public class PreferencesDialog extends AbstractDialog {
 
 		JLabel _lookAndFeel = new JLabel(Translator._("Look and feel"));
 		JLabel _language = new JLabel(Translator._("Language"));
-		JLabel _font = new JLabel(Translator._("Font family"));
-		JLabel _size = new JLabel(Translator._("Font size"));
 
 		container.add(_lookAndFeel);
-		container.add(lookAndFeel);
+		container.add(lookAndFeelComboBox);
 
-		if (languagesList.getModel().getSize() > 0) {
+		if (languageComboBox.getModel().getSize() > 0) {
 			container.add(_language);
-			container.add(languagesList);
+			container.add(languageComboBox);
 		}
 
-		container.add(_font);
-		container.add(fontsList);
-		container.add(_size);
-		container.add(size);
-
-		container.add(btnOk);
-		container.add(btnCancel);
+		container.add(okButton);
+		container.add(cancelButton);
 
 		layout.putConstraint(SpringLayout.WEST, _lookAndFeel, 5,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.WEST, lookAndFeel, 5,
+		layout.putConstraint(SpringLayout.WEST, lookAndFeelComboBox, 5,
 				SpringLayout.WEST, container);
 		layout.putConstraint(SpringLayout.WEST, _language, 5,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.WEST, languagesList, 5,
+		layout.putConstraint(SpringLayout.WEST, languageComboBox, 5,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.WEST, _font, 5, SpringLayout.WEST,
-				container);
-		layout.putConstraint(SpringLayout.WEST, fontsList, 5,
-				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.WEST, _size, 5, SpringLayout.WEST,
-				container);
-		layout.putConstraint(SpringLayout.WEST, size, 5, SpringLayout.WEST,
-				container);
-		layout.putConstraint(SpringLayout.EAST, btnOk, -5, SpringLayout.WEST,
-				btnCancel);
-		layout.putConstraint(SpringLayout.EAST, btnCancel, -5,
+		layout.putConstraint(SpringLayout.EAST, okButton, -5, SpringLayout.WEST,
+				cancelButton);
+		layout.putConstraint(SpringLayout.EAST, cancelButton, -5,
 				SpringLayout.EAST, container);
 
 		layout.putConstraint(SpringLayout.NORTH, _lookAndFeel, 5,
 				SpringLayout.NORTH, container);
-		layout.putConstraint(SpringLayout.NORTH, lookAndFeel, 5,
+		layout.putConstraint(SpringLayout.NORTH, lookAndFeelComboBox, 5,
 				SpringLayout.SOUTH, _lookAndFeel);
 		layout.putConstraint(SpringLayout.NORTH, _language, 5,
-				SpringLayout.SOUTH, lookAndFeel);
-		layout.putConstraint(SpringLayout.NORTH, languagesList, 5,
+				SpringLayout.SOUTH, lookAndFeelComboBox);
+		layout.putConstraint(SpringLayout.NORTH, languageComboBox, 5,
 				SpringLayout.SOUTH, _language);
-		layout.putConstraint(SpringLayout.NORTH, _font, 5, SpringLayout.SOUTH,
-				languagesList);
-		layout.putConstraint(SpringLayout.NORTH, fontsList, 5,
-				SpringLayout.SOUTH, _font);
-		layout.putConstraint(SpringLayout.NORTH, _size, 5, SpringLayout.SOUTH,
-				fontsList);
-		layout.putConstraint(SpringLayout.NORTH, size, 5, SpringLayout.SOUTH,
-				_size);
-		layout.putConstraint(SpringLayout.NORTH, btnOk, 15, SpringLayout.SOUTH,
-				size);
-		layout.putConstraint(SpringLayout.NORTH, btnCancel, 15,
-				SpringLayout.SOUTH, size);
+		layout.putConstraint(SpringLayout.NORTH, okButton, 15, SpringLayout.SOUTH,
+				languageComboBox);
+		layout.putConstraint(SpringLayout.NORTH, cancelButton, 15,
+				SpringLayout.SOUTH, languageComboBox);
 
 		Constraints containerCons = layout.getConstraints(container);
-		Constraints fontCons = layout.getConstraints(fontsList);
-		Constraints okCons = layout.getConstraints(btnOk);
+		Constraints okCons = layout.getConstraints(okButton);
 
-		containerCons.setWidth(Spring.sum(Spring.constant(5),
-				fontCons.getConstraint(EAST)));
+		containerCons.setWidth(Spring.constant(270));
 		containerCons.setHeight(Spring.sum(Spring.constant(5),
 				okCons.getConstraint(SOUTH)));
 
-		getRootPane().setDefaultButton(btnOk);
+		getRootPane().setDefaultButton(okButton);
 
 		pack();
 		setLocationRelativeTo(getOwner());
