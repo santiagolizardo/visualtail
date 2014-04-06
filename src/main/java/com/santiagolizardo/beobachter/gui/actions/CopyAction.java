@@ -59,7 +59,7 @@ public class CopyAction extends AbstractAction {
 	public void actionPerformed(ActionEvent event) {
 		LogWindow log = (LogWindow) mainGUI.getDesktop().getSelectedFrame();
 		if (log != null) {
-			List<String> selectedLines = log.linesList.getSelectedValuesList();
+			List<String> selectedLines = log.getLinesList().getSelectedValuesList();
 			StringBuilder sb = new StringBuilder();
 			for (String selectedLine : selectedLines) {
 				sb.append(selectedLine);

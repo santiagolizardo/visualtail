@@ -301,4 +301,8 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			linesList.ensureIndexIsVisible(lastIndex);
 		}
 	}
+
+	public JList<String> getLinesList() {
+		return linesList;
+	}
 }
