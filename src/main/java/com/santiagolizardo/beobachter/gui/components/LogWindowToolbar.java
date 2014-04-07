@@ -104,6 +104,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 				logTypesLoader.getAll().toArray(new LogType[]{}));
 		logTypes = new JComboBox<>(logTypesModel);
 		logTypes.setRenderer(new LogTypeListRenderer());
+		logTypes.setToolTipText(Translator._("Log type"));
 		logTypes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {

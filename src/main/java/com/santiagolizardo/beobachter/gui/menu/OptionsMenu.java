@@ -57,7 +57,7 @@ public class OptionsMenu extends JMenu implements ActionListener {
 		manageLogTypesMenuItem.setIcon(IconFactory.getImage("manage_log_types.png"));
 		manageLogTypesMenuItem.addActionListener(this);
 
-		fontSelectorMenuItem = new JMenuItem(_("Change log windows font..."));
+		fontSelectorMenuItem = new JMenuItem(_("Font settings..."));
 		fontSelectorMenuItem.addActionListener(this);
 
 		preferencesMenuItem = new JMenuItem(_("Preferences..."));

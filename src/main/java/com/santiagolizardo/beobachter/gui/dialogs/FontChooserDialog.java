@@ -65,7 +65,7 @@ public class FontChooserDialog extends AbstractDialog {
 
 		final ConfigData configManager = mainGUI.getConfigData();
 
-		setTitle(Translator._("Preferences"));
+		setTitle(Translator._("Font settings"));
 		setResizable(false);
 		setModal(true);
 

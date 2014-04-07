@@ -93,9 +93,6 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		searchText = null;
 		numberLinesToDisplay = 256;
 
-		lineListRenderer = new LineRenderer(logType.getRules(),
-				mainWindow.getConfigData());
-
 		this.mainWindow = mainWindow;
 		this.logType = logType;
 
@@ -105,7 +102,10 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		linesModel = new DefaultListModel<>();
 		linesList = new JList<>(linesModel);
 
-		loadLogType(logType);
+		lineListRenderer = new LineRenderer();
+		lineListRenderer.loadLogType(logType);
+		lineListRenderer.updateFont(mainWindow.getConfigData());
+		linesList.setCellRenderer(lineListRenderer);
 
 		linesList
 				.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -172,6 +172,11 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		});
 	}
 
+	public void loadLogType(LogType logType) {
+		lineListRenderer.loadLogType(logType);
+		linesList.updateUI();
+	}
+	
 	public void updateFont(Font font) {
 		lineListRenderer.setFont(font);
 		linesList.updateUI();
@@ -281,10 +286,6 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	public void clear() {
 		linesModel.clear();
 		toolbar.getClearButton().setEnabled(false);
-	}
-
-	public void loadLogType(LogType logType) {
-		linesList.setCellRenderer(lineListRenderer);
 	}
 
 	public int getNumberLinesToDisplay() {
