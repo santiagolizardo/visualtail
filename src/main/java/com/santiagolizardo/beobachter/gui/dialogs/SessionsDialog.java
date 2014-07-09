@@ -15,7 +15,7 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -41,7 +41,7 @@ import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.beans.Session;
 import com.santiagolizardo.beobachter.beans.SessionManager;
-import com.santiagolizardo.beobachter.engine.Controller;
+import com.santiagolizardo.beobachter.gui.actions.OpenAction;
 import com.santiagolizardo.beobachter.gui.menu.RecentsMenu;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 
@@ -62,16 +62,16 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 	private SessionManager sessionManager;
 
-	private MainWindow mainGUI;
+	private MainWindow mainWindow;
 
-	public SessionsDialog(MainWindow mainGUI, RecentsMenu recentsMenu) {
-		super(mainGUI);
+	public SessionsDialog(MainWindow mainWindow, RecentsMenu recentsMenu) {
+		super(mainWindow);
 
-		setTitle(Translator._("Session management"));
+		setTitle(Translator.tr("Session management"));
 		setModal(true);
 		setSize(520, 320);
 
-		this.mainGUI = mainGUI;
+		this.mainWindow = mainWindow;
 
 		sessionManager = new SessionManager();
 
@@ -97,11 +97,11 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 			}
 		});
 
-		btnOpen = new JButton(Translator._("Open"));
+		btnOpen = new JButton(Translator.tr("Open"));
 		btnOpen.setEnabled(false);
 		btnOpen.addActionListener(this);
 
-		btnRemove = new JButton(Translator._("Remove"));
+		btnRemove = new JButton(Translator.tr("Remove"));
 		btnRemove.setEnabled(false);
 		btnRemove.addActionListener(this);
 
@@ -123,7 +123,7 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 		JPanel introPanel = new JPanel();
 		JLabel introLabel = new JLabel(
-				_("Please select the session you want to open or remove:"));
+				tr("Please select the session you want to open or remove:"));
 		introPanel.add(introLabel);
 		container.add(introPanel, BorderLayout.NORTH);
 
@@ -155,13 +155,13 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 		Session session = list.getSelectedValue();
 		for (String fileName : session.getFileNames()) {
-			mainGUI.getRecentFiles().remove(fileName);
-			mainGUI.getRecentFiles().add(fileName);
-			Controller.openFile(mainGUI, fileName, new LogType("Default"));
+			mainWindow.getRecentFiles().remove(fileName);
+			mainWindow.getRecentFiles().add(fileName);
+			mainWindow.getActionFactory().getOpenAction().openFile(fileName, new LogType("Default"));
 		}
 		recentsMenu.refresh();
 
-		mainGUI.getDesktop().setWindowsOnCascade();
+		mainWindow.getDesktop().setWindowsOnCascade();
 
 		dispose();
 	}
@@ -169,7 +169,7 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 	private void removeSession() {
 		String sessionName = list.getSelectedValue().getName();
 		int resp = JOptionPane.showConfirmDialog(getParent(),
-				Translator._("Are you sure you want to delete this session?"));
+				Translator.tr("Are you sure you want to delete this session?"));
 		if (resp == JOptionPane.YES_OPTION) {
 			sessionManager.delete(sessionName);
 			updateList();
@@ -190,7 +190,7 @@ class SessionListCellRenderer extends DefaultListCellRenderer {
 		StringBuilder text = new StringBuilder();
 		text.append("<html>");
 		text.append(String.format("<strong>%s</strong> ", session.getName()));
-		text.append(String.format(_("%d file(s)"), session.getFileNames()
+		text.append(String.format(tr("%d file(s)"), session.getFileNames()
 				.size()));
 		text.append("<br />");
 		for (String fileName : session.getFileNames()) {

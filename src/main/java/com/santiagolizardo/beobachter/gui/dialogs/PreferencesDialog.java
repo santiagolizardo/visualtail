@@ -60,12 +60,12 @@ public class PreferencesDialog extends AbstractDialog {
 	private JButton okButton;
 	private JButton cancelButton;
 
-	public PreferencesDialog(final MainWindow mainGUI) {
-		super(mainGUI);
+	public PreferencesDialog(final MainWindow mainWindow) {
+		super(mainWindow);
 
-		final ConfigData configManager = mainGUI.getConfigData();
+		final ConfigData configManager = mainWindow.getConfigData();
 
-		setTitle(Translator._("Preferences"));
+		setTitle(Translator.tr("Preferences"));
 		setResizable(false);
 		setModal(true);
 
@@ -91,7 +91,7 @@ public class PreferencesDialog extends AbstractDialog {
 		languageComboBox.setSelectedItem(configManager.getLanguage());
 		languageComboBox.setRenderer(new LocaleRender());
 
-		okButton = new JButton(Translator._("Save"));
+		okButton = new JButton(Translator.tr("Save"));
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -101,7 +101,7 @@ public class PreferencesDialog extends AbstractDialog {
 						.getSelectedItem());
 				configManager.setWindowLAF(laf.getClassName());
 				SwingUtil.setLookAndFeel(laf.getClassName());
-				SwingUtilities.updateComponentTreeUI(mainGUI);
+				SwingUtilities.updateComponentTreeUI(mainWindow);
 
 				Object selectedLanguage = languageComboBox.getSelectedItem();
 				if (null != selectedLanguage) {
@@ -109,14 +109,14 @@ public class PreferencesDialog extends AbstractDialog {
 				}
 
 				ConfigPersistence configPersistence = new ConfigPersistence();
-				configPersistence.saveProperties(mainGUI,
+				configPersistence.saveProperties(mainWindow,
 						configManager.getConfiguration());
 
 				dispose();
 			}
 		});
 
-		cancelButton = new JButton(Translator._("Cancel"));
+		cancelButton = new JButton(Translator.tr("Cancel"));
 		cancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -133,8 +133,8 @@ public class PreferencesDialog extends AbstractDialog {
 		SpringLayout layout = new SpringLayout();
 		container.setLayout(layout);
 
-		JLabel _lookAndFeel = new JLabel(Translator._("Look and feel"));
-		JLabel _language = new JLabel(Translator._("Language"));
+		JLabel _lookAndFeel = new JLabel(Translator.tr("Look and feel"));
+		JLabel _language = new JLabel(Translator.tr("Language"));
 
 		container.add(_lookAndFeel);
 		container.add(lookAndFeelComboBox);

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Beobachter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-06 22:33+0100\n"
+"POT-Creation-Date: 2014-07-09 17:28+0100\n"
 "PO-Revision-Date: 2013-12-07 12:07+0100\n"
 "Last-Translator: Santiago Lizardo <santiago.lizardo@gmail.com>\n"
 "Language-Team: \n"
@@ -16,15 +16,15 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../../../../../../java\n"
 
-#: com/santiagolizardo/beobachter/util/FileUtil.java:40
+#: com/santiagolizardo/beobachter/util/FileUtil.java:42
 msgid "The file does not exist"
 msgstr ""
 
-#: com/santiagolizardo/beobachter/util/FileUtil.java:43
+#: com/santiagolizardo/beobachter/util/FileUtil.java:45
 msgid "Cannot open a directory"
 msgstr ""
 
-#: com/santiagolizardo/beobachter/util/FileUtil.java:47
+#: com/santiagolizardo/beobachter/util/FileUtil.java:49
 msgid "You do not have permissions to read this file"
 msgstr ""
 
@@ -97,19 +97,21 @@ msgid "Save current session"
 msgstr ""
 
 #: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:141
-msgid "These files could not be opened for reading:"
-msgstr ""
+msgid "The file could not be opened for reading:"
+msgid_plural "These files could not be opened for reading:"
+msgstr[0] ""
+msgstr[1] ""
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:158
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:159
 msgid "Please enter the session name:"
 msgstr ""
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:159
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:160
 msgid "Session name"
 msgstr ""
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:168
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:185
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:169
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:186
 msgid "Invalid session name"
 msgstr ""
 
@@ -126,7 +128,7 @@ msgid "Manage log types..."
 msgstr ""
 
 #: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:60
-msgid "Change log windows font..."
+msgid "Font settings..."
 msgstr ""
 
 #: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:63
@@ -154,7 +156,6 @@ msgid "Unable to fetch server information"
 msgstr ""
 
 #: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:68
-#: com/santiagolizardo/beobachter/gui/dialogs/FontChooserDialog.java:68
 msgid "Preferences"
 msgstr ""
 
@@ -176,7 +177,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:218
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:223
 msgid "Do you want to search again?"
 msgstr ""
 
@@ -269,6 +270,10 @@ msgstr ""
 msgid "Select a log type on the left to edit it"
 msgstr ""
 
+#: com/santiagolizardo/beobachter/gui/dialogs/FontChooserDialog.java:68
+msgid "Font settings"
+msgstr ""
+
 #: com/santiagolizardo/beobachter/gui/dialogs/FontChooserDialog.java:157
 msgid "Font family"
 msgstr ""
@@ -333,7 +338,11 @@ msgstr ""
 msgid "Clear buffer"
 msgstr ""
 
-#: com/santiagolizardo/beobachter/gui/components/LogWindowToolbar.java:137
+#: com/santiagolizardo/beobachter/gui/components/LogWindowToolbar.java:107
+msgid "Log type"
+msgstr ""
+
+#: com/santiagolizardo/beobachter/gui/components/LogWindowToolbar.java:138
 msgid "Print this file"
 msgstr ""
 

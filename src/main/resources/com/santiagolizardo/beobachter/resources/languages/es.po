@@ -2,30 +2,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: beobachter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-06 22:33+0100\n"
-"PO-Revision-Date: 2013-12-12 15:23-0500\n"
-"Last-Translator: santiagolizardo <santiago.lizardo@gmail.com>\n"
+"POT-Creation-Date: 2014-07-09 17:28+0100\n"
+"PO-Revision-Date: 2014-07-07 22:16+0100\n"
+"Last-Translator: Santiago Lizardo <santiago.lizardo@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: crowdin.net\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: ../../../../../../java\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../../../../../../java\n"
 
-#: com/santiagolizardo/beobachter/util/FileUtil.java:40
+#: com/santiagolizardo/beobachter/util/FileUtil.java:42
 msgid "The file does not exist"
 msgstr "El fichero no existe"
 
-#: com/santiagolizardo/beobachter/util/FileUtil.java:43
+#: com/santiagolizardo/beobachter/util/FileUtil.java:45
 msgid "Cannot open a directory"
 msgstr "No es posible abrir un directorio"
 
-#: com/santiagolizardo/beobachter/util/FileUtil.java:47
+#: com/santiagolizardo/beobachter/util/FileUtil.java:49
 msgid "You do not have permissions to read this file"
 msgstr "No tiene permisos para leer el fichero seleccionado"
 
@@ -98,19 +98,22 @@ msgid "Save current session"
 msgstr "Guardar sesión actual"
 
 #: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:141
-msgid "These files could not be opened for reading:"
-msgstr "Estos ficheros no pudieron ser abiertos para lectura:"
+#, fuzzy
+msgid "The file could not be opened for reading:"
+msgid_plural "These files could not be opened for reading:"
+msgstr[0] "Estos ficheros no pudieron ser abiertos para lectura:"
+msgstr[1] "Estos ficheros no pudieron ser abiertos para lectura:"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:158
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:159
 msgid "Please enter the session name:"
 msgstr "Por favor ingrese un nombre de sesión:"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:159
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:160
 msgid "Session name"
 msgstr "Nombre de sesión"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:168
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:185
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:169
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:186
 msgid "Invalid session name"
 msgstr "Nombre de sesión inválido"
 
@@ -127,7 +130,7 @@ msgid "Manage log types..."
 msgstr "Administrar tipos de ficheros..."
 
 #: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:60
-msgid "Change log windows font..."
+msgid "Font settings..."
 msgstr ""
 
 #: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:63
@@ -155,7 +158,6 @@ msgid "Unable to fetch server information"
 msgstr "No fue posible obtener información del servidor"
 
 #: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:68
-#: com/santiagolizardo/beobachter/gui/dialogs/FontChooserDialog.java:68
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -177,7 +179,7 @@ msgstr "Apariencia"
 msgid "Language"
 msgstr "Idioma"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:218
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:223
 msgid "Do you want to search again?"
 msgstr "¿Quiere buscar nuevamente?"
 
@@ -270,6 +272,11 @@ msgstr "Reglas de formateo"
 msgid "Select a log type on the left to edit it"
 msgstr "Seleccione un tipo de registro a la izquierda para editarlo"
 
+#: com/santiagolizardo/beobachter/gui/dialogs/FontChooserDialog.java:68
+#, fuzzy
+msgid "Font settings"
+msgstr "Tamaño de letra"
+
 #: com/santiagolizardo/beobachter/gui/dialogs/FontChooserDialog.java:157
 msgid "Font family"
 msgstr "Tipo de letra"
@@ -334,7 +341,12 @@ msgstr "Desplazarse a nuevas líneas"
 msgid "Clear buffer"
 msgstr "Borrar contenido"
 
-#: com/santiagolizardo/beobachter/gui/components/LogWindowToolbar.java:137
+#: com/santiagolizardo/beobachter/gui/components/LogWindowToolbar.java:107
+#, fuzzy
+msgid "Log type"
+msgstr "Tipos de fichero"
+
+#: com/santiagolizardo/beobachter/gui/components/LogWindowToolbar.java:138
 msgid "Print this file"
 msgstr "Imprimir este fichero"
 

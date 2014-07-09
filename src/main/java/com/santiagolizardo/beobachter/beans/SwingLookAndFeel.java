@@ -59,6 +59,7 @@ public class SwingLookAndFeel {
 		this.name = name;
 	}
 
+	@Override
 	public boolean equals(Object o) {
 		if (o == null) {
 			return false;

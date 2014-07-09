@@ -15,7 +15,7 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -31,13 +31,13 @@ public class ClearAllBuffersAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2244429466145757856L;
 
-	private MainWindow mainGUI;
+	private MainWindow mainWindow;
 
-	public ClearAllBuffersAction(MainWindow mainGUI) {
+	public ClearAllBuffersAction(MainWindow mainWindow) {
 
-		this.mainGUI = mainGUI;
+		this.mainWindow = mainWindow;
 
-		putValue(AbstractAction.NAME, _("Clear all buffers"));
+		putValue(AbstractAction.NAME, tr("Clear all buffers"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_MASK | KeyEvent.SHIFT_MASK
 				));
@@ -45,7 +45,7 @@ public class ClearAllBuffersAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		for (JInternalFrame frame : mainGUI.getDesktop().getAllFrames()) {
+		for (JInternalFrame frame : mainWindow.getDesktop().getAllFrames()) {
 			LogWindow logWindow = (LogWindow) frame;
 			logWindow.clear();
 		}

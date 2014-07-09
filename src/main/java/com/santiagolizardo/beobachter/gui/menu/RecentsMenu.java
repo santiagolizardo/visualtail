@@ -15,7 +15,7 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +26,7 @@ import javax.swing.JMenuItem;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
-import com.santiagolizardo.beobachter.engine.Controller;
+import com.santiagolizardo.beobachter.gui.actions.OpenAction;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
@@ -38,24 +38,24 @@ public class RecentsMenu extends JMenu implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
-	private MainWindow mainGUI;
+	private MainWindow mainWindow;
 
 	private JMenuItem cleanRecentsMenuItem;
 
-	public RecentsMenu(MainWindow mainGUI) {
-		super(_("Open recents"));
+	public RecentsMenu(MainWindow mainWindow) {
+		super(tr("Open recents"));
 
-		this.mainGUI = mainGUI;
+		this.mainWindow = mainWindow;
 
 		setIcon(EmptyIcon.SIZE_16);
 
-		cleanRecentsMenuItem = new JMenuItem(_("Clean recents"));
+		cleanRecentsMenuItem = new JMenuItem(tr("Clean recents"));
 		cleanRecentsMenuItem.setIcon(IconFactory.getImage("bin_empty.png"));
 		cleanRecentsMenuItem.addActionListener(this);
 	}
 
 	public void addRecent(String fileName) {
-		List<String> recentFiles = mainGUI.getRecentFiles();
+		List<String> recentFiles = mainWindow.getRecentFiles();
 		if (!recentFiles.contains(fileName)) {
 			JMenuItem item = new JMenuItem(fileName);
 			item.addActionListener(new ActionListener() {
@@ -68,11 +68,11 @@ public class RecentsMenu extends JMenu implements ActionListener {
 					try {
 						FileUtil.tryReading(file);
 					} catch (Exception e) {
-						DialogFactory.showErrorMessage(mainGUI, e.getMessage());
+						DialogFactory.showErrorMessage(mainWindow, e.getMessage());
 						return;
 					}
 
-					Controller.openFile(mainGUI, filePath, new LogType(
+					mainWindow.getActionFactory().getOpenAction().openFile(filePath, new LogType(
 							"Default"));
 				}
 			});
@@ -83,7 +83,7 @@ public class RecentsMenu extends JMenu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ev) {
 		if (cleanRecentsMenuItem == ev.getSource()) {
-			mainGUI.getRecentFiles().clear();
+			mainWindow.getRecentFiles().clear();
 			refresh();
 
 			setEnabled(false);
@@ -93,7 +93,7 @@ public class RecentsMenu extends JMenu implements ActionListener {
 	public void refresh() {
 		removeAll();
 
-		List<String> recentFileNames = mainGUI.getRecentFiles();
+		List<String> recentFileNames = mainWindow.getRecentFiles();
 		ListIterator<String> it = recentFileNames.listIterator(recentFileNames.size());
 		while (it.hasPrevious()) {
 			String recentFilePath = it.previous();
@@ -108,11 +108,11 @@ public class RecentsMenu extends JMenu implements ActionListener {
 					try {
 						FileUtil.tryReading(file);
 					} catch (Exception e) {
-						DialogFactory.showErrorMessage(mainGUI, e.getMessage());
+						DialogFactory.showErrorMessage(mainWindow, e.getMessage());
 						return;
 					}
 
-					Controller.openFile(mainGUI, filePath, new LogType(
+					mainWindow.getActionFactory().getOpenAction().openFile(filePath, new LogType(
 							"Default"));
 				}
 			});

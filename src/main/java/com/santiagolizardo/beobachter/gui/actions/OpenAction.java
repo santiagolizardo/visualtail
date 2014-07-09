@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License along with
  * Beobachter. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.santiagolizardo.beobachter.engine;
+package com.santiagolizardo.beobachter.gui.actions;
 
 import java.beans.PropertyVetoException;
 
@@ -22,18 +22,23 @@ import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import java.util.logging.Logger;
 
-public class Controller {
+public class OpenAction {
 
-	private static final Logger logger = Logger.getLogger(Controller.class.getName());
+	private static final Logger logger = Logger.getLogger(OpenAction.class.getName());
+	
+	private MainWindow mainWindow;
 
+	public OpenAction(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
+	}
+	
 	/**
 	 * Invoked from the "Open" dialog.
 	 *
-	 * @param mainWindow
 	 * @param fileName
 	 * @param logType
 	 */
-	public static void openFile(MainWindow mainWindow, String fileName, LogType logType) {
+	public void openFile(String fileName, LogType logType) {
 		LogWindow logWindow = new LogWindow(mainWindow, fileName, logType);
 		logWindow.setVisible(true);
 		

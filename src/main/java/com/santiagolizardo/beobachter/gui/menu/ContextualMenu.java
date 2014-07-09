@@ -42,7 +42,7 @@ public class ContextualMenu extends JPopupMenu implements ActionListener {
 		JMenuItem selectAll = new JMenuItem(
 				actionFactory.getSelectAllAction());
 		
-		JMenuItem hideSelectedLinesMenuItem = new JMenuItem(Translator._("Hide selected lines"));
+		JMenuItem hideSelectedLinesMenuItem = new JMenuItem(Translator.tr("Hide selected lines"));
 		hideSelectedLinesMenuItem.addActionListener(this);
 
 		add(copy);

@@ -15,7 +15,7 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -31,22 +31,22 @@ public class SelectAllAction extends AbstractAction {
 
 	private static final long serialVersionUID = 3272495186683089254L;
 
-	private MainWindow mainGUI;
+	private MainWindow mainWindow;
 
-	public SelectAllAction(MainWindow mainGUI) {
-		this.mainGUI = mainGUI;
+	public SelectAllAction(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
 
 		setEnabled(false);
 
 		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
-		putValue(AbstractAction.NAME, _("Select all"));
+		putValue(AbstractAction.NAME, tr("Select all"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) mainGUI.getDesktop().getSelectedFrame();
+		LogWindow log = (LogWindow) mainWindow.getDesktop().getSelectedFrame();
 		if (log != null) {
 			int numLines = log.getLinesList().getModel().getSize();
 			if (numLines > 0) {

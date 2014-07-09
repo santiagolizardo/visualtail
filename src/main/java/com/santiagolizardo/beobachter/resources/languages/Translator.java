@@ -37,23 +37,36 @@ public class Translator {
 
 	public static void start(String language) {
 		Locale locale = LocaleUtil.fromString(language);
+		Locale.setDefault(locale);
 
 		try {
 			i18n = I18nFactory.getI18n(Translator.class, locale);
 		} catch (MissingResourceException mre) {
-			mre.printStackTrace();
+			logger.severe(mre.getMessage());
 		}
 	}
 
-	public static String _(String key) {
+	public static String tr(String text) {
 		if (null == i18n)
-			return key;
+			return text;
 
 		try {
-			return i18n.tr(key);
+			return i18n.tr(text);
 		} catch (MissingResourceException mre) {
-			logger.warning("Missing translation: " + key);
-			return key;
+			logger.warning("Missing translation: " + mre.getKey());
+			return text;
 		}
+	}
+	
+	public static String trn(String text, String pluralText, long number) {
+		if (null == i18n)
+			return text;
+
+		try {
+			return i18n.trn(text, pluralText, number);
+		} catch (MissingResourceException mre) {
+			logger.warning("Missing translation: " + mre.getKey());
+			return text;
+		}		
 	}
 }

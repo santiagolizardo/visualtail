@@ -60,12 +60,12 @@ public class FontChooserDialog extends AbstractDialog {
 	private JButton okButton;
 	private JButton cancelButton;
 
-	public FontChooserDialog(final MainWindow mainGUI) {
-		super(mainGUI);
+	public FontChooserDialog(final MainWindow mainWindow) {
+		super(mainWindow);
 
-		final ConfigData configManager = mainGUI.getConfigData();
+		final ConfigData configManager = mainWindow.getConfigData();
 
-		setTitle(Translator._("Font settings"));
+		setTitle(Translator.tr("Font settings"));
 		setResizable(false);
 		setModal(true);
 
@@ -94,7 +94,7 @@ public class FontChooserDialog extends AbstractDialog {
 
 		previewTextField = new JTextField("[INFO] Log line example");
 
-		okButton = new JButton(Translator._("Save"));
+		okButton = new JButton(Translator.tr("Save"));
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -108,10 +108,10 @@ public class FontChooserDialog extends AbstractDialog {
 						.toString()));
 
 				ConfigPersistence configPersistence = new ConfigPersistence();
-				configPersistence.saveProperties(mainGUI,
+				configPersistence.saveProperties(mainWindow,
 						configManager.getConfiguration());
 
-				JInternalFrame[] internalFrames = mainGUI.getDesktop().getAllFrames();
+				JInternalFrame[] internalFrames = mainWindow.getDesktop().getAllFrames();
 				for (JInternalFrame internalFrame : internalFrames) {
 					LogWindow logWindow = (LogWindow) internalFrame;
 					logWindow.updateFont(font);
@@ -121,7 +121,7 @@ public class FontChooserDialog extends AbstractDialog {
 			}
 		});
 
-		cancelButton = new JButton(Translator._("Cancel"));
+		cancelButton = new JButton(Translator.tr("Cancel"));
 		cancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -154,9 +154,9 @@ public class FontChooserDialog extends AbstractDialog {
 		SpringLayout layout = new SpringLayout();
 		container.setLayout(layout);
 
-		JLabel fontLabel = new JLabel(Translator._("Font family"));
-		JLabel sizeLabel = new JLabel(Translator._("Font size"));
-		JLabel previewLabel = new JLabel(Translator._("Preview"));
+		JLabel fontLabel = new JLabel(Translator.tr("Font family"));
+		JLabel sizeLabel = new JLabel(Translator.tr("Font size"));
+		JLabel previewLabel = new JLabel(Translator.tr("Preview"));
 
 		container.add(fontLabel);
 		container.add(fontFamilyCombo);

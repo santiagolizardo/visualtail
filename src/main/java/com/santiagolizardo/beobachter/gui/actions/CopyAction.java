@@ -16,7 +16,7 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -37,16 +37,16 @@ public class CopyAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2226006120048433873L;
 
-	private MainWindow mainGUI;
+	private MainWindow mainWindow;
 
 	private Clipboard clipboard;
 
-	public CopyAction(MainWindow mainGUI) {
+	public CopyAction(MainWindow mainWindow) {
 
-		this.mainGUI = mainGUI;
+		this.mainWindow = mainWindow;
 
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("copy.png"));
-		putValue(AbstractAction.NAME, _("Copy"));
+		putValue(AbstractAction.NAME, tr("Copy"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
 
@@ -57,7 +57,7 @@ public class CopyAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) mainGUI.getDesktop().getSelectedFrame();
+		LogWindow log = (LogWindow) mainWindow.getDesktop().getSelectedFrame();
 		if (log != null) {
 			List<String> selectedLines = log.getLinesList().getSelectedValuesList();
 			StringBuilder sb = new StringBuilder();

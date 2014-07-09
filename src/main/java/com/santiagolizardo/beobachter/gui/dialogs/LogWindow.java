@@ -46,7 +46,7 @@ import com.santiagolizardo.beobachter.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 import java.awt.Font;
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -220,7 +220,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		}
 		if (searchIndex >= linesSize
 				&& DialogFactory.showQuestionDialog(this,
-						Translator._("Do you want to search again?"))) {
+						Translator.tr("Do you want to search again?"))) {
 			searchIndex = 0;
 			searchAgainText();
 		}
@@ -238,8 +238,8 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		String byteCount = FileUtil.byteCountToDisplaySize(file.length());
 		title = title.concat(" - ").concat(byteCount);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
-		String modDate = sdf.format(file.lastModified());
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, getLocale());
+		String modDate = dateFormat.format(file.lastModified());
 		title = title.concat(" - ").concat(modDate);
 
 		setTitle(title);

@@ -23,19 +23,19 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import com.santiagolizardo.beobachter.beans.Rule;
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 public class RulesTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = -3824360112995729445L;
 
 	private String columns[] = new String[]{
-		_("Pattern"),
-		_("Regular expression"),
-		_("Ignore case"),
-		_("Background color"),
-		_("Foreground color"),
-		_("Example")
+		tr("Pattern"),
+		tr("Regular expression"),
+		tr("Ignore case"),
+		tr("Background color"),
+		tr("Foreground color"),
+		tr("Example")
 	};
 
 	private List<Rule> rules;

@@ -16,7 +16,7 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.event.KeyEvent;
 
@@ -36,23 +36,23 @@ public class EditMenu extends JMenu {
 
 	private JMenuItem copyMenuItem;
 
-	public EditMenu(MainWindow mainGUI) {
+	public EditMenu(MainWindow mainWindow) {
 
-		setText(_("Edit"));
+		setText(tr("Edit"));
 		setEnabled(false);
 		setMnemonic(KeyEvent.VK_E);
 
-		ActionFactory actionFactory = mainGUI.getActionFactory();
+		ActionFactory actionFactory = mainWindow.getActionFactory();
 
 		copyMenuItem = new JMenuItem(actionFactory.getCopyAction());
 		JMenuItem selectAllMenuItem = new JMenuItem(
 				actionFactory.getSelectAllAction());
 
-		JMenuItem findMenuItem = new JMenuItem(new FindAction(mainGUI));
-		JMenuItem findNextMenuItem = new JMenuItem(new FindNextAction(mainGUI));
+		JMenuItem findMenuItem = new JMenuItem(new FindAction(mainWindow));
+		JMenuItem findNextMenuItem = new JMenuItem(new FindNextAction(mainWindow));
 		
-		JMenuItem clearSelectedBufferMenuItem = new JMenuItem(new ClearSelectedBufferAction(mainGUI));
-		JMenuItem clearAllBuffersMenuItem = new JMenuItem(new ClearAllBuffersAction(mainGUI));
+		JMenuItem clearSelectedBufferMenuItem = new JMenuItem(new ClearSelectedBufferAction(mainWindow));
+		JMenuItem clearAllBuffersMenuItem = new JMenuItem(new ClearAllBuffersAction(mainWindow));
 
 		add(copyMenuItem);
 		addSeparator();

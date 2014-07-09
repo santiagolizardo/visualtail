@@ -22,29 +22,31 @@ import com.santiagolizardo.beobachter.resources.languages.Translator;
 public class FileUtil {
 
 	public static String byteCountToDisplaySize(long fileSizeInBytes) {
-		if (fileSizeInBytes < 1024) {
-			return String.format("%d B", fileSizeInBytes);
+		String sizeToDisplay = String.valueOf(fileSizeInBytes);
+
+		if (fileSizeInBytes < 1024) { // Bytes
+			sizeToDisplay = String.format("%.0f B", fileSizeInBytes);
+		} else if ((fileSizeInBytes / 1024) < 1024) { // Kbytes
+			sizeToDisplay = String.format("%.2f KB", (fileSizeInBytes / 1024));
+		} else if ((fileSizeInBytes / 1024 / 1024) < 1024) { // Mbytes
+			sizeToDisplay = String.format("%.2f MB", (fileSizeInBytes / 1024 / 1024));
+		} else if ((fileSizeInBytes / 1024 / 1024 / 1024) < 1024) { // Gbytes
+			sizeToDisplay = String.format("%.2f GB", (fileSizeInBytes / 1024 / 1024 / 1024));
 		}
 
-		double fileSizeInKb = fileSizeInBytes / 1024;
-		if (fileSizeInKb < 1024) {
-			return String.format("%.2f KB", fileSizeInKb);
-		}
-
-		fileSizeInKb /= 1024;
-		return String.format("%.2f MB", fileSizeInKb);
+		return sizeToDisplay;
 	}
 
 	public static void tryReading(File file) throws Exception {
 		if (!file.exists()) {
-			throw new Exception(Translator._("The file does not exist"));
+			throw new Exception(Translator.tr("The file does not exist"));
 		}
 		if (file.isDirectory()) {
-			throw new Exception(Translator._("Cannot open a directory"));
+			throw new Exception(Translator.tr("Cannot open a directory"));
 		}
 		if (!file.canRead()) {
 			throw new Exception(
-					Translator._("You do not have permissions to read this file"));
+					Translator.tr("You do not have permissions to read this file"));
 		}
 	}
 }

@@ -15,7 +15,7 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs.components;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 import static javax.swing.SpringLayout.EAST;
 import static javax.swing.SpringLayout.NORTH;
 import static javax.swing.SpringLayout.SOUTH;
@@ -81,7 +81,7 @@ public class EditionPanel extends JPanel {
 	private LogType logType;
 	private boolean logTypeLoaded;
 
-	public EditionPanel(final JDialog mainGUI) {
+	public EditionPanel(final JDialog mainWindow) {
 		super();
 		setPreferredSize(new Dimension(640, 250));
 
@@ -154,7 +154,7 @@ public class EditionPanel extends JPanel {
 				}
 		);
 
-		btnAddRule = new JButton(Translator._("Add rule"));
+		btnAddRule = new JButton(Translator.tr("Add rule"));
 
 		btnAddRule.addActionListener(
 				new ActionListener() {
@@ -169,7 +169,7 @@ public class EditionPanel extends JPanel {
 		}
 	);
 
-		btnRemoveRule = new JButton(Translator._("Remove rule"));
+		btnRemoveRule = new JButton(Translator.tr("Remove rule"));
 
 		btnRemoveRule.setEnabled(
 				false);
@@ -214,7 +214,7 @@ public class EditionPanel extends JPanel {
 		double _refresh = Double.parseDouble(spnRefresh.getValue().toString());
 		double _seconds = _refresh / 1000;
 		lblSeconds.setText(formatter.format(_seconds)
-				.concat(" " + _("seconds")));
+				.concat(" " + tr("seconds")));
 	}
 
 	public void setLogType(LogType logType) {
@@ -235,8 +235,8 @@ public class EditionPanel extends JPanel {
 
 	private void placeComponents() {
 		JLabel lblRefresh = new JLabel(
-				Translator._("Refresh interval in milliseconds"));
-		JLabel lblRules = new JLabel(Translator._("Formatting rules"));
+				Translator.tr("Refresh interval in milliseconds"));
+		JLabel lblRules = new JLabel(Translator.tr("Formatting rules"));
 
 		cardLayout = new CardLayout();
 		setLayout(cardLayout);
@@ -244,7 +244,7 @@ public class EditionPanel extends JPanel {
 		JPanel panelA = new JPanel();
 		panelA.add(
 				new JLabel(Translator
-						._("Select a log type on the left to edit it")),
+						.tr("Select a log type on the left to edit it")),
 				BorderLayout.CENTER);
 
 		add(panelA, "A");

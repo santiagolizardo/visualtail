@@ -16,7 +16,7 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -32,21 +32,21 @@ public class FindNextAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2768042815624362464L;
 	
-	private MainWindow mainGUI;
+	private MainWindow mainWindow;
 
-	public FindNextAction(MainWindow mainGUI) {
+	public FindNextAction(MainWindow mainWindow) {
 
-		this.mainGUI = mainGUI;
+		this.mainWindow = mainWindow;
 
 		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
-		putValue(AbstractAction.NAME, _("Find next"));
+		putValue(AbstractAction.NAME, tr("Find next"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) mainGUI.getDesktop().getSelectedFrame();
+		LogWindow log = (LogWindow) mainWindow.getDesktop().getSelectedFrame();
 		if (log != null) {
 			log.searchAgainText();
 		}

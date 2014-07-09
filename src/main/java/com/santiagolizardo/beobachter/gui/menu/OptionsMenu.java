@@ -15,7 +15,7 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,24 +43,24 @@ public class OptionsMenu extends JMenu implements ActionListener {
 	private JMenuItem fontSelectorMenuItem;
 	private JMenuItem preferencesMenuItem;
 
-	public OptionsMenu(MainWindow mainGUI) {
+	public OptionsMenu(MainWindow mainWindow) {
 
-		setText(_("Options"));
+		setText(tr("Options"));
 		setMnemonic(KeyEvent.VK_O);
 
-		this.mainWindow = mainGUI;
+		this.mainWindow = mainWindow;
 
-		alwaysOnTopMenuItem = new JCheckBoxMenuItem(_("Always on top"));
+		alwaysOnTopMenuItem = new JCheckBoxMenuItem(tr("Always on top"));
 		alwaysOnTopMenuItem.addActionListener(this);
 
-		manageLogTypesMenuItem = new JMenuItem(_("Manage log types..."));
+		manageLogTypesMenuItem = new JMenuItem(tr("Manage log types..."));
 		manageLogTypesMenuItem.setIcon(IconFactory.getImage("manage_log_types.png"));
 		manageLogTypesMenuItem.addActionListener(this);
 
-		fontSelectorMenuItem = new JMenuItem(_("Font settings..."));
+		fontSelectorMenuItem = new JMenuItem(tr("Font settings..."));
 		fontSelectorMenuItem.addActionListener(this);
 
-		preferencesMenuItem = new JMenuItem(_("Preferences..."));
+		preferencesMenuItem = new JMenuItem(tr("Preferences..."));
 		preferencesMenuItem.setIcon(IconFactory.getImage("preferences.png"));
 		preferencesMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
 				KeyEvent.CTRL_MASK));

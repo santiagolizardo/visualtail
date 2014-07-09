@@ -16,7 +16,7 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -42,7 +42,7 @@ public class AboutDialog extends AbstractDialog {
 	public AboutDialog(JFrame parentFrame) {
 		super(parentFrame);
 
-		setTitle(Translator._("About this application"));
+		setTitle(Translator.tr("About this application"));
 		setModal(true);
 
 		defineLayout();
@@ -66,8 +66,8 @@ public class AboutDialog extends AbstractDialog {
 		String headlineText = String.format("<h1>%s <em>v%s</em></h1>",
 				Constants.APP_NAME, Constants.APP_VERSION);
 		String infoText = String.format("<p>%s</p>", String.format(
-				_("More info about the project at <a href=\"%s\">%s</a>."),
-				Constants.APP_URL, Constants.APP_URL_DISPLAY));
+				tr("More info about the project at <a href=\"%s\">%s</a>."),
+				Constants.APP_URL, Constants.APP_URL));
 		String creditsText = ResourcesLoader.readResource(AboutDialog.class,
 				"credits.html");
 

@@ -15,7 +15,7 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,18 +50,18 @@ public class HelpMenu extends JMenu implements ActionListener {
 
 		this.mainWindow = mainWindow;
 
-		setText(_("Help"));
+		setText(tr("Help"));
 		setMnemonic(KeyEvent.VK_H);
 
-		reportBugFeatureRequestMenuItem = new JMenuItem(_("Report bug/Request feature"));
+		reportBugFeatureRequestMenuItem = new JMenuItem(tr("Report bug/Request feature"));
 		reportBugFeatureRequestMenuItem.setIcon(IconFactory.getImage("lightbulb.png"));
 		reportBugFeatureRequestMenuItem.addActionListener(this);
 
-		checkForUpdatesMenuItem = new JMenuItem(_("Check for updates"));
+		checkForUpdatesMenuItem = new JMenuItem(tr("Check for updates"));
 		checkForUpdatesMenuItem.setIcon(IconFactory.getImage("arrow_rotate_clockwise.png"));
 		checkForUpdatesMenuItem.addActionListener(this);
 
-		aboutThisAppMenuItem = new JMenuItem(_("About this application..."));
+		aboutThisAppMenuItem = new JMenuItem(tr("About this application..."));
 		aboutThisAppMenuItem.setIcon(IconFactory.getImage("information.png"));
 		aboutThisAppMenuItem.setMnemonic(KeyEvent.VK_F1);
 		aboutThisAppMenuItem.addActionListener(this);

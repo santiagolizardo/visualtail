@@ -28,10 +28,10 @@ public class LinesMouseAdapter extends MouseAdapter {
 
 	private ContextualMenu popupMenu;
 
-	public LinesMouseAdapter(MainWindow mainGUI) {
+	public LinesMouseAdapter(MainWindow mainWindow) {
 		super();
 
-		popupMenu = new ContextualMenu(mainGUI);
+		popupMenu = new ContextualMenu(mainWindow);
 	}
 
 	@Override

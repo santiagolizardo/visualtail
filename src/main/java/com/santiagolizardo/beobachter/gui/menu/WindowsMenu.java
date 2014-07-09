@@ -17,7 +17,7 @@
 package com.santiagolizardo.beobachter.gui.menu;
 
 import com.santiagolizardo.beobachter.Constants;
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,10 +36,10 @@ public class WindowsMenu extends JMenu {
 
 	public WindowsMenu(final MainWindow parentFrame) {
 
-		setText(_("Windows"));
+		setText(tr("Windows"));
 		setMnemonic(KeyEvent.VK_W);
 
-		JMenuItem itemCascade = new JMenuItem(_("Cascade windows"));
+		JMenuItem itemCascade = new JMenuItem(tr("Cascade windows"));
 		itemCascade.setIcon(IconFactory.getImage("application_double.png"));
 		itemCascade.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
 				KeyEvent.CTRL_MASK));
@@ -50,7 +50,7 @@ public class WindowsMenu extends JMenu {
 			}
 		});
 
-		JMenuItem itemTileVer = new JMenuItem(_("Tile windows vertically"));
+		JMenuItem itemTileVer = new JMenuItem(tr("Tile windows vertically"));
 		itemTileVer.setIcon(IconFactory
 				.getImage("application_tile_vertical.png"));
 		itemTileVer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,
@@ -62,7 +62,7 @@ public class WindowsMenu extends JMenu {
 			}
 		});
 
-		JMenuItem itemTileHor = new JMenuItem(_("Tile windows horizontally"));
+		JMenuItem itemTileHor = new JMenuItem(tr("Tile windows horizontally"));
 		itemTileHor.setIcon(IconFactory
 				.getImage("application_tile_horizontal.png"));
 		itemTileHor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
@@ -74,7 +74,7 @@ public class WindowsMenu extends JMenu {
 			}
 		});
 
-		JMenuItem miCloseAllWindows = new JMenuItem(_("Close all windows"));
+		JMenuItem miCloseAllWindows = new JMenuItem(tr("Close all windows"));
 		miCloseAllWindows.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
 				KeyEvent.CTRL_MASK));
 		miCloseAllWindows.addActionListener(new ActionListener() {

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: beobachter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-06 22:33+0100\n"
+"POT-Creation-Date: 2014-07-09 17:28+0100\n"
 "PO-Revision-Date: 2013-12-17 17:13-0500\n"
 "Last-Translator: santiagolizardo <santiago.lizardo@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: com/santiagolizardo/beobachter/util/FileUtil.java:40
+#: com/santiagolizardo/beobachter/util/FileUtil.java:42
 msgid "The file does not exist"
 msgstr "Файл не iснуэ"
 
-#: com/santiagolizardo/beobachter/util/FileUtil.java:43
+#: com/santiagolizardo/beobachter/util/FileUtil.java:45
 msgid "Cannot open a directory"
 msgstr "Не можу вiдкрити директорiю"
 
-#: com/santiagolizardo/beobachter/util/FileUtil.java:47
+#: com/santiagolizardo/beobachter/util/FileUtil.java:49
 msgid "You do not have permissions to read this file"
 msgstr "У вас нема дозволу на читання цього файлу"
 
@@ -99,19 +99,23 @@ msgid "Save current session"
 msgstr "Зберегти поточну сесiю"
 
 #: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:141
-msgid "These files could not be opened for reading:"
-msgstr "Цi файли неможливо вiдкрити для читання:"
+#, fuzzy
+msgid "The file could not be opened for reading:"
+msgid_plural "These files could not be opened for reading:"
+msgstr[0] "Цi файли неможливо вiдкрити для читання:"
+msgstr[1] "Цi файли неможливо вiдкрити для читання:"
+msgstr[2] "Цi файли неможливо вiдкрити для читання:"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:158
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:159
 msgid "Please enter the session name:"
 msgstr "Будь ласка, введiть назву сесii:"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:159
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:160
 msgid "Session name"
 msgstr "Назва сесii"
 
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:168
-#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:185
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:169
+#: com/santiagolizardo/beobachter/gui/menu/FileMenu.java:186
 msgid "Invalid session name"
 msgstr "Невiрна назва сесii"
 
@@ -128,7 +132,7 @@ msgid "Manage log types..."
 msgstr "Керувати типами журналiв..."
 
 #: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:60
-msgid "Change log windows font..."
+msgid "Font settings..."
 msgstr ""
 
 #: com/santiagolizardo/beobachter/gui/menu/OptionsMenu.java:63
@@ -156,7 +160,6 @@ msgid "Unable to fetch server information"
 msgstr "Не вдалося отримати iнформацiю вiд сервера"
 
 #: com/santiagolizardo/beobachter/gui/dialogs/PreferencesDialog.java:68
-#: com/santiagolizardo/beobachter/gui/dialogs/FontChooserDialog.java:68
 msgid "Preferences"
 msgstr "Налаштування"
 
@@ -178,7 +181,7 @@ msgstr "Зовнішній вигляд"
 msgid "Language"
 msgstr "Мова"
 
-#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:218
+#: com/santiagolizardo/beobachter/gui/dialogs/LogWindow.java:223
 msgid "Do you want to search again?"
 msgstr "Ви хочете, щоб виконати пошук знову?"
 
@@ -271,6 +274,11 @@ msgstr "Правила форматування"
 msgid "Select a log type on the left to edit it"
 msgstr "Виберіть тип журналу ліворуч щоб його змінити"
 
+#: com/santiagolizardo/beobachter/gui/dialogs/FontChooserDialog.java:68
+#, fuzzy
+msgid "Font settings"
+msgstr "Розмір шрифту"
+
 #: com/santiagolizardo/beobachter/gui/dialogs/FontChooserDialog.java:157
 msgid "Font family"
 msgstr "Гарнітура"
@@ -335,7 +343,12 @@ msgstr "Перейдіть до нових ліній"
 msgid "Clear buffer"
 msgstr "Очистити буфер"
 
-#: com/santiagolizardo/beobachter/gui/components/LogWindowToolbar.java:137
+#: com/santiagolizardo/beobachter/gui/components/LogWindowToolbar.java:107
+#, fuzzy
+msgid "Log type"
+msgstr "Типи журналiв"
+
+#: com/santiagolizardo/beobachter/gui/components/LogWindowToolbar.java:138
 msgid "Print this file"
 msgstr "Надрукувати цей файл"
 

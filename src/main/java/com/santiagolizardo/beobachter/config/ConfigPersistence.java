@@ -49,11 +49,11 @@ public class ConfigPersistence {
 		return new PropertySet(CONFIG_FILE_PATH);
 	}
 
-	public void saveProperties(MainWindow mainGUI,
+	public void saveProperties(MainWindow mainWindow,
 			PropertySet configuration) {
 		byte i = 0;
 
-		List<String> recentFiles = mainGUI.getRecentFiles();
+		List<String> recentFiles = mainWindow.getRecentFiles();
 		for (; i < recentFiles.size(); i++) {
 			String propertyName = "recent." + i + ".file_name";
 			configuration.setProperty(propertyName, recentFiles.get(i)

@@ -15,7 +15,7 @@
  */
 package com.santiagolizardo.beobachter.gui.menu;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,13 +33,13 @@ import javax.swing.KeyStroke;
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
 import com.santiagolizardo.beobachter.beans.SessionManager;
-import com.santiagolizardo.beobachter.engine.Controller;
 import com.santiagolizardo.beobachter.gui.actions.ExitAction;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.SessionsDialog;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.trn;
 import java.io.IOException;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
@@ -59,12 +59,12 @@ public class FileMenu extends JMenu implements ActionListener {
 	private JMenuItem saveSessionMenuItem;
 
 	public FileMenu(final MainWindow mainWindow) {
-		setText(_("File"));
+		setText(tr("File"));
 		setMnemonic(KeyEvent.VK_F);
 
 		this.mainWindow = mainWindow;
 
-		openMenuItem = new JMenuItem(_("Open..."));
+		openMenuItem = new JMenuItem(tr("Open..."));
 		openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 				KeyEvent.CTRL_MASK));
 		openMenuItem.addActionListener(this);
@@ -76,10 +76,10 @@ public class FileMenu extends JMenu implements ActionListener {
 		JMenuItem exit = new JMenuItem(new ExitAction(mainWindow));
 		exit.setIcon(IconFactory.getImage("exit.png"));
 
-		loadSessionMenuItem = new JMenuItem(_("Manage sessions..."));
+		loadSessionMenuItem = new JMenuItem(tr("Manage sessions..."));
 		loadSessionMenuItem.addActionListener(this);
 
-		saveSessionMenuItem = new JMenuItem(_("Save current session"));
+		saveSessionMenuItem = new JMenuItem(tr("Save current session"));
 		saveSessionMenuItem.setIcon(IconFactory.getImage("disk.png"));
 		saveSessionMenuItem.setEnabled(false);
 		saveSessionMenuItem.addActionListener(this);
@@ -125,7 +125,7 @@ public class FileMenu extends JMenu implements ActionListener {
 						continue;
 					}
 
-					Controller.openFile(mainWindow, file.getAbsolutePath(),
+					mainWindow.getActionFactory().getOpenAction().openFile(file.getAbsolutePath(),
 							logType);
 
 					mainWindow.getRecentFiles().remove(file.getAbsolutePath());
@@ -136,10 +136,11 @@ public class FileMenu extends JMenu implements ActionListener {
 
 				mainWindow.getDesktop().setWindowsOnTileHorizontal();
 
-				if (unreadableFiles.size() > 0) {
+				int numberOfUnreadableFiles = unreadableFiles.size();
+				if (numberOfUnreadableFiles > 0) {
+					String text = trn("The file could not be opened for reading:", "These files could not be opened for reading:", numberOfUnreadableFiles);
 					StringBuilder message = new StringBuilder();
-					message.append(_("These files could not be opened for reading:")
-							+ "\n");
+					message.append(text.concat("\n"));
 					for (File file : unreadableFiles) {
 						message.append("    - ")
 								.append(file.getAbsolutePath())
@@ -155,8 +156,8 @@ public class FileMenu extends JMenu implements ActionListener {
 		} else if (saveSessionMenuItem
 				== ev.getSource()) {
 			String name = JOptionPane.showInputDialog(getParent()
-					.getParent(), _("Please enter the session name:"),
-					_("Session name"), JOptionPane.QUESTION_MESSAGE);
+					.getParent(), tr("Please enter the session name:"),
+					tr("Session name"), JOptionPane.QUESTION_MESSAGE);
 			if (name == null) {
 				return;
 			}
@@ -165,7 +166,7 @@ public class FileMenu extends JMenu implements ActionListener {
 
 			if (name.length() == 0) {
 				DialogFactory.showErrorMessage(null,
-						_("Invalid session name"));
+						tr("Invalid session name"));
 				return;
 			}
 
@@ -182,7 +183,7 @@ public class FileMenu extends JMenu implements ActionListener {
 				sessionManager.save(name, filePaths);
 			} catch (IOException e) {
 				logger.warning(e.getMessage());
-				DialogFactory.showErrorMessage(null, _("Invalid session name") + "\r\n" + e.getMessage());
+				DialogFactory.showErrorMessage(null, tr("Invalid session name") + "\r\n" + e.getMessage());
 			}
 		}
 	}

@@ -57,7 +57,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 
 		spNumberDisplayerLines = new JSpinner(new SpinnerNumberModel(
 				logWindow.getNumberLinesToDisplay(), 1, 9999, 1));
-		spNumberDisplayerLines.setToolTipText(Translator._("Number of lines to display"));
+		spNumberDisplayerLines.setToolTipText(Translator.tr("Number of lines to display"));
 		spNumberDisplayerLines.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -68,7 +68,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 			}
 		});
 
-		checkForChangesCheckBox = new JCheckBox(Translator._("Check for changes"));
+		checkForChangesCheckBox = new JCheckBox(Translator.tr("Check for changes"));
 		checkForChangesCheckBox.setSelected(true);
 		checkForChangesCheckBox.addActionListener(new ActionListener() {
 
@@ -78,7 +78,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 			}
 		});
 
-		scrollNewLinesCheckBox = new JCheckBox(Translator._("Scroll to new lines"));
+		scrollNewLinesCheckBox = new JCheckBox(Translator.tr("Scroll to new lines"));
 		scrollNewLinesCheckBox.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -89,7 +89,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 			}
 		});
 
-		clearButton = new JButton(Translator._("Clear buffer"));
+		clearButton = new JButton(Translator.tr("Clear buffer"));
 		clearButton.setEnabled(false);
 		clearButton.addActionListener(new ActionListener() {
 			@Override
@@ -104,7 +104,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 				logTypesLoader.getAll().toArray(new LogType[]{}));
 		logTypes = new JComboBox<>(logTypesModel);
 		logTypes.setRenderer(new LogTypeListRenderer());
-		logTypes.setToolTipText(Translator._("Log type"));
+		logTypes.setToolTipText(Translator.tr("Log type"));
 		logTypes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -135,7 +135,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 			return;
 		}
 
-		JButton btnPrint = new JButton(Translator._("Print this file"));
+		JButton btnPrint = new JButton(Translator.tr("Print this file"));
 		btnPrint.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {

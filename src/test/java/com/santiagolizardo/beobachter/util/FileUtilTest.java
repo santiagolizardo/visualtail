@@ -14,28 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with Beobachter.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.santiagolizardo.beobachter.gui.renderers;
+package com.santiagolizardo.beobachter.util;
 
-import com.santiagolizardo.beobachter.resources.languages.Translator;
-import java.awt.Color;
-import java.awt.Component;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
+import junit.framework.TestCase;
 
-public class ColorExampleRenderer extends DefaultTableCellRenderer {
-
-	public ColorExampleRenderer() {
-		setOpaque(true);
-		setText(Translator.tr("Testing"));
-	}
-
-	@Override
-	public Component getTableCellRendererComponent(JTable table, Object value,
-			boolean isSelected, boolean hasFocus,
-			int row, int column) {
-		Color[] colors = (Color[]) value;
-		setBackground(colors[0]);
-		setForeground(colors[1]);
-		return this;
+public class FileUtilTest extends TestCase {
+	
+	public void testSizeFormatting() {
+		assertEquals("0 B", FileUtil.byteCountToDisplaySize(0));
+		assertEquals("37 B", FileUtil.byteCountToDisplaySize(37));
+		assertEquals("1.00 MB", FileUtil.byteCountToDisplaySize(1024*1024));
 	}
 }

@@ -20,12 +20,18 @@ import com.santiagolizardo.beobachter.gui.MainWindow;
 
 public class ActionFactory {
 
+	private OpenAction openAction;
 	private CopyAction copyAction;
 	private SelectAllAction selectAllAction;
 
-	public ActionFactory(MainWindow mainGUI) {
-		copyAction = new CopyAction(mainGUI);
-		selectAllAction = new SelectAllAction(mainGUI);
+	public ActionFactory(MainWindow mainWindow) {
+		openAction = new OpenAction(mainWindow);
+		copyAction = new CopyAction(mainWindow);
+		selectAllAction = new SelectAllAction(mainWindow);
+	}
+	
+	public OpenAction getOpenAction() {
+		return openAction;
 	}
 
 	public CopyAction getCopyAction() {

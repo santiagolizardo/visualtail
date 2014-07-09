@@ -16,7 +16,7 @@
  */
 package com.santiagolizardo.beobachter.gui.util;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,10 +28,10 @@ import java.io.IOException;
 
 public class UpdateManager extends Thread {
 
-	private MainWindow mainGUI;
+	private MainWindow mainWindow;
 
-	public UpdateManager(MainWindow mainGUI) {
-		this.mainGUI = mainGUI;
+	public UpdateManager(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
 	}
 
 	public void checkForUpdate() {
@@ -54,19 +54,19 @@ public class UpdateManager extends Thread {
 			if (serverVersion > currentVersion) {
 				StringBuilder sb = new StringBuilder();
 				sb.append(
-						String.format(_("New version %s is available"), version))
+						String.format(tr("New version %s is available"), version))
 						.append(Constants.LINE_SEP).append(Constants.LINE_SEP);
-				sb.append(_("Please visit the project website")).append(
+				sb.append(tr("Please visit the project website")).append(
 						Constants.LINE_SEP);
-				DialogFactory.showInformationMessage(mainGUI, sb.toString());
+				DialogFactory.showInformationMessage(mainWindow, sb.toString());
 			} else if (serverVersion <= currentVersion) {
-				DialogFactory.showInformationMessage(mainGUI,
-						_("There are not updates available"));
+				DialogFactory.showInformationMessage(mainWindow,
+						tr("There are not updates available"));
 			}
 
 		} catch (IOException | NumberFormatException e) {
-			DialogFactory.showErrorMessage(mainGUI,
-					_("Unable to fetch server information"));
+			DialogFactory.showErrorMessage(mainWindow,
+					tr("Unable to fetch server information"));
 		}
 
 	}

@@ -23,9 +23,8 @@ import java.io.File;
 public class Constants {
 
 	public static final String APP_NAME = "Beobachter";
-	public static final String APP_VERSION = "1.8.3";
-	public static final String APP_URL_DISPLAY = "http://www.santiagolizardo.com/page/beobachter";
-	public static final String APP_URL = APP_URL_DISPLAY + "?utm_source=beobachter&utm_medium=desktop&utm_content=applications-beobachter&utm_campaign=applications";
+	public static final String APP_VERSION = "1.8.4";
+	public static final String APP_URL = "http://sourceforge.net/projects/beobachter/";
 	public static final String APP_UPDATE_URL = "http://beobachter.sourceforge.net/version.html";
 
 	public static final String LINE_SEP = System.getProperty("line.separator");

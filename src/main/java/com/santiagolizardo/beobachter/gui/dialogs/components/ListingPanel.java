@@ -15,7 +15,7 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs.components;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 import static javax.swing.SpringLayout.EAST;
 import static javax.swing.SpringLayout.NORTH;
 import static javax.swing.SpringLayout.SOUTH;
@@ -93,19 +93,19 @@ public class ListingPanel extends JPanel {
 
 		scrollTypes = new JScrollPane(lstTypes);
 
-		btnAdd = new JButton(Translator._("Add"));
+		btnAdd = new JButton(Translator.tr("Add"));
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String name = JOptionPane.showInputDialog(getParent(),
-						Translator._("Enter the name of the new log type"));
+						Translator.tr("Enter the name of the new log type"));
 				if (name == null) {
 					return;
 				}
 				name = name.trim();
 				if (name.length() == 0) {
 					DialogFactory.showErrorMessage(null,
-							Translator._("Invalid log type name"));
+							Translator.tr("Invalid log type name"));
 					return;
 				}
 				LogType logType = new LogType(name);
@@ -120,14 +120,14 @@ public class ListingPanel extends JPanel {
 			}
 		});
 
-		btnRename = new JButton(Translator._("Rename"));
+		btnRename = new JButton(Translator.tr("Rename"));
 		btnRename.setEnabled(false);
 		btnRename.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
 				LogType selected = (LogType) lstTypes.getSelectedValue();
 				String newName = JOptionPane.showInputDialog(getParent(),
-						_("Enter the new name of the log type:"),
+						tr("Enter the new name of the log type:"),
 						selected.getName());
 				if (newName == null) {
 					return;
@@ -142,18 +142,18 @@ public class ListingPanel extends JPanel {
 			}
 		});
 
-		btnRemove = new JButton(Translator._("Remove"));
+		btnRemove = new JButton(Translator.tr("Remove"));
 		btnRemove.setEnabled(false);
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
 				if (DialogFactory.showQuestionDialog(getParent(), Translator
-						._("Are you sure you want to delete the selected log type?"))) {
+						.tr("Are you sure you want to delete the selected log type?"))) {
 					LogType selected = (LogType) lstTypes.getSelectedValue();
 					LogTypeManager logTypes = LogTypeManager.getInstance();
 					if (!logTypes.remove(selected)) {
 						DialogFactory.showErrorMessage(getParent(),
-								Translator._("Unable to delete the log type"));
+								Translator.tr("Unable to delete the log type"));
 					}
 
 					updateLogTypes();
@@ -171,7 +171,7 @@ public class ListingPanel extends JPanel {
 	}
 
 	private void placeComponents() {
-		JLabel lblTypes = new JLabel(Translator._("Log types"));
+		JLabel lblTypes = new JLabel(Translator.tr("Log types"));
 
 		SpringLayout layout = new SpringLayout();
 		setLayout(layout);

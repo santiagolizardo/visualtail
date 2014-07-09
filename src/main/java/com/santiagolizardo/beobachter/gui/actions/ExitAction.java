@@ -35,7 +35,7 @@ public class ExitAction extends AbstractAction {
 
 		this.mainWindow = mainGui;
 
-		putValue(AbstractAction.NAME, Translator._("Exit"));
+		putValue(AbstractAction.NAME, Translator.tr("Exit"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_F4, KeyEvent.ALT_MASK));
 	}

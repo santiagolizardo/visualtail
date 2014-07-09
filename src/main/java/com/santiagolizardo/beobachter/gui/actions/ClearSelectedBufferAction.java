@@ -16,7 +16,7 @@
  */
 package com.santiagolizardo.beobachter.gui.actions;
 
-import static com.santiagolizardo.beobachter.resources.languages.Translator._;
+import static com.santiagolizardo.beobachter.resources.languages.Translator.tr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -31,20 +31,20 @@ public class ClearSelectedBufferAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2244429466145757856L;
 
-	private MainWindow mainGUI;
+	private MainWindow mainWindow;
 
-	public ClearSelectedBufferAction(MainWindow mainGUI) {
+	public ClearSelectedBufferAction(MainWindow mainWindow) {
 		
-		this.mainGUI = mainGUI;
+		this.mainWindow = mainWindow;
 
-		putValue(AbstractAction.NAME, _("Clear selected buffer"));
+		putValue(AbstractAction.NAME, tr("Clear selected buffer"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_MASK));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		LogWindow logWindow = (LogWindow)mainGUI.getDesktop().getSelectedFrame();
+		LogWindow logWindow = (LogWindow)mainWindow.getDesktop().getSelectedFrame();
 		logWindow.clear();
 	}
 }
