@@ -22,7 +22,6 @@ import java.awt.Color;
 
 import org.junit.Test;
 
-import com.santiagolizardo.beobachter.beans.Rule;
 
 public class RuleTest {
 

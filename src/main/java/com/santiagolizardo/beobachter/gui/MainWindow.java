@@ -40,8 +40,6 @@ public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = -349295815866572937L;
 
-	private static final Logger logger = Logger.getLogger(MainWindow.class.getName());
-
 	private ConfigData configData;
 	private DesktopPanel desktop;
 	private FindPanel findPanel;

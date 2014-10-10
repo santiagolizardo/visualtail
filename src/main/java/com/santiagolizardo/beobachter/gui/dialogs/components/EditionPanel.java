@@ -296,7 +296,7 @@ public class EditionPanel extends JPanel {
 
 	public void saveChanges() {
 		short interval = Short
-				.valueOf(spnRefresh.getValue().toString()).shortValue();
+				.valueOf(spnRefresh.getValue().toString());
 		logType.setRefreshInterval(interval);
 		logType.setRules(modelRules.getRules());
 

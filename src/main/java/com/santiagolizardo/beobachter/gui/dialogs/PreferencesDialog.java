@@ -15,11 +15,9 @@
  */
 package com.santiagolizardo.beobachter.gui.dialogs;
 
-import static javax.swing.SpringLayout.EAST;
 import static javax.swing.SpringLayout.SOUTH;
 
 import java.awt.Container;
-import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
@@ -27,8 +25,6 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
 import javax.swing.SpringLayout.Constraints;

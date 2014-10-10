@@ -20,8 +20,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.santiagolizardo.beobachter.beans.LogType;
-import com.santiagolizardo.beobachter.beans.Rule;
 
 public class LogTypeTest {
 

@@ -26,7 +26,6 @@ import javax.swing.JMenuItem;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
-import com.santiagolizardo.beobachter.gui.actions.OpenAction;
 import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;

@@ -210,8 +210,8 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		this.searchText = searchText;
 		int linesSize = linesModel.size();
 		for (; searchIndex < linesSize; searchIndex++) {
-			String line = linesModel.get(searchIndex).toString();
-			if (line.indexOf(searchText) != -1) {
+			String line = linesModel.get(searchIndex);
+			if (line.contains(searchText) ) {
 				linesList.ensureIndexIsVisible(searchIndex);
 				linesList.setSelectedIndex(searchIndex);
 				searchIndex++;
@@ -233,16 +233,16 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	}
 
 	private void updateTitle() {
-		String title = file.getName();
+		String newTitle = file.getName();
 
 		String byteCount = FileUtil.byteCountToDisplaySize(file.length());
-		title = title.concat(" - ").concat(byteCount);
+		newTitle = newTitle.concat(" - ").concat(byteCount);
 
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, getLocale());
 		String modDate = dateFormat.format(file.lastModified());
-		title = title.concat(" - ").concat(modDate);
+		newTitle = newTitle.concat(" - ").concat(modDate);
 
-		setTitle(title);
+		setTitle(newTitle);
 	}
 
 	public File getFile() {

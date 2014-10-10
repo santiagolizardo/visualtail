@@ -23,7 +23,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import com.santiagolizardo.beobachter.beans.SwingLookAndFeel;
 
 public class SwingLookAndFeelTest {
 

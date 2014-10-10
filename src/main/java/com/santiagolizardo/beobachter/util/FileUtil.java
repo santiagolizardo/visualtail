@@ -25,13 +25,13 @@ public class FileUtil {
 		String sizeToDisplay = String.valueOf(fileSizeInBytes);
 
 		if (fileSizeInBytes < 1024) { // Bytes
-			sizeToDisplay = String.format("%.0f B", fileSizeInBytes);
+			sizeToDisplay = String.format("%d B", fileSizeInBytes);
 		} else if ((fileSizeInBytes / 1024) < 1024) { // Kbytes
-			sizeToDisplay = String.format("%.2f KB", (fileSizeInBytes / 1024));
+			sizeToDisplay = String.format("%.2f KB", (float)(fileSizeInBytes / 1024));
 		} else if ((fileSizeInBytes / 1024 / 1024) < 1024) { // Mbytes
-			sizeToDisplay = String.format("%.2f MB", (fileSizeInBytes / 1024 / 1024));
+			sizeToDisplay = String.format("%.2f MB", (float)(fileSizeInBytes / 1024 / 1024));
 		} else if ((fileSizeInBytes / 1024 / 1024 / 1024) < 1024) { // Gbytes
-			sizeToDisplay = String.format("%.2f GB", (fileSizeInBytes / 1024 / 1024 / 1024));
+			sizeToDisplay = String.format("%.2f GB", (float)(fileSizeInBytes / 1024 / 1024 / 1024));
 		}
 
 		return sizeToDisplay;

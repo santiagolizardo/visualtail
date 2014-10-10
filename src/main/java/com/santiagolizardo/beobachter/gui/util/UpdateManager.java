@@ -25,9 +25,13 @@ import java.net.URL;
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UpdateManager extends Thread {
 
+	private static final Logger logger = Logger.getLogger(UpdateManager.class.getName());
+	
 	private MainWindow mainWindow;
 
 	public UpdateManager(MainWindow mainWindow) {
@@ -40,17 +44,16 @@ public class UpdateManager extends Thread {
 
 	@Override
 	public void run() {
+		InputStreamReader reader = null;
+		BufferedReader buffer = null;
 		try {
 			URL url = new URL(Constants.APP_UPDATE_URL);
-			InputStreamReader reader = new InputStreamReader(url.openStream());
-			BufferedReader buffer = new BufferedReader(reader);
+			reader = new InputStreamReader(url.openStream());
+			buffer = new BufferedReader(reader);
 			String version = buffer.readLine();
-			buffer.close();
-			reader.close();
-			int serverVersion = Integer.valueOf(version.replaceAll("\\.", ""))
-					.intValue();
+			int serverVersion = Integer.valueOf(version.replaceAll("\\.", ""));
 			int currentVersion = Integer.valueOf(
-					Constants.APP_VERSION.replaceAll("\\.", "")).intValue();
+					Constants.APP_VERSION.replaceAll("\\.", ""));
 			if (serverVersion > currentVersion) {
 				StringBuilder sb = new StringBuilder();
 				sb.append(
@@ -68,6 +71,21 @@ public class UpdateManager extends Thread {
 			DialogFactory.showErrorMessage(mainWindow,
 					tr("Unable to fetch server information"));
 		}
-
+		finally {
+			if( null != buffer ) {
+				try {
+					buffer.close();
+				} catch (IOException ex) {
+					logger.log(Level.SEVERE, null, ex);
+				}
+			}
+			if( null != reader) {
+				try {
+					reader.close();
+				} catch (IOException ex) {
+					logger.log(Level.SEVERE, null, ex);
+				}
+			}
+		}
 	}
 }

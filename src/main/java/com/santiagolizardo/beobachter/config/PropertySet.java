@@ -43,15 +43,15 @@ public class PropertySet extends Properties {
 	}
 
 	public void setProperty(String key, short value) {
-		setProperty(key, Short.valueOf(value).toString());
+		setProperty(key, Short.toString(value));
 	}
 
 	public void setProperty(String key, int value) {
-		setProperty(key, Integer.valueOf(value).toString());
+		setProperty(key, Integer.toString(value));
 	}
 
 	public void setProperty(String key, boolean value) {
-		setProperty(key, Boolean.valueOf(value).toString());
+		setProperty(key, Boolean.toString(value));
 	}
 	
 	public int getInt(String key) {

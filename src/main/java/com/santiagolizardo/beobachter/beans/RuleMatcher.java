@@ -45,7 +45,7 @@ public class RuleMatcher {
 		if (rule.isRegularExpression()) {
 			return rePattern.matcher(text).matches();
 		} else {
-			return (text.indexOf(pattern) != -1);
+			return text.contains(pattern);
 		}
 	}
 }

@@ -47,22 +47,18 @@ public class Tail implements Runnable {
 	public void run() {
 		long currentSize = file.length();
 		if (currentSize > savedSize) {
-
-			try {
-				RandomAccessFile accessFile = new RandomAccessFile(
-						fileName, "r");
-				accessFile.seek(savedSize);
-
-				String line = accessFile.readLine();
-				do {
-					if (!line.isEmpty()) {
-						notifyListeners(line);
-					}
-				} while ((line = accessFile.readLine()) != null);
-
-				savedSize = currentSize;
-
-				accessFile.close();
+			try (RandomAccessFile accessFile = new RandomAccessFile(
+						fileName, "r")) {
+					accessFile.seek(savedSize);
+					
+					String line = accessFile.readLine();
+					do {
+						if (!line.isEmpty()) {
+							notifyListeners(line);
+						}
+					} while ((line = accessFile.readLine()) != null);
+					
+					savedSize = currentSize;
 			} catch (IOException e) {
 				logger.severe(e.getMessage());
 			}

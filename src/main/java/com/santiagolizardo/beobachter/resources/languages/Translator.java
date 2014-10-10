@@ -24,6 +24,7 @@ import org.xnap.commons.i18n.I18n;
 import org.xnap.commons.i18n.I18nFactory;
 
 import com.santiagolizardo.beobachter.util.LocaleUtil;
+import java.util.logging.Level;
 
 /**
  * This class is the responsible of translate every literal on the GUI
@@ -53,7 +54,7 @@ public class Translator {
 		try {
 			return i18n.tr(text);
 		} catch (MissingResourceException mre) {
-			logger.warning("Missing translation: " + mre.getKey());
+			logger.log(Level.WARNING, "Missing translation: {0}", mre.getKey());
 			return text;
 		}
 	}
@@ -65,7 +66,7 @@ public class Translator {
 		try {
 			return i18n.trn(text, pluralText, number);
 		} catch (MissingResourceException mre) {
-			logger.warning("Missing translation: " + mre.getKey());
+			logger.log(Level.WARNING, "Missing translation: {0}", mre.getKey());
 			return text;
 		}		
 	}
