@@ -7,3 +7,4 @@ pom.xml.versionsBackup
 *.pot
 *.po.~*
 nbactions.xml
+*.exe
