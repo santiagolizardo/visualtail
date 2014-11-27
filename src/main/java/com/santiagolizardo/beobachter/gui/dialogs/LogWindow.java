@@ -56,6 +56,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private static final long serialVersionUID = -108911942974722973L;
 
+	private int numberPreviousLinesToDisplay;
 	private int numberLinesToDisplay;
 
 	private int searchIndex;
@@ -91,6 +92,8 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		searchIndex = 0;
 		searchText = null;
+
+		numberPreviousLinesToDisplay = 0;
 		numberLinesToDisplay = 256;
 
 		this.mainWindow = mainWindow;
@@ -286,6 +289,17 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	public void clear() {
 		linesModel.clear();
 		toolbar.getClearButton().setEnabled(false);
+	}
+
+	public void loadPreviousLines(int numberOfLines) {
+	}
+	
+	public int getNumberPreviousLinesToDisplay() {
+		return numberPreviousLinesToDisplay;
+	}
+
+	public void setNumberPreviousLinesToDisplay(int numberPreviousLinesToDisplay) {
+		this.numberPreviousLinesToDisplay = numberPreviousLinesToDisplay;
 	}
 
 	public int getNumberLinesToDisplay() {

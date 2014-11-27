@@ -23,7 +23,7 @@ import java.io.File;
 public class Constants {
 
 	public static final String APP_NAME = "Beobachter";
-	public static final String APP_VERSION = "1.8.4";
+	public static final String APP_VERSION = "1.8.5";
 	public static final String APP_URL = "http://sourceforge.net/projects/beobachter/";
 	public static final String APP_UPDATE_URL = "http://beobachter.sourceforge.net/version.html";
 

@@ -18,7 +18,7 @@ package com.santiagolizardo.beobachter.engine;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -32,37 +32,110 @@ public class Tail implements Runnable {
 	private String fileName;
 
 	private File file;
-	private long savedSize;
+	private long currentPosition;
 
 	public Tail(String fileName) {
 		listeners = new LinkedList<>();
 
 		file = new File(fileName);
-		savedSize = file.length();
+		currentPosition = file.length();
 
 		this.fileName = fileName;
 	}
 
-	@Override
-	public void run() {
+	public void open() {
+		open(file.length());
+	}
+
+	public void open(long position) {
+		if (position < 0) {
+			throw new IllegalArgumentException("Argument position must be positive");
+		}
+
+		currentPosition = (position > file.length() ? file.length() : position);
+	}
+
+	public String readNextLine() {
+		return readNextLines(1).get(0);
+	}
+
+	public List<String> readNextLines(int count) {
+		if(count < 1) {
+			throw new IllegalArgumentException("Argument count must greater than 0");
+		}
+		
+		List<String> lines = new ArrayList<>();
+
 		long currentSize = file.length();
-		if (currentSize > savedSize) {
+		if (currentSize > currentPosition) {
 			try (RandomAccessFile accessFile = new RandomAccessFile(
-						fileName, "r")) {
-					accessFile.seek(savedSize);
-					
+					fileName, "r")) {
+				accessFile.seek(currentPosition);
+
+				while (0 != count--) {
 					String line = accessFile.readLine();
-					do {
-						if (!line.isEmpty()) {
-							notifyListeners(line);
-						}
-					} while ((line = accessFile.readLine()) != null);
-					
-					savedSize = currentSize;
+					lines.add(line);
+				}
+
+				currentPosition = accessFile.getFilePointer();
 			} catch (IOException e) {
 				logger.severe(e.getMessage());
 			}
 		}
+
+		return lines;
+	}
+
+	public String readPreviousLine() {
+		return readPreviousLines(1).get(0);
+	}
+
+	public List<String> readPreviousLines(int count) {
+		if(count < 1) {
+			throw new IllegalArgumentException("Argument count must greater than 0");
+		}
+		
+		List<String> lines = new ArrayList<>();
+
+		String lineSeparator = System.lineSeparator();
+		int lineSeparatorLen = lineSeparator.length();
+		long tempPosition = currentPosition - lineSeparatorLen;
+
+		byte chars[] = new byte[lineSeparatorLen];
+
+		long lastFound = 0;
+
+		try (RandomAccessFile accessFile = new RandomAccessFile(
+				fileName, "r")) {
+
+			do {
+				tempPosition--;
+				accessFile.seek(tempPosition);
+				accessFile.read(chars);
+				if (new String(chars).equals(lineSeparator)) {
+					lastFound = tempPosition;
+					String line = accessFile.readLine();
+					lines.add(line);
+					count--;
+				}
+
+			} while (tempPosition > lineSeparatorLen && count > 0);
+
+			if (count > 0 && lastFound != 0) {
+				accessFile.seek(0);
+				lines.add(accessFile.readLine());
+			}
+
+			currentPosition = accessFile.getFilePointer();
+		} catch (IOException e) {
+			logger.severe(e.getMessage());
+		}
+
+		return lines;
+	}
+
+	@Override
+	public void run() {
 	}
 
 	public void addListener(TailListener listener) {
@@ -70,10 +143,12 @@ public class Tail implements Runnable {
 	}
 
 	private void notifyListeners(String line) {
-		Iterator<TailListener> it = listeners.iterator();
-		while (it.hasNext()) {
-			TailListener listener = (TailListener) it.next();
+		for (TailListener listener : listeners) {
 			listener.onFileChanges(line);
 		}
+	}
+
+	public long getCurrentPosition() {
+		return currentPosition;
 	}
 }

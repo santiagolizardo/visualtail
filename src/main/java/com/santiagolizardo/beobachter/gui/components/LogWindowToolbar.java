@@ -21,10 +21,11 @@ import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 import com.santiagolizardo.beobachter.beans.LogTypeManager;
+import com.santiagolizardo.beobachter.gui.components.buttons.ClearBufferButton;
+import com.santiagolizardo.beobachter.gui.components.buttons.PrintFileButton;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -46,7 +47,8 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 	private JCheckBox scrollNewLinesCheckBox;
 
 	private JComboBox<LogType> logTypes;
-	private JSpinner spNumberDisplayerLines;
+	private JSpinner numberLinesToDisplaySpinner;
+	private JSpinner numerPreviousLinesToDisplaySpinner;
 
 	private JButton clearButton;
 
@@ -55,16 +57,33 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 
 		this.logWindow = logWindow;
 
-		spNumberDisplayerLines = new JSpinner(new SpinnerNumberModel(
+		numberLinesToDisplaySpinner = new JSpinner(new SpinnerNumberModel(
 				logWindow.getNumberLinesToDisplay(), 1, 9999, 1));
-		spNumberDisplayerLines.setToolTipText(Translator.tr("Number of lines to display"));
-		spNumberDisplayerLines.addChangeListener(new ChangeListener() {
+		numberLinesToDisplaySpinner.setToolTipText(Translator.tr("Number of lines to display"));
+		numberLinesToDisplaySpinner.addChangeListener(new ChangeListener() {
 
 			@Override
 			public void stateChanged(ChangeEvent ev) {
-				int numberDisplayedLines = (int) spNumberDisplayerLines.getValue();
+				int numberDisplayedLines = (int) numberLinesToDisplaySpinner.getValue();
 				logWindow.setNumberLinesToDisplay(numberDisplayedLines);
 				logWindow.trimLines();
+			}
+		});
+
+		numerPreviousLinesToDisplaySpinner = new JSpinner(new SpinnerNumberModel(
+				logWindow.getNumberPreviousLinesToDisplay(), 0, 9999, 1));
+		numerPreviousLinesToDisplaySpinner.setToolTipText(Translator.tr("Number of previous lines to display"));
+		numerPreviousLinesToDisplaySpinner.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent ev) {
+				int numberDisplayedLines = (int) numerPreviousLinesToDisplaySpinner.getValue();
+				int diff  = logWindow.getNumberPreviousLinesToDisplay() - numberDisplayedLines;
+				logWindow.setNumberPreviousLinesToDisplay(numberDisplayedLines);
+				if( diff < 0 ) {
+					diff = -diff;
+					logWindow.loadPreviousLines(diff);
+				}
 			}
 		});
 
@@ -89,15 +108,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 			}
 		});
 
-		clearButton = new JButton(Translator.tr("Clear buffer"));
-		clearButton.setEnabled(false);
-		clearButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				logWindow.clear();
-				clearButton.setEnabled(false);
-			}
-		});
+		clearButton = new ClearBufferButton(logWindow);
 
 		LogTypeManager logTypesLoader = LogTypeManager.getInstance();
 		DefaultComboBoxModel<LogType> logTypesModel = new DefaultComboBoxModel<>(
@@ -117,7 +128,8 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 		add(checkForChangesCheckBox);
 		add(scrollNewLinesCheckBox);
 		add(logTypes);
-		add(spNumberDisplayerLines);
+		add(numerPreviousLinesToDisplaySpinner);
+		add(numberLinesToDisplaySpinner);
 		addPrintMenuItem();
 		add(clearButton);
 	}
@@ -135,19 +147,8 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 			return;
 		}
 
-		JButton btnPrint = new JButton(Translator.tr("Print this file"));
-		btnPrint.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				try {
-					desktop.print(logWindow.getFile());
-				} catch (IOException e) {
-					logger.warning(e.getMessage());
-				}
-			}
-		});
-
-		add(btnPrint);
+		JButton printButton = new PrintFileButton(logWindow);
+		add(printButton);
 	}
 
 	public JCheckBox getCheckForChangesCheckBox() {
