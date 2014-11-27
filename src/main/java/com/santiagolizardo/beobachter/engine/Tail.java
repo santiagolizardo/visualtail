@@ -23,132 +23,117 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class Tail implements Runnable {
+public class Tail {
 
-	private static final Logger logger = Logger.getLogger(Tail.class.getName());
+    private static final Logger logger = Logger.getLogger(Tail.class.getName());
 
-	private List<TailListener> listeners;
+    private String lineSeparator;
+    private int lineSeparatorLength;
 
-	private String fileName;
+    private File file;
+    private long currentPosition;
+    private long currentPositionBackwards;
 
-	private File file;
-	private long currentPosition;
+    public Tail(String fileName) {
+        lineSeparator = "\r\n";
+        lineSeparatorLength = lineSeparator.length();
 
-	public Tail(String fileName) {
-		listeners = new LinkedList<>();
+        file = new File(fileName);
+        open();
+    }
 
-		file = new File(fileName);
-		currentPosition = file.length();
+    public void open() {
+        open(file.length());
+    }
 
-		this.fileName = fileName;
-	}
+    public void open(long position) {
+        if (position < 0) {
+            throw new IllegalArgumentException("Argument position must be positive");
+        }
 
-	public void open() {
-		open(file.length());
-	}
+        currentPositionBackwards
+                = currentPosition = (position > file.length() ? file.length() : position);
+    }
+    
+    public boolean hasMoreLines() {
+        return ( file.length() > currentPosition );
+    }
 
-	public void open(long position) {
-		if (position < 0) {
-			throw new IllegalArgumentException("Argument position must be positive");
-		}
+    public String readNextLine() {
+        return readNextLines(1).get(0);
+    }
 
-		currentPosition = (position > file.length() ? file.length() : position);
-	}
+    public List<String> readNextLines(int count) {
+        if (count < 1) {
+            throw new IllegalArgumentException("Argument count must greater than 0");
+        }
 
-	public String readNextLine() {
-		return readNextLines(1).get(0);
-	}
+        List<String> lines = new ArrayList<>();
 
-	public List<String> readNextLines(int count) {
-		if(count < 1) {
-			throw new IllegalArgumentException("Argument count must greater than 0");
-		}
-		
-		List<String> lines = new ArrayList<>();
+        if (hasMoreLines()) {
+            try (RandomAccessFile accessFile = new RandomAccessFile(
+                    file, "r")) {
+                accessFile.seek(currentPosition);
 
-		long currentSize = file.length();
-		if (currentSize > currentPosition) {
-			try (RandomAccessFile accessFile = new RandomAccessFile(
-					fileName, "r")) {
-				accessFile.seek(currentPosition);
+                while (0 != count--) {
+                    String line = accessFile.readLine();
+                    lines.add(line);
+                }
 
-				while (0 != count--) {
-					String line = accessFile.readLine();
-					lines.add(line);
-				}
+                currentPosition = accessFile.getFilePointer();
+            } catch (IOException e) {
+                logger.severe(e.getMessage());
+            }
+        }
 
-				currentPosition = accessFile.getFilePointer();
-			} catch (IOException e) {
-				logger.severe(e.getMessage());
-			}
-		}
+        return lines;
+    }
 
-		return lines;
-	}
+    public String readPreviousLine() {
+        List<String> lines = readPreviousLines(1);
+        return lines.size() > 0 ? lines.get(0) : null;
+    }
 
-	public String readPreviousLine() {
-		return readPreviousLines(1).get(0);
-	}
+    public List<String> readPreviousLines(int count) {
+        if (count < 1) {
+            throw new IllegalArgumentException("Argument count must greater than 0");
+        }
 
-	public List<String> readPreviousLines(int count) {
-		if(count < 1) {
-			throw new IllegalArgumentException("Argument count must greater than 0");
-		}
-		
-		List<String> lines = new ArrayList<>();
+        List<String> lines = new ArrayList<>();
 
-		String lineSeparator = System.lineSeparator();
-		int lineSeparatorLen = lineSeparator.length();
-		long tempPosition = currentPosition - lineSeparatorLen;
+        long tempPosition = currentPositionBackwards - lineSeparatorLength;
 
-		byte chars[] = new byte[lineSeparatorLen];
+        byte chars[] = new byte[lineSeparatorLength];
 
-		long lastFound = 0;
+        try (RandomAccessFile accessFile = new RandomAccessFile(
+                file, "r")) {
 
-		try (RandomAccessFile accessFile = new RandomAccessFile(
-				fileName, "r")) {
+            do {
+                tempPosition--;
+                accessFile.seek(tempPosition);
+                accessFile.read(chars);
+                if (new String(chars).equals(lineSeparator)) {
+                    String line = accessFile.readLine();
+                    lines.add(line);
+                    count--;
+                }
 
-			do {
-				tempPosition--;
-				accessFile.seek(tempPosition);
-				accessFile.read(chars);
-				if (new String(chars).equals(lineSeparator)) {
-					lastFound = tempPosition;
-					String line = accessFile.readLine();
-					lines.add(line);
-					count--;
-				}
+            } while (tempPosition > lineSeparatorLength && count > 0);
 
-			} while (tempPosition > lineSeparatorLen && count > 0);
+            if (count > 0 && tempPosition != 0) {
+                accessFile.seek(0);
+                lines.add(accessFile.readLine());
+            }
 
-			if (count > 0 && lastFound != 0) {
-				accessFile.seek(0);
-				lines.add(accessFile.readLine());
-			}
+            currentPositionBackwards = tempPosition;
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
+        }
 
-			currentPosition = accessFile.getFilePointer();
-		} catch (IOException e) {
-			logger.severe(e.getMessage());
-		}
+        return lines;
+    }
 
-		return lines;
-	}
-
-	@Override
-	public void run() {
-	}
-
-	public void addListener(TailListener listener) {
-		listeners.add(listener);
-	}
-
-	private void notifyListeners(String line) {
-		for (TailListener listener : listeners) {
-			listener.onFileChanges(line);
-		}
-	}
-
-	public long getCurrentPosition() {
-		return currentPosition;
-	}
+    public long getCurrentPosition() {
+        return currentPosition;
+    }
 }

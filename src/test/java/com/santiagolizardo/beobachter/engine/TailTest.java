@@ -24,6 +24,8 @@ import org.junit.Test;
 
 public class TailTest {
 
+        private String lineSeparator = "\r\n";
+    
 	private File file;
 
 	@Before
@@ -58,23 +60,23 @@ public class TailTest {
 	@Test
 	public void testReadLineReturnsExpectedString() {
 		Tail tail = new Tail(file.getName());
-		tail.open(("first line" + System.lineSeparator()).length());
+		tail.open(("first line" + lineSeparator).length());
 		assertEquals("second line", tail.readNextLine());
 	}
 
 	@Test
 	public void testReadLinesReturnsExpectedStrings() {
 		Tail tail = new Tail(file.getName());
-		tail.open(("first line" + System.lineSeparator()).length());
+		tail.open(("first line" + lineSeparator).length());
 		assertEquals("second line", tail.readNextLine());
 		assertEquals("third line", tail.readNextLine());
 		assertEquals("last line", tail.readNextLine());
 	}
 
 	@Test
-	public void testReadPreviousLineReturnsExpectedString4() {
+	public void testReadPreviousLineOneByOne() {
 		Tail tail = new Tail(file.getName());
-		tail.open(("first line" + System.lineSeparator() + "second line" + System.lineSeparator()).length());
+		tail.open(("first line" + lineSeparator + "second line" + lineSeparator).length());
 		assertEquals("second line", tail.readPreviousLine());
 		assertEquals("first line", tail.readPreviousLine());
 	}
@@ -82,7 +84,7 @@ public class TailTest {
 	@Test
 	public void testReadPreviousLineReturnsExpectedString() {
 		Tail tail = new Tail(file.getName());
-		tail.open(("first line" + System.lineSeparator() + "second line" + System.lineSeparator()).length());
+		tail.open(("first line" + lineSeparator + "second line" + lineSeparator).length());
 		List<String> previousLines = tail.readPreviousLines(2);
 		assertEquals(2, previousLines.size());
 		assertEquals("second line", previousLines.get(0));
@@ -90,9 +92,9 @@ public class TailTest {
 	}
 
 	@Test
-	public void testReadPreviousLineReturnsExpectedString2() {
+	public void testReadPreviousLinesReturnsExpectedStrings() {
 		Tail tail = new Tail(file.getName());
-		tail.open(("first line" + System.lineSeparator() + "second line" + System.lineSeparator() + "third line" + System.lineSeparator()).length());
+		tail.open(("first line" + lineSeparator + "second line" + lineSeparator + "third line" + lineSeparator).length());
 		List<String> previousLines = tail.readPreviousLines(2);
 		assertEquals(2, previousLines.size());
 		assertEquals("third line", previousLines.get(0));
@@ -100,9 +102,9 @@ public class TailTest {
 	}
 
 	@Test
-	public void testReadPreviousLineReturnsExpectedString3() {
+	public void testReadPreviousLinesReturnsMaxExistingLines() {
 		Tail tail = new Tail(file.getName());
-		tail.open(("first line" + System.lineSeparator() + "second line" + System.lineSeparator() + "third line" + System.lineSeparator()).length());
+		tail.open(("first line" + lineSeparator + "second line" + lineSeparator + "third line" + lineSeparator).length());
 		List<String> previousLines = tail.readPreviousLines(10);
 		assertEquals(3, previousLines.size());
 		assertEquals("third line", previousLines.get(0));
@@ -111,9 +113,9 @@ public class TailTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testReadPreviousLineReturnsExpectedString6() {
+	public void testReadPreviousLineThrowsExceptionOnInvalidCount() {
 		Tail tail = new Tail(file.getName());
-		tail.open(("first line" + System.lineSeparator() + "second line" + System.lineSeparator() + "third line" + System.lineSeparator()).length());
+		tail.open();
 		tail.readPreviousLines(0);
 	}
 }

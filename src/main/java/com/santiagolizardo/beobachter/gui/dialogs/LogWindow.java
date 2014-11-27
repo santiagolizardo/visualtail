@@ -36,8 +36,8 @@ import javax.swing.event.ListSelectionListener;
 import com.santiagolizardo.beobachter.Constants;
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.beans.LogType;
-import com.santiagolizardo.beobachter.engine.Tail;
 import com.santiagolizardo.beobachter.engine.TailListener;
+import com.santiagolizardo.beobachter.engine.TailNotifier;
 import com.santiagolizardo.beobachter.gui.adapters.LinesMouseAdapter;
 import com.santiagolizardo.beobachter.gui.components.LogWindowToolbar;
 import com.santiagolizardo.beobachter.gui.renderers.LineRenderer;
@@ -64,7 +64,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private File file;
 
-	private Tail tail;
+	private TailNotifier tailNotifier;
 
 	private ScheduledExecutorService scheduler;
 	private ScheduledFuture<?> task;
@@ -143,9 +143,9 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		updateTitle();
 
-		tail = new Tail(fileName);
-		tail.addListener(this);
-		tail.addListener(toolbar);
+		tailNotifier = new TailNotifier(fileName);
+		tailNotifier.addListener(this);
+		tailNotifier.addListener(toolbar);
 
 		scheduler = Executors.newScheduledThreadPool(1);
 		launchTask();
@@ -269,7 +269,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	}
 
 	private void launchTask() {
-		task = scheduler.scheduleAtFixedRate(tail, 0, logType.getRefreshInterval(), TimeUnit.MILLISECONDS);
+		task = scheduler.scheduleAtFixedRate(tailNotifier, 0, logType.getRefreshInterval(), TimeUnit.MILLISECONDS);
 	}
 
 	public void hideSelectedLines() {
