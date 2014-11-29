@@ -26,6 +26,7 @@ import javax.swing.KeyStroke;
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
 import com.santiagolizardo.beobachter.gui.util.EmptyIcon;
+import java.awt.Toolkit;
 
 public class SelectAllAction extends AbstractAction {
 
@@ -41,7 +42,7 @@ public class SelectAllAction extends AbstractAction {
 		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
 		putValue(AbstractAction.NAME, tr("Select all"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
-				KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK));
+				KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 	}
 
 	@Override

@@ -47,6 +47,7 @@ import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import com.santiagolizardo.beobachter.resources.languages.Translator;
 import java.awt.Font;
 import java.text.DateFormat;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -86,6 +87,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		setIconifiable(false);
 		setResizable(true);
+                // @todo Make frame icon shareable to all windows
 		setFrameIcon(IconFactory.getImage("log_window.png"));
 		setMaximizable(true);
 		setClosable(true);
@@ -292,6 +294,10 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	}
 
 	public void loadPreviousLines(int numberOfLines) {
+            List<String> lines = tailNotifier.getTail().readPreviousLines(numberOfLines);
+            for(String line : lines ) {
+                linesModel.add(0, line);
+            }
 	}
 	
 	public int getNumberPreviousLinesToDisplay() {

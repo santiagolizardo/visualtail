@@ -31,6 +31,7 @@ import com.santiagolizardo.beobachter.gui.dialogs.FontChooserDialog;
 import com.santiagolizardo.beobachter.gui.dialogs.LogTypesDialog;
 import com.santiagolizardo.beobachter.gui.dialogs.PreferencesDialog;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
+import java.awt.Toolkit;
 
 public class OptionsMenu extends JMenu implements ActionListener {
 
@@ -63,7 +64,7 @@ public class OptionsMenu extends JMenu implements ActionListener {
 		preferencesMenuItem = new JMenuItem(tr("Preferences..."));
 		preferencesMenuItem.setIcon(IconFactory.getImage("preferences.png"));
 		preferencesMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
-				KeyEvent.CTRL_MASK));
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		preferencesMenuItem.addActionListener(this);
 
 		add(alwaysOnTopMenuItem);

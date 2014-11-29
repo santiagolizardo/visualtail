@@ -26,6 +26,7 @@ import javax.swing.KeyStroke;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.gui.dialogs.LogWindow;
+import java.awt.Toolkit;
 
 public class ClearSelectedBufferAction extends AbstractAction {
 
@@ -39,7 +40,7 @@ public class ClearSelectedBufferAction extends AbstractAction {
 
 		putValue(AbstractAction.NAME, tr("Clear selected buffer"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
-				KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_MASK));
+				KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 	}
 
 	@Override

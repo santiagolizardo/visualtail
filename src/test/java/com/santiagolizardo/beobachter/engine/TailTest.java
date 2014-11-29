@@ -24,8 +24,8 @@ import org.junit.Test;
 
 public class TailTest {
 
-        private String lineSeparator = "\r\n";
-    
+	private String lineSeparator = "\r\n";
+
 	private File file;
 
 	@Before
@@ -80,7 +80,7 @@ public class TailTest {
 		assertEquals("second line", tail.readPreviousLine());
 		assertEquals("first line", tail.readPreviousLine());
 	}
-	
+
 	@Test
 	public void testReadPreviousLineReturnsExpectedString() {
 		Tail tail = new Tail(file.getName());
@@ -111,7 +111,7 @@ public class TailTest {
 		assertEquals("second line", previousLines.get(1));
 		assertEquals("first line", previousLines.get(2));
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testReadPreviousLineThrowsExceptionOnInvalidCount() {
 		Tail tail = new Tail(file.getName());

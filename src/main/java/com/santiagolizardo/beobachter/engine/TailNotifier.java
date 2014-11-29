@@ -28,6 +28,12 @@ public class TailNotifier implements Runnable {
         listeners = new LinkedList<>();
     }
 
+    public Tail getTail() {
+        return tail;
+    }
+    
+    
+
     @Override
     public void run() {
         if (tail.hasMoreLines()) {

@@ -40,6 +40,7 @@ import com.santiagolizardo.beobachter.gui.util.DialogFactory;
 import com.santiagolizardo.beobachter.util.FileUtil;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
 import static com.santiagolizardo.beobachter.resources.languages.Translator.trn;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
@@ -66,7 +67,7 @@ public class FileMenu extends JMenu implements ActionListener {
 
 		openMenuItem = new JMenuItem(tr("Open..."));
 		openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
-				KeyEvent.CTRL_MASK));
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		openMenuItem.addActionListener(this);
 
 		recentsMenu = new RecentsMenu(mainWindow);

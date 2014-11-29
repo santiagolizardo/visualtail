@@ -29,6 +29,7 @@ import javax.swing.KeyStroke;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
+import java.awt.Toolkit;
 
 public class WindowsMenu extends JMenu {
 
@@ -36,13 +37,14 @@ public class WindowsMenu extends JMenu {
 
 	public WindowsMenu(final MainWindow parentFrame) {
 
+		int menuShortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+		
 		setText(tr("Windows"));
 		setMnemonic(KeyEvent.VK_W);
 
 		JMenuItem itemCascade = new JMenuItem(tr("Cascade windows"));
 		itemCascade.setIcon(IconFactory.getImage("application_double.png"));
-		itemCascade.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-				KeyEvent.CTRL_MASK));
+		itemCascade.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, menuShortcutKeyMask));
 		itemCascade.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -53,8 +55,7 @@ public class WindowsMenu extends JMenu {
 		JMenuItem itemTileVer = new JMenuItem(tr("Tile windows vertically"));
 		itemTileVer.setIcon(IconFactory
 				.getImage("application_tile_vertical.png"));
-		itemTileVer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,
-				KeyEvent.CTRL_MASK));
+		itemTileVer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,menuShortcutKeyMask));
 		itemTileVer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -65,8 +66,7 @@ public class WindowsMenu extends JMenu {
 		JMenuItem itemTileHor = new JMenuItem(tr("Tile windows horizontally"));
 		itemTileHor.setIcon(IconFactory
 				.getImage("application_tile_horizontal.png"));
-		itemTileHor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
-				KeyEvent.CTRL_MASK));
+		itemTileHor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,menuShortcutKeyMask));
 		itemTileHor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -75,8 +75,7 @@ public class WindowsMenu extends JMenu {
 		});
 
 		JMenuItem miCloseAllWindows = new JMenuItem(tr("Close all windows"));
-		miCloseAllWindows.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
-				KeyEvent.CTRL_MASK));
+		miCloseAllWindows.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,menuShortcutKeyMask));
 		miCloseAllWindows.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {

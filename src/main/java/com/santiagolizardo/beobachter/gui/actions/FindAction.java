@@ -26,6 +26,7 @@ import javax.swing.KeyStroke;
 
 import com.santiagolizardo.beobachter.gui.MainWindow;
 import com.santiagolizardo.beobachter.resources.images.IconFactory;
+import java.awt.Toolkit;
 
 public class FindAction extends AbstractAction {
 
@@ -40,7 +41,7 @@ public class FindAction extends AbstractAction {
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("find.png"));
 		putValue(AbstractAction.NAME, tr("Find..."));
 		putValue(AbstractAction.ACCELERATOR_KEY,
-				KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_MASK));
+				KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 	}
 
 	@Override
