@@ -293,11 +293,17 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		toolbar.getClearButton().setEnabled(false);
 	}
 
-	public void loadPreviousLines(int numberOfLines) {
+	/**
+	 * 
+	 * @param numberOfLines
+	 * @return int Number of previous lines added.
+	 */
+	public int loadPreviousLines(int numberOfLines) {
             List<String> lines = tailNotifier.getTail().readPreviousLines(numberOfLines);
             for(String line : lines ) {
                 linesModel.add(0, line);
             }
+			return lines.size();
 	}
 	
 	public int getNumberPreviousLinesToDisplay() {

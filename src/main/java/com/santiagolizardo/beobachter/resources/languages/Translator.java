@@ -30,15 +30,21 @@ import java.util.logging.Level;
  * This class is the responsible of translate every literal on the GUI
  */
 public class Translator {
-
+	
 	private static final Logger logger = Logger.getLogger(Translator.class
 			.getName());
 
 	private static I18n i18n;
 
 	public static void start(String language) {
-		Locale locale = LocaleUtil.fromString(language);
-		Locale.setDefault(locale);
+		Locale locale = null;
+		if( null == language ) {
+			logger.warning("Parameter language is null");
+			locale = Locale.getDefault();
+		} else {
+			LocaleUtil.fromString(language);
+			Locale.setDefault(locale);			
+		}
 
 		try {
 			i18n = I18nFactory.getI18n(Translator.class, locale);

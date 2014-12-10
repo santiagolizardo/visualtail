@@ -26,11 +26,14 @@ import com.santiagolizardo.beobachter.gui.components.buttons.PrintFileButton;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
@@ -48,8 +51,8 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 
 	private JComboBox<LogType> logTypes;
 	private JSpinner numberLinesToDisplaySpinner;
-	private JSpinner numerPreviousLinesToDisplaySpinner;
 
+	private JButton showPreviousLinesButton;
 	private JButton clearButton;
 
 	public LogWindowToolbar(final LogWindow logWindow, LogType logType) {
@@ -67,23 +70,6 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 				int numberDisplayedLines = (int) numberLinesToDisplaySpinner.getValue();
 				logWindow.setNumberLinesToDisplay(numberDisplayedLines);
 				logWindow.trimLines();
-			}
-		});
-
-		numerPreviousLinesToDisplaySpinner = new JSpinner(new SpinnerNumberModel(
-				logWindow.getNumberPreviousLinesToDisplay(), 0, 9999, 1));
-		numerPreviousLinesToDisplaySpinner.setToolTipText(Translator.tr("Number of previous lines to display"));
-		numerPreviousLinesToDisplaySpinner.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent ev) {
-				int numberDisplayedLines = (int) numerPreviousLinesToDisplaySpinner.getValue();
-				int diff  = logWindow.getNumberPreviousLinesToDisplay() - numberDisplayedLines;
-				logWindow.setNumberPreviousLinesToDisplay(numberDisplayedLines);
-				if( diff < 0 ) {
-					diff = -diff;
-					logWindow.loadPreviousLines(diff);
-				}
 			}
 		});
 
@@ -125,11 +111,36 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 		});
 		logTypes.setSelectedItem(logType);
 
+		showPreviousLinesButton = new JButton(Translator.tr("Show previous lines"));
+		showPreviousLinesButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int limit = 100;
+				Integer[] options = new Integer[limit];
+				for (int i = 0; i < limit; i++) {
+					options[i] = i;
+				}
+				Object input = JOptionPane.showInternalInputDialog(logWindow, Translator.tr("Enter the number of previous lines to display:"), Translator.tr("Input"), JOptionPane.OK_CANCEL_OPTION, null, (Object[])options, options[5]);
+				if (null == input) {
+					return;
+				}
+
+				try {
+					int count = (Integer) input;
+					clearButton.setEnabled(logWindow.loadPreviousLines(count) > 0);
+				} catch (NumberFormatException nfe) {
+					logger.warning(nfe.getMessage());
+					JOptionPane.showMessageDialog(logWindow, Translator.tr("Invalid number of lines entered."), Translator.tr("Error"), JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+
 		add(checkForChangesCheckBox);
 		add(scrollNewLinesCheckBox);
 		add(logTypes);
-		add(numerPreviousLinesToDisplaySpinner);
 		add(numberLinesToDisplaySpinner);
+		add(showPreviousLinesButton);
 		addPrintMenuItem();
 		add(clearButton);
 	}
