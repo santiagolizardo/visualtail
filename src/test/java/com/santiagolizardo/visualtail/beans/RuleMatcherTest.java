@@ -14,3 +14,26 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.beans;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+public class RuleMatcherTest {
+
+	@Test
+	public void testPatternMatching() {
+		Rule rule = new Rule();
+		rule.setRegularExpression(true);
+		rule.setPattern("[a-z]{1,3}");
+
+		RuleMatcher ruleMatcher = new RuleMatcher(rule);
+
+		assertTrue(ruleMatcher.matches("abc"));
+		assertFalse(ruleMatcher.matches("123"));
+		assertFalse(ruleMatcher.matches("abcd"));
+		assertFalse(ruleMatcher.matches(null));
+	}
+}

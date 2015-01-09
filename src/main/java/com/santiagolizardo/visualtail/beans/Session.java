@@ -14,3 +14,32 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.beans;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * A session represents one or more files opened at the same time.
+ */
+public class Session {
+
+	private String name;
+	private List<String> fileNames;
+
+	public Session() {
+		fileNames = new ArrayList<>();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<String> getFileNames() {
+		return fileNames;
+	}
+}

@@ -14,3 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.util;
+
+import junit.framework.TestCase;
+
+public class FileUtilTest extends TestCase {
+	
+	public void testSizeFormatting() {
+		assertEquals("0 B", FileUtil.byteCountToDisplaySize(0));
+		assertEquals("37 B", FileUtil.byteCountToDisplaySize(37));
+		assertEquals("1.00 MB", FileUtil.byteCountToDisplaySize(1024*1024));
+	}
+}

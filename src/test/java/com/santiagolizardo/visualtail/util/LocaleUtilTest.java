@@ -14,3 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.util;
+
+import java.util.Locale;
+import junit.framework.TestCase;
+
+public class LocaleUtilTest extends TestCase {
+
+	public void testgetDisplayName() {
+		try {
+			LocaleUtil.getDisplayName(null);
+			fail("An IllegalArgumentException was expected.");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Argument can not be null.", iae.getMessage());
+		}
+
+		Locale.setDefault(Locale.ENGLISH);
+		assertEquals("", LocaleUtil.getDisplayName(""));
+		assertEquals("foobar", LocaleUtil.getDisplayName("foobar"));
+		assertEquals("Spanish", LocaleUtil.getDisplayName("es"));
+		assertEquals("Spanish (Argentina)", LocaleUtil.getDisplayName("es_AR"));
+	}
+}

@@ -14,3 +14,31 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.gui.actions;
+
+import com.santiagolizardo.visualtail.gui.MainWindow;
+
+public class ActionFactory {
+
+	private OpenAction openAction;
+	private CopyAction copyAction;
+	private SelectAllAction selectAllAction;
+
+	public ActionFactory(MainWindow mainWindow) {
+		openAction = new OpenAction(mainWindow);
+		copyAction = new CopyAction(mainWindow);
+		selectAllAction = new SelectAllAction(mainWindow);
+	}
+	
+	public OpenAction getOpenAction() {
+		return openAction;
+	}
+
+	public CopyAction getCopyAction() {
+		return copyAction;
+	}
+
+	public SelectAllAction getSelectAllAction() {
+		return selectAllAction;
+	}
+}

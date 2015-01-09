@@ -17,7 +17,7 @@ Version 1.8.1 (2014/03/09)
 	- Last modification date shown on title bar (optional).
 	- New unit tests were added.
 	- Data folder has been removed and logTypes and sessions folder now are located
-	under the .beobachter folder in the user's home.
+	under the .visualtail folder in the user's home.
 
 Version 1.8.0 (2014/02/09)
 
@@ -112,7 +112,7 @@ Version 1.4:
 	- Session feature implemented. It allows to load and save several opened files (logs) at the same time.
 	- More translations
 	- Minor code improvements
-	- Web page, http://beobachter.sf.net
+	- Web page, http://visualtail.sf.net
 	- Documentation and license for every class
 
 Version 1.3:

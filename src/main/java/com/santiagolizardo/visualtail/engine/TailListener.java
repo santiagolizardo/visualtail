@@ -14,3 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.engine;
+
+/**
+ * This is an interface which should be implemented by objects interested on
+ * file modifications.
+ */
+public interface TailListener {
+
+	public void onFileChanges(String line);
+}

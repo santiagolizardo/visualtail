@@ -14,3 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.beans;
+
+import static org.junit.Assert.*;
+
+import java.awt.Color;
+
+import org.junit.Test;
+
+
+public class RuleTest {
+
+	@Test
+	public void testDefaults() {
+		Rule rule = new Rule();
+
+		assertEquals(Color.WHITE, rule.getBackgroundColor());
+		assertEquals(Color.BLACK, rule.getForegroundColor());
+		assertFalse(rule.isRegularExpression());
+		assertFalse(rule.isIgnoreCase());
+	}
+}

@@ -14,3 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.beans;
+
+import junit.framework.TestCase;
+
+public class SessionTest extends TestCase {
+
+	public void testInitialization() {
+		Session session = new Session();
+		assertNull(session.getName());
+		assertTrue(session.getFileNames().isEmpty());
+	}
+}

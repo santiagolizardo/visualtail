@@ -14,3 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.resources.images;
+
+import java.net.URL;
+
+import javax.swing.ImageIcon;
+
+public class IconFactory {
+
+	public static ImageIcon getImage(String name) {
+		URL url = IconFactory.class.getResource(name);
+
+		return new ImageIcon(url);
+	}
+}

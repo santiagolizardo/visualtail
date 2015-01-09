@@ -1,0 +1,437 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: VisualTail\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-09 18:16+0000\n"
+"PO-Revision-Date: 2013-12-17 17:13-0500\n"
+"Last-Translator: santiagolizardo <santiago.lizardo@gmail.com>\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+"X-Generator: crowdin.net\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ../../../../../../java\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: com/santiagolizardo/visualtail/gui/actions/ClearAllBuffersAction.java:42
+#, fuzzy
+msgid "Clear all buffers"
+msgstr "Puffer löschen"
+
+#: com/santiagolizardo/visualtail/gui/actions/ClearSelectedBufferAction.java:41
+#, fuzzy
+msgid "Clear selected buffer"
+msgstr "Puffer löschen"
+
+#: com/santiagolizardo/visualtail/gui/actions/CopyAction.java:49
+msgid "Copy"
+msgstr "Kopieren"
+
+#: com/santiagolizardo/visualtail/gui/actions/ExitAction.java:38
+msgid "Exit"
+msgstr "Beenden"
+
+#: com/santiagolizardo/visualtail/gui/actions/FindAction.java:42
+msgid "Find..."
+msgstr "Suchen..."
+
+#: com/santiagolizardo/visualtail/gui/actions/FindNextAction.java:42
+msgid "Find next"
+msgstr "Weitersuchen"
+
+#: com/santiagolizardo/visualtail/gui/actions/SelectAllAction.java:44
+msgid "Select all"
+msgstr "Alle auswählen"
+
+#: com/santiagolizardo/visualtail/gui/components/buttons/ClearBufferButton.java:30
+msgid "Clear buffer"
+msgstr "Puffer löschen"
+
+#: com/santiagolizardo/visualtail/gui/components/buttons/PrintFileButton.java:35
+msgid "Print this file"
+msgstr "Datei drucken"
+
+#: com/santiagolizardo/visualtail/gui/components/LogWindowToolbar.java:66
+msgid "Number of lines to display"
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/components/LogWindowToolbar.java:77
+msgid "Check for changes"
+msgstr "Auf Änderungen überprüfen"
+
+#: com/santiagolizardo/visualtail/gui/components/LogWindowToolbar.java:87
+msgid "Scroll to new lines"
+msgstr "Zu neuen Zeilen blättern"
+
+#: com/santiagolizardo/visualtail/gui/components/LogWindowToolbar.java:105
+#, fuzzy
+msgid "Log type"
+msgstr "Protokoll-Typen"
+
+#: com/santiagolizardo/visualtail/gui/components/LogWindowToolbar.java:115
+msgid "Show previous lines"
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/components/LogWindowToolbar.java:125
+#, fuzzy
+msgid "Enter the number of previous lines to display:"
+msgstr "Gib den Namen des neuen Protokolltyps an"
+
+#: com/santiagolizardo/visualtail/gui/components/LogWindowToolbar.java:125
+msgid "Input"
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/components/LogWindowToolbar.java:135
+msgid "Invalid number of lines entered."
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/components/LogWindowToolbar.java:135
+msgid "Error"
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/dialogs/AboutDialog.java:45
+msgid "About this application"
+msgstr "Über"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/AboutDialog.java:69
+msgid "More info about the project at <a href=\"%s\">%s</a>."
+msgstr "Mehr Infos über das Projekt unter der <a href=\"%s\"> Adresse %s</a>."
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/EditionPanel.java:158
+msgid "Add rule"
+msgstr "Regel hinzufügen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/EditionPanel.java:173
+msgid "Remove rule"
+msgstr "Regel entfernen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/EditionPanel.java:218
+msgid "seconds"
+msgstr "Sekunden"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/EditionPanel.java:239
+msgid "Refresh interval in milliseconds"
+msgstr "Aktualisierungsintervall in Millisekunden"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/EditionPanel.java:240
+msgid "Formatting rules"
+msgstr "Formatierungsregeln"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/EditionPanel.java:248
+msgid "Select a log type on the left to edit it"
+msgstr ""
+"Wähle auf der linken Seite einen Protokolltyp aus, den du bearbeiten möchtest"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/FindPanel.java:79
+msgid "Search"
+msgstr "Suchen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/ListingPanel.java:97
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/ListingPanel.java:102
+msgid "Enter the name of the new log type"
+msgstr "Gib den Namen des neuen Protokolltyps an"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/ListingPanel.java:109
+msgid "Invalid log type name"
+msgstr "Ungültiger Name für Protokolltyp"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/ListingPanel.java:124
+msgid "Rename"
+msgstr "Umbenennen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/ListingPanel.java:131
+msgid "Enter the new name of the log type:"
+msgstr "Big den neuen Namen für den Protokolltyp ein:"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/ListingPanel.java:146
+#: com/santiagolizardo/visualtail/gui/dialogs/SessionsDialog.java:105
+msgid "Remove"
+msgstr "Entfernen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/ListingPanel.java:152
+msgid "Are you sure you want to delete the selected log type?"
+msgstr ""
+"Bist du sicher, dass du den Typ des ausgewählten Protokolls löschen möchtest?"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/ListingPanel.java:157
+msgid "Unable to delete the log type"
+msgstr "Nicht möglich, den Protokolltyp zu löschen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/ListingPanel.java:175
+msgid "Log types"
+msgstr "Protokoll-Typen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/RulesTableModel.java:33
+msgid "Pattern"
+msgstr "Muster"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/RulesTableModel.java:34
+msgid "Regular expression"
+msgstr "Regular expression"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/RulesTableModel.java:35
+msgid "Ignore case"
+msgstr "Groß/Kleinschreibung ignorieren"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/RulesTableModel.java:36
+msgid "Background color"
+msgstr "Hintergrund Farbe"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/RulesTableModel.java:37
+msgid "Foreground color"
+msgstr "Vordergrund Farbe"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/components/RulesTableModel.java:38
+msgid "Example"
+msgstr "Beispiel"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/FontChooserDialog.java:69
+#, fuzzy
+msgid "Font settings"
+msgstr "Zeichensatz Größe"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/FontChooserDialog.java:98
+#: com/santiagolizardo/visualtail/gui/dialogs/PreferencesDialog.java:91
+msgid "Save"
+msgstr "Speichern"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/FontChooserDialog.java:125
+#: com/santiagolizardo/visualtail/gui/dialogs/PreferencesDialog.java:116
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/FontChooserDialog.java:158
+msgid "Font family"
+msgstr "Zeichensatz Familie"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/FontChooserDialog.java:159
+msgid "Font size"
+msgstr "Zeichensatz Größe"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/FontChooserDialog.java:160
+msgid "Preview"
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/dialogs/LogTypesDialog.java:39
+msgid "Log types management"
+msgstr "Verwalten von Protokolltypen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/LogWindow.java:229
+msgid "Do you want to search again?"
+msgstr "Willst du nochmal suchen?"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/PreferencesDialog.java:65
+msgid "Preferences"
+msgstr "Voreinstellungen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/PreferencesDialog.java:133
+msgid "Look and feel"
+msgstr "Ansicht"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/PreferencesDialog.java:134
+msgid "Language"
+msgstr "Sprache"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/SessionsDialog.java:71
+msgid "Session management"
+msgstr "Sitzungen verwalten"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/SessionsDialog.java:101
+msgid "Open"
+msgstr "Öffnen"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/SessionsDialog.java:127
+msgid "Please select the session you want to open or remove:"
+msgstr "Wähle die Sitzung aus, die du öffnen oder entfernen möchtest:"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/SessionsDialog.java:173
+msgid "Are you sure you want to delete this session?"
+msgstr "Bist du sicher, dass du diese Sitzung löschen möchtest?"
+
+#: com/santiagolizardo/visualtail/gui/dialogs/SessionsDialog.java:194
+msgid "%d file(s)"
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/editors/ColorEditor.java:50
+msgid "Pick a color"
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/menu/ContextualMenu.java:45
+msgid "Hide selected lines"
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/menu/EditMenu.java:41
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: com/santiagolizardo/visualtail/gui/menu/FileMenu.java:64
+msgid "File"
+msgstr "Datei"
+
+#: com/santiagolizardo/visualtail/gui/menu/FileMenu.java:69
+msgid "Open..."
+msgstr "Öffnen..."
+
+#: com/santiagolizardo/visualtail/gui/menu/FileMenu.java:81
+msgid "Manage sessions..."
+msgstr "Sitzungen verwalten..."
+
+#: com/santiagolizardo/visualtail/gui/menu/FileMenu.java:84
+msgid "Save current session"
+msgstr "Aktuelle Sitzung speichern"
+
+#: com/santiagolizardo/visualtail/gui/menu/FileMenu.java:143
+#, fuzzy
+msgid "The file could not be opened for reading:"
+msgid_plural "These files could not be opened for reading:"
+msgstr[0] "Diese Dateien konnten nicht geöffnet werden:"
+msgstr[1] "Diese Dateien konnten nicht geöffnet werden:"
+
+#: com/santiagolizardo/visualtail/gui/menu/FileMenu.java:161
+msgid "Please enter the session name:"
+msgstr "Name der Sitzung:"
+
+#: com/santiagolizardo/visualtail/gui/menu/FileMenu.java:162
+msgid "Session name"
+msgstr "Sitzungsname"
+
+#: com/santiagolizardo/visualtail/gui/menu/FileMenu.java:171
+#: com/santiagolizardo/visualtail/gui/menu/FileMenu.java:188
+msgid "Invalid session name"
+msgstr "Sitzungsname ungültig"
+
+#: com/santiagolizardo/visualtail/gui/menu/HelpMenu.java:54
+msgid "Help"
+msgstr "Hilfe"
+
+#: com/santiagolizardo/visualtail/gui/menu/HelpMenu.java:57
+msgid "Report bug/Request feature"
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/menu/HelpMenu.java:61
+msgid "Check for updates"
+msgstr "Nach Updates suchen"
+
+#: com/santiagolizardo/visualtail/gui/menu/HelpMenu.java:65
+msgid "About this application..."
+msgstr "Über..."
+
+#: com/santiagolizardo/visualtail/gui/menu/OptionsMenu.java:50
+msgid "Options"
+msgstr "Optionen"
+
+#: com/santiagolizardo/visualtail/gui/menu/OptionsMenu.java:55
+msgid "Always on top"
+msgstr "Immer im Vordergrund"
+
+#: com/santiagolizardo/visualtail/gui/menu/OptionsMenu.java:58
+msgid "Manage log types..."
+msgstr "Logtypen verwalten..."
+
+#: com/santiagolizardo/visualtail/gui/menu/OptionsMenu.java:62
+msgid "Font settings..."
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/menu/OptionsMenu.java:65
+msgid "Preferences..."
+msgstr "Einstellungen..."
+
+#: com/santiagolizardo/visualtail/gui/menu/RecentsMenu.java:46
+msgid "Open recents"
+msgstr "zuletzt geöffnet"
+
+#: com/santiagolizardo/visualtail/gui/menu/RecentsMenu.java:52
+msgid "Clean recents"
+msgstr "Verlauf löschen"
+
+#: com/santiagolizardo/visualtail/gui/menu/WindowsMenu.java:42
+msgid "Windows"
+msgstr "Fenster"
+
+#: com/santiagolizardo/visualtail/gui/menu/WindowsMenu.java:45
+msgid "Cascade windows"
+msgstr "Fenster staffeln"
+
+#: com/santiagolizardo/visualtail/gui/menu/WindowsMenu.java:55
+msgid "Tile windows vertically"
+msgstr "Fenster senkrecht anordnen"
+
+#: com/santiagolizardo/visualtail/gui/menu/WindowsMenu.java:66
+msgid "Tile windows horizontally"
+msgstr "Fenster waagerecht anordnen"
+
+#: com/santiagolizardo/visualtail/gui/menu/WindowsMenu.java:77
+msgid "Close all windows"
+msgstr "Alle Fenster schliessen"
+
+#: com/santiagolizardo/visualtail/gui/renderers/ColorExampleRenderer.java:29
+msgid "Testing"
+msgstr ""
+
+#: com/santiagolizardo/visualtail/gui/util/UpdateManager.java:60
+msgid "New version %s is available"
+msgstr "Neue Version %s ist verfügbar"
+
+#: com/santiagolizardo/visualtail/gui/util/UpdateManager.java:62
+msgid "Please visit the project website"
+msgstr "Bitte besuche die Projekt-Seite"
+
+#: com/santiagolizardo/visualtail/gui/util/UpdateManager.java:67
+msgid "There are not updates available"
+msgstr "Keine Updates verfügbar"
+
+#: com/santiagolizardo/visualtail/gui/util/UpdateManager.java:72
+msgid "Unable to fetch server information"
+msgstr "Kann Sever nicht erreichen"
+
+#: com/santiagolizardo/visualtail/util/FileUtil.java:43
+msgid "The file does not exist"
+msgstr "Datei existiert nicht"
+
+#: com/santiagolizardo/visualtail/util/FileUtil.java:46
+msgid "Cannot open a directory"
+msgstr "Kann Verzeichnis nicht öffnen"
+
+#: com/santiagolizardo/visualtail/util/FileUtil.java:50
+msgid "You do not have permissions to read this file"
+msgstr "Keine Berechtigung zum Öffnen der Datei"
+
+#~ msgid "rule."
+#~ msgstr "Regel."
+
+#~ msgid "recent."
+#~ msgstr "Zuletzt."
+
+#~ msgid "You can not save a session with no opened files"
+#~ msgstr "Sitzung kann nur gespeichert werden, wenn Dateien geöffnet sind"
+
+#~ msgid "Pick"
+#~ msgstr "Auswählen"
+
+#~ msgid "Pick the foreground color"
+#~ msgstr "Vordergrund Farbe auswählen"
+
+#~ msgid "Ok"
+#~ msgstr "OK"
+
+#~ msgid "Please complete the field pattern"
+#~ msgstr "Bitte das Muster-Feld vervollständigen"
+
+#~ msgid "Colors"
+#~ msgstr "Farben"
+
+#~ msgid "Apply changes"
+#~ msgstr "Änderungen übernehmen"
+
+#~ msgid "Please select a rule first"
+#~ msgstr "Bitte wähle zuerst eine Regel aus"
+
+#~ msgid "Name"
+#~ msgstr "Name"

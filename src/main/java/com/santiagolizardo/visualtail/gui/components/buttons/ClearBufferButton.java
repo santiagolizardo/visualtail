@@ -14,3 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.gui.components.buttons;
+
+import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
+import com.santiagolizardo.visualtail.resources.languages.Translator;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+
+public class ClearBufferButton extends JButton implements ActionListener {
+
+	private LogWindow logWindow;
+	
+	public ClearBufferButton(LogWindow logWindow) {
+		super(Translator.tr("Clear buffer"));
+		
+		setEnabled(false);
+		addActionListener(this);
+		
+		this.logWindow = logWindow;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent ev) {
+		logWindow.clear();
+		setEnabled(false);
+	}
+}

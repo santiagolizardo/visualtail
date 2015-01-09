@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.santiagolizardo.beobachter</groupId>
-	<artifactId>Beobachter</artifactId>
+	<groupId>com.santiagolizardo.visualtail</groupId>
+	<artifactId>VisualTail</artifactId>
 	<version>1.8.5</version>
 	<packaging>jar</packaging>
-	<name>Beobachter</name>
-	<url>http://sourceforge.net/projects/beobachter/</url>
+	<name>VisualTail</name>
+	<url>http://sourceforge.net/projects/visualtail/</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -26,8 +26,8 @@
 					</execution>
 				</executions>
 				<configuration>
-					<poDirectory>${project.build.sourceDirectory}/../resources/com/santiagolizardo/beobachter/resources/languages</poDirectory>
-					<targetBundle>com.santiagolizardo.beobachter.resources.languages.Translator</targetBundle>
+					<poDirectory>${project.build.sourceDirectory}/../resources/com/santiagolizardo/visualtail/resources/languages</poDirectory>
+					<targetBundle>com.santiagolizardo.visualtail.resources.languages.Translator</targetBundle>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -44,7 +44,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.santiagolizardo.beobachter.Main</mainClass>
+							<mainClass>com.santiagolizardo.visualtail.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

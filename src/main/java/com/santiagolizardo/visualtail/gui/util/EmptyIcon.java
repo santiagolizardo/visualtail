@@ -14,3 +14,34 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.gui.util;
+
+import java.awt.Component;
+import java.awt.Graphics;
+
+import javax.swing.Icon;
+
+public class EmptyIcon implements Icon {
+
+	public final static EmptyIcon SIZE_16 = new EmptyIcon(16);
+
+	private int size;
+
+	public EmptyIcon(int size) {
+		this.size = size;
+	}
+
+	@Override
+	public int getIconHeight() {
+		return size;
+	}
+
+	@Override
+	public int getIconWidth() {
+		return size;
+	}
+
+	@Override
+	public void paintIcon(Component c, Graphics g, int x, int y) {
+	}
+}

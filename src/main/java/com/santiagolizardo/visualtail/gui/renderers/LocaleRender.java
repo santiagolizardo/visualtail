@@ -14,3 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.santiagolizardo.visualtail.gui.renderers;
+
+import java.awt.Component;
+
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
+
+import com.santiagolizardo.visualtail.util.LocaleUtil;
+
+public class LocaleRender extends DefaultListCellRenderer {
+
+	private static final long serialVersionUID = -6554618278841155838L;
+
+	@Override
+	public Component getListCellRendererComponent(JList<?> list, Object value,
+			int index, boolean isSelected, boolean cellHasFocus) {
+		String locale = (String) value;
+		return super.getListCellRendererComponent(list,
+				LocaleUtil.getDisplayName(locale), index, isSelected,
+				cellHasFocus);
+	}
+}
