@@ -17,10 +17,8 @@
 package com.santiagolizardo.visualtail.gui;
 
 import com.santiagolizardo.visualtail.Constants;
-import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -29,7 +27,6 @@ import com.santiagolizardo.visualtail.config.ConfigData;
 import com.santiagolizardo.visualtail.config.ConfigPersistence;
 import com.santiagolizardo.visualtail.gui.actions.ActionFactory;
 import com.santiagolizardo.visualtail.gui.components.DesktopPanel;
-import com.santiagolizardo.visualtail.gui.dialogs.components.FindPanel;
 import com.santiagolizardo.visualtail.gui.menu.Menu;
 import com.santiagolizardo.visualtail.resources.images.IconFactory;
 import java.util.List;
@@ -43,7 +40,6 @@ public class MainWindow extends JFrame {
 
 	private ConfigData configData;
 	private DesktopPanel desktop;
-	private FindPanel findPanel;
 
 	private ActionFactory actionFactory;
 
@@ -82,24 +78,6 @@ public class MainWindow extends JFrame {
 
 	public void setTitle(String title, String fileName) {
 		setTitle(title + " - " + fileName);
-	}
-
-	public void addFindPanel() {
-		if (findPanel == null) {
-			findPanel = new FindPanel(this);
-
-			getContentPane().add(findPanel, BorderLayout.PAGE_END);
-			getContentPane().validate();
-
-			findPanel.focus();
-		}
-	}
-
-	public void removeFindPanel() {
-		getContentPane().remove(findPanel);
-		getContentPane().validate();
-
-		findPanel = null;
 	}
 
 	/**

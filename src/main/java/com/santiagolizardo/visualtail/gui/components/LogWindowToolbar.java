@@ -22,13 +22,11 @@ import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import com.santiagolizardo.visualtail.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
 import com.santiagolizardo.visualtail.beans.LogTypeManager;
-import com.santiagolizardo.visualtail.gui.components.buttons.ClearBufferButton;
+import com.santiagolizardo.visualtail.gui.components.buttons.ClearWindowButton;
 import com.santiagolizardo.visualtail.gui.components.buttons.PrintFileButton;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -36,6 +34,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
@@ -47,8 +46,8 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 
 	private LogWindow logWindow;
 
-	private JCheckBox checkForChangesCheckBox;
-	private JCheckBox scrollNewLinesCheckBox;
+	private JToggleButton checkForChangesCheckBox;
+	private JToggleButton scrollNewLinesCheckBox;
 
 	private JComboBox<LogType> logTypes;
 	private JSpinner numberLinesToDisplaySpinner;
@@ -74,7 +73,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 			}
 		});
 
-		checkForChangesCheckBox = new JCheckBox(Translator.tr("Check for changes"));
+		checkForChangesCheckBox = new JToggleButton(Translator.tr("Check for changes"));
 		checkForChangesCheckBox.setSelected(true);
 		checkForChangesCheckBox.addActionListener(new ActionListener() {
 
@@ -84,7 +83,8 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 			}
 		});
 
-		scrollNewLinesCheckBox = new JCheckBox(Translator.tr("Scroll to new lines"));
+		scrollNewLinesCheckBox = new JToggleButton(Translator.tr("Scroll to new lines"));
+		scrollNewLinesCheckBox.setSelected(true);
 		scrollNewLinesCheckBox.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -95,7 +95,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 			}
 		});
 
-		clearButton = new ClearBufferButton(logWindow);
+		clearButton = new ClearWindowButton(logWindow);
 
 		LogTypeManager logTypesLoader = LogTypeManager.getInstance();
 		DefaultComboBoxModel<LogType> logTypesModel = new DefaultComboBoxModel<>(
@@ -163,11 +163,11 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 		add(printButton);
 	}
 
-	public JCheckBox getCheckForChangesCheckBox() {
+	public JToggleButton getCheckForChangesCheckBox() {
 		return checkForChangesCheckBox;
 	}
 
-	public JCheckBox getScrollNewLinesCheckBox() {
+	public JToggleButton getScrollNewLinesCheckBox() {
 		return scrollNewLinesCheckBox;
 	}
 

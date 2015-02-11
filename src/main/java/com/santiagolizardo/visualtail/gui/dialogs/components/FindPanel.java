@@ -39,7 +39,7 @@ public class FindPanel extends JPanel {
 	private JTextField searchTextField;
 	private JButton closeButton;
 
-	public FindPanel(final MainWindow mainWindow) {
+	public FindPanel(final LogWindow mainWindow) {
 
 		searchTextField = new JTextField(20);
 		searchTextField.addKeyListener(new KeyAdapter() {
@@ -48,8 +48,7 @@ public class FindPanel extends JPanel {
 			public void keyReleased(KeyEvent ev) {
 				int keyCode = ev.getKeyCode();
 				if (keyCode == KeyEvent.VK_ENTER) {
-					LogWindow log = (LogWindow) mainWindow.getDesktop()
-							.getSelectedFrame();
+					LogWindow log = mainWindow;
 					if (log != null) {
 						log.searchText(searchTextField.getText());
 					}

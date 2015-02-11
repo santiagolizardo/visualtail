@@ -16,6 +16,7 @@
  */
 package com.santiagolizardo.visualtail.gui.components;
 
+import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import java.beans.PropertyVetoException;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -137,5 +138,9 @@ public class DesktopPanel extends JDesktopPane {
 		for (JInternalFrame frame : getAllFrames()) {
 			frame.doDefaultCloseAction();
 		}
+	}
+	
+	public LogWindow getSelectedWindow() {
+		return (LogWindow)getSelectedFrame();
 	}
 }

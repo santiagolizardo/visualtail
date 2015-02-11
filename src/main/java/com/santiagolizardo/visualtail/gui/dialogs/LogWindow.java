@@ -41,6 +41,7 @@ import com.santiagolizardo.visualtail.engine.TailListener;
 import com.santiagolizardo.visualtail.engine.TailNotifier;
 import com.santiagolizardo.visualtail.gui.adapters.LinesMouseAdapter;
 import com.santiagolizardo.visualtail.gui.components.LogWindowToolbar;
+import com.santiagolizardo.visualtail.gui.dialogs.components.FindPanel;
 import com.santiagolizardo.visualtail.gui.renderers.LineRenderer;
 import com.santiagolizardo.visualtail.gui.util.DialogFactory;
 import com.santiagolizardo.visualtail.util.FileUtil;
@@ -84,11 +85,13 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private MainWindow mainWindow;
 
+	private FindPanel findPanel;
+	
 	public LogWindow(final MainWindow mainWindow, String fileName, LogType logType) {
 
 		setIconifiable(false);
 		setResizable(true);
-                // @todo Make frame icon shareable to all windows
+        // @todo Make frame icon shareable to all windows
 		setFrameIcon(IconFactory.getImage("log_window.png"));
 		setMaximizable(true);
 		setClosable(true);
@@ -97,7 +100,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		searchText = null;
 
 		numberPreviousLinesToDisplay = 0;
-		numberLinesToDisplay = 256;
+		numberLinesToDisplay = 512;
 
 		this.mainWindow = mainWindow;
 		this.logType = logType;
@@ -297,7 +300,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	/**
 	 * 
 	 * @param numberOfLines
-	 * @return int Number of previous lines added.
+	 * @return Number of previous lines added.
 	 */
 	public int loadPreviousLines(int numberOfLines) {
             List<String> lines = tailNotifier.getTail().readPreviousLines(numberOfLines);
@@ -332,5 +335,23 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	public JList<String> getLinesList() {
 		return linesList;
+	}
+	
+	public void addFindPanel() {
+		if (findPanel == null) {
+			findPanel = new FindPanel(this);
+
+			getContentPane().add(findPanel, BorderLayout.PAGE_END);
+			getContentPane().validate();
+
+			findPanel.focus();
+		}
+	}
+
+	public void removeFindPanel() {
+		getContentPane().remove(findPanel);
+		getContentPane().validate();
+
+		findPanel = null;
 	}
 }

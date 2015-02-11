@@ -1,18 +1,17 @@
 /**
  * This file is part of VisualTail, a graphical log file monitor.
  *
- * VisualTail is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * VisualTail is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * VisualTail is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * VisualTail is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * VisualTail. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.visualtail.gui.dialogs.components;
 
@@ -98,26 +97,7 @@ public class ListingPanel extends JPanel {
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String name = JOptionPane.showInputDialog(getParent(),
-						Translator.tr("Enter the name of the new log type"));
-				if (name == null) {
-					return;
-				}
-				name = name.trim();
-				if (name.length() == 0) {
-					DialogFactory.showErrorMessage(null,
-							Translator.tr("Invalid log type name"));
-					return;
-				}
-				LogType logType = new LogType(name);
-				try {
-					LogTypeManager logTypes = LogTypeManager.getInstance();
-					logTypes.saveToFile(logType);
-
-					updateLogTypes();
-				} catch (IOException ee) {
-					logger.warning(ee.getMessage());
-				}
+				onAddLogType();
 			}
 		});
 
@@ -126,20 +106,7 @@ public class ListingPanel extends JPanel {
 		btnRename.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				LogType selected = (LogType) lstTypes.getSelectedValue();
-				String newName = JOptionPane.showInputDialog(getParent(),
-						tr("Enter the new name of the log type:"),
-						selected.getName());
-				if (newName == null) {
-					return;
-				}
-				newName = newName.trim();
-				if (newName.length() > 0 && !newName.equals(selected.getName())) {
-					LogTypeManager logTypes = LogTypeManager.getInstance();
-					logTypes.rename(selected, newName);
-
-					updateLogTypes();
-				}
+				onRenameLogType();
 			}
 		});
 
@@ -148,17 +115,7 @@ public class ListingPanel extends JPanel {
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				if (DialogFactory.showQuestionDialog(getParent(), Translator
-						.tr("Are you sure you want to delete the selected log type?"))) {
-					LogType selected = (LogType) lstTypes.getSelectedValue();
-					LogTypeManager logTypes = LogTypeManager.getInstance();
-					if (!logTypes.remove(selected)) {
-						DialogFactory.showErrorMessage(getParent(),
-								Translator.tr("Unable to delete the log type"));
-					}
-
-					updateLogTypes();
-				}
+				onRemoveLogType();
 			}
 		});
 
@@ -209,6 +166,62 @@ public class ListingPanel extends JPanel {
 			if (!"Default".equals(logType.getName())) {
 				modelTypes.addElement(logType);
 			}
+		}
+	}
+
+	private void onAddLogType() {
+		String name = JOptionPane.showInputDialog(getParent(),
+				Translator.tr("Enter the name of the new log type"));
+		if (name == null) {
+			return;
+		}
+		name = name.trim();
+		if (name.length() == 0) {
+			DialogFactory.showErrorMessage(null,
+					Translator.tr("Invalid log type name"));
+			return;
+		}
+		LogType logType = new LogType(name);
+		try {
+			LogTypeManager logTypes = LogTypeManager.getInstance();
+			logTypes.saveToFile(logType);
+
+			updateLogTypes();
+
+			lstTypes.setSelectedValue(logType, true);
+		} catch (IOException ee) {
+			logger.warning(ee.getMessage());
+		}
+	}
+
+	private void onRenameLogType() {
+		LogType selected = (LogType) lstTypes.getSelectedValue();
+		String newName = JOptionPane.showInputDialog(getParent(),
+				tr("Enter the new name of the log type:"),
+				selected.getName());
+		if (newName == null) {
+			return;
+		}
+		newName = newName.trim();
+		if (newName.length() > 0 && !newName.equals(selected.getName())) {
+			LogTypeManager logTypes = LogTypeManager.getInstance();
+			logTypes.rename(selected, newName);
+
+			updateLogTypes();
+		}
+	}
+
+	private void onRemoveLogType() {
+		if (DialogFactory.showQuestionDialog(getParent(), Translator
+				.tr("Are you sure you want to delete the selected log type?"))) {
+			LogType selected = (LogType) lstTypes.getSelectedValue();
+			LogTypeManager logTypes = LogTypeManager.getInstance();
+			if (!logTypes.remove(selected)) {
+				DialogFactory.showErrorMessage(getParent(),
+						Translator.tr("Unable to delete the log type"));
+			}
+
+			updateLogTypes();
 		}
 	}
 }

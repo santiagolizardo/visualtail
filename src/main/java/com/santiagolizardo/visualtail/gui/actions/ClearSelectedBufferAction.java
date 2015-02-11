@@ -38,7 +38,7 @@ public class ClearSelectedBufferAction extends AbstractAction {
 		
 		this.mainWindow = mainWindow;
 
-		putValue(AbstractAction.NAME, tr("Clear selected buffer"));
+		putValue(AbstractAction.NAME, tr("Clear selected window"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
 				KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 	}

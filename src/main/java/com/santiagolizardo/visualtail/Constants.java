@@ -25,7 +25,7 @@ public class Constants {
 
 	public static final String APP_NAME = "VisualTail";
 	public static final String APP_VERSION = "1.8.5";
-	public static final String APP_URL = "http://sourceforge.net/projects/visualtail/";
+	public static final String APP_URL = "https://github.com/santiagolizardo/visualtail";
 	public static final String APP_UPDATE_URL = "http://visualtail.sourceforge.net/version.html";
 
 	public static final String LINE_SEP = System.getProperty("line.separator");

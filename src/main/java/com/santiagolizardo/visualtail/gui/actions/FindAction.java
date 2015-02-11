@@ -25,6 +25,7 @@ import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
 import com.santiagolizardo.visualtail.gui.MainWindow;
+import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import com.santiagolizardo.visualtail.resources.images.IconFactory;
 import java.awt.Toolkit;
 
@@ -46,6 +47,7 @@ public class FindAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		mainWindow.addFindPanel();
+		LogWindow logWindow = mainWindow.getDesktop().getSelectedWindow();
+		logWindow.addFindPanel();
 	}
 }

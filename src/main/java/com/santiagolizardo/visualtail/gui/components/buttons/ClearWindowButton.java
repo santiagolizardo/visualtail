@@ -22,12 +22,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-public class ClearBufferButton extends JButton implements ActionListener {
+public class ClearWindowButton extends JButton implements ActionListener {
 
 	private LogWindow logWindow;
 	
-	public ClearBufferButton(LogWindow logWindow) {
-		super(Translator.tr("Clear buffer"));
+	public ClearWindowButton(LogWindow logWindow) {
+		super(Translator.tr("Clear window"));
 		
 		setEnabled(false);
 		addActionListener(this);
