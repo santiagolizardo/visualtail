@@ -343,9 +343,9 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 			getContentPane().add(findPanel, BorderLayout.PAGE_END);
 			getContentPane().validate();
-
-			findPanel.focus();
 		}
+		
+		findPanel.focus();		
 	}
 
 	public void removeFindPanel() {

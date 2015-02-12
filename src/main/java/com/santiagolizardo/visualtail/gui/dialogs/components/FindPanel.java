@@ -27,7 +27,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.santiagolizardo.visualtail.gui.MainWindow;
 import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import com.santiagolizardo.visualtail.resources.images.IconFactory;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
@@ -39,19 +38,19 @@ public class FindPanel extends JPanel {
 	private JTextField searchTextField;
 	private JButton closeButton;
 
-	public FindPanel(final LogWindow mainWindow) {
+	public FindPanel(final LogWindow logWindow) {
 
 		searchTextField = new JTextField(20);
 		searchTextField.addKeyListener(new KeyAdapter() {
 
 			@Override
-			public void keyReleased(KeyEvent ev) {
+			public void keyPressed(KeyEvent ev) {
 				int keyCode = ev.getKeyCode();
-				if (keyCode == KeyEvent.VK_ENTER) {
-					LogWindow log = mainWindow;
-					if (log != null) {
-						log.searchText(searchTextField.getText());
-					}
+				if (KeyEvent.VK_ENTER == keyCode ) {
+					logWindow.searchText(searchTextField.getText());
+				}
+				else if (KeyEvent.VK_ESCAPE == keyCode) {
+					logWindow.removeFindPanel();
 				}
 			}
 		});
@@ -60,7 +59,7 @@ public class FindPanel extends JPanel {
 		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				mainWindow.removeFindPanel();
+				logWindow.removeFindPanel();
 			}
 		});
 
