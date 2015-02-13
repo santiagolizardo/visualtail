@@ -42,6 +42,7 @@ import com.santiagolizardo.visualtail.engine.TailNotifier;
 import com.santiagolizardo.visualtail.gui.adapters.LinesMouseAdapter;
 import com.santiagolizardo.visualtail.gui.components.LogWindowToolbar;
 import com.santiagolizardo.visualtail.gui.dialogs.components.FindPanel;
+import com.santiagolizardo.visualtail.gui.dialogs.components.ReplacePanel;
 import com.santiagolizardo.visualtail.gui.renderers.LineRenderer;
 import com.santiagolizardo.visualtail.gui.util.DialogFactory;
 import com.santiagolizardo.visualtail.util.FileUtil;
@@ -54,6 +55,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import javax.swing.BoxLayout;
 
 public class LogWindow extends JInternalFrame implements TailListener {
 
@@ -86,6 +88,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	private MainWindow mainWindow;
 
 	private FindPanel findPanel;
+	private ReplacePanel replacePanel;
 	
 	public LogWindow(final MainWindow mainWindow, String fileName, LogType logType) {
 
@@ -208,9 +211,10 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private void defineLayout() {
 		Container contentPane = getContentPane();
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-		contentPane.add(toolbar, BorderLayout.NORTH);
-		contentPane.add(scrollableList, BorderLayout.CENTER);
+		contentPane.add(toolbar);
+		contentPane.add(scrollableList);
 
 		pack();
 	}
@@ -337,21 +341,39 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		return linesList;
 	}
 	
-	public void addFindPanel() {
+	public void showFindPanel() {
 		if (findPanel == null) {
 			findPanel = new FindPanel(this);
 
-			getContentPane().add(findPanel, BorderLayout.PAGE_END);
+			getContentPane().add(findPanel);
 			getContentPane().validate();
 		}
 		
-		findPanel.focus();		
+		findPanel.focus();
 	}
 
-	public void removeFindPanel() {
+	public void hideFindPanel() {
 		getContentPane().remove(findPanel);
 		getContentPane().validate();
 
 		findPanel = null;
+	}
+	
+	public void showReplacePanel() {
+		if (replacePanel == null) {
+			replacePanel = new ReplacePanel(this);
+
+			getContentPane().add(replacePanel);
+			getContentPane().validate();
+		}
+		
+		replacePanel.focus();		
+	}
+	
+	public void hideReplacePanel() {
+		getContentPane().remove(replacePanel);
+		getContentPane().validate();
+
+		replacePanel = null;		
 	}
 }

@@ -48,6 +48,6 @@ public class FindAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		LogWindow logWindow = mainWindow.getDesktop().getSelectedWindow();
-		logWindow.addFindPanel();
+		logWindow.showFindPanel();
 	}
 }

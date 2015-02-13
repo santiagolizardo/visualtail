@@ -29,6 +29,7 @@ import com.santiagolizardo.visualtail.gui.actions.ClearAllBuffersAction;
 import com.santiagolizardo.visualtail.gui.actions.ClearSelectedBufferAction;
 import com.santiagolizardo.visualtail.gui.actions.FindAction;
 import com.santiagolizardo.visualtail.gui.actions.FindNextAction;
+import com.santiagolizardo.visualtail.gui.actions.ReplaceAction;
 
 public class EditMenu extends JMenu {
 
@@ -51,12 +52,15 @@ public class EditMenu extends JMenu {
 		JMenuItem findMenuItem = new JMenuItem(new FindAction(mainWindow));
 		JMenuItem findNextMenuItem = new JMenuItem(new FindNextAction(mainWindow));
 		
+		JMenuItem replaceMenuItem = new JMenuItem(new ReplaceAction(mainWindow));
+		
 		JMenuItem clearSelectedBufferMenuItem = new JMenuItem(new ClearSelectedBufferAction(mainWindow));
 		JMenuItem clearAllBuffersMenuItem = new JMenuItem(new ClearAllBuffersAction(mainWindow));
 
 		add(copyMenuItem);
-		addSeparator();
 		add(selectAllMenuItem);
+		addSeparator();
+		add(replaceMenuItem);		
 		addSeparator();
 		add(findMenuItem);
 		add(findNextMenuItem);

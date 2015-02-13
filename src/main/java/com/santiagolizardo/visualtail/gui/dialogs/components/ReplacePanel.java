@@ -32,15 +32,18 @@ import com.santiagolizardo.visualtail.resources.images.IconFactory;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
 import java.awt.Container;
 
-public class FindPanel extends JPanel {
+public class ReplacePanel extends JPanel {
 
 	private static final long serialVersionUID = -750096502886630895L;
 
 	private JTextField searchTextField;
+	private JTextField replaceTextField;
 	private JButton closeButton;
 
-	public FindPanel(final LogWindow logWindow) {
+	public ReplacePanel(final LogWindow logWindow) {
 
+		replaceTextField = new JTextField(20);
+		
 		searchTextField = new JTextField(20);
 		searchTextField.addKeyListener(new KeyAdapter() {
 
@@ -60,7 +63,7 @@ public class FindPanel extends JPanel {
 		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				logWindow.hideFindPanel();
+				logWindow.hideReplacePanel();
 			}
 		});
 
@@ -75,10 +78,11 @@ public class FindPanel extends JPanel {
 		BoxLayout box = new BoxLayout(this, BoxLayout.X_AXIS);
 		setLayout(box);
 
-		JLabel searchLabel = new JLabel(Translator.tr("Search") + ":");
+		JLabel searchLabel = new JLabel(Translator.tr("Replace") + ":");
 
 		add(searchLabel);
 		add(searchTextField);
+		add(replaceTextField);
 		add(closeButton);
 	}
 }
