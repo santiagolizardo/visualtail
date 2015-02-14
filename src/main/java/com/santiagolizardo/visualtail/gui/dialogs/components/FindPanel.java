@@ -31,6 +31,7 @@ import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import com.santiagolizardo.visualtail.resources.images.IconFactory;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
 import java.awt.Container;
+import java.awt.Dimension;
 
 public class FindPanel extends JPanel {
 
@@ -42,6 +43,7 @@ public class FindPanel extends JPanel {
 	public FindPanel(final LogWindow logWindow) {
 
 		searchTextField = new JTextField(20);
+		searchTextField.setMaximumSize(new Dimension(Integer.MAX_VALUE, searchTextField.getPreferredSize().height));
 		searchTextField.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -57,6 +59,7 @@ public class FindPanel extends JPanel {
 		});
 
 		closeButton = new JButton(IconFactory.getImage("close.png"));
+		closeButton.setMaximumSize(closeButton.getPreferredSize());
 		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {

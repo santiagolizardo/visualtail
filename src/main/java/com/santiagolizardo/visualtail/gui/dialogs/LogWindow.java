@@ -1,22 +1,20 @@
 /**
  * This file is part of VisualTail, a graphical log file monitor.
  *
- * VisualTail is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * VisualTail is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * VisualTail is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * VisualTail is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * VisualTail. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.visualtail.gui.dialogs;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -29,7 +27,6 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
-import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -56,6 +53,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import javax.swing.BoxLayout;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameListener;
 
 public class LogWindow extends JInternalFrame implements TailListener {
 
@@ -89,12 +88,12 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private FindPanel findPanel;
 	private ReplacePanel replacePanel;
-	
+
 	public LogWindow(final MainWindow mainWindow, String fileName, LogType logType) {
 
 		setIconifiable(false);
 		setResizable(true);
-        // @todo Make frame icon shareable to all windows
+		// @todo Make frame icon shareable to all windows
 		setFrameIcon(IconFactory.getImage("log_window.png"));
 		setMaximizable(true);
 		setClosable(true);
@@ -164,6 +163,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		setVisible(true);
 
 		addInternalFrameListener(new InternalFrameAdapter() {
+
 			@Override
 			public void internalFrameActivated(InternalFrameEvent ev) {
 				mainWindow.setTitle(Constants.APP_NAME, file.getName());
@@ -188,7 +188,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		lineListRenderer.loadLogType(logType);
 		linesList.updateUI();
 	}
-	
+
 	public void updateFont(Font font) {
 		lineListRenderer.setFont(font);
 		linesList.updateUI();
@@ -224,7 +224,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		int linesSize = linesModel.size();
 		for (; searchIndex < linesSize; searchIndex++) {
 			String line = linesModel.get(searchIndex);
-			if (line.contains(searchText) ) {
+			if (line.contains(searchText)) {
 				linesList.ensureIndexIsVisible(searchIndex);
 				linesList.setSelectedIndex(searchIndex);
 				searchIndex++;
@@ -302,18 +302,18 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param numberOfLines
 	 * @return Number of previous lines added.
 	 */
 	public int loadPreviousLines(int numberOfLines) {
-            List<String> lines = tailNotifier.getTail().readPreviousLines(numberOfLines);
-            for(String line : lines ) {
-                linesModel.add(0, line);
-            }
-			return lines.size();
+		List<String> lines = tailNotifier.getTail().readPreviousLines(numberOfLines);
+		for (String line : lines) {
+			linesModel.add(0, line);
+		}
+		return lines.size();
 	}
-	
+
 	public int getNumberPreviousLinesToDisplay() {
 		return numberPreviousLinesToDisplay;
 	}
@@ -340,7 +340,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	public JList<String> getLinesList() {
 		return linesList;
 	}
-	
+
 	public void showFindPanel() {
 		if (findPanel == null) {
 			findPanel = new FindPanel(this);
@@ -348,7 +348,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			getContentPane().add(findPanel);
 			getContentPane().validate();
 		}
-		
+
 		findPanel.focus();
 	}
 
@@ -358,7 +358,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		findPanel = null;
 	}
-	
+
 	public void showReplacePanel() {
 		if (replacePanel == null) {
 			replacePanel = new ReplacePanel(this);
@@ -366,14 +366,19 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			getContentPane().add(replacePanel);
 			getContentPane().validate();
 		}
-		
-		replacePanel.focus();		
+
+		replacePanel.focus();
 	}
-	
+
 	public void hideReplacePanel() {
 		getContentPane().remove(replacePanel);
 		getContentPane().validate();
 
-		replacePanel = null;		
+		replacePanel = null;
+	}
+
+	public LineRenderer getLineRenderer() {
+		return lineListRenderer;
 	}
 }
+Ï

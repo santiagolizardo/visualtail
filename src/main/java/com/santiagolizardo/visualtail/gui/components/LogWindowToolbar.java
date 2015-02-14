@@ -25,6 +25,7 @@ import com.santiagolizardo.visualtail.beans.LogTypeManager;
 import com.santiagolizardo.visualtail.gui.components.buttons.ClearWindowButton;
 import com.santiagolizardo.visualtail.gui.components.buttons.PrintFileButton;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
@@ -59,10 +60,13 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 		setFloatable(false);
 
 		this.logWindow = logWindow;
+		
+		setMaximumSize(new Dimension(Integer.MAX_VALUE, getPreferredSize().height));
 
 		numberLinesToDisplaySpinner = new JSpinner(new SpinnerNumberModel(
 				logWindow.getNumberLinesToDisplay(), 1, 9999, 1));
 		numberLinesToDisplaySpinner.setToolTipText(Translator.tr("Number of lines to display"));
+		numberLinesToDisplaySpinner.setMaximumSize(numberLinesToDisplaySpinner.getPreferredSize());
 		numberLinesToDisplaySpinner.addChangeListener(new ChangeListener() {
 
 			@Override

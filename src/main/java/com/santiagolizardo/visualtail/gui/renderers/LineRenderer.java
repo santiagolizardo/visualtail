@@ -1,18 +1,17 @@
 /**
  * This file is part of VisualTail, a graphical log file monitor.
  *
- * VisualTail is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * VisualTail is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * VisualTail is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * VisualTail is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * VisualTail. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.visualtail.gui.renderers;
 
@@ -29,12 +28,16 @@ import javax.swing.ListCellRenderer;
 import com.santiagolizardo.visualtail.beans.Rule;
 import com.santiagolizardo.visualtail.beans.RuleMatcher;
 import com.santiagolizardo.visualtail.config.ConfigData;
+import java.util.regex.Pattern;
 
 public class LineRenderer extends JLabel implements ListCellRenderer<String> {
 
 	private static final long serialVersionUID = 3132401719842667709L;
 
 	private RuleMatcher[] ruleMatchers;
+
+	private Pattern replacePattern;
+	private String replacementString;
 
 	public LineRenderer() {
 		setOpaque(true);
@@ -57,7 +60,10 @@ public class LineRenderer extends JLabel implements ListCellRenderer<String> {
 	@Override
 	public Component getListCellRendererComponent(JList<? extends String> list,
 			String value, int index, boolean isSelected, boolean hasFocus) {
-		setText(value);
+
+		String lineText = (replacePattern != null ? replacePattern.matcher(value).replaceAll(replacementString) : value);
+
+		setText(lineText);
 		setBackground(Color.WHITE);
 		setForeground(Color.BLACK);
 
@@ -75,5 +81,10 @@ public class LineRenderer extends JLabel implements ListCellRenderer<String> {
 		}
 
 		return this;
+	}
+
+	public void updateReplacerValues(Pattern replacePattern, String replacementString) {
+		this.replacePattern = replacePattern;
+		this.replacementString = replacementString;
 	}
 }
