@@ -381,4 +381,3 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		return lineListRenderer;
 	}
 }
-Ï
