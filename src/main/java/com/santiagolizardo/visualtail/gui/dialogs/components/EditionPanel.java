@@ -69,11 +69,11 @@ public class EditionPanel extends JPanel {
 
 	private static final Logger logger = Logger.getLogger(EditionPanel.class.getName());
 
-	private JSpinner spnRefresh;
-	private JLabel lblSeconds;
+	private JSpinner refreshSpinner;
+	private JLabel secondsLabel;
 
 	private RulesTableModel modelRules;
-	private JTable tblRules;
+	private JTable rulesTable;
 	private JScrollPane scrollRules;
 
 	private JButton btnAddRule;
@@ -88,16 +88,16 @@ public class EditionPanel extends JPanel {
 
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(500, 100,
 				10000, 100);
-		spnRefresh = new JSpinner(spinnerModel);
-		spnRefresh.addChangeListener(new ChangeListener() {
+		refreshSpinner = new JSpinner(spinnerModel);
+		refreshSpinner.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent ev) {
 				updateSeconds();
 			}
 		});
 
-		lblSeconds = new JLabel();
-		lblSeconds.setForeground(Color.GRAY);
+		secondsLabel = new JLabel();
+		secondsLabel.setForeground(Color.GRAY);
 		updateSeconds();
 
 		logTypeLoaded = false;
@@ -113,33 +113,33 @@ public class EditionPanel extends JPanel {
 			}
 		});
 
-		tblRules = new JTable(modelRules);
-		tblRules.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		rulesTable = new JTable(modelRules);
+		rulesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		setColumnWidths();
 
-		tblRules.getTableHeader().setReorderingAllowed(false);
+		rulesTable.getTableHeader().setReorderingAllowed(false);
 
-		tblRules.setDefaultRenderer(Color.class, new ColorRenderer());
-		tblRules.setDefaultEditor(Color.class, new ColorEditor(this));
+		rulesTable.setDefaultRenderer(Color.class, new ColorRenderer());
+		rulesTable.setDefaultEditor(Color.class, new ColorEditor(this));
 
-		tblRules.getColumnModel()
+		rulesTable.getColumnModel()
 				.getColumn(5).setCellRenderer(new ColorExampleRenderer());
 
-		tblRules.getSelectionModel()
+		rulesTable.getSelectionModel()
 				.addListSelectionListener(
 						new ListSelectionListener() {
 
 							@Override
 							public void valueChanged(ListSelectionEvent ev
 							) {
-								btnRemoveRule.setEnabled(1 == tblRules
+								btnRemoveRule.setEnabled(1 == rulesTable
 										.getSelectedRowCount());
 							}
 						}
 				);
 
-		scrollRules = new JScrollPane(tblRules);
+		scrollRules = new JScrollPane(rulesTable);
 
 		scrollRules.addComponentListener(
 				new ComponentAdapter() {
@@ -179,16 +179,16 @@ public class EditionPanel extends JPanel {
 					@Override
 					public void actionPerformed(ActionEvent event
 					) {
-						int selectedRow = tblRules.getSelectedRow();
+						int selectedRow = rulesTable.getSelectedRow();
 						modelRules.removeRule(selectedRow);
 						saveChanges();
 					}
 				}
 		);
 
-		tblRules.setMinimumSize(
+		rulesTable.setMinimumSize(
 				new Dimension(500, 500));
-		tblRules.setPreferredSize(
+		rulesTable.setPreferredSize(
 				new Dimension(500, 500));
 
 		placeComponents();
@@ -212,16 +212,16 @@ public class EditionPanel extends JPanel {
 
 	private void updateSeconds() {
 		DecimalFormat formatter = new DecimalFormat("#0.0");
-		double _refresh = Double.parseDouble(spnRefresh.getValue().toString());
+		double _refresh = Double.parseDouble(refreshSpinner.getValue().toString());
 		double _seconds = _refresh / 1000;
-		lblSeconds.setText(formatter.format(_seconds)
+		secondsLabel.setText(formatter.format(_seconds)
 				.concat(" " + tr("seconds")));
 	}
 
 	public void setLogType(LogType logType) {
 		this.logType = logType;
 
-		spnRefresh.setValue(logType.getRefreshInterval());
+		refreshSpinner.setValue(logType.getRefreshInterval());
 
 		logTypeLoaded = false;
 		modelRules.clear();
@@ -256,17 +256,17 @@ public class EditionPanel extends JPanel {
 		panel.setLayout(layout);
 
 		layout.putConstraint(NORTH, lblRefresh, 5, NORTH, panel);
-		layout.putConstraint(NORTH, spnRefresh, 5, SOUTH, lblRefresh);
-		layout.putConstraint(NORTH, lblSeconds, 5, SOUTH, spnRefresh);
-		layout.putConstraint(NORTH, lblRules, 5, SOUTH, lblSeconds);
+		layout.putConstraint(NORTH, refreshSpinner, 5, SOUTH, lblRefresh);
+		layout.putConstraint(NORTH, secondsLabel, 5, SOUTH, refreshSpinner);
+		layout.putConstraint(NORTH, lblRules, 5, SOUTH, secondsLabel);
 		layout.putConstraint(NORTH, scrollRules, 5, SOUTH, lblRules);
 		layout.putConstraint(SOUTH, scrollRules, -5, NORTH, btnAddRule);
 		layout.putConstraint(SOUTH, btnAddRule, -5, SOUTH, panel);
 		layout.putConstraint(SOUTH, btnRemoveRule, -5, SOUTH, panel);
 
 		layout.putConstraint(WEST, lblRefresh, 5, WEST, panel);
-		layout.putConstraint(WEST, spnRefresh, 5, WEST, panel);
-		layout.putConstraint(WEST, lblSeconds, 5, WEST, panel);
+		layout.putConstraint(WEST, refreshSpinner, 5, WEST, panel);
+		layout.putConstraint(WEST, secondsLabel, 5, WEST, panel);
 		layout.putConstraint(WEST, lblRules, 5, WEST, panel);
 		layout.putConstraint(WEST, scrollRules, 5, WEST, panel);
 		layout.putConstraint(EAST, scrollRules, -5, EAST, panel);
@@ -274,8 +274,8 @@ public class EditionPanel extends JPanel {
 		layout.putConstraint(WEST, btnRemoveRule, 5, EAST, btnAddRule);
 
 		panel.add(lblRefresh);
-		panel.add(spnRefresh);
-		panel.add(lblSeconds);
+		panel.add(refreshSpinner);
+		panel.add(secondsLabel);
 		panel.add(lblRules);
 		panel.add(scrollRules);
 		panel.add(btnAddRule);
@@ -285,19 +285,19 @@ public class EditionPanel extends JPanel {
 	}
 
 	public void setColumnWidths() {
-		(((DefaultTableCellRenderer) tblRules.getTableHeader().getDefaultRenderer())).setHorizontalAlignment(SwingConstants.CENTER);
+		(((DefaultTableCellRenderer) rulesTable.getTableHeader().getDefaultRenderer())).setHorizontalAlignment(SwingConstants.CENTER);
 
-		Dimension tableSize = tblRules.getSize();
+		Dimension tableSize = rulesTable.getSize();
 		double w = tableSize.getWidth();
-		for (int i = 0; i < tblRules.getColumnCount(); i++) {
-			tblRules.getColumnModel().getColumn(i).setWidth(modelRules.getColumnWidth(w, i));
-			tblRules.getColumnModel().getColumn(i).setPreferredWidth(modelRules.getColumnWidth(w, i));
+		for (int i = 0; i < rulesTable.getColumnCount(); i++) {
+			rulesTable.getColumnModel().getColumn(i).setWidth(modelRules.getColumnWidth(w, i));
+			rulesTable.getColumnModel().getColumn(i).setPreferredWidth(modelRules.getColumnWidth(w, i));
 		}
 	}
 
 	public void saveChanges() {
 		short interval = Short
-				.valueOf(spnRefresh.getValue().toString());
+				.valueOf(refreshSpinner.getValue().toString());
 		logType.setRefreshInterval(interval);
 		logType.setRules(modelRules.getRules());
 

@@ -40,6 +40,7 @@ import com.santiagolizardo.visualtail.gui.adapters.LinesMouseAdapter;
 import com.santiagolizardo.visualtail.gui.components.LogWindowToolbar;
 import com.santiagolizardo.visualtail.gui.dialogs.components.FindPanel;
 import com.santiagolizardo.visualtail.gui.dialogs.components.ReplacePanel;
+import com.santiagolizardo.visualtail.gui.models.LogListModel;
 import com.santiagolizardo.visualtail.gui.renderers.LineRenderer;
 import com.santiagolizardo.visualtail.gui.util.DialogFactory;
 import com.santiagolizardo.visualtail.util.FileUtil;
@@ -79,7 +80,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private LogWindowToolbar toolbar;
 
-	private DefaultListModel<String> linesModel;
+	private LogListModel linesModel;
 
 	private JList<String> linesList;
 	private LineRenderer lineListRenderer;
@@ -110,7 +111,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		mainWindow.getConfigData().setLastPath(fileName);
 		mainWindow.updateActions(+1);
 
-		linesModel = new DefaultListModel<>();
+		linesModel = new LogListModel();
 		linesList = new JList<>(linesModel);
 
 		lineListRenderer = new LineRenderer();
@@ -342,12 +343,14 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	}
 
 	public void showFindPanel() {
+		// Lazy initialization to save some memory if the panel
+		// is never used.
 		if (findPanel == null) {
 			findPanel = new FindPanel(this);
-
-			getContentPane().add(findPanel);
-			getContentPane().validate();
 		}
+
+		getContentPane().add(findPanel);
+		getContentPane().validate();
 
 		findPanel.focus();
 	}
@@ -355,17 +358,17 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	public void hideFindPanel() {
 		getContentPane().remove(findPanel);
 		getContentPane().validate();
-
-		findPanel = null;
 	}
 
 	public void showReplacePanel() {
+		// Lazy initialization to save some memory if the panel
+		// is never used.
 		if (replacePanel == null) {
 			replacePanel = new ReplacePanel(this);
-
-			getContentPane().add(replacePanel);
-			getContentPane().validate();
 		}
+
+		getContentPane().add(replacePanel);
+		getContentPane().validate();
 
 		replacePanel.focus();
 	}
@@ -373,11 +376,13 @@ public class LogWindow extends JInternalFrame implements TailListener {
 	public void hideReplacePanel() {
 		getContentPane().remove(replacePanel);
 		getContentPane().validate();
-
-		replacePanel = null;
 	}
 
 	public LineRenderer getLineRenderer() {
 		return lineListRenderer;
+	}
+
+	public LogListModel getLinesModel() {
+		return linesModel;
 	}
 }

@@ -30,7 +30,6 @@ import javax.swing.JTextField;
 import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import com.santiagolizardo.visualtail.resources.images.IconFactory;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
-import java.awt.Container;
 import java.awt.Dimension;
 
 public class FindPanel extends JPanel {
@@ -50,7 +49,10 @@ public class FindPanel extends JPanel {
 			public void keyPressed(KeyEvent ev) {
 				int keyCode = ev.getKeyCode();
 				if (KeyEvent.VK_ENTER == keyCode ) {
-					logWindow.searchText(searchTextField.getText());
+					String searchValue = searchTextField.getText();
+					if(!searchValue.isEmpty()) {
+						logWindow.searchText(searchValue);
+					}
 				}
 				else if (KeyEvent.VK_ESCAPE == keyCode) {
 					logWindow.hideFindPanel();

@@ -24,7 +24,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
-import javax.swing.Icon;
 import javax.swing.KeyStroke;
 
 public class ReplaceAction extends AbstractAction {
@@ -34,8 +33,8 @@ public class ReplaceAction extends AbstractAction {
 	public ReplaceAction(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 		
-		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("find.png"));
-		putValue(AbstractAction.NAME, tr("Live replace..."));
+		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("text_replace.png"));
+		putValue(AbstractAction.NAME, tr("Replace..."));
 		putValue(AbstractAction.ACCELERATOR_KEY,
 			KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 	}

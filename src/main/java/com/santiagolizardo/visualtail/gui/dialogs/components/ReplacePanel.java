@@ -94,6 +94,7 @@ public class ReplacePanel extends JPanel implements KeyListener {
 		int keyCode = ev.getKeyCode();
 		if (KeyEvent.VK_ENTER == keyCode) {
 			logWindow.getLineRenderer().updateReplacerValues(replacePattern, replaceTextField.getText());
+			logWindow.getLinesModel().updateReplacerValues(replacePattern, replaceTextField.getText());
 		} else if (KeyEvent.VK_ESCAPE == keyCode) {
 			logWindow.hideReplacePanel();
 		}

@@ -56,32 +56,35 @@ public class ListingPanel extends JPanel {
 
 	private DefaultListModel<LogType> modelTypes;
 
-	private JList<LogType> lstTypes;
+	private JList<LogType> logTypesJList;
 	private JScrollPane scrollTypes;
 
 	private JButton btnAdd;
 	private JButton btnRename;
 	private JButton btnRemove;
+	
+	private LogTypeManager logTypeManager;
 
 	public ListingPanel() {
 		setPreferredSize(new Dimension(180, 300));
 
+		logTypeManager = LogTypeManager.getInstance();
+		
 		modelTypes = new DefaultListModel<>();
-		lstTypes = new JList<>(modelTypes);
-		lstTypes.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-		lstTypes.setCellRenderer(new LogTypeListRenderer());
-		lstTypes.addListSelectionListener(new ListSelectionListener() {
+		logTypesJList = new JList<>(modelTypes);
+		logTypesJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+		logTypesJList.setCellRenderer(new LogTypeListRenderer());
+		logTypesJList.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				boolean isEmpty = lstTypes.isSelectionEmpty();
+				boolean isEmpty = logTypesJList.isSelectionEmpty();
 				editionPanel.setEnabled(!isEmpty);
 				if (isEmpty) {
 					btnRename.setEnabled(false);
 					btnRemove.setEnabled(false);
 				} else {
-					LogType logType = (LogType) lstTypes.getSelectedValue();
-					LogTypeManager logTypes = LogTypeManager.getInstance();
-					logType = logTypes.loadFromFile(logType
+					LogType logType = (LogType) logTypesJList.getSelectedValue();
+					logType = logTypeManager.loadFromFile(logType
 							.getName());
 
 					editionPanel.setLogType(logType);
@@ -91,7 +94,7 @@ public class ListingPanel extends JPanel {
 			}
 		});
 
-		scrollTypes = new JScrollPane(lstTypes);
+		scrollTypes = new JScrollPane(logTypesJList);
 
 		btnAdd = new JButton(Translator.tr("Add"));
 		btnAdd.addActionListener(new ActionListener() {
@@ -160,8 +163,7 @@ public class ListingPanel extends JPanel {
 	public void updateLogTypes() {
 		modelTypes.clear();
 
-		LogTypeManager logTypesLoader = LogTypeManager.getInstance();
-		List<LogType> logTypes = logTypesLoader.getAll();
+		List<LogType> logTypes = logTypeManager.getAll();
 		for (LogType logType : logTypes) {
 			if (!"Default".equals(logType.getName())) {
 				modelTypes.addElement(logType);
@@ -177,25 +179,24 @@ public class ListingPanel extends JPanel {
 		}
 		name = name.trim();
 		if (name.length() == 0) {
-			DialogFactory.showErrorMessage(null,
+			DialogFactory.showErrorMessage(getParent(),
 					Translator.tr("Invalid log type name"));
 			return;
 		}
 		LogType logType = new LogType(name);
 		try {
-			LogTypeManager logTypes = LogTypeManager.getInstance();
-			logTypes.saveToFile(logType);
+			logTypeManager.saveToFile(logType);
 
 			updateLogTypes();
 
-			lstTypes.setSelectedValue(logType, true);
+			logTypesJList.setSelectedValue(logType, true);
 		} catch (IOException ee) {
 			logger.warning(ee.getMessage());
 		}
 	}
 
 	private void onRenameLogType() {
-		LogType selected = (LogType) lstTypes.getSelectedValue();
+		LogType selected = (LogType) logTypesJList.getSelectedValue();
 		String newName = JOptionPane.showInputDialog(getParent(),
 				tr("Enter the new name of the log type:"),
 				selected.getName());
@@ -204,19 +205,20 @@ public class ListingPanel extends JPanel {
 		}
 		newName = newName.trim();
 		if (newName.length() > 0 && !newName.equals(selected.getName())) {
-			LogTypeManager logTypes = LogTypeManager.getInstance();
-			logTypes.rename(selected, newName);
+			if( logTypeManager.rename(selected, newName) ) {
+				updateLogTypes();
 
-			updateLogTypes();
+				LogType newLogType = logTypeManager.loadFromFile(newName);
+				logTypesJList.setSelectedValue(newLogType, true);				
+			}
 		}
 	}
 
 	private void onRemoveLogType() {
 		if (DialogFactory.showQuestionDialog(getParent(), Translator
 				.tr("Are you sure you want to delete the selected log type?"))) {
-			LogType selected = (LogType) lstTypes.getSelectedValue();
-			LogTypeManager logTypes = LogTypeManager.getInstance();
-			if (!logTypes.remove(selected)) {
+			LogType selected = (LogType) logTypesJList.getSelectedValue();
+			if (!logTypeManager.remove(selected)) {
 				DialogFactory.showErrorMessage(getParent(),
 						Translator.tr("Unable to delete the log type"));
 			}
