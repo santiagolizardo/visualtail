@@ -21,7 +21,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -55,7 +54,6 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import javax.swing.BoxLayout;
 import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameListener;
 
 public class LogWindow extends JInternalFrame implements TailListener {
 
@@ -66,6 +64,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private int searchIndex;
 	private String searchText;
+	private boolean searchCaseSensitive;
 
 	private File file;
 
@@ -101,6 +100,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		searchIndex = 0;
 		searchText = null;
+		searchCaseSensitive = false;
 
 		numberPreviousLinesToDisplay = 0;
 		numberLinesToDisplay = 512;
@@ -220,12 +220,17 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		pack();
 	}
 
-	public void searchText(String searchText) {
-		this.searchText = searchText;
+	public void searchText(String searchText, boolean caseSensitive) {
+		this.searchText = ( caseSensitive ? searchText : searchText.toLowerCase() );
+		this.searchCaseSensitive = caseSensitive;
+		
 		int linesSize = linesModel.size();
 		for (; searchIndex < linesSize; searchIndex++) {
 			String line = linesModel.get(searchIndex);
-			if (line.contains(searchText)) {
+			if( !caseSensitive ) {
+				line = line.toLowerCase();
+			}
+			if (line.contains(this.searchText)) {
 				linesList.ensureIndexIsVisible(searchIndex);
 				linesList.setSelectedIndex(searchIndex);
 				searchIndex++;
@@ -242,7 +247,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	public void searchAgainText() {
 		if (searchText != null) {
-			searchText(searchText);
+			searchText(searchText, searchCaseSensitive);
 		}
 	}
 

@@ -16,6 +16,7 @@
  */
 package com.santiagolizardo.visualtail.gui.dialogs.components;
 
+import com.santiagolizardo.visualtail.gui.components.buttons.CloseButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -28,21 +29,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
-import com.santiagolizardo.visualtail.resources.images.IconFactory;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
-import java.awt.Dimension;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JToggleButton;
 
 public class FindPanel extends JPanel {
 
 	private static final long serialVersionUID = -750096502886630895L;
 
 	private JTextField searchTextField;
+	private JToggleButton caseSensitiveButton;
 	private JButton closeButton;
 
 	public FindPanel(final LogWindow logWindow) {
 
-		searchTextField = new JTextField(20);
-		searchTextField.setMaximumSize(new Dimension(Integer.MAX_VALUE, searchTextField.getPreferredSize().height));
+		searchTextField = new JTextField(40);
+		searchTextField.setMaximumSize(searchTextField.getPreferredSize());
 		searchTextField.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -51,7 +54,7 @@ public class FindPanel extends JPanel {
 				if (KeyEvent.VK_ENTER == keyCode ) {
 					String searchValue = searchTextField.getText();
 					if(!searchValue.isEmpty()) {
-						logWindow.searchText(searchValue);
+						logWindow.searchText(searchValue, caseSensitiveButton.isSelected());
 					}
 				}
 				else if (KeyEvent.VK_ESCAPE == keyCode) {
@@ -59,9 +62,10 @@ public class FindPanel extends JPanel {
 				}
 			}
 		});
+		
+		caseSensitiveButton = new JToggleButton(Translator.tr("Case sensitive"));
 
-		closeButton = new JButton(IconFactory.getImage("close.png"));
-		closeButton.setMaximumSize(closeButton.getPreferredSize());
+		closeButton = new CloseButton();
 		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -79,11 +83,14 @@ public class FindPanel extends JPanel {
 	public void defineLayout() {
 		BoxLayout box = new BoxLayout(this, BoxLayout.X_AXIS);
 		setLayout(box);
+		setBorder(BorderFactory.createEmptyBorder( 1, 3, 1, 3 ));
 
 		JLabel searchLabel = new JLabel(Translator.tr("Search") + ":");
 
 		add(searchLabel);
 		add(searchTextField);
+		add(caseSensitiveButton);
+		add(Box.createHorizontalGlue());
 		add(closeButton);
 	}
 }

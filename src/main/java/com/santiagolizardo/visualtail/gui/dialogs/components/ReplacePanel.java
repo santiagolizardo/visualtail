@@ -15,6 +15,7 @@
  */
 package com.santiagolizardo.visualtail.gui.dialogs.components;
 
+import com.santiagolizardo.visualtail.gui.components.buttons.CloseButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -26,12 +27,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
-import com.santiagolizardo.visualtail.resources.images.IconFactory;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
 import java.awt.Color;
 import java.awt.event.KeyListener;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 
 public class ReplacePanel extends JPanel implements KeyListener {
 
@@ -60,9 +62,8 @@ public class ReplacePanel extends JPanel implements KeyListener {
 		replaceTextField = new JTextField(20);
 		replaceTextField.setMaximumSize(replaceTextField.getPreferredSize());
 		replaceTextField.addKeyListener(this);
-		
-		closeButton = new JButton(IconFactory.getImage("close.png"));
-		closeButton.setMaximumSize(closeButton.getPreferredSize());
+
+		closeButton = new CloseButton();
 		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -80,12 +81,14 @@ public class ReplacePanel extends JPanel implements KeyListener {
 	public void defineLayout() {
 		BoxLayout box = new BoxLayout(this, BoxLayout.X_AXIS);
 		setLayout(box);
+		setBorder(BorderFactory.createEmptyBorder( 1, 3, 1, 3 ));
 
 		JLabel searchLabel = new JLabel(Translator.tr("Replace") + ":");
 
 		add(searchLabel);
 		add(searchTextField);
 		add(replaceTextField);
+		add(Box.createHorizontalGlue());
 		add(closeButton);
 	}
 
