@@ -38,6 +38,5 @@ public class ClearWindowButton extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ev) {
 		logWindow.clear();
-		setEnabled(false);
 	}
 }

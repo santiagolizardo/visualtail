@@ -75,6 +75,7 @@ public class ReplacePanel extends JPanel implements KeyListener {
 	}
 
 	public void focus() {
+		searchTextField.selectAll();
 		searchTextField.requestFocusInWindow();
 	}
 

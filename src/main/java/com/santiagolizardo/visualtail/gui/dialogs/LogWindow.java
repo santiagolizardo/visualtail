@@ -225,6 +225,10 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		this.searchCaseSensitive = caseSensitive;
 		
 		int linesSize = linesModel.size();
+		if( 0 == linesSize ) {
+			return;
+		}
+		
 		for (; searchIndex < linesSize; searchIndex++) {
 			String line = linesModel.get(searchIndex);
 			if( !caseSensitive ) {

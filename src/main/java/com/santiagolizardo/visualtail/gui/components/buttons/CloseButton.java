@@ -16,12 +16,14 @@
 package com.santiagolizardo.visualtail.gui.components.buttons;
 
 import com.santiagolizardo.visualtail.resources.images.IconFactory;
+import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 public class CloseButton extends JButton {
 
 	public CloseButton() {
+		setPreferredSize(new Dimension(16, 16));
 		setMaximumSize(getPreferredSize());
 		setBorder(BorderFactory.createEmptyBorder());
 		setIcon(IconFactory.getImage("close.png"));
