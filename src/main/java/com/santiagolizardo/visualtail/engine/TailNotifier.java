@@ -33,8 +33,6 @@ public class TailNotifier implements Runnable {
         return tail;
     }
     
-    
-
     @Override
     public void run() {
         if (tail.hasMoreLines()) {

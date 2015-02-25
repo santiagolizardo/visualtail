@@ -127,7 +127,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 					@Override
 					public void valueChanged(ListSelectionEvent ev) {
 						if (ev.getValueIsAdjusting() == false) {
-							updateSelections();
+							updateUiControls();
 						}
 					}
 				});
@@ -168,7 +168,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 			@Override
 			public void internalFrameActivated(InternalFrameEvent ev) {
 				mainWindow.setTitle(Constants.APP_NAME, file.getName());
-				updateSelections();
+				updateUiControls();
 			}
 
 			@Override
@@ -206,6 +206,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 					moveToNewLines();
 				}
 				updateTitle();
+				updateUiControls();
 			}
 		});
 	}
@@ -283,9 +284,14 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		}
 	}
 
-	private void updateSelections() {
+	private void updateUiControls() {
+		boolean linesModelIsNotEmpty = !linesModel.isEmpty();
+		mainWindow.getActionFactory().getSelectAllAction()
+				.setEnabled(linesModelIsNotEmpty);
 		mainWindow.getActionFactory().getCopyAction()
 				.setEnabled(linesList.getSelectedValuesList().size() > 0);
+		mainWindow.getMenu().getEditMenu().getClearSelectedWindowMenuItem().setEnabled(linesModelIsNotEmpty);
+		toolbar.getClearButton().setEnabled(linesModelIsNotEmpty);
 	}
 
 	private void launchTask() {
@@ -308,7 +314,7 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	public void clear() {
 		linesModel.clear();
-		toolbar.getClearButton().setEnabled(false);
+		updateUiControls();
 	}
 
 	/**

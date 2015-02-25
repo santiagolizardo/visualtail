@@ -36,6 +36,7 @@ public class EditMenu extends JMenu {
 	private static final long serialVersionUID = -8897022931984447153L;
 
 	private JMenuItem copyMenuItem;
+	private JMenuItem clearSelectedWindowMenuItem;
 
 	public EditMenu(MainWindow mainWindow) {
 
@@ -54,7 +55,7 @@ public class EditMenu extends JMenu {
 		
 		JMenuItem replaceMenuItem = new JMenuItem(new ReplaceAction(mainWindow));
 		
-		JMenuItem clearSelectedBufferMenuItem = new JMenuItem(new ClearSelectedBufferAction(mainWindow));
+		clearSelectedWindowMenuItem = new JMenuItem(new ClearSelectedBufferAction(mainWindow));
 		JMenuItem clearAllBuffersMenuItem = new JMenuItem(new ClearAllBuffersAction(mainWindow));
 
 		add(copyMenuItem);
@@ -65,7 +66,11 @@ public class EditMenu extends JMenu {
 		add(findMenuItem);
 		add(findNextMenuItem);
 		addSeparator();
-		add(clearSelectedBufferMenuItem);
+		add(clearSelectedWindowMenuItem);
 		add(clearAllBuffersMenuItem);
+	}
+
+	public JMenuItem getClearSelectedWindowMenuItem() {
+		return clearSelectedWindowMenuItem;
 	}
 }

@@ -15,6 +15,7 @@
  */
 package com.santiagolizardo.visualtail.gui.dialogs.components;
 
+import com.santiagolizardo.visualtail.gui.components.EnhancedTextField;
 import com.santiagolizardo.visualtail.gui.components.buttons.CloseButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,8 +40,8 @@ public class ReplacePanel extends JPanel implements KeyListener {
 
 	private static final long serialVersionUID = -750096502886630895L;
 
-	private JTextField searchTextField;
-	private JTextField replaceTextField;
+	private EnhancedTextField searchTextField;
+	private EnhancedTextField replaceTextField;
 	private JButton closeButton;
 
 	private LogWindow logWindow;
@@ -53,13 +54,15 @@ public class ReplacePanel extends JPanel implements KeyListener {
 
 		this.logWindow = logWindow;
 
-		searchTextField = new JTextField(20);
+		searchTextField = new EnhancedTextField(25);
+		searchTextField.setPlaceholder(Translator.tr("Search pattern..."));
 		searchTextField.setMaximumSize(searchTextField.getPreferredSize());
 		searchTextField.addKeyListener(this);
 		
 		defaultForegroundColor = searchTextField.getForeground();
 
-		replaceTextField = new JTextField(20);
+		replaceTextField = new EnhancedTextField(25);
+		replaceTextField.setPlaceholder(Translator.tr("Replacement string..."));
 		replaceTextField.setMaximumSize(replaceTextField.getPreferredSize());
 		replaceTextField.addKeyListener(this);
 
@@ -84,9 +87,6 @@ public class ReplacePanel extends JPanel implements KeyListener {
 		setLayout(box);
 		setBorder(BorderFactory.createEmptyBorder( 1, 3, 1, 3 ));
 
-		JLabel searchLabel = new JLabel(Translator.tr("Replace") + ":");
-
-		add(searchLabel);
 		add(searchTextField);
 		add(replaceTextField);
 		add(Box.createHorizontalGlue());
