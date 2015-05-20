@@ -36,7 +36,7 @@ import javax.swing.SpringLayout.Constraints;
 
 import com.santiagolizardo.visualtail.gui.MainWindow;
 import com.santiagolizardo.visualtail.config.ConfigData;
-import com.santiagolizardo.visualtail.config.ConfigPersistence;
+import com.santiagolizardo.visualtail.config.ConfigFileWriter;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -102,15 +102,10 @@ public class FontChooserDialog extends AbstractDialog {
 				setVisible(false);
 
 				Font font = getSelectedFont();
+				configManager.setFont(font);
 
-				configManager.setFontFamily(fontFamilyCombo.getSelectedItem()
-						.toString());
-				configManager.setFontSize(Integer.parseInt(fontSizeCombo.getValue()
-						.toString()));
-
-				ConfigPersistence configPersistence = new ConfigPersistence();
-				configPersistence.saveProperties(mainWindow,
-						configManager.getConfiguration());
+				ConfigFileWriter configPersistence = new ConfigFileWriter();
+				configPersistence.write(configManager);
 
 				JInternalFrame[] internalFrames = mainWindow.getDesktop().getAllFrames();
 				for (JInternalFrame internalFrame : internalFrames) {
@@ -131,8 +126,8 @@ public class FontChooserDialog extends AbstractDialog {
 			}
 		});
 
-		fontFamilyCombo.setSelectedItem(configManager.getFontFamily());
-		fontSizeCombo.setValue(configManager.getFontSize());
+		fontFamilyCombo.setSelectedItem(configManager.getFont().getFamily());
+		fontSizeCombo.setValue(configManager.getFont().getSize());
 		updatePreview();
 
 		defineLayout();

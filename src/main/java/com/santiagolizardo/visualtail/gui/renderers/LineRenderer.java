@@ -52,9 +52,7 @@ public class LineRenderer extends JLabel implements ListCellRenderer<String> {
 	}
 
 	public void updateFont(ConfigData configData) {
-		Font font = new Font(configData.getFontFamily(), Font.PLAIN,
-				configData.getFontSize());
-		setFont(font);
+		setFont(configData.getFont());
 	}
 
 	@Override

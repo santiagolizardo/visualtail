@@ -53,7 +53,7 @@ import com.santiagolizardo.visualtail.gui.editors.ColorEditor;
 import com.santiagolizardo.visualtail.gui.renderers.ColorExampleRenderer;
 import com.santiagolizardo.visualtail.gui.renderers.ColorRenderer;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
-import com.santiagolizardo.visualtail.beans.LogTypeManager;
+import com.santiagolizardo.visualtail.config.LogTypeFileWriter;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
@@ -302,8 +302,8 @@ public class EditionPanel extends JPanel {
 		logType.setRules(modelRules.getRules());
 
 		try {
-			LogTypeManager logTypes = LogTypeManager.getInstance();
-			logTypes.saveToFile(logType);
+			LogTypeFileWriter logTypes = LogTypeFileWriter.getInstance();
+			logTypes.write(logType);
 		} catch (IOException ex) {
 			logger.severe(ex.getMessage());
 		}

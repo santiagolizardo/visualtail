@@ -1,18 +1,17 @@
 /**
  * This file is part of VisualTail, a graphical log file monitor.
  *
- * VisualTail is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * VisualTail is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * VisualTail is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * VisualTail is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * VisualTail. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.visualtail.gui.dialogs;
 
@@ -36,7 +35,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import com.santiagolizardo.visualtail.gui.MainWindow;
 import com.santiagolizardo.visualtail.beans.SwingLookAndFeel;
 import com.santiagolizardo.visualtail.config.ConfigData;
-import com.santiagolizardo.visualtail.config.ConfigPersistence;
+import com.santiagolizardo.visualtail.config.ConfigFileWriter;
 import com.santiagolizardo.visualtail.gui.renderers.LocaleRender;
 import com.santiagolizardo.visualtail.gui.renderers.SwingLAFRenderer;
 import com.santiagolizardo.visualtail.gui.util.SwingUtil;
@@ -76,7 +75,7 @@ public class PreferencesDialog extends AbstractDialog {
 		lookAndFeelComboBox.setRenderer(new SwingLAFRenderer());
 		try {
 			SwingLookAndFeel look = SwingLookAndFeel.forName(configManager
-					.getWindowLAF());
+					.getWindowLookAndFeel());
 			lookAndFeelComboBox.setSelectedItem(look);
 		} catch (Exception e) {
 			logger.warning("Unable to set the selected look&feel.");
@@ -96,7 +95,7 @@ public class PreferencesDialog extends AbstractDialog {
 
 				SwingLookAndFeel laf = ((SwingLookAndFeel) lookAndFeelComboBox
 						.getSelectedItem());
-				configManager.setWindowLAF(laf.getClassName());
+				configManager.setWindowLookAndFeel(laf.getClassName());
 				SwingUtil.setLookAndFeel(laf.getClassName());
 				SwingUtilities.updateComponentTreeUI(mainWindow);
 
@@ -105,9 +104,8 @@ public class PreferencesDialog extends AbstractDialog {
 					configManager.setLanguage(selectedLanguage.toString());
 				}
 
-				ConfigPersistence configPersistence = new ConfigPersistence();
-				configPersistence.saveProperties(mainWindow,
-						configManager.getConfiguration());
+				ConfigFileWriter configPersistence = new ConfigFileWriter();
+				configPersistence.write(configManager);
 
 				dispose();
 			}

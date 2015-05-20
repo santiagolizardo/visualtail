@@ -43,6 +43,6 @@ public class EnhancedTextField extends JTextField {
 		}
 		
 		g.setColor(getDisabledTextColor());
-		g.drawString(placeholder, getInsets().left, getInsets().top + getFontMetrics(getFont()).getMaxAscent());
+		g.drawString(placeholder, getInsets().left + 2, getInsets().top + getFontMetrics(getFont()).getMaxAscent());
 	}
 }

@@ -16,138 +16,94 @@
  */
 package com.santiagolizardo.visualtail.config;
 
+import com.santiagolizardo.visualtail.beans.Session;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.UIManager;
 
 public class ConfigData {
 
-	// Window properties
-	private final String WINDOW_POSITION_X = "window.position.x";
-
-	private final String WINDOW_POSITION_Y = "window.position.y";
-
-	private final String WINDOW_DIMENSION_WIDTH = "window.dimension.width";
-
-	private final String WINDOW_DIMENSION_HEIGHT = "window.dimension.height";
-
-	private final String WINDOW_LAF = "window.laf";
-
-	// App properties
-	private final String LANGUAGE = "language";
-
-	private final String LAST_PATH = "last_path";
-
-	// Font properties
-	private final String FONT_FAMILY = "font.family";
-
-	private final String FONT_SIZE = "font.size";
-
-	private PropertySet configuration;
+	private String windowLookAndFeel;
+	private Point windowPosition;
+	private Dimension windowDimension;
+	
+	private String language;
+	
+	private Font font;
+	
+	private List<Session> sessions;
+	private List<String> recentFiles;
 
 	public ConfigData() {
+		windowLookAndFeel = UIManager.getSystemLookAndFeelClassName();
+		windowPosition = new Point(20, 20);
+		windowDimension = new Dimension(640, 480);
+		
+		language = "en";
+		
+		font = new Font("Courier", Font.PLAIN, 11);
+		
+		sessions = new LinkedList<>();
+		recentFiles = new ArrayList<>(10);
 	}
 
 	public List<String> getRecentFiles() {
-		List<String> recentFiles = new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
-			String recentFile = configuration.getProperty("recent." + i
-					+ ".file_name");
-			if (recentFile != null) {
-				recentFiles.add(recentFile);
-			}
-		}
 		return recentFiles;
 	}
 
-	public int getWindowWidth() {
-		return configuration.getInt(WINDOW_DIMENSION_WIDTH);
+	public void setWindowDimension(Dimension windowDimension) {
+		this.windowDimension = windowDimension;
 	}
 
-	public void setWindowWidth(int windowWidth) {
-		configuration.setProperty(WINDOW_DIMENSION_WIDTH, windowWidth);
+	public Dimension getWindowDimension() {
+		return windowDimension;
 	}
 
-	public int getWindowHeight() {
-		return configuration.getInt(WINDOW_DIMENSION_HEIGHT);
+	public String getWindowLookAndFeel() {
+		return windowLookAndFeel;
 	}
 
-	public void setWindowHeight(int windowHeight) {
-		configuration.setProperty(WINDOW_DIMENSION_HEIGHT, windowHeight);
+	public void setWindowLookAndFeel(String windowLookAndFeel) {
+		this.windowLookAndFeel = windowLookAndFeel;
 	}
 
-	public String getWindowLAF() {
-		String laf = configuration.getProperty(WINDOW_LAF);
-		if (laf == null) {
-			laf = UIManager.getSystemLookAndFeelClassName();
-			configuration.setProperty(WINDOW_LAF, laf);
-		}
-		return laf;
+	public Point getWindowPosition() {
+		return windowPosition;
 	}
 
-	public void setWindowLAF(String laf) {
-		configuration.setProperty(WINDOW_LAF, laf);
-	}
-
-	public int getWindowX() {
-		return configuration.getInt(WINDOW_POSITION_X);
-	}
-
-	public void setWindowX(int windowX) {
-		configuration.setProperty(WINDOW_POSITION_X, windowX);
-	}
-
-	public int getWindowY() {
-		return configuration.getInt(WINDOW_POSITION_Y);
-	}
-
-	public void setWindowY(int windowY) {
-		configuration.setProperty(WINDOW_POSITION_Y, windowY);
+	public void setWindowPosition(Point windowPosition) {
+		this.windowPosition = windowPosition;
 	}
 
 	public String getLastPath() {
-		String lastPath = configuration.getProperty(LAST_PATH);
-		if (lastPath == null) {
-			lastPath = System.getProperty("user.home");
-			configuration.setProperty(LAST_PATH, lastPath);
+		if(recentFiles.isEmpty()) {
+			return System.getProperty("user.home");
 		}
-		return lastPath;
-	}
-
-	public void setLastPath(String lastPath) {
-		configuration.setProperty(LAST_PATH, lastPath);
+		return recentFiles.get(recentFiles.size() - 1);
 	}
 
 	public String getLanguage() {
-		return configuration.getString(LANGUAGE);
+		return language;
 	}
 
 	public void setLanguage(String language) {
-		configuration.setProperty(LANGUAGE, language);
+		this.language = language;
 	}
 
-	public String getFontFamily() {
-		return configuration.getString(FONT_FAMILY);
+	public Font getFont() {
+		return font;
 	}
 
-	public void setFontFamily(String fontFamily) {
-		configuration.setProperty(FONT_FAMILY, fontFamily);
+	public void setFont(Font font) {
+		this.font = font;
 	}
 
-	public int getFontSize() {
-		return configuration.getInt(FONT_SIZE);
-	}
-
-	public void setFontSize(int fontSize) {
-		configuration.setProperty(FONT_SIZE, fontSize);
-	}
-
-	public PropertySet getConfiguration() {
-		return configuration;
-	}
-
-	public void setConfiguration(PropertySet configuration) {
-		this.configuration = configuration;
+	public List<Session> getSessions() {
+		return sessions;
 	}
 }

@@ -33,7 +33,7 @@ import javax.swing.KeyStroke;
 
 import com.santiagolizardo.visualtail.gui.MainWindow;
 import com.santiagolizardo.visualtail.beans.LogType;
-import com.santiagolizardo.visualtail.beans.SessionManager;
+import com.santiagolizardo.visualtail.beans.Session;
 import com.santiagolizardo.visualtail.gui.actions.ExitAction;
 import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import com.santiagolizardo.visualtail.gui.dialogs.SessionsDialog;
@@ -130,8 +130,8 @@ public class FileMenu extends JMenu implements ActionListener {
 					mainWindow.getActionFactory().getOpenAction().openFile(file.getAbsolutePath(),
 							logType);
 
-					mainWindow.getRecentFiles().remove(file.getAbsolutePath());
-					mainWindow.getRecentFiles().add(file.getAbsolutePath());
+					mainWindow.getConfigData().getRecentFiles().remove(file.getAbsolutePath());
+					mainWindow.getConfigData().getRecentFiles().add(file.getAbsolutePath());
 					recentsMenu.refresh();
 					recentsMenu.setEnabled(true);
 				}
@@ -180,13 +180,10 @@ public class FileMenu extends JMenu implements ActionListener {
 						.getAbsolutePath());
 			}
 
-			SessionManager sessionManager = new SessionManager();
-			try {
-				sessionManager.save(name, filePaths);
-			} catch (IOException e) {
-				logger.warning(e.getMessage());
-				DialogFactory.showErrorMessage(null, tr("Invalid session name") + "\r\n" + e.getMessage());
-			}
+			Session session = new Session();
+			session.setName(name);
+			session.getFileNames().addAll(filePaths);
+			mainWindow.getConfigData().getSessions().add(session);
 		}
 	}
 }

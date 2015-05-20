@@ -1,18 +1,17 @@
 /**
  * This file is part of VisualTail, a graphical log file monitor.
  *
- * VisualTail is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * VisualTail is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
  *
- * VisualTail is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * VisualTail is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License along with
+ * VisualTail. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.visualtail.gui;
 
@@ -24,12 +23,11 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import com.santiagolizardo.visualtail.config.ConfigData;
-import com.santiagolizardo.visualtail.config.ConfigPersistence;
+import com.santiagolizardo.visualtail.config.ConfigFileWriter;
 import com.santiagolizardo.visualtail.gui.actions.ActionFactory;
 import com.santiagolizardo.visualtail.gui.components.DesktopPanel;
 import com.santiagolizardo.visualtail.gui.menu.Menu;
 import com.santiagolizardo.visualtail.resources.images.IconFactory;
-import java.util.List;
 
 /**
  * This is the main application entry point. It constructs the initial window.
@@ -45,12 +43,8 @@ public class MainWindow extends JFrame {
 
 	private Menu menu;
 
-	private List<String> recentFiles;
-
 	public MainWindow(ConfigData configData) {
 		this.configData = configData;
-
-		recentFiles = configData.getRecentFiles();
 
 		actionFactory = new ActionFactory(this);
 
@@ -61,8 +55,8 @@ public class MainWindow extends JFrame {
 
 		setTitle(Constants.APP_NAME);
 
-		setSize(configData.getWindowWidth(), configData.getWindowHeight());
-		setLocation(configData.getWindowX(), configData.getWindowY());
+		setSize(configData.getWindowDimension());
+		setLocation(configData.getWindowPosition());
 		setIconImage(IconFactory.getImage("icon.png").getImage());
 
 		addWindowListener(new WindowAdapter() {
@@ -90,14 +84,11 @@ public class MainWindow extends JFrame {
 
 		setVisible(false);
 
-		configData.setWindowHeight(getHeight());
-		configData.setWindowWidth(getWidth());
-		configData.setWindowX(getX());
-		configData.setWindowY(getY());
+		configData.setWindowDimension(getSize());
+		configData.setWindowPosition(getLocation());
 
-		ConfigPersistence configPersistence = new ConfigPersistence();
-		configPersistence.saveProperties(this,
-				configData.getConfiguration());
+		ConfigFileWriter configPersistence = new ConfigFileWriter();
+		configPersistence.write(configData);
 
 		dispose();
 		exitCode = 0;
@@ -114,10 +105,6 @@ public class MainWindow extends JFrame {
 				.setEnabled(areWindowsOpen);
 		mainMenu.getEditMenu().setEnabled(areWindowsOpen);
 		mainMenu.getWindowMenu().setEnabled(areWindowsOpen);
-	}
-
-	public List<String> getRecentFiles() {
-		return recentFiles;
 	}
 
 	public Menu getMenu() {

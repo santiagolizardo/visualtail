@@ -1,6 +1,6 @@
 !define APP_VENDOR "VisualTail"
 !define APP_NAME "VisualTail"
-!define APP_VERSION "1.8.5"
+!define APP_VERSION "1.8.6"
 !define APP_FILENAME "${APP_NAME}-${APP_VERSION}-jar-with-dependencies.jar"
 
 Name "${APP_VENDOR} ${APP_NAME}"

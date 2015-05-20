@@ -28,12 +28,12 @@ import javax.swing.SwingUtilities;
 import org.xnap.commons.i18n.I18nFactory;
 
 import com.santiagolizardo.visualtail.config.ConfigData;
-import com.santiagolizardo.visualtail.config.ConfigPersistence;
+import com.santiagolizardo.visualtail.config.ConfigFileReader;
 import com.santiagolizardo.visualtail.gui.util.SwingUtil;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
 
 /**
- * This is the main application entry point. It initializes the main window.
+ * This is the main application entry point. It initialises the main window.
  */
 public class Main {
 
@@ -54,14 +54,8 @@ public class Main {
 			System.err.println(ex.getMessage());
 		}
 
-		final ConfigData configData = new ConfigData();
-		ConfigPersistence configPersistence = new ConfigPersistence();
-		try {
-			configData.setConfiguration(configPersistence
-					.loadProperties());
-		} catch (IOException ex) {
-			System.err.println(ex.getMessage());
-		}
+		ConfigFileReader configPersistence = new ConfigFileReader();
+		final ConfigData configData = configPersistence.read();
 
 		Translator.start(configData.getLanguage());
 
@@ -69,7 +63,7 @@ public class Main {
 
 			@Override
 			public void run() {
-				SwingUtil.setLookAndFeel(configData.getWindowLAF());
+				SwingUtil.setLookAndFeel(configData.getWindowLookAndFeel());
 
 				MainWindow mainWindow = new MainWindow(configData);
 				mainWindow.setVisible(true);

@@ -21,10 +21,10 @@ import java.io.File;
 /**
  * This class holds all the immutable information of the application.
  */
-public class Constants {
+public interface Constants {
 
 	public static final String APP_NAME = "VisualTail";
-	public static final String APP_VERSION = "1.8.5";
+	public static final String APP_VERSION = "1.8.6";
 	public static final String APP_URL = "https://github.com/santiagolizardo/visualtail";
 	public static final String APP_UPDATE_URL = "http://visualtail.sourceforge.net/version.html";
 

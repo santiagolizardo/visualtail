@@ -108,7 +108,6 @@ public class LogWindow extends JInternalFrame implements TailListener {
 		this.mainWindow = mainWindow;
 		this.logType = logType;
 
-		mainWindow.getConfigData().setLastPath(fileName);
 		mainWindow.updateActions(+1);
 
 		linesModel = new LogListModel();

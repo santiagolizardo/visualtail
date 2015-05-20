@@ -41,8 +41,6 @@ import javax.swing.event.ListSelectionListener;
 import com.santiagolizardo.visualtail.gui.MainWindow;
 import com.santiagolizardo.visualtail.beans.LogType;
 import com.santiagolizardo.visualtail.beans.Session;
-import com.santiagolizardo.visualtail.beans.SessionManager;
-import com.santiagolizardo.visualtail.gui.actions.OpenAction;
 import com.santiagolizardo.visualtail.gui.menu.RecentsMenu;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
 
@@ -61,8 +59,6 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 	private RecentsMenu recentsMenu;
 
-	private SessionManager sessionManager;
-
 	private MainWindow mainWindow;
 
 	public SessionsDialog(MainWindow mainWindow, RecentsMenu recentsMenu) {
@@ -73,8 +69,6 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 		setSize(520, 320);
 
 		this.mainWindow = mainWindow;
-
-		sessionManager = new SessionManager();
 
 		this.recentsMenu = recentsMenu;
 
@@ -114,7 +108,7 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 	private void updateList() {
 		listModel.clear();
 
-		for (Session session : sessionManager.getSessions()) {
+		for (Session session : mainWindow.getConfigData().getSessions()) {
 			listModel.addElement(session);
 		}
 	}
@@ -156,8 +150,8 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 		Session session = list.getSelectedValue();
 		for (String fileName : session.getFileNames()) {
-			mainWindow.getRecentFiles().remove(fileName);
-			mainWindow.getRecentFiles().add(fileName);
+			mainWindow.getConfigData().getRecentFiles().remove(fileName);
+			mainWindow.getConfigData().getRecentFiles().add(fileName);
 			mainWindow.getActionFactory().getOpenAction().openFile(fileName, new LogType("Default"));
 		}
 		recentsMenu.refresh();
@@ -168,11 +162,11 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 	}
 
 	private void removeSession() {
-		String sessionName = list.getSelectedValue().getName();
+		Session session = list.getSelectedValue();
 		int resp = JOptionPane.showConfirmDialog(getParent(),
 				Translator.tr("Are you sure you want to delete this session?"));
 		if (resp == JOptionPane.YES_OPTION) {
-			sessionManager.delete(sessionName);
+			mainWindow.getConfigData().getSessions().remove(session);
 			updateList();
 		}
 	}

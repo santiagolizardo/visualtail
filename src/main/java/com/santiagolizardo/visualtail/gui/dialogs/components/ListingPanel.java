@@ -38,10 +38,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.santiagolizardo.visualtail.beans.LogType;
+import com.santiagolizardo.visualtail.config.LogTypeFileReader;
 import com.santiagolizardo.visualtail.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.visualtail.gui.util.DialogFactory;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
-import com.santiagolizardo.visualtail.beans.LogTypeManager;
+import com.santiagolizardo.visualtail.config.LogTypeFileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
@@ -62,14 +63,16 @@ public class ListingPanel extends JPanel {
 	private JButton btnAdd;
 	private JButton btnRename;
 	private JButton btnRemove;
-	
-	private LogTypeManager logTypeManager;
+
+	private LogTypeFileReader logTypeManager;
+	private LogTypeFileWriter logTypeFileWriter;
 
 	public ListingPanel() {
 		setPreferredSize(new Dimension(180, 300));
 
-		logTypeManager = LogTypeManager.getInstance();
-		
+		logTypeManager = LogTypeFileReader.getInstance();
+		logTypeFileWriter = LogTypeFileWriter.getInstance();
+
 		modelTypes = new DefaultListModel<>();
 		logTypesJList = new JList<>(modelTypes);
 		logTypesJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
@@ -84,7 +87,7 @@ public class ListingPanel extends JPanel {
 					btnRemove.setEnabled(false);
 				} else {
 					LogType logType = (LogType) logTypesJList.getSelectedValue();
-					logType = logTypeManager.loadFromFile(logType
+					logType = logTypeManager.read(logType
 							.getName());
 
 					editionPanel.setLogType(logType);
@@ -163,7 +166,7 @@ public class ListingPanel extends JPanel {
 	public void updateLogTypes() {
 		modelTypes.clear();
 
-		List<LogType> logTypes = logTypeManager.getAll();
+		LogType[] logTypes = logTypeManager.readAll();
 		for (LogType logType : logTypes) {
 			if (!"Default".equals(logType.getName())) {
 				modelTypes.addElement(logType);
@@ -185,7 +188,7 @@ public class ListingPanel extends JPanel {
 		}
 		LogType logType = new LogType(name);
 		try {
-			logTypeManager.saveToFile(logType);
+			logTypeFileWriter.write(logType);
 
 			updateLogTypes();
 
@@ -205,11 +208,11 @@ public class ListingPanel extends JPanel {
 		}
 		newName = newName.trim();
 		if (newName.length() > 0 && !newName.equals(selected.getName())) {
-			if( logTypeManager.rename(selected, newName) ) {
+			if (logTypeFileWriter.rename(selected, newName)) {
 				updateLogTypes();
 
-				LogType newLogType = logTypeManager.loadFromFile(newName);
-				logTypesJList.setSelectedValue(newLogType, true);				
+				LogType newLogType = logTypeManager.read(newName);
+				logTypesJList.setSelectedValue(newLogType, true);
 			}
 		}
 	}
@@ -218,7 +221,7 @@ public class ListingPanel extends JPanel {
 		if (DialogFactory.showQuestionDialog(getParent(), Translator
 				.tr("Are you sure you want to delete the selected log type?"))) {
 			LogType selected = (LogType) logTypesJList.getSelectedValue();
-			if (!logTypeManager.remove(selected)) {
+			if (!logTypeFileWriter.remove(selected)) {
 				DialogFactory.showErrorMessage(getParent(),
 						Translator.tr("Unable to delete the log type"));
 			}

@@ -55,7 +55,7 @@ public class RecentsMenu extends JMenu implements ActionListener {
 	}
 
 	public void addRecent(String fileName) {
-		List<String> recentFiles = mainWindow.getRecentFiles();
+		List<String> recentFiles = mainWindow.getConfigData().getRecentFiles();
 		if (!recentFiles.contains(fileName)) {
 			JMenuItem item = new JMenuItem(fileName);
 			item.addActionListener(new ActionListener() {
@@ -83,7 +83,7 @@ public class RecentsMenu extends JMenu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ev) {
 		if (cleanRecentsMenuItem == ev.getSource()) {
-			mainWindow.getRecentFiles().clear();
+			mainWindow.getConfigData().getRecentFiles().clear();
 			refresh();
 
 			setEnabled(false);
@@ -93,7 +93,7 @@ public class RecentsMenu extends JMenu implements ActionListener {
 	public void refresh() {
 		removeAll();
 
-		List<String> recentFileNames = mainWindow.getRecentFiles();
+		List<String> recentFileNames = mainWindow.getConfigData().getRecentFiles();
 		ListIterator<String> it = recentFileNames.listIterator(recentFileNames.size());
 		while (it.hasPrevious()) {
 			String recentFilePath = it.previous();

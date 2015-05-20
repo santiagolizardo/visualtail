@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.santiagolizardo.visualtail</groupId>
 	<artifactId>VisualTail</artifactId>
-	<version>1.8.5</version>
+	<version>1.8.6</version>
 	<packaging>jar</packaging>
 	<name>VisualTail</name>
 	<url>http://sourceforge.net/projects/visualtail/</url>
