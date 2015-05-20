@@ -11,15 +11,15 @@ What is it?
 
 *VisualTail* is an open source graphical log visualizer with syntax highlighting and pattern matching.
 
-How tow run it
---------------
+How to run it
+-------------
 
-### Requirement
+### Requirements
 
   * Java runtime (JRE) 1.7+
   * Graphical user interface
 
-### How to run it
+### Execution
 
 Double click on VisualTail.jar or run _java -jar VisualTail.jar_ on the command line.
 
