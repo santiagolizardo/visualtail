@@ -1,5 +1,16 @@
 CHANGES
 
+Version 1.8.6 (2015/05/20)
+
+	- Converting config files to XML format (from .properties)
+
+Version 1.8.5 (2015/02/26)
+
+	- Replacement panel to make substitutions on the text displayed.
+	- The find panel now belongs to the documents and not to the main window. 
+	- The find functionality now has an option to perform the search in case sensitive or insensitive manner.
+	- Various bugfixes and improvements.
+
 Version 1.8.2 (2014/04/06)
 
 	- New font selection dialog
