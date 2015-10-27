@@ -28,7 +28,7 @@ import javax.swing.KeyStroke;
 
 public class ReplaceAction extends AbstractAction {
 
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 	
 	public ReplaceAction(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;

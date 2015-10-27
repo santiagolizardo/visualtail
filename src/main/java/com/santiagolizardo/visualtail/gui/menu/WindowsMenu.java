@@ -45,45 +45,33 @@ public class WindowsMenu extends JMenu {
 		JMenuItem itemCascade = new JMenuItem(tr("Cascade windows"));
 		itemCascade.setIcon(IconFactory.getImage("application_double.png"));
 		itemCascade.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, menuShortcutKeyMask));
-		itemCascade.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				parentFrame.getDesktop().setWindowsOnCascade();
-			}
+		itemCascade.addActionListener((ActionEvent) -> {
+			parentFrame.getDesktop().setWindowsOnCascade();
 		});
 
 		JMenuItem itemTileVer = new JMenuItem(tr("Tile windows vertically"));
 		itemTileVer.setIcon(IconFactory
 				.getImage("application_tile_vertical.png"));
 		itemTileVer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,menuShortcutKeyMask));
-		itemTileVer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				parentFrame.getDesktop().setWindowsOnTileVertical();
-			}
+		itemTileVer.addActionListener((ActionEvent) -> {
+			parentFrame.getDesktop().setWindowsOnTileVertical();
 		});
 
 		JMenuItem itemTileHor = new JMenuItem(tr("Tile windows horizontally"));
 		itemTileHor.setIcon(IconFactory
 				.getImage("application_tile_horizontal.png"));
 		itemTileHor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,menuShortcutKeyMask));
-		itemTileHor.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				parentFrame.getDesktop().setWindowsOnTileHorizontal();
-			}
+		itemTileHor.addActionListener((ActionEvent) -> {
+			parentFrame.getDesktop().setWindowsOnTileHorizontal();
 		});
 
 		JMenuItem miCloseAllWindows = new JMenuItem(tr("Close all windows"));
 		miCloseAllWindows.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,menuShortcutKeyMask));
-		miCloseAllWindows.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				parentFrame.getDesktop().closeAllWindows();
-
-				parentFrame.setTitle(Constants.APP_NAME);
-				parentFrame.updateActions(0);
-			}
+		miCloseAllWindows.addActionListener((ActionEvent) -> {
+			parentFrame.getDesktop().closeAllWindows();
+			
+			parentFrame.setTitle(Constants.APP_NAME);
+			parentFrame.updateActions(0);
 		});
 
 		add(itemCascade);

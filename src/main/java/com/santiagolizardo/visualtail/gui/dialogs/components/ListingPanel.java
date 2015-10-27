@@ -22,8 +22,6 @@ import static javax.swing.SpringLayout.SOUTH;
 import static javax.swing.SpringLayout.WEST;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
@@ -34,8 +32,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import com.santiagolizardo.visualtail.beans.LogType;
 import com.santiagolizardo.visualtail.config.LogTypeFileReader;
@@ -44,7 +40,6 @@ import com.santiagolizardo.visualtail.gui.util.DialogFactory;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
 import com.santiagolizardo.visualtail.config.LogTypeFileWriter;
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class ListingPanel extends JPanel {
@@ -55,17 +50,17 @@ public class ListingPanel extends JPanel {
 
 	private EditionPanel editionPanel;
 
-	private DefaultListModel<LogType> modelTypes;
+	private final DefaultListModel<LogType> modelTypes;
 
 	private JList<LogType> logTypesJList;
-	private JScrollPane scrollTypes;
+	private final JScrollPane scrollTypes;
 
-	private JButton btnAdd;
-	private JButton btnRename;
-	private JButton btnRemove;
+	private final JButton addButton;
+	private JButton renameButton;
+	private JButton removeButton;
 
 	private LogTypeFileReader logTypeManager;
-	private LogTypeFileWriter logTypeFileWriter;
+	private final LogTypeFileWriter logTypeFileWriter;
 
 	public ListingPanel() {
 		setPreferredSize(new Dimension(180, 300));
@@ -77,52 +72,40 @@ public class ListingPanel extends JPanel {
 		logTypesJList = new JList<>(modelTypes);
 		logTypesJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 		logTypesJList.setCellRenderer(new LogTypeListRenderer());
-		logTypesJList.addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				boolean isEmpty = logTypesJList.isSelectionEmpty();
-				editionPanel.setEnabled(!isEmpty);
-				if (isEmpty) {
-					btnRename.setEnabled(false);
-					btnRemove.setEnabled(false);
-				} else {
-					LogType logType = (LogType) logTypesJList.getSelectedValue();
-					logType = logTypeManager.read(logType
-							.getName());
-
-					editionPanel.setLogType(logType);
-					btnRename.setEnabled(true);
-					btnRemove.setEnabled(true);
-				}
+		logTypesJList.addListSelectionListener((ListSelectionEvent) -> {
+			boolean isEmpty = logTypesJList.isSelectionEmpty();
+			editionPanel.setEnabled(!isEmpty);
+			if (isEmpty) {
+				renameButton.setEnabled(false);
+				removeButton.setEnabled(false);
+			} else {
+				LogType logType = (LogType) logTypesJList.getSelectedValue();
+				logType = logTypeManager.read(logType
+						.getName());
+				
+				editionPanel.setLogType(logType);
+				renameButton.setEnabled(true);
+				removeButton.setEnabled(true);
 			}
 		});
 
 		scrollTypes = new JScrollPane(logTypesJList);
 
-		btnAdd = new JButton(Translator.tr("Add"));
-		btnAdd.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				onAddLogType();
-			}
+		addButton = new JButton(Translator.tr("Add"));
+		addButton.addActionListener((ActionEvent) -> {
+			onAddLogType();
 		});
 
-		btnRename = new JButton(Translator.tr("Rename"));
-		btnRename.setEnabled(false);
-		btnRename.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				onRenameLogType();
-			}
+		renameButton = new JButton(Translator.tr("Rename"));
+		renameButton.setEnabled(false);
+		renameButton.addActionListener((ActionEvent) -> {
+			onRenameLogType();
 		});
 
-		btnRemove = new JButton(Translator.tr("Remove"));
-		btnRemove.setEnabled(false);
-		btnRemove.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				onRemoveLogType();
-			}
+		removeButton = new JButton(Translator.tr("Remove"));
+		removeButton.setEnabled(false);
+		removeButton.addActionListener((ActionEvent) -> {
+			onRemoveLogType();
 		});
 
 		placeComponents();
@@ -142,25 +125,25 @@ public class ListingPanel extends JPanel {
 
 		layout.putConstraint(NORTH, lblTypes, 5, NORTH, this);
 		layout.putConstraint(NORTH, scrollTypes, 5, SOUTH, lblTypes);
-		layout.putConstraint(NORTH, btnAdd, 5, SOUTH, scrollTypes);
-		layout.putConstraint(NORTH, btnRename, 5, SOUTH, btnAdd);
-		layout.putConstraint(NORTH, btnRemove, 5, SOUTH, btnRename);
+		layout.putConstraint(NORTH, addButton, 5, SOUTH, scrollTypes);
+		layout.putConstraint(NORTH, renameButton, 5, SOUTH, addButton);
+		layout.putConstraint(NORTH, removeButton, 5, SOUTH, renameButton);
 
 		layout.putConstraint(WEST, lblTypes, 5, WEST, this);
 		layout.putConstraint(WEST, scrollTypes, 5, WEST, this);
 		layout.putConstraint(EAST, scrollTypes, -5, EAST, this);
-		layout.putConstraint(WEST, btnAdd, 5, WEST, this);
-		layout.putConstraint(EAST, btnAdd, -5, EAST, this);
-		layout.putConstraint(WEST, btnRename, 5, WEST, this);
-		layout.putConstraint(EAST, btnRename, -5, EAST, this);
-		layout.putConstraint(WEST, btnRemove, 5, WEST, this);
-		layout.putConstraint(EAST, btnRemove, -5, EAST, this);
+		layout.putConstraint(WEST, addButton, 5, WEST, this);
+		layout.putConstraint(EAST, addButton, -5, EAST, this);
+		layout.putConstraint(WEST, renameButton, 5, WEST, this);
+		layout.putConstraint(EAST, renameButton, -5, EAST, this);
+		layout.putConstraint(WEST, removeButton, 5, WEST, this);
+		layout.putConstraint(EAST, removeButton, -5, EAST, this);
 
 		add(lblTypes);
 		add(scrollTypes);
-		add(btnAdd);
-		add(btnRename);
-		add(btnRemove);
+		add(addButton);
+		add(renameButton);
+		add(removeButton);
 	}
 
 	public void updateLogTypes() {

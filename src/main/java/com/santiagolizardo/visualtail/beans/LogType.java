@@ -45,7 +45,7 @@ public class LogType {
 		return name;
 	}
 
-	public void setName(String name) {
+	public final void setName(String name) {
 		if (name == null) {
 			throw new IllegalArgumentException("name can not be null");
 		}
@@ -56,7 +56,7 @@ public class LogType {
 		return refreshInterval;
 	}
 
-	public void setRefreshInterval(int refreshInterval) {
+	public final void setRefreshInterval(int refreshInterval) {
 		if (refreshInterval < MINIMUM_REFRESH_INTERVAL_MS) {
 			throw new IllegalArgumentException(
 					"refreshInterval has to be greater than "

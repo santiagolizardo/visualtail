@@ -18,7 +18,6 @@ package com.santiagolizardo.visualtail.gui.renderers;
 import com.santiagolizardo.visualtail.beans.LogType;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.util.List;
 
 import javax.swing.JLabel;

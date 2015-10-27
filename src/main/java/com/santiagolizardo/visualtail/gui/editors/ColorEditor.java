@@ -34,9 +34,9 @@ public class ColorEditor extends AbstractCellEditor
 	private static final String EDIT = "edit";
 
 	private Color currentColor;
-	private JButton button;
+	private final JButton button;
 
-	private ColorChooser chooser;
+	private final ColorChooser chooser;
 
 	public ColorEditor(Component parent) {
 		button = new JButton();

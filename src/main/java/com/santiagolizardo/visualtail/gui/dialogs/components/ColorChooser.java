@@ -38,22 +38,15 @@ public class ColorChooser {
 
 		AbstractColorChooserPanel[] panel = {colorChooser.getChooserPanels()[0]};
 		colorChooser.setChooserPanels(panel);
-		dialog = JColorChooser.createDialog(parent, title, true, colorChooser,
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						returnColor = colorChooser.getColor();
-						dialog.setVisible(false);
-						actionListener.actionPerformed(e);
-					}
-				}, new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						returnColor = null;
-						dialog.setVisible(false);
-						actionListener.actionPerformed(e);
-					}
-				});
+		dialog = JColorChooser.createDialog(parent, title, true, colorChooser, (ActionEvent e) -> {
+			returnColor = colorChooser.getColor();
+			dialog.setVisible(false);
+			actionListener.actionPerformed(e);
+		}, (ActionEvent e) -> {
+			returnColor = null;
+			dialog.setVisible(false);
+			actionListener.actionPerformed(e);
+		});
 		dialog.setResizable(false);
 		dialog.pack();
 	}

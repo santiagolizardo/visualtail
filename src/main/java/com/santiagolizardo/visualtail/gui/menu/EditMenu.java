@@ -35,8 +35,8 @@ public class EditMenu extends JMenu {
 
 	private static final long serialVersionUID = -8897022931984447153L;
 
-	private JMenuItem copyMenuItem;
-	private JMenuItem clearSelectedWindowMenuItem;
+	private final JMenuItem copyMenuItem;
+	private final JMenuItem clearSelectedWindowMenuItem;
 
 	public EditMenu(MainWindow mainWindow) {
 

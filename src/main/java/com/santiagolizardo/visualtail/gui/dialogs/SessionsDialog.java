@@ -51,15 +51,15 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 	private static final long serialVersionUID = -8601498821660138035L;
 
-	private DefaultListModel<Session> listModel;
+	private final DefaultListModel<Session> listModel;
 	private JList<Session> list;
 
-	private JButton btnOpen;
-	private JButton btnRemove;
+	private JButton openButton;
+	private JButton removeButton;
 
-	private RecentsMenu recentsMenu;
+	private final RecentsMenu recentsMenu;
 
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
 	public SessionsDialog(MainWindow mainWindow, RecentsMenu recentsMenu) {
 		super(mainWindow);
@@ -83,22 +83,19 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 				}
 			}
 		});
-		list.addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent ev) {
-				boolean enable = !list.isSelectionEmpty();
-				btnOpen.setEnabled(enable);
-				btnRemove.setEnabled(enable);
-			}
+		list.addListSelectionListener((ListSelectionEvent) -> {
+			boolean enable = !list.isSelectionEmpty();
+			openButton.setEnabled(enable);
+			removeButton.setEnabled(enable);
 		});
 
-		btnOpen = new JButton(Translator.tr("Open"));
-		btnOpen.setEnabled(false);
-		btnOpen.addActionListener(this);
+		openButton = new JButton(Translator.tr("Open"));
+		openButton.setEnabled(false);
+		openButton.addActionListener(this);
 
-		btnRemove = new JButton(Translator.tr("Remove"));
-		btnRemove.setEnabled(false);
-		btnRemove.addActionListener(this);
+		removeButton = new JButton(Translator.tr("Remove"));
+		removeButton.setEnabled(false);
+		removeButton.addActionListener(this);
 
 		placeComponents();
 
@@ -127,20 +124,20 @@ public class SessionsDialog extends AbstractDialog implements ActionListener {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		panel.add(btnOpen);
-		panel.add(btnRemove);
+		panel.add(openButton);
+		panel.add(removeButton);
 		container.add(panel, BorderLayout.SOUTH);
 
-		getRootPane().setDefaultButton(btnOpen);
+		getRootPane().setDefaultButton(openButton);
 
 		setLocationRelativeTo(getOwner());
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent ev) {
-		if (btnOpen == ev.getSource()) {
+		if (openButton == ev.getSource()) {
 			openSession();
-		} else if (btnRemove == ev.getSource()) {
+		} else if (removeButton == ev.getSource()) {
 			removeSession();
 		}
 	}
@@ -188,9 +185,9 @@ class SessionListCellRenderer extends DefaultListCellRenderer {
 		text.append(String.format(tr("%d file(s)"), session.getFileNames()
 				.size()));
 		text.append("<br />");
-		for (String fileName : session.getFileNames()) {
+		session.getFileNames().stream().forEach((fileName) -> {
 			text.append(String.format("- %s<br />", fileName));
-		}
+		});
 		text.append("</html>");
 
 		label.setText(text.toString());

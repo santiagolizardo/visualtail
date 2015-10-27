@@ -54,12 +54,12 @@ public class FontChooserDialog extends AbstractDialog {
 	private static final Logger logger = Logger
 			.getLogger(FontChooserDialog.class.getName());
 
-	private JComboBox<String> fontFamilyCombo;
-	private JSpinner fontSizeCombo;
-	private JTextField previewTextField;
+	private final JComboBox<String> fontFamilyCombo;
+	private final JSpinner fontSizeCombo;
+	private final JTextField previewTextField;
 
-	private JButton okButton;
-	private JButton cancelButton;
+	private final JButton okButton;
+	private final JButton cancelButton;
 
 	public FontChooserDialog(final MainWindow mainWindow) {
 		super(mainWindow);
@@ -73,57 +73,39 @@ public class FontChooserDialog extends AbstractDialog {
 		String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment()
 				.getAvailableFontFamilyNames();
 		fontFamilyCombo = new JComboBox<>(fonts);
-		fontFamilyCombo.addItemListener(new ItemListener() {
-
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == ItemEvent.SELECTED) {
-					updatePreview();
-				}
+		fontFamilyCombo.addItemListener((ItemEvent e) -> {
+			if (e.getStateChange() == ItemEvent.SELECTED) {
+				updatePreview();
 			}
 		});
 
 		fontSizeCombo = new JSpinner(new SpinnerNumberModel(10,
 				8, 72, 1));
-		fontSizeCombo.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updatePreview();
-			}
+		fontSizeCombo.addChangeListener((ChangeEvent) -> {
+			updatePreview();
 		});
 
 		previewTextField = new JTextField("[INFO] Log line example");
 
 		okButton = new JButton(Translator.tr("Save"));
-		okButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				setVisible(false);
-
-				Font font = getSelectedFont();
-				configManager.setFont(font);
-
-				ConfigFileWriter configPersistence = new ConfigFileWriter();
-				configPersistence.write(configManager);
-
-				JInternalFrame[] internalFrames = mainWindow.getDesktop().getAllFrames();
-				for (JInternalFrame internalFrame : internalFrames) {
-					LogWindow logWindow = (LogWindow) internalFrame;
-					logWindow.updateFont(font);
-				}
-
-				dispose();
+		okButton.addActionListener((ActionEvent) -> {
+			setVisible(false);
+			Font selectedFont = getSelectedFont();
+			configManager.setFont(selectedFont);
+			ConfigFileWriter configPersistence = new ConfigFileWriter();
+			configPersistence.write(configManager);
+			JInternalFrame[] internalFrames = mainWindow.getDesktop().getAllFrames();
+			for (JInternalFrame internalFrame : internalFrames) {
+				LogWindow logWindow = (LogWindow) internalFrame;
+				logWindow.updateFont(selectedFont);
 			}
+			dispose();
 		});
 
 		cancelButton = new JButton(Translator.tr("Cancel"));
-		cancelButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				setVisible(false);
-				dispose();
-			}
+		cancelButton.addActionListener((ActionEvent) -> {
+			setVisible(false);
+			dispose();
 		});
 
 		fontFamilyCombo.setSelectedItem(configManager.getFont().getFamily());

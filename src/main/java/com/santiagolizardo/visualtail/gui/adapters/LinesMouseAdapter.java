@@ -26,7 +26,7 @@ import com.santiagolizardo.visualtail.gui.menu.ContextualMenu;
 
 public class LinesMouseAdapter extends MouseAdapter {
 
-	private ContextualMenu popupMenu;
+	private final ContextualMenu popupMenu;
 
 	public LinesMouseAdapter(MainWindow mainWindow) {
 		super();

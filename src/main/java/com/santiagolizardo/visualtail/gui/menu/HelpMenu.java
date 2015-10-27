@@ -41,11 +41,11 @@ public class HelpMenu extends JMenu implements ActionListener {
 
 	private static final Logger logger = Logger.getLogger(HelpMenu.class.getName());
 
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
-	private JMenuItem reportBugFeatureRequestMenuItem;
-	private JMenuItem checkForUpdatesMenuItem;
-	private JMenuItem aboutThisAppMenuItem;
+	private final JMenuItem reportBugFeatureRequestMenuItem;
+	private final JMenuItem checkForUpdatesMenuItem;
+	private final JMenuItem aboutThisAppMenuItem;
 
 	public HelpMenu(MainWindow mainWindow) {
 

@@ -42,7 +42,6 @@ import com.santiagolizardo.visualtail.util.FileUtil;
 import com.santiagolizardo.visualtail.resources.images.IconFactory;
 import static com.santiagolizardo.visualtail.resources.languages.Translator.trn;
 import java.awt.Toolkit;
-import java.io.IOException;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 
@@ -52,13 +51,13 @@ public class FileMenu extends JMenu implements ActionListener {
 
 	private static final Logger logger = Logger.getLogger(FileMenu.class.getName());
 
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
-	private RecentsMenu recentsMenu;
+	private final RecentsMenu recentsMenu;
 
-	private JMenuItem openMenuItem;
-	private JMenuItem loadSessionMenuItem;
-	private JMenuItem saveSessionMenuItem;
+	private final JMenuItem openMenuItem;
+	private final JMenuItem loadSessionMenuItem;
+	private final JMenuItem saveSessionMenuItem;
 
 	public FileMenu(final MainWindow mainWindow) {
 		setText(tr("File"));

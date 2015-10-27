@@ -39,7 +39,7 @@ public class FindPanel extends JPanel {
 
 	private EnhancedTextField searchTextField;
 	private JToggleButton caseSensitiveButton;
-	private JButton closeButton;
+	private final JButton closeButton;
 
 	public FindPanel(final LogWindow logWindow) {
 
@@ -66,11 +66,8 @@ public class FindPanel extends JPanel {
 		caseSensitiveButton = new JToggleButton(Translator.tr("Case sensitive"));
 
 		closeButton = new CloseButton();
-		closeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				logWindow.hideFindPanel();
-			}
+		closeButton.addActionListener((ActionEvent) -> {
+			logWindow.hideFindPanel();
 		});
 
 		defineLayout();

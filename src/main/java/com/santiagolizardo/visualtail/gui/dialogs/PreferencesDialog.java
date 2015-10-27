@@ -53,8 +53,8 @@ public class PreferencesDialog extends AbstractDialog {
 
 	private JComboBox<String> languageComboBox;
 
-	private JButton okButton;
-	private JButton cancelButton;
+	private final JButton okButton;
+	private final JButton cancelButton;
 
 	public PreferencesDialog(final MainWindow mainWindow) {
 		super(mainWindow);
@@ -88,36 +88,30 @@ public class PreferencesDialog extends AbstractDialog {
 		languageComboBox.setRenderer(new LocaleRender());
 
 		okButton = new JButton(Translator.tr("Save"));
-		okButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				setVisible(false);
-
-				SwingLookAndFeel laf = ((SwingLookAndFeel) lookAndFeelComboBox
-						.getSelectedItem());
-				configManager.setWindowLookAndFeel(laf.getClassName());
-				SwingUtil.setLookAndFeel(laf.getClassName());
-				SwingUtilities.updateComponentTreeUI(mainWindow);
-
-				Object selectedLanguage = languageComboBox.getSelectedItem();
-				if (null != selectedLanguage) {
-					configManager.setLanguage(selectedLanguage.toString());
-				}
-
-				ConfigFileWriter configPersistence = new ConfigFileWriter();
-				configPersistence.write(configManager);
-
-				dispose();
+		okButton.addActionListener((ActionEvent) -> {
+			setVisible(false);
+			
+			SwingLookAndFeel laf = ((SwingLookAndFeel) lookAndFeelComboBox
+					.getSelectedItem());
+			configManager.setWindowLookAndFeel(laf.getClassName());
+			SwingUtil.setLookAndFeel(laf.getClassName());
+			SwingUtilities.updateComponentTreeUI(mainWindow);
+			
+			Object selectedLanguage = languageComboBox.getSelectedItem();
+			if (null != selectedLanguage) {
+				configManager.setLanguage(selectedLanguage.toString());
 			}
+			
+			ConfigFileWriter configPersistence = new ConfigFileWriter();
+			configPersistence.write(configManager);
+			
+			dispose();
 		});
 
 		cancelButton = new JButton(Translator.tr("Cancel"));
-		cancelButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				setVisible(false);
-				dispose();
-			}
+		cancelButton.addActionListener((ActionEvent) -> {
+			setVisible(false);
+			dispose();
 		});
 
 		defineLayout();

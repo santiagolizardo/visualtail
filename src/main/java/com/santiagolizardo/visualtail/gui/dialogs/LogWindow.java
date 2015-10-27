@@ -68,23 +68,23 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	private File file;
 
-	private TailNotifier tailNotifier;
+	private final TailNotifier tailNotifier;
 
 	private ScheduledExecutorService scheduler;
 	private ScheduledFuture<?> task;
 
-	private LogType logType;
+	private final LogType logType;
 
-	private JScrollPane scrollableList;
+	private final JScrollPane scrollableList;
 
 	private LogWindowToolbar toolbar;
 
-	private LogListModel linesModel;
+	private final LogListModel linesModel;
 
-	private JList<String> linesList;
-	private LineRenderer lineListRenderer;
+	private final JList<String> linesList;
+	private final LineRenderer lineListRenderer;
 
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
 	private FindPanel findPanel;
 	private ReplacePanel replacePanel;
@@ -120,16 +120,11 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 		linesList
 				.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		linesList.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
-
-					@Override
-					public void valueChanged(ListSelectionEvent ev) {
-						if (ev.getValueIsAdjusting() == false) {
-							updateUiControls();
-						}
-					}
-				});
+		linesList.getSelectionModel().addListSelectionListener((ListSelectionEvent ev) -> {
+			if (ev.getValueIsAdjusting() == false) {
+				updateUiControls();
+			}
+		});
 		linesList.addMouseListener(new LinesMouseAdapter(mainWindow));
 
 		scrollableList = new JScrollPane(linesList);
@@ -196,17 +191,14 @@ public class LogWindow extends JInternalFrame implements TailListener {
 
 	@Override
 	public void onFileChanges(final String line) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				linesModel.addElement(line);
-				trimLines();
-				if (toolbar.getScrollNewLinesCheckBox().isSelected()) {
-					moveToNewLines();
-				}
-				updateTitle();
-				updateUiControls();
+		SwingUtilities.invokeLater(() -> {
+			linesModel.addElement(line);
+			trimLines();
+			if (toolbar.getScrollNewLinesCheckBox().isSelected()) {
+				moveToNewLines();
 			}
+			updateTitle();
+			updateUiControls();
 		});
 	}
 

@@ -37,9 +37,9 @@ public class Translator {
 	private static I18n i18n;
 
 	public static void start(String language) {
-		Locale locale = null;
+		Locale locale;
 		if( null == language ) {
-			logger.warning("Parameter language is null");
+			logger.warning("Language parameter is null");
 			locale = Locale.getDefault();
 		} else {
 			locale = LocaleUtil.fromString(language);

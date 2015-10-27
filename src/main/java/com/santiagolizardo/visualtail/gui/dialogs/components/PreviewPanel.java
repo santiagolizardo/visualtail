@@ -31,7 +31,7 @@ public class PreviewPanel extends JPanel implements ChangeListener {
 
 	private static final long serialVersionUID = -7883502338884979025L;
 
-	private JLabel label;
+	private final JLabel label;
 
 	public PreviewPanel(JColorChooser chooser) {
 		super();

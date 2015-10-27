@@ -36,8 +36,8 @@ public class ConfigData {
 	
 	private Font font;
 	
-	private List<Session> sessions;
-	private List<String> recentFiles;
+	private final List<Session> sessions;
+	private final List<String> recentFiles;
 
 	public ConfigData() {
 		windowLookAndFeel = UIManager.getSystemLookAndFeelClassName();

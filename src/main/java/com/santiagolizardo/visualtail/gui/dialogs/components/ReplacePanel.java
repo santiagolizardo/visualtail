@@ -23,9 +23,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
@@ -40,13 +38,13 @@ public class ReplacePanel extends JPanel implements KeyListener {
 
 	private static final long serialVersionUID = -750096502886630895L;
 
-	private EnhancedTextField searchTextField;
-	private EnhancedTextField replaceTextField;
-	private JButton closeButton;
+	private final EnhancedTextField searchTextField;
+	private final EnhancedTextField replaceTextField;
+	private final JButton closeButton;
 
-	private LogWindow logWindow;
+	private final LogWindow logWindow;
 	
-	private Color defaultForegroundColor;
+	private final Color defaultForegroundColor;
 	
 	private Pattern replacePattern;
 
@@ -67,11 +65,8 @@ public class ReplacePanel extends JPanel implements KeyListener {
 		replaceTextField.addKeyListener(this);
 
 		closeButton = new CloseButton();
-		closeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				logWindow.hideReplacePanel();
-			}
+		closeButton.addActionListener((ActionEvent) -> {
+			logWindow.hideReplacePanel();
 		});
 
 		defineLayout();

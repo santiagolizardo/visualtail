@@ -8,3 +8,4 @@ pom.xml.versionsBackup
 *.po.~*
 nbactions.xml
 *.exe
+.DS_Store

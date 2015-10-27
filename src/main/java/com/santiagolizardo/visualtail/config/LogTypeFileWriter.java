@@ -70,8 +70,8 @@ public class LogTypeFileWriter extends LogTypeFileCommon {
 			for (Rule rule : rules) {
 				Element ruleNode = doc.createElement(TAG_RULE);
 				ruleNode.setAttribute(TAG_PATTERN, rule.getPattern());
-				ruleNode.setAttribute(TAG_REGULAR_EXPRESSION, Boolean.valueOf(rule.isRegularExpression()).toString());
-				ruleNode.setAttribute(TAG_IGNORE_CASE, Boolean.valueOf(rule.isIgnoreCase()).toString());
+				ruleNode.setAttribute(TAG_REGULAR_EXPRESSION, Boolean.toString(rule.isRegularExpression()));
+				ruleNode.setAttribute(TAG_IGNORE_CASE, Boolean.toString(rule.isIgnoreCase()));
 				ruleNode.setAttribute(TAG_BACKGROUND_COLOR, String.valueOf(rule.getBackgroundColor().getRGB()));
 				ruleNode.setAttribute(TAG_FOREGROUND_COLOR, String.valueOf(rule.getForegroundColor().getRGB()));
 				rootNode.appendChild(ruleNode);

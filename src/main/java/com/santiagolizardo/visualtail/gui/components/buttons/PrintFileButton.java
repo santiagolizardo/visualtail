@@ -29,7 +29,7 @@ public class PrintFileButton extends JButton implements ActionListener {
 
 	private static final Logger logger = Logger.getLogger(PrintFileButton.class.getName());
 
-	private LogWindow logWindow;
+	private final LogWindow logWindow;
 	
 	public PrintFileButton(LogWindow logWindow) {
 		super(Translator.tr("Print this file"));

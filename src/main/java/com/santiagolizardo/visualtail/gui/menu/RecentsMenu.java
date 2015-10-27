@@ -38,9 +38,9 @@ public class RecentsMenu extends JMenu implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
-	private JMenuItem cleanRecentsMenuItem;
+	private final JMenuItem cleanRecentsMenuItem;
 
 	public RecentsMenu(MainWindow mainWindow) {
 		super(tr("Open recents"));
@@ -58,23 +58,18 @@ public class RecentsMenu extends JMenu implements ActionListener {
 		List<String> recentFiles = mainWindow.getConfigData().getRecentFiles();
 		if (!recentFiles.contains(fileName)) {
 			JMenuItem item = new JMenuItem(fileName);
-			item.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ev) {
-					JMenuItem item = (JMenuItem) ev.getSource();
-					String filePath = item.getText();
-					File file = new File(filePath);
-
-					try {
-						FileUtil.tryReading(file);
-					} catch (Exception e) {
-						DialogFactory.showErrorMessage(mainWindow, e.getMessage());
-						return;
-					}
-
-					mainWindow.getActionFactory().getOpenAction().openFile(filePath, new LogType(
-							"Default"));
+			item.addActionListener((ActionEvent ev) -> {
+				JMenuItem item1 = (JMenuItem) ev.getSource();
+				String filePath = item1.getText();
+				File file = new File(filePath);
+				try {
+					FileUtil.tryReading(file);
+				} catch (Exception e) {
+					DialogFactory.showErrorMessage(mainWindow, e.getMessage());
+					return;
 				}
+				mainWindow.getActionFactory().getOpenAction().openFile(filePath, new LogType(
+						"Default"));
 			});
 			add(item);
 		}
@@ -98,23 +93,18 @@ public class RecentsMenu extends JMenu implements ActionListener {
 		while (it.hasPrevious()) {
 			String recentFilePath = it.previous();
 			JMenuItem item = new JMenuItem(recentFilePath);
-			item.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ev) {
-					JMenuItem item = (JMenuItem) ev.getSource();
-					String filePath = item.getText();
-					File file = new File(filePath);
-
-					try {
-						FileUtil.tryReading(file);
-					} catch (Exception e) {
-						DialogFactory.showErrorMessage(mainWindow, e.getMessage());
-						return;
-					}
-
-					mainWindow.getActionFactory().getOpenAction().openFile(filePath, new LogType(
-							"Default"));
+			item.addActionListener((ActionEvent ev) -> {
+				JMenuItem item1 = (JMenuItem) ev.getSource();
+				String filePath = item1.getText();
+				File file = new File(filePath);
+				try {
+					FileUtil.tryReading(file);
+				} catch (Exception e) {
+					DialogFactory.showErrorMessage(mainWindow, e.getMessage());
+					return;
 				}
+				mainWindow.getActionFactory().getOpenAction().openFile(filePath, new LogType(
+						"Default"));
 			});
 			add(item);
 		}

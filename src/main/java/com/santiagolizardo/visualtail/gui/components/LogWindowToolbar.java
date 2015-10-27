@@ -21,7 +21,6 @@ import com.santiagolizardo.visualtail.engine.TailListener;
 import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import com.santiagolizardo.visualtail.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
-import com.santiagolizardo.visualtail.config.LogTypeFileWriter;
 import com.santiagolizardo.visualtail.gui.components.buttons.ClearWindowButton;
 import com.santiagolizardo.visualtail.gui.components.buttons.PrintFileButton;
 import java.awt.Desktop;
@@ -66,35 +65,23 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 				logWindow.getNumberLinesToDisplay(), 1, 9999, 1));
 		numberLinesToDisplaySpinner.setToolTipText(Translator.tr("Number of lines to display"));
 		numberLinesToDisplaySpinner.setMaximumSize(numberLinesToDisplaySpinner.getPreferredSize());
-		numberLinesToDisplaySpinner.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent ev) {
-				int numberDisplayedLines = (int) numberLinesToDisplaySpinner.getValue();
-				logWindow.setNumberLinesToDisplay(numberDisplayedLines);
-				logWindow.trimLines();
-			}
+		numberLinesToDisplaySpinner.addChangeListener((ChangeEvent) -> {
+			int numberDisplayedLines = (int) numberLinesToDisplaySpinner.getValue();
+			logWindow.setNumberLinesToDisplay(numberDisplayedLines);
+			logWindow.trimLines();
 		});
 
 		checkForChangesCheckBox = new JToggleButton(Translator.tr("Check for changes"));
 		checkForChangesCheckBox.setSelected(true);
-		checkForChangesCheckBox.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				logWindow.checkForChanges();
-			}
+		checkForChangesCheckBox.addActionListener((ActionEvent) -> {
+			logWindow.checkForChanges();
 		});
 
 		scrollNewLinesCheckBox = new JToggleButton(Translator.tr("Scroll to new lines"));
 		scrollNewLinesCheckBox.setSelected(true);
-		scrollNewLinesCheckBox.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				if (scrollNewLinesCheckBox.isSelected()) {
-					logWindow.moveToNewLines();
-				}
+		scrollNewLinesCheckBox.addChangeListener((ChangeEvent e) -> {
+			if (scrollNewLinesCheckBox.isSelected()) {
+				logWindow.moveToNewLines();
 			}
 		});
 
@@ -106,37 +93,30 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
 		logTypes = new JComboBox<>(logTypesModel);
 		logTypes.setRenderer(new LogTypeListRenderer());
 		logTypes.setToolTipText(Translator.tr("Log type"));
-		logTypes.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				LogType logType = (LogType) logTypes.getSelectedItem();
-				logWindow.loadLogType(logType);
-			}
+		logTypes.addActionListener((ActionEvent) -> {
+			LogType selectedLogType = (LogType) logTypes.getSelectedItem();
+			logWindow.loadLogType(selectedLogType);
 		});
 		logTypes.setSelectedItem(logType);
 
 		showPreviousLinesButton = new JButton(Translator.tr("Show previous lines"));
-		showPreviousLinesButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int limit = 100;
-				Integer[] options = new Integer[limit];
-				for (int i = 0; i < limit; i++) {
-					options[i] = i;
-				}
-				Object input = JOptionPane.showInternalInputDialog(logWindow, Translator.tr("Enter the number of previous lines to display:"), Translator.tr("Input"), JOptionPane.OK_CANCEL_OPTION, null, (Object[]) options, options[5]);
-				if (null == input) {
-					return;
-				}
-
-				try {
-					int count = (Integer) input;
-					clearButton.setEnabled(logWindow.loadPreviousLines(count) > 0);
-				} catch (NumberFormatException nfe) {
-					logger.warning(nfe.getMessage());
-					JOptionPane.showMessageDialog(logWindow, Translator.tr("Invalid number of lines entered."), Translator.tr("Error"), JOptionPane.ERROR_MESSAGE);
-				}
+		showPreviousLinesButton.addActionListener((ActionEvent) -> {
+			int limit = 100;
+			Integer[] options = new Integer[limit];
+			for (int i = 0; i < limit; i++) {
+				options[i] = i;
+			}
+			Object input = JOptionPane.showInternalInputDialog(logWindow, Translator.tr("Enter the number of previous lines to display:"), Translator.tr("Input"), JOptionPane.OK_CANCEL_OPTION, null, (Object[]) options, options[5]);
+			if (null == input) {
+				return;
+			}
+			
+			try {
+				int count = (Integer) input;
+				clearButton.setEnabled(logWindow.loadPreviousLines(count) > 0);
+			} catch (NumberFormatException nfe) {
+				logger.warning(nfe.getMessage());
+				JOptionPane.showMessageDialog(logWindow, Translator.tr("Invalid number of lines entered."), Translator.tr("Error"), JOptionPane.ERROR_MESSAGE);
 			}
 		});
 

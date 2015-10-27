@@ -25,7 +25,7 @@ import java.util.List;
 public class Session {
 
 	private String name;
-	private List<String> fileNames;
+	private final List<String> fileNames;
 
 	public Session() {
 		fileNames = new ArrayList<>();

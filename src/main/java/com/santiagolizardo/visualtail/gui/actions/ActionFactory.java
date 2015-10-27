@@ -20,9 +20,9 @@ import com.santiagolizardo.visualtail.gui.MainWindow;
 
 public class ActionFactory {
 
-	private OpenAction openAction;
-	private CopyAction copyAction;
-	private SelectAllAction selectAllAction;
+	private final OpenAction openAction;
+	private final CopyAction copyAction;
+	private final SelectAllAction selectAllAction;
 
 	public ActionFactory(MainWindow mainWindow) {
 		openAction = new OpenAction(mainWindow);

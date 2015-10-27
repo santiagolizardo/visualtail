@@ -33,7 +33,7 @@ public class SelectAllAction extends AbstractAction {
 
 	private static final long serialVersionUID = 3272495186683089254L;
 
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
 	public SelectAllAction(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;

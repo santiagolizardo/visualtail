@@ -33,7 +33,7 @@ import com.santiagolizardo.visualtail.gui.util.SwingUtil;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
 
 /**
- * This is the main application entry point. It initialises the main window.
+ * This is the main application entry point. It initializes the main window.
  */
 public class Main {
 
@@ -59,15 +59,11 @@ public class Main {
 
 		Translator.start(configData.getLanguage());
 
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				SwingUtil.setLookAndFeel(configData.getWindowLookAndFeel());
-
-				MainWindow mainWindow = new MainWindow(configData);
-				mainWindow.setVisible(true);
-			}
+		SwingUtilities.invokeLater(() -> {
+			SwingUtil.setLookAndFeel(configData.getWindowLookAndFeel());
+			
+			MainWindow mainWindow = new MainWindow(configData);
+			mainWindow.setVisible(true);
 		});
 	}
 }

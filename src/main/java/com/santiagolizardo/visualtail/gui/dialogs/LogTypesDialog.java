@@ -30,8 +30,8 @@ public class LogTypesDialog extends AbstractDialog {
 
 	private static final long serialVersionUID = -1516233460385847703L;
 
-	private ListingPanel listingPanel;
-	private EditionPanel editionPanel;
+	private final ListingPanel listingPanel;
+	private final EditionPanel editionPanel;
 
 	public LogTypesDialog(MainWindow mainWindow) {
 		super(mainWindow);

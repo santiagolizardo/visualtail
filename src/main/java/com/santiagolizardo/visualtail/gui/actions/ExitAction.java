@@ -29,7 +29,7 @@ public class ExitAction extends AbstractAction {
 
 	private static final long serialVersionUID = 9138179821476711088L;
 
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
 	public ExitAction(MainWindow mainGui) {
 

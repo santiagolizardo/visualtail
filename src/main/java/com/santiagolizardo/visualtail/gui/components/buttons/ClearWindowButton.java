@@ -24,7 +24,7 @@ import javax.swing.JButton;
 
 public class ClearWindowButton extends JButton implements ActionListener {
 
-	private LogWindow logWindow;
+	private final LogWindow logWindow;
 	
 	public ClearWindowButton(LogWindow logWindow) {
 		super(Translator.tr("Clear window"));

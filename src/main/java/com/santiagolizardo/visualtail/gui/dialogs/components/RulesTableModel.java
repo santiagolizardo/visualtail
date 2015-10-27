@@ -29,7 +29,7 @@ public class RulesTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = -3824360112995729445L;
 
-	private String columns[] = new String[]{
+	private final String columns[] = new String[]{
 		tr("Pattern"),
 		tr("Regular expression"),
 		tr("Ignore case"),
@@ -50,10 +50,9 @@ public class RulesTableModel extends AbstractTableModel {
 		if (name.contains(" ")) {
 			String[] lines = name.split(" ");
 			return String.format("<html>%s<br />%s</html>", lines[0], lines[1]);
-		} else {
-			return String.format("<html><br />%s</html>", name);
 		}
-
+		
+		return String.format("<html><br />%s</html>", name);
 	}
 
 	@Override

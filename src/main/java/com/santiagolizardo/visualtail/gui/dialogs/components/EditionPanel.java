@@ -69,15 +69,15 @@ public class EditionPanel extends JPanel {
 
 	private static final Logger logger = Logger.getLogger(EditionPanel.class.getName());
 
-	private JSpinner refreshSpinner;
-	private JLabel secondsLabel;
+	private final JSpinner refreshSpinner;
+	private final JLabel secondsLabel;
 
 	private RulesTableModel modelRules;
 	private JTable rulesTable;
-	private JScrollPane scrollRules;
+	private final JScrollPane scrollRules;
 
-	private JButton btnAddRule;
-	private JButton btnRemoveRule;
+	private final JButton addRuleButton;
+	private JButton removeRuleButton;
 
 	private LogType logType;
 	private boolean logTypeLoaded;
@@ -89,11 +89,8 @@ public class EditionPanel extends JPanel {
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(500, 100,
 				10000, 100);
 		refreshSpinner = new JSpinner(spinnerModel);
-		refreshSpinner.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent ev) {
-				updateSeconds();
-			}
+		refreshSpinner.addChangeListener((ChangeEvent) -> {
+			updateSeconds();
 		});
 
 		secondsLabel = new JLabel();
@@ -103,13 +100,9 @@ public class EditionPanel extends JPanel {
 		logTypeLoaded = false;
 
 		modelRules = new RulesTableModel();
-		modelRules.addTableModelListener(new TableModelListener() {
-
-			@Override
-			public void tableChanged(TableModelEvent tme) {
-				if (logTypeLoaded) {
-					saveChanges();
-				}
+		modelRules.addTableModelListener((TableModelEvent) -> {
+			if (logTypeLoaded) {
+				saveChanges();
 			}
 		});
 
@@ -127,17 +120,10 @@ public class EditionPanel extends JPanel {
 				.getColumn(5).setCellRenderer(new ColorExampleRenderer());
 
 		rulesTable.getSelectionModel()
-				.addListSelectionListener(
-						new ListSelectionListener() {
-
-							@Override
-							public void valueChanged(ListSelectionEvent ev
-							) {
-								btnRemoveRule.setEnabled(1 == rulesTable
-										.getSelectedRowCount());
-							}
-						}
-				);
+				.addListSelectionListener((ListSelectionEvent) -> {
+					removeRuleButton.setEnabled(1 == rulesTable
+							.getSelectedRowCount());
+		});
 
 		scrollRules = new JScrollPane(rulesTable);
 
@@ -155,36 +141,23 @@ public class EditionPanel extends JPanel {
 				}
 		);
 
-		btnAddRule = new JButton(Translator.tr("Add rule"));
+		addRuleButton = new JButton(Translator.tr("Add rule"));
 
-		btnAddRule.addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent ev
-					) {
-						Rule rule = new Rule();
-						modelRules.addRule(rule);
-						saveChanges();
-					}
-				;
-		}
-	);
+		addRuleButton.addActionListener((ActionEvent) -> {
+			Rule rule = new Rule();
+			modelRules.addRule(rule);
+			saveChanges();
+		});
 
-		btnRemoveRule = new JButton(Translator.tr("Remove rule"));
+		removeRuleButton = new JButton(Translator.tr("Remove rule"));
 
-		btnRemoveRule.setEnabled(
+		removeRuleButton.setEnabled(
 				false);
-		btnRemoveRule.addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent event
-					) {
-						int selectedRow = rulesTable.getSelectedRow();
-						modelRules.removeRule(selectedRow);
-						saveChanges();
-					}
-				}
-		);
+		removeRuleButton.addActionListener((ActionEvent) -> {
+			int selectedRow = rulesTable.getSelectedRow();
+			modelRules.removeRule(selectedRow);
+			saveChanges();
+		});
 
 		rulesTable.setMinimumSize(
 				new Dimension(500, 500));
@@ -260,9 +233,9 @@ public class EditionPanel extends JPanel {
 		layout.putConstraint(NORTH, secondsLabel, 5, SOUTH, refreshSpinner);
 		layout.putConstraint(NORTH, lblRules, 5, SOUTH, secondsLabel);
 		layout.putConstraint(NORTH, scrollRules, 5, SOUTH, lblRules);
-		layout.putConstraint(SOUTH, scrollRules, -5, NORTH, btnAddRule);
-		layout.putConstraint(SOUTH, btnAddRule, -5, SOUTH, panel);
-		layout.putConstraint(SOUTH, btnRemoveRule, -5, SOUTH, panel);
+		layout.putConstraint(SOUTH, scrollRules, -5, NORTH, addRuleButton);
+		layout.putConstraint(SOUTH, addRuleButton, -5, SOUTH, panel);
+		layout.putConstraint(SOUTH, removeRuleButton, -5, SOUTH, panel);
 
 		layout.putConstraint(WEST, lblRefresh, 5, WEST, panel);
 		layout.putConstraint(WEST, refreshSpinner, 5, WEST, panel);
@@ -270,16 +243,16 @@ public class EditionPanel extends JPanel {
 		layout.putConstraint(WEST, lblRules, 5, WEST, panel);
 		layout.putConstraint(WEST, scrollRules, 5, WEST, panel);
 		layout.putConstraint(EAST, scrollRules, -5, EAST, panel);
-		layout.putConstraint(WEST, btnAddRule, 5, WEST, panel);
-		layout.putConstraint(WEST, btnRemoveRule, 5, EAST, btnAddRule);
+		layout.putConstraint(WEST, addRuleButton, 5, WEST, panel);
+		layout.putConstraint(WEST, removeRuleButton, 5, EAST, addRuleButton);
 
 		panel.add(lblRefresh);
 		panel.add(refreshSpinner);
 		panel.add(secondsLabel);
 		panel.add(lblRules);
 		panel.add(scrollRules);
-		panel.add(btnAddRule);
-		panel.add(btnRemoveRule);
+		panel.add(addRuleButton);
+		panel.add(removeRuleButton);
 
 		add(panel);
 	}

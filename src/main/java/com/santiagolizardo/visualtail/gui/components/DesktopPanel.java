@@ -50,10 +50,10 @@ public class DesktopPanel extends JDesktopPane {
 		int diffWidth = (int) (getWidth() * .25) / numFrames;
 		int diffHeight = (int) (getHeight() * .25) / numFrames;
 
-		short x = 0;
-		short y = 0;
+		int x = 0;
+		int y = 0;
 
-		for (byte i = 0; i < numFrames; i++) {
+		for (int i = 0; i < numFrames; i++) {
 			try {
 				frames[i].setMaximum(false);
 				frames[i].setIcon(false);
@@ -83,7 +83,7 @@ public class DesktopPanel extends JDesktopPane {
 		int frameWidth = getWidth();
 		int frameHeight = getHeight() / numFrames;
 
-		for (short i = 0; i < numFrames; i++) {
+		for (int i = 0; i < numFrames; i++) {
 			try {
 				frames[i].setMaximum(false);
 				frames[i].setIcon(false);
@@ -110,7 +110,7 @@ public class DesktopPanel extends JDesktopPane {
 		int frameWidth = (getWidth() / numFrames);
 		int frameHeight = getHeight();
 
-		for (short i = 0; i < numFrames; i++) {
+		for (int i = 0; i < numFrames; i++) {
 			try {
 				frames[i].setMaximum(false);
 				frames[i].setIcon(false);

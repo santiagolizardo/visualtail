@@ -69,12 +69,7 @@ public class LogTypeFileReader extends LogTypeFileCommon {
 	
 	public LogType[] readAll() {
 		File logTypesDir = new File(FOLDER_LOG_TYPES);
-		FileFilter filter = new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				return (pathname.getName().endsWith(LOG_TYPE_FILE_EXTENSION));
-			}
-		};
+		FileFilter filter = (File pathname) -> (pathname.getName().endsWith(LOG_TYPE_FILE_EXTENSION));
 		File[] files = logTypesDir.listFiles(filter);
 
 		LogType[] logTypes = new LogType[files.length + 1];

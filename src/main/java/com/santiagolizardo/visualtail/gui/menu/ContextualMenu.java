@@ -30,7 +30,7 @@ public class ContextualMenu extends JPopupMenu implements ActionListener {
 
 	private static final long serialVersionUID = 4858813412795446507L;
 	
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
 	public ContextualMenu(MainWindow mainWindow) {
 

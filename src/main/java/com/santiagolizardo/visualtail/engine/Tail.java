@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Tail {
@@ -31,7 +30,7 @@ public class Tail {
 	private String lineSeparator;
 	private int lineSeparatorLength;
 
-	private File file;
+	private final File file;
 	private long currentPosition;
 	private long currentPositionBackwards;
 
@@ -42,12 +41,12 @@ public class Tail {
 		open();
 	}
 
-	public void setLineSeparator(String lineSeparatorArg) {
+	public final void setLineSeparator(String lineSeparatorArg) {
 		lineSeparator = lineSeparatorArg;
 		lineSeparatorLength = lineSeparatorArg.length();
 	}
 
-	public void open() {
+	public final void open() {
 		open(file.length());
 	}
 

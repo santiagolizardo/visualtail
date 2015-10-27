@@ -27,7 +27,7 @@ public class OpenAction {
 
 	private static final Logger logger = Logger.getLogger(OpenAction.class.getName());
 	
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
 	public OpenAction(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;

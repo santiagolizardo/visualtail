@@ -32,7 +32,7 @@ public class FindNextAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2768042815624362464L;
 	
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
 	public FindNextAction(MainWindow mainWindow) {
 

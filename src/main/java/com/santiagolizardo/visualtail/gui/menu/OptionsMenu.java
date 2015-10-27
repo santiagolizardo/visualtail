@@ -38,12 +38,12 @@ public class OptionsMenu extends JMenu implements ActionListener {
 
 	private static final long serialVersionUID = 4390929385204480673L;
 
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
-	private JMenuItem alwaysOnTopMenuItem;
-	private JMenuItem manageLogTypesMenuItem;
-	private JMenuItem fontSelectorMenuItem;
-	private JMenuItem preferencesMenuItem;
+	private final JMenuItem alwaysOnTopMenuItem;
+	private final JMenuItem manageLogTypesMenuItem;
+	private final JMenuItem fontSelectorMenuItem;
+	private final JMenuItem preferencesMenuItem;
 
 	public OptionsMenu(MainWindow mainWindow) {
 

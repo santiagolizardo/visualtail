@@ -21,8 +21,8 @@ import java.util.List;
 
 public class TailNotifier implements Runnable {
 
-    private Tail tail;
-    private List<TailListener> listeners;
+    private final Tail tail;
+    private final List<TailListener> listeners;
 
     public TailNotifier(String fileName) {
         tail = new Tail(fileName);

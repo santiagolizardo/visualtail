@@ -37,9 +37,9 @@ public class CopyAction extends AbstractAction {
 
 	private static final long serialVersionUID = 2226006120048433873L;
 
-	private MainWindow mainWindow;
+	private final MainWindow mainWindow;
 
-	private Clipboard clipboard;
+	private final Clipboard clipboard;
 
 	public CopyAction(MainWindow mainWindow) {
 
