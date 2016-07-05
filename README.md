@@ -16,7 +16,7 @@ How to run it
 
 ### Requirements
 
-  * Java runtime (JRE) 1.7+
+  * Java runtime (JRE) 1.8+
   * Graphical user interface
 
 ### Execution
