@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import com.santiagolizardo.visualtail.Constants;
+import com.santiagolizardo.visualtail.ProjectUrls;
 import com.santiagolizardo.visualtail.gui.MainWindow;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -30,62 +31,61 @@ import java.util.logging.Logger;
 
 public class UpdateManager extends Thread {
 
-	private static final Logger logger = Logger.getLogger(UpdateManager.class.getName());
-	
-	private MainWindow mainWindow;
+    private static final Logger logger = Logger.getLogger(UpdateManager.class.getName());
 
-	public UpdateManager(MainWindow mainWindow) {
-		this.mainWindow = mainWindow;
-	}
+    private MainWindow mainWindow;
 
-	public void checkForUpdate() {
-		start();
-	}
+    public UpdateManager(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+    }
 
-	@Override
-	public void run() {
-		InputStreamReader reader = null;
-		BufferedReader buffer = null;
-		try {
-			URL url = new URL(Constants.APP_UPDATE_URL);
-			reader = new InputStreamReader(url.openStream());
-			buffer = new BufferedReader(reader);
-			String version = buffer.readLine();
-			int serverVersion = Integer.valueOf(version.replaceAll("\\.", ""));
-			int currentVersion = Integer.valueOf(
-					Constants.APP_VERSION.replaceAll("\\.", ""));
-			if (serverVersion > currentVersion) {
-				StringBuilder sb = new StringBuilder();
-				sb.append(
-						String.format(tr("New version %s is available"), version))
-						.append(Constants.LINE_SEP).append(Constants.LINE_SEP);
-				sb.append(tr("Please visit the project website")).append(
-						Constants.LINE_SEP);
-				DialogFactory.showInformationMessage(mainWindow, sb.toString());
-			} else if (serverVersion <= currentVersion) {
-				DialogFactory.showInformationMessage(mainWindow,
-						tr("There are not updates available"));
-			}
+    public void checkForUpdate() {
+        start();
+    }
 
-		} catch (IOException | NumberFormatException e) {
-			DialogFactory.showErrorMessage(mainWindow,
-					tr("Unable to fetch server information"));
-		}
-		finally {
-			if( null != buffer ) {
-				try {
-					buffer.close();
-				} catch (IOException ex) {
-					logger.log(Level.SEVERE, null, ex);
-				}
-			}
-			if( null != reader) {
-				try {
-					reader.close();
-				} catch (IOException ex) {
-					logger.log(Level.SEVERE, null, ex);
-				}
-			}
-		}
-	}
+    @Override
+    public void run() {
+        InputStreamReader reader = null;
+        BufferedReader buffer = null;
+        try {
+            URL url = new URL(ProjectUrls.UPDATE_URL);
+            reader = new InputStreamReader(url.openStream());
+            buffer = new BufferedReader(reader);
+            String version = buffer.readLine();
+            int serverVersion = Integer.valueOf(version.replaceAll("\\.", ""));
+            int currentVersion = Integer.valueOf(
+                    Constants.APP_VERSION.replaceAll("\\.", ""));
+            if (serverVersion > currentVersion) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(
+                        String.format(tr("New version %s is available"), version))
+                        .append(Constants.LINE_SEP).append(Constants.LINE_SEP);
+                sb.append(tr("Please visit the project website")).append(
+                        Constants.LINE_SEP);
+                DialogFactory.showInformationMessage(mainWindow, sb.toString());
+            } else if (serverVersion <= currentVersion) {
+                DialogFactory.showInformationMessage(mainWindow,
+                        tr("There are not updates available"));
+            }
+
+        } catch (IOException | NumberFormatException e) {
+            DialogFactory.showErrorMessage(mainWindow,
+                    tr("Unable to fetch server information"));
+        } finally {
+            if (null != buffer) {
+                try {
+                    buffer.close();
+                } catch (IOException ex) {
+                    logger.log(Level.SEVERE, null, ex);
+                }
+            }
+            if (null != reader) {
+                try {
+                    reader.close();
+                } catch (IOException ex) {
+                    logger.log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 }

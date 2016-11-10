@@ -16,24 +16,14 @@
  */
 package com.santiagolizardo.visualtail;
 
-import java.io.File;
-
-/**
- * This class holds all the immutable information of the application.
- */
-public final class Constants {
-
-    private Constants() {
-
+public final class ProjectUrls {
+    
+    private ProjectUrls() {
+        
     }
 
-    public static final String APP_NAME = "VisualTail";
-    public static final String APP_VERSION = "1.8.7";
+    public static final String MAIN_URL = "https://github.com/santiagolizardo/visualtail";
+    public static final String UPDATE_URL = "http://visualtail.sourceforge.net/version.html";
+    public final static String SUPPORT_URL = "https://github.com/santiagolizardo/visualtail/issues";
 
-    public static final String LINE_SEP = System.getProperty("line.separator");
-
-    public static final String USER_HOME = System.getProperty("user.home");
-
-    public static final String HOME_PATH = USER_HOME + File.separator
-            + ".visualtail";
 }

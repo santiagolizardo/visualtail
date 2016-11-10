@@ -31,39 +31,46 @@ import com.santiagolizardo.visualtail.config.ConfigData;
 import com.santiagolizardo.visualtail.config.ConfigFileReader;
 import com.santiagolizardo.visualtail.gui.util.SwingUtil;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
+import com.santiagolizardo.visualtail.util.OsDetector;
 
 /**
  * This is the main application entry point. It initializes the main window.
  */
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		try {
-			I18nFactory.getI18n(Main.class, Locale.ENGLISH);
-		} catch (MissingResourceException mre) {
-			System.err.println(mre.getMessage());
-		}
+        try {
+            I18nFactory.getI18n(Main.class, Locale.ENGLISH);
+        } catch (MissingResourceException mre) {
+            System.err.println(mre.getMessage());
+        }
 
-		try {
-			Properties prop = System.getProperties();
-			prop.setProperty("java.util.logging.config.file",
-					"logging.properties");
-			LogManager.getLogManager().readConfiguration();
-		} catch (IOException ex) {
-			System.err.println(ex.getMessage());
-		}
+        try {
+            Properties prop = System.getProperties();
+            prop.setProperty("java.util.logging.config.file",
+                    "logging.properties");
+            LogManager.getLogManager().readConfiguration();
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
 
-		ConfigFileReader configPersistence = new ConfigFileReader();
-		final ConfigData configData = configPersistence.read();
+        ConfigFileReader configPersistence = new ConfigFileReader();
+        final ConfigData configData = configPersistence.read();
 
-		Translator.start(configData.getLanguage());
+        Translator.start(configData.getLanguage());
 
-		SwingUtilities.invokeLater(() -> {
-			SwingUtil.setLookAndFeel(configData.getWindowLookAndFeel());
-			
-			MainWindow mainWindow = new MainWindow(configData);
-			mainWindow.setVisible(true);
-		});
-	}
+        OsDetector osDetector = new OsDetector();
+        if (osDetector.isMacOs()) {
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", Constants.APP_NAME);
+        }
+
+        SwingUtilities.invokeLater(() -> {
+            SwingUtil.setLookAndFeel(configData.getWindowLookAndFeel());
+
+            MainWindow mainWindow = new MainWindow(configData);
+            mainWindow.setVisible(true);
+        });
+    }
 }

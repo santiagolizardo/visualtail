@@ -14,26 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.santiagolizardo.visualtail;
+package com.santiagolizardo.visualtail.util;
 
-import java.io.File;
+public class OsDetector {
 
-/**
- * This class holds all the immutable information of the application.
- */
-public final class Constants {
-
-    private Constants() {
-
+    public boolean isMacOs() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        return osName.startsWith("mac os x");
     }
-
-    public static final String APP_NAME = "VisualTail";
-    public static final String APP_VERSION = "1.8.7";
-
-    public static final String LINE_SEP = System.getProperty("line.separator");
-
-    public static final String USER_HOME = System.getProperty("user.home");
-
-    public static final String HOME_PATH = USER_HOME + File.separator
-            + ".visualtail";
 }

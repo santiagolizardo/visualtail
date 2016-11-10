@@ -26,7 +26,7 @@ public class DialogFactory {
 
 	public static void showInformationMessage(Component parent, String message) {
 		JOptionPane.showMessageDialog(parent, message, Constants.APP_NAME,
-				JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public static void showErrorMessage(Component parent, String message) {
@@ -36,7 +36,7 @@ public class DialogFactory {
 
 	public static boolean showQuestionDialog(Component parent, String message) {
 		return (JOptionPane.showConfirmDialog(parent, message,
-				Constants.APP_NAME, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
+				Constants.APP_NAME, JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE) == JOptionPane.YES_OPTION);
 	}
 
 	public static String showInputDialog(Component parent, String message) {

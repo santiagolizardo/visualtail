@@ -30,6 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import com.santiagolizardo.visualtail.Constants;
+import com.santiagolizardo.visualtail.ProjectUrls;
 import com.santiagolizardo.visualtail.gui.components.HtmlLabel;
 import com.santiagolizardo.visualtail.resources.ResourcesLoader;
 import com.santiagolizardo.visualtail.resources.images.IconFactory;
@@ -67,7 +68,7 @@ public class AboutDialog extends AbstractDialog {
 				Constants.APP_NAME, Constants.APP_VERSION);
 		String infoText = String.format("<p>%s</p>", String.format(
 				tr("More info about the project at <a href=\"%s\">%s</a>."),
-				Constants.APP_URL, Constants.APP_URL));
+                                ProjectUrls.MAIN_URL, ProjectUrls.MAIN_URL));
 		String creditsText = ResourcesLoader.readResource(AboutDialog.class,
 				"credits.html");
 

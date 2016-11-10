@@ -36,12 +36,12 @@ public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = -349295815866572937L;
 
-	private ConfigData configData;
-	private DesktopPanel desktop;
+	private final ConfigData configData;
+	private final DesktopPanel desktop;
 
-	private ActionFactory actionFactory;
+	private final ActionFactory actionFactory;
 
-	private Menu menu;
+	private final Menu menu;
 
 	public MainWindow(ConfigData configData) {
 		this.configData = configData;
@@ -80,8 +80,6 @@ public class MainWindow extends JFrame {
 	 */
 	public void quit() {
 
-		int exitCode = 1;
-
 		setVisible(false);
 
 		configData.setWindowDimension(getSize());
@@ -91,9 +89,8 @@ public class MainWindow extends JFrame {
 		configPersistence.write(configData);
 
 		dispose();
-		exitCode = 0;
 
-		System.exit(exitCode);
+		System.exit(0);
 	}
 
 	public void updateActions(int delta) {
