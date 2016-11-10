@@ -1,5 +1,10 @@
 CHANGES
 
+Version 1.8.7 (2016/11/10)
+
+	- Better menubar integration on MacOS
+	- Validation of number of lines improved (negative numbers are rejected)
+
 Version 1.8.6 (2015/05/20)
 
 	- Converting config files to XML format (from .properties)
