@@ -17,6 +17,9 @@
 package com.santiagolizardo.visualtail.engine;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import org.junit.After;
 import static org.junit.Assert.*;
@@ -25,17 +28,25 @@ import org.junit.Test;
 
 public class TailTest {
 
-	private String lineSeparator = "\r\n";
+	private static final String lineSeparator = System.getProperty("line.separator");
 
 	private File file;
 
 	@Before
-	public void setUp() {
-		file = new File("Test.log");
+	public void setUp() throws FileNotFoundException, IOException {
+		file = new File("test.log");
+
+		try (FileOutputStream fos = new FileOutputStream(file)) {
+			fos.write(("first line" + lineSeparator).getBytes());
+			fos.write(("second line" + lineSeparator).getBytes());
+			fos.write(("third line" + lineSeparator).getBytes());
+			fos.write(("last line" + lineSeparator).getBytes());
+		}
 	}
 
 	@After
 	public void tearDown() {
+		file.delete();
 	}
 
 	@Test
@@ -95,7 +106,8 @@ public class TailTest {
 	@Test
 	public void testReadPreviousLinesReturnsExpectedStrings() {
 		Tail tail = new Tail(file.getName());
-		tail.open(("first line" + lineSeparator + "second line" + lineSeparator + "third line" + lineSeparator).length());
+		tail.open(
+				("first line" + lineSeparator + "second line" + lineSeparator + "third line" + lineSeparator).length());
 		List<String> previousLines = tail.readPreviousLines(2);
 		assertEquals(2, previousLines.size());
 		assertEquals("third line", previousLines.get(0));
@@ -105,7 +117,8 @@ public class TailTest {
 	@Test
 	public void testReadPreviousLinesReturnsMaxExistingLines() {
 		Tail tail = new Tail(file.getName());
-		tail.open(("first line" + lineSeparator + "second line" + lineSeparator + "third line" + lineSeparator).length());
+		tail.open(
+				("first line" + lineSeparator + "second line" + lineSeparator + "third line" + lineSeparator).length());
 		List<String> previousLines = tail.readPreviousLines(10);
 		assertEquals(3, previousLines.size());
 		assertEquals("third line", previousLines.get(0));
