@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+<izpack:shortcuts version="5.0"
+				  xmlns:izpack="http://izpack.org/schema/shortcuts"
+				  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				  xsi:schemaLocation="http://izpack.org/schema/shortcuts http://izpack.org/schema/5.0/izpack-shortcuts-5.0.xsd">
+	<skipIfNotSupported/>
+	
+	<programGroup defaultName="Ponup" location="applications" />
+	
+	<shortcut
+		name="VisualTail"
+		description="Launches the VisualTail app"
+		programGroup="yes"
+		target="java"
+		commandLine="-classpath &quot;${INSTALL_PATH}/visualtail-1.9.0-jar-with-dependencies.jar&quot; com.santiagolizardo.visualtail.Main"
+		workingDirectory="${INSTALL_PATH}"
+		initialState="normal"
+		iconFile="$INSTALL_PATH\images\startup.ico"
+		iconIndex="0"
+
+		desktop="yes"
+		applications="no"
+		startMenu="no"
+		startup="no"
+	>
+		<!--initialState="noShow"-->
+		<createForPack name="core"/>
+	</shortcut>
+
+	<shortcut
+		name="Uninstaller"
+		programGroup="yes"
+		desktop="no"
+		applications="no"
+		startMenu="yes"
+		startup="no"
+		target="$INSTALL_PATH\uninstaller\uninstall.jar"
+		commandLine=""
+		iconFile="$INSTALL_PATH\images\uninstall.ico"
+		iconIndex="31"
+		description="Uninstalls VisualTail">
+		<createForPack name="core"/>
+	</shortcut>
+
+</izpack:shortcuts>
+

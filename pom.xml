@@ -3,13 +3,22 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.santiagolizardo.visualtail</groupId>
 	<artifactId>VisualTail</artifactId>
-	<version>1.8.8</version>
+	<version>1.9.0</version>
 	<packaging>jar</packaging>
 	<name>VisualTail</name>
 	<url>https://github.com/santiagolizardo/visualtail</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<artifactFilename>${project.build.finalName}-jar-with-dependencies.jar</artifactFilename>
+		<artifactPath>${project.basedir}/target/${artifactFilename}</artifactPath>
 	</properties>
+	<developers>
+		<developer>
+			<name>Santiago Lizardo</name>
+			<organization>Ponup</organization>
+			<organizationUrl>https://ponup.com</organizationUrl>
+		</developer>
+	</developers>
 	<build>
 		<plugins>
 			<plugin>
@@ -66,6 +75,28 @@
 				<artifactId>versions-maven-plugin</artifactId>
 				<version>2.2</version>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.izpack</groupId>
+				<artifactId>izpack-maven-plugin</artifactId>
+				<version>5.1.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>izpack</goal>
+						</goals>
+						<configuration>
+							<installFile>${project.basedir}/src/launcher/install.xml</installFile>
+							<baseDir>${project.basedir}/src/launcher</baseDir>
+							<outputDirectory>./target</outputDirectory>
+							<finalName>${project.build.finalName}-installer</finalName>
+							<autoIncludeUrl>true</autoIncludeUrl>
+							<autoIncludeDevelopers>true</autoIncludeDevelopers>
+							<kind>standard</kind>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>			
 		</plugins>
 	</build>
 	<dependencies>

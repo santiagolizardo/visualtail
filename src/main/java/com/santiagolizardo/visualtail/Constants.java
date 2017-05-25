@@ -28,7 +28,7 @@ public final class Constants {
     }
 
     public static final String APP_NAME = "VisualTail";
-    public static final String APP_VERSION = "1.8.7";
+    public static final String APP_VERSION = "1.9.0";
 
     public static final String LINE_SEP = System.getProperty("line.separator");
 

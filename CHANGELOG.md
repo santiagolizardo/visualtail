@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [1.9.0] - 2017-05-25
+
+### Added
+
+- Cross-platform installer using Izpack replaced Nsis.
+
 ## [1.8.7] - 2016-11-10
 
 ### Added
