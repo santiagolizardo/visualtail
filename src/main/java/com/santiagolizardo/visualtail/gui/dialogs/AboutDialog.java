@@ -65,7 +65,7 @@ public class AboutDialog extends AbstractDialog {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		String headlineText = String.format("<h1>%s <em>v%s</em></h1>",
-				Constants.APP_NAME, Constants.APP_VERSION);
+				Constants.APP_NAME, Constants.getVersion());
 		String infoText = String.format("<p>%s</p>", String.format(
 				tr("More info about the project at <a href=\"%s\">%s</a>."),
                                 ProjectUrls.MAIN_URL, ProjectUrls.MAIN_URL));

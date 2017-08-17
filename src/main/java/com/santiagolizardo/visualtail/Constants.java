@@ -17,6 +17,8 @@
 package com.santiagolizardo.visualtail;
 
 import java.io.File;
+import java.io.InputStream;
+import java.util.Properties;
 
 /**
  * This class holds all the immutable information of the application.
@@ -28,7 +30,6 @@ public final class Constants {
     }
 
     public static final String APP_NAME = "VisualTail";
-    public static final String APP_VERSION = "1.9.0";
 
     public static final String LINE_SEP = System.getProperty("line.separator");
 
@@ -36,4 +37,20 @@ public final class Constants {
 
     public static final String HOME_PATH = USER_HOME + File.separator
             + ".visualtail";
+
+    public static final String getVersion() {
+        Constants constants = new Constants();
+        InputStream resourceAsStream =
+                constants.getClass().getResourceAsStream(
+                        "/build.properties"
+                );
+        Properties prop = new Properties();
+        try
+        {
+            prop.load( resourceAsStream );
+        } catch (Exception e) {
+            return "N/A";
+        }
+        return prop.getProperty("version");
+    }
 }

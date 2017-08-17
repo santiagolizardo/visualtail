@@ -24,6 +24,6 @@ public final class ProjectUrls {
 
     public static final String MAIN_URL = "https://github.com/santiagolizardo/visualtail";
     public static final String UPDATE_URL = "http://visualtail.sourceforge.net/version.html";
-    public final static String SUPPORT_URL = "https://github.com/santiagolizardo/visualtail/issues";
+    public static final String SUPPORT_URL = "https://github.com/santiagolizardo/visualtail/issues";
 
 }

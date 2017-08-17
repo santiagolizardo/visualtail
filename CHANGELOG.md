@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [1.9.1] - 2017-08-25
+
+- Windows installer now uses javaw instead of java to start the app, so that the background console doesn't show.
+- New feature: You can now delete the open file from the filesystem and close the dialog automatically.
+
 ## [1.9.0] - 2017-05-25
 
 ### Added

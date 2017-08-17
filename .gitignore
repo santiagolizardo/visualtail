@@ -9,3 +9,5 @@ pom.xml.versionsBackup
 nbactions.xml
 *.exe
 .DS_Store
+*.iml
+.idea

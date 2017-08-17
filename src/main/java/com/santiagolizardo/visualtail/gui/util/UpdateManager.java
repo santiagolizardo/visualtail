@@ -54,7 +54,7 @@ public class UpdateManager extends Thread {
             String version = buffer.readLine();
             int serverVersion = Integer.valueOf(version.replaceAll("\\.", ""));
             int currentVersion = Integer.valueOf(
-                    Constants.APP_VERSION.replaceAll("\\.", ""));
+                    Constants.getVersion().replaceAll("\\.", ""));
             if (serverVersion > currentVersion) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(

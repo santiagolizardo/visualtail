@@ -25,15 +25,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFileChooser;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
 import com.santiagolizardo.visualtail.gui.MainWindow;
 import com.santiagolizardo.visualtail.beans.LogType;
 import com.santiagolizardo.visualtail.beans.Session;
+import com.santiagolizardo.visualtail.gui.actionlisteners.DeleteFileActionListener;
 import com.santiagolizardo.visualtail.gui.actions.ExitAction;
 import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import com.santiagolizardo.visualtail.gui.dialogs.SessionsDialog;
@@ -44,7 +41,6 @@ import static com.santiagolizardo.visualtail.resources.languages.Translator.trn;
 import java.awt.Container;
 import java.awt.Toolkit;
 import java.util.logging.Logger;
-import javax.swing.JInternalFrame;
 
 public class FileMenu extends JMenu implements ActionListener {
 
@@ -59,6 +55,7 @@ public class FileMenu extends JMenu implements ActionListener {
     private final JMenuItem openMenuItem;
     private final JMenuItem loadSessionMenuItem;
     private final JMenuItem saveSessionMenuItem;
+    private final JMenuItem deleteFileMenuItem;
 
     public FileMenu(final MainWindow mainWindow) {
         setText(tr("File"));
@@ -75,8 +72,9 @@ public class FileMenu extends JMenu implements ActionListener {
         recentsMenu.setEnabled(!mainWindow.getConfigData().getRecentFiles().isEmpty());
         recentsMenu.refresh();
 
-        JMenuItem exit = new JMenuItem(new ExitAction(mainWindow));
-        exit.setIcon(IconFactory.getImage("exit.png"));
+        deleteFileMenuItem = new JMenuItem(tr("Delete file"), IconFactory.getImage("page_delete.png"));
+        deleteFileMenuItem.setEnabled(false);
+        deleteFileMenuItem.addActionListener(new DeleteFileActionListener(mainWindow));
 
         loadSessionMenuItem = new JMenuItem(tr("Manage sessions..."));
         loadSessionMenuItem.addActionListener(this);
@@ -86,8 +84,13 @@ public class FileMenu extends JMenu implements ActionListener {
         saveSessionMenuItem.setEnabled(false);
         saveSessionMenuItem.addActionListener(this);
 
+        JMenuItem exit = new JMenuItem(new ExitAction(mainWindow));
+        exit.setIcon(IconFactory.getImage("exit.png"));
+
         add(openMenuItem);
         add(recentsMenu);
+        addSeparator();
+        add(deleteFileMenuItem);
         addSeparator();
         add(loadSessionMenuItem);
         add(saveSessionMenuItem);
@@ -95,12 +98,12 @@ public class FileMenu extends JMenu implements ActionListener {
         add(exit);
     }
 
-    public RecentsMenu getRecentsMenu() {
-        return recentsMenu;
-    }
-
     public JMenuItem getSaveSessionMenuItem() {
         return saveSessionMenuItem;
+    }
+
+    public JMenuItem getDeleteFileMenuItem() {
+        return deleteFileMenuItem;
     }
 
     @Override

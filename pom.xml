@@ -3,12 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.santiagolizardo.visualtail</groupId>
 	<artifactId>VisualTail</artifactId>
-	<version>1.9.0</version>
+	<version>1.9.1</version>
 	<packaging>jar</packaging>
 	<name>VisualTail</name>
 	<url>https://github.com/santiagolizardo/visualtail</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<artifactName>${project.name}</artifactName>
+		<artifactVersion>${project.version}</artifactVersion>
 		<artifactFilename>${project.build.finalName}-jar-with-dependencies.jar</artifactFilename>
 		<artifactPath>${project.basedir}/target/${artifactFilename}</artifactPath>
 	</properties>
@@ -21,6 +23,13 @@
 	</developers>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.santiagolizardo.visualtail.Main</mainClass>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>com.googlecode.gettext-commons</groupId>
 				<artifactId>gettext-maven-plugin</artifactId>
@@ -98,6 +107,17 @@
 				</executions>
 			</plugin>			
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+<!--
+				<includes>
+					<include>build.properties</include>
+				</includes>
+				-->
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 	<dependencies>
 		<dependency>
