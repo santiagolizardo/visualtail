@@ -11,11 +11,13 @@
 
 ## How to run it
 
-### Requirements
 
-  * Java runtime (JRE) 1.8+
+### Requirements
+
+  * Java runtime (JRE) 9+
   * Graphical user interface
+
 
 ### Execution
 
-Double click on VisualTail.jar or run _java -jar VisualTail.jar_ on the command line.
+Double click on *VisualTail.jar* or run `java -jar VisualTail.jar` on the command line.
