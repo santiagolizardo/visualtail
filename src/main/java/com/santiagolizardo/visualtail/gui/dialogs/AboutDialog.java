@@ -38,56 +38,60 @@ import com.santiagolizardo.visualtail.resources.languages.Translator;
 
 public class AboutDialog extends AbstractDialog {
 
-	private static final long serialVersionUID = -3985858584067350439L;
+    private static final long serialVersionUID = -3985858584067350439L;
 
-	public AboutDialog(JFrame parentFrame) {
-		super(parentFrame);
+    public AboutDialog(JFrame parentFrame) {
+        super(parentFrame);
+    }
 
-		setTitle(Translator.tr("About this application"));
-		setModal(true);
+    @Override
+    protected void dialogInit() {
+        super.dialogInit();
 
-		defineLayout();
-	}
+        setTitle(Translator.tr("About this application"));
+        setModal(true);
 
-	private void defineLayout() {
-		Container container = getContentPane();
-		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
+        defineLayout();
+    }
 
-		JLabel iconPanel = new JLabel(IconFactory.getImage("icon.png"));
-				
-		JPanel leftPanel = new JPanel();
-		leftPanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
-		leftPanel.add(iconPanel);
-	
-		container.add(leftPanel);
+    private void defineLayout() {
+        Container container = getContentPane();
+        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        JLabel iconPanel = new JLabel(IconFactory.getImage("icon.png"));
 
-		String headlineText = String.format("<h1>%s <em>v%s</em></h1>",
-				Constants.APP_NAME, Constants.getVersion());
-		String infoText = String.format("<p>%s</p>", String.format(
-				tr("More info about the project at <a href=\"%s\">%s</a>."),
-                                ProjectUrls.MAIN_URL, ProjectUrls.MAIN_URL));
-		String creditsText = ResourcesLoader.readResource(AboutDialog.class,
-				"credits.html");
+        JPanel leftPanel = new JPanel();
+        leftPanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
+        leftPanel.add(iconPanel);
 
-		String content = headlineText.concat(infoText).concat(creditsText);
-		JEditorPane lblCredits = new HtmlLabel(content);
-		lblCredits.setCaretPosition(0);
+        container.add(leftPanel);
 
-		JScrollPane scrollPane = new JScrollPane(lblCredits);
-		scrollPane.setPreferredSize(new Dimension(380, 240));
-		scrollPane
-				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-		panel.setAlignmentY(JPanel.TOP_ALIGNMENT);
-		panel.add(scrollPane);
+        String headlineText = String.format("<h1>%s <em>v%s</em></h1>",
+                Constants.APP_NAME, Constants.getVersion());
+        String infoText = String.format("<p>%s</p>", String.format(
+                tr("More info about the project at <a href=\"%s\">%s</a>."),
+                ProjectUrls.MAIN_URL, ProjectUrls.MAIN_URL));
+        String creditsText = ResourcesLoader.readResource(AboutDialog.class,
+                "credits.html");
 
-		container.add(panel);
+        String content = headlineText.concat(infoText).concat(creditsText);
+        JEditorPane lblCredits = new HtmlLabel(content);
+        lblCredits.setCaretPosition(0);
 
-		pack();
-		setLocationRelativeTo(getOwner());
-	}
+        JScrollPane scrollPane = new JScrollPane(lblCredits);
+        scrollPane.setPreferredSize(new Dimension(380, 240));
+        scrollPane
+                .setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        panel.setAlignmentY(JPanel.TOP_ALIGNMENT);
+        panel.add(scrollPane);
+
+        container.add(panel);
+
+        pack();
+        setLocationRelativeTo(getOwner());
+    }
 }
-

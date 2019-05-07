@@ -11,7 +11,7 @@ import java.io.File;
 
 public class DeleteFileActionListener implements ActionListener {
 
-    private MainWindow mainWindow;
+    private final MainWindow mainWindow;
 
     public DeleteFileActionListener(MainWindow mainWindow) {
         this.mainWindow = mainWindow;

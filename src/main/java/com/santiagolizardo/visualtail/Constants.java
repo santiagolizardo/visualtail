@@ -17,6 +17,7 @@
 package com.santiagolizardo.visualtail;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -48,7 +49,7 @@ public final class Constants {
         try
         {
             prop.load( resourceAsStream );
-        } catch (Exception e) {
+        } catch (IOException e) {
             return "N/A";
         }
         return prop.getProperty("version");

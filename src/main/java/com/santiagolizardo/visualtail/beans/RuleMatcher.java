@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 public class RuleMatcher {
 
-	private Rule rule;
+	private final Rule rule;
 	private Pattern rePattern;
 
 	public RuleMatcher(final Rule rule) {

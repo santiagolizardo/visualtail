@@ -35,38 +35,38 @@ import com.santiagolizardo.visualtail.resources.images.IconFactory;
 
 public class CopyAction extends AbstractAction {
 
-	private static final long serialVersionUID = 2226006120048433873L;
+    private static final long serialVersionUID = 2226006120048433873L;
 
-	private final MainWindow mainWindow;
+    private final MainWindow mainWindow;
 
-	private final Clipboard clipboard;
+    private final Clipboard clipboard;
 
-	public CopyAction(MainWindow mainWindow) {
+    public CopyAction(MainWindow mainWindow) {
 
-		this.mainWindow = mainWindow;
+        this.mainWindow = mainWindow;
 
-		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("copy.png"));
-		putValue(AbstractAction.NAME, tr("Copy"));
-		putValue(AbstractAction.ACCELERATOR_KEY,
-				KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("copy.png"));
+        putValue(AbstractAction.NAME, tr("Copy"));
+        putValue(AbstractAction.ACCELERATOR_KEY,
+                KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
-		setEnabled(false);
-		
-		clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-	}
+        setEnabled(false);
 
-	@Override
-	public void actionPerformed(ActionEvent event) {
-		LogWindow log = (LogWindow) mainWindow.getDesktop().getSelectedFrame();
-		if (log != null) {
-			List<String> selectedLines = log.getLinesList().getSelectedValuesList();
-			StringBuilder sb = new StringBuilder();
-			for (String selectedLine : selectedLines) {
-				sb.append(selectedLine);
-				sb.append(Constants.LINE_SEP);
-			}
-			clipboard
-					.setContents(new StringSelection(sb.toString()), null /* ClipboardOwner */);
-		}
-	}
+        clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        LogWindow log = (LogWindow) mainWindow.getDesktop().getSelectedFrame();
+        if (log != null) {
+            List<String> selectedLines = log.getLinesList().getSelectedValuesList();
+            StringBuilder sb = new StringBuilder();
+            selectedLines.forEach((selectedLine) -> {
+                sb.append(selectedLine);
+                sb.append(Constants.LINE_SEP);
+            });
+            clipboard
+                    .setContents(new StringSelection(sb.toString()), null /* ClipboardOwner */);
+        }
+    }
 }

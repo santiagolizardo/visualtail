@@ -26,7 +26,6 @@ import com.santiagolizardo.visualtail.config.ConfigData;
 import com.santiagolizardo.visualtail.config.ConfigFileWriter;
 import com.santiagolizardo.visualtail.gui.actions.ActionFactory;
 import com.santiagolizardo.visualtail.gui.components.DesktopPanel;
-import com.santiagolizardo.visualtail.gui.dialogs.LogWindow;
 import com.santiagolizardo.visualtail.gui.menu.Menu;
 import com.santiagolizardo.visualtail.resources.images.IconFactory;
 

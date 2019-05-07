@@ -37,11 +37,9 @@ public class TailNotifier implements Runnable {
     public void run() {
         if (tail.hasMoreLines()) {
             List<String> lines = tail.readNextLines(10000);
-            for (String line : lines) {
-                if (!line.isEmpty()) {
-                    notifyListeners(line);
-                }
-            }
+            lines.stream().filter((line) -> (!line.isEmpty())).forEachOrdered((line) -> {
+                notifyListeners(line);
+            });
         }
     }
 
@@ -50,8 +48,8 @@ public class TailNotifier implements Runnable {
     }
 
     private void notifyListeners(String line) {
-        for (TailListener listener : listeners) {
+        listeners.forEach((listener) -> {
             listener.onFileChanges(line);
-        }
+        });
     }
 }

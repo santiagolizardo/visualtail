@@ -23,7 +23,6 @@ import com.santiagolizardo.visualtail.gui.renderers.LogTypeListRenderer;
 import com.santiagolizardo.visualtail.resources.languages.Translator;
 import com.santiagolizardo.visualtail.gui.components.buttons.ClearWindowButton;
 import com.santiagolizardo.visualtail.gui.components.buttons.PrintFileButton;
-import com.santiagolizardo.visualtail.gui.util.DialogFactory;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.util.logging.Logger;

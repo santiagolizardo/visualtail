@@ -25,7 +25,7 @@ public class EmptyIcon implements Icon {
 
 	public final static EmptyIcon SIZE_16 = new EmptyIcon(16);
 
-	private int size;
+	private final int size;
 
 	public EmptyIcon(int size) {
 		this.size = size;

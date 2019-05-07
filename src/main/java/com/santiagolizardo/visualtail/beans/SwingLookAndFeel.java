@@ -32,8 +32,7 @@ public class SwingLookAndFeel {
 	 *             in case of an error
 	 */
 	public static SwingLookAndFeel forName(String className) throws Exception {
-		LookAndFeel lookAndFeel = (LookAndFeel) Class.forName(className)
-				.newInstance();
+		LookAndFeel lookAndFeel = (LookAndFeel) Class.forName(className).getDeclaredConstructor().newInstance();
 		return new SwingLookAndFeel(lookAndFeel.getName(), lookAndFeel
 				.getClass().getName());
 	}
