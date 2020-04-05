@@ -14,7 +14,7 @@
 
 ### Requirements
 
-  * Java runtime (JRE) 9+
+  * Java SE 13
   * Graphical user interface
 
 
