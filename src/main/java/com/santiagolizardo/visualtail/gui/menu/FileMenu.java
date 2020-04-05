@@ -65,7 +65,7 @@ public class FileMenu extends JMenu implements ActionListener {
 
         openMenuItem = new JMenuItem(tr("Open..."));
         openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         openMenuItem.addActionListener(this);
 
         recentsMenu = new RecentsMenu(mainWindow);

@@ -41,7 +41,7 @@ public class ClearAllBuffersAction extends AbstractAction {
 
 		putValue(AbstractAction.NAME, tr("Clear all windows"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
-				KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | KeyEvent.SHIFT_MASK
+				KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() | KeyEvent.SHIFT_DOWN_MASK
 				));
 	}
 

@@ -48,7 +48,7 @@ public class CopyAction extends AbstractAction {
         putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("copy.png"));
         putValue(AbstractAction.NAME, tr("Copy"));
         putValue(AbstractAction.ACCELERATOR_KEY,
-                KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 
         setEnabled(false);
 

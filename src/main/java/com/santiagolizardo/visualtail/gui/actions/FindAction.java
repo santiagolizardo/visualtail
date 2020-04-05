@@ -42,7 +42,7 @@ public class FindAction extends AbstractAction {
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("find.png"));
 		putValue(AbstractAction.NAME, tr("Find..."));
 		putValue(AbstractAction.ACCELERATOR_KEY,
-				KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+				KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class WindowsMenu extends JMenu {
 
 	public WindowsMenu(final MainWindow parentFrame) {
 
-		int menuShortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+		int menuShortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
 		
 		setText(tr("Windows"));
 		setMnemonic(KeyEvent.VK_W);

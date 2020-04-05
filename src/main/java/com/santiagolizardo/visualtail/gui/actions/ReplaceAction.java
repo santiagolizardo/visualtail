@@ -36,7 +36,7 @@ public class ReplaceAction extends AbstractAction {
 		putValue(AbstractAction.SMALL_ICON, IconFactory.getImage("text_replace.png"));
 		putValue(AbstractAction.NAME, tr("Replace..."));
 		putValue(AbstractAction.ACCELERATOR_KEY,
-			KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+			KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 	}
 
 	@Override

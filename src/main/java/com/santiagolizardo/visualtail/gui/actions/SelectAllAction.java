@@ -43,7 +43,7 @@ public class SelectAllAction extends AbstractAction {
 		putValue(AbstractAction.SMALL_ICON, EmptyIcon.SIZE_16);
 		putValue(AbstractAction.NAME, tr("Select all"));
 		putValue(AbstractAction.ACCELERATOR_KEY,
-				KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+				KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 	}
 
 	@Override

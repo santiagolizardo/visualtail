@@ -65,7 +65,7 @@ public class OptionsMenu extends JMenu implements ActionListener {
 		preferencesMenuItem = new JMenuItem(tr("Preferences..."));
 		preferencesMenuItem.setIcon(IconFactory.getImage("preferences.png"));
 		preferencesMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
-				Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+				Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 		preferencesMenuItem.addActionListener(this);
 
 		add(alwaysOnTopMenuItem);
