@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [1.9.2] - 2020-04-05
+
+- Set minimum Java requirement to Java SE 13.
+- Remove calls to deprecated class and methods.
+
 ## [1.9.1] - 2017-08-25
 
 - Windows installer now uses javaw instead of java to start the app, so that the background console doesn't show.
