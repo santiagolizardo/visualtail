@@ -3,21 +3,29 @@
 
 # VisualTail
 
-![VisualTail screenshot](http://a.fsdn.com/con/app/proj/visualtail/screenshots/87299.jpg "VisualTail running with 2 files opened")
+![VisualTail screenshot](screenshot.png "VisualTail running with 2 files open")
 
 ## What is it?
 
 *VisualTail* is an open source graphical log visualizer with syntax highlighting and pattern matching.
 
-## How to run it
-
-
 ### Requirements
+
 
   * Java SE 13
   * Graphical user interface
 
+### How to build
 
-### Execution
+```sh
+$ mvn package
+```
 
-Double click on *VisualTail.jar* or run `java -jar VisualTail.jar` on the command line.
+### How to run
+
+```sh
+$ java -jar target/VisualTail-1.9.2-jar-with-dependencies.jar 
+```
+
+or double click on the jar file using your default file manager.
+
