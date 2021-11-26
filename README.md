@@ -1,6 +1,4 @@
 
-[![Build Status](https://travis-ci.org/santiagolizardo/visualtail.svg?branch=master)](https://travis-ci.org/santiagolizardo/visualtail)
-
 # VisualTail
 
 ![VisualTail screenshot](screenshot.png "VisualTail running with 2 files open")
@@ -11,20 +9,19 @@
 
 ### Requirements
 
-
-  * Java SE 13
+  * Java SE 17
   * Graphical user interface
 
 ### How to build
 
 ```sh
-$ mvn package
+mvn package
 ```
 
 ### How to run
 
 ```sh
-$ java -jar target/VisualTail-1.9.2-jar-with-dependencies.jar 
+java -jar target/VisualTail-1.9.2-jar-with-dependencies.jar 
 ```
 
 or double click on the jar file using your default file manager.

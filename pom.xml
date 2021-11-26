@@ -57,7 +57,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <release>15</release>
+                    <release>17</release>
                     <compilerArgs>
                         <arg>-Xlint:deprecation</arg>
                     </compilerArgs>
@@ -117,11 +117,6 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <!--
-                                <includes>
-                                    <include>build.properties</include>
-                                </includes>
-                                -->
                 <filtering>true</filtering>
             </resource>
         </resources>
@@ -130,7 +125,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.1</version>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
