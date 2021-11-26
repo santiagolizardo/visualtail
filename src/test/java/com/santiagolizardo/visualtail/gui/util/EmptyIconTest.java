@@ -16,8 +16,6 @@
  */
 package com.santiagolizardo.visualtail.gui.util;
 
-import javax.swing.Icon;
-
 import junit.framework.TestCase;
 
 public class EmptyIconTest extends TestCase {
@@ -30,9 +28,5 @@ public class EmptyIconTest extends TestCase {
 	public void testEmptyIcon16HasTheRigthDimension() {
 		assertEquals(16, EmptyIcon.SIZE_16.getIconWidth());
 		assertEquals(16, EmptyIcon.SIZE_16.getIconHeight());
-	}
-
-	public void testEmptyIconHasCorrectInheritance() {
-		assertTrue(new EmptyIcon(0) instanceof Icon);
 	}
 }

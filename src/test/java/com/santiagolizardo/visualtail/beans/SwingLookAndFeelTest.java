@@ -18,8 +18,7 @@ package com.santiagolizardo.visualtail.beans;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -28,7 +27,7 @@ public class SwingLookAndFeelTest {
 
 	@Test
 	public void testEquals() {
-		SwingLookAndFeel laf1 = null, laf2 = null;
+		SwingLookAndFeel laf1, laf2;
 
 		laf1 = new SwingLookAndFeel("foo", "test.Foo");
 		laf2 = new SwingLookAndFeel("bar", "test.Foo");
@@ -36,6 +35,6 @@ public class SwingLookAndFeelTest {
 
 		laf1 = new SwingLookAndFeel("foo", "test.Foo");
 		laf2 = new SwingLookAndFeel("foo", "test.Bar");
-		assertThat(laf1, not(equalTo(laf2)));
+		assertNotEquals(laf1, laf2);
 	}
 }

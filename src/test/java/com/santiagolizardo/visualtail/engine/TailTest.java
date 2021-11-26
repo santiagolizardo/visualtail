@@ -16,15 +16,16 @@
  */
 package com.santiagolizardo.visualtail.engine;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-import org.junit.After;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TailTest {
 
@@ -33,7 +34,7 @@ public class TailTest {
 	private File file;
 
 	@Before
-	public void setUp() throws FileNotFoundException, IOException {
+	public void setUp() throws IOException {
 		file = new File("test.log");
 
 		try (FileOutputStream fos = new FileOutputStream(file)) {
