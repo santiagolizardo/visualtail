@@ -1,18 +1,18 @@
-/**
- * This file is part of VisualTail, a graphical log file monitor.
- *
- * VisualTail is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * VisualTail is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
+/*
+  This file is part of VisualTail, a graphical log file monitor.
+
+  VisualTail is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  VisualTail is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with VisualTail.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.visualtail.resources;
 
@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -36,7 +37,7 @@ public class ResourcesLoader {
 			.getName());
 
 	public static String readResource(Class<?> clazz, String name) {
-		Charset charset = Charset.forName("UTF-8");
+		Charset charset = StandardCharsets.UTF_8;
 		StringBuilder resourceContent = new StringBuilder();
 
 		try (InputStream is = clazz.getResourceAsStream(name)) {
@@ -88,16 +89,18 @@ public class ResourcesLoader {
 	private static void addResourcesFromDirectory(List<String> names,
 			File directory, Pattern pattern) throws IOException {
 		File[] fileList = directory.listFiles();
-		for (File file : fileList) {
-			if (file.isDirectory()) {
-				addResourcesFromDirectory(names, file, pattern);
-			} else {
-				String fileName = file.getCanonicalPath();
-				Matcher matcher = pattern.matcher(fileName);
-				if (matcher.matches()) {
-					String result = matcher.group(1);
-					if (!names.contains(result)) {
-						names.add(result);
+		if (fileList != null) {
+			for (File file : fileList) {
+				if (file.isDirectory()) {
+					addResourcesFromDirectory(names, file, pattern);
+				} else {
+					String fileName = file.getCanonicalPath();
+					Matcher matcher = pattern.matcher(fileName);
+					if (matcher.matches()) {
+						String result = matcher.group(1);
+						if (!names.contains(result)) {
+							names.add(result);
+						}
 					}
 				}
 			}

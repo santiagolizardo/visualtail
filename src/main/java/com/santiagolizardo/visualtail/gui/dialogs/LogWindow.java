@@ -1,17 +1,17 @@
-/**
- * This file is part of VisualTail, a graphical log file monitor.
- *
- * VisualTail is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * VisualTail is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * VisualTail. If not, see <http://www.gnu.org/licenses/>.
+/*
+  This file is part of VisualTail, a graphical log file monitor.
+
+  VisualTail is free software: you can redistribute it and/or modify it under
+  the terms of the GNU General Public License as published by the Free Software
+  Foundation, either version 3 of the License, or (at your option) any later
+  version.
+
+  VisualTail is distributed in the hope that it will be useful, but WITHOUT ANY
+  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+  A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along with
+  VisualTail. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.santiagolizardo.visualtail.gui.dialogs;
 
@@ -57,7 +57,6 @@ import javax.swing.event.InternalFrameAdapter;
 
 public class LogWindow extends JInternalFrame implements TailListener {
 
-    private static final long serialVersionUID = -108911942974722973L;
 
     private int numberPreviousLinesToDisplay;
     private int numberLinesToDisplay;
@@ -264,10 +263,6 @@ public class LogWindow extends JInternalFrame implements TailListener {
         return file;
     }
 
-    public void setFile(File file) {
-        this.file = file;
-    }
-
     public void trimLines() {
         int numLines = linesModel.size();
         if (numLines > numberLinesToDisplay) {
@@ -319,14 +314,6 @@ public class LogWindow extends JInternalFrame implements TailListener {
             linesModel.add(0, line);
         });
         return lines.size();
-    }
-
-    public int getNumberPreviousLinesToDisplay() {
-        return numberPreviousLinesToDisplay;
-    }
-
-    public void setNumberPreviousLinesToDisplay(int numberPreviousLinesToDisplay) {
-        this.numberPreviousLinesToDisplay = numberPreviousLinesToDisplay;
     }
 
     public int getNumberLinesToDisplay() {
