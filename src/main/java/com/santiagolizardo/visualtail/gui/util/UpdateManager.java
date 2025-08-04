@@ -52,8 +52,8 @@ public class UpdateManager extends Thread {
             reader = new InputStreamReader(url.openStream());
             buffer = new BufferedReader(reader);
             String version = buffer.readLine();
-            int serverVersion = Integer.valueOf(version.replaceAll("\\.", ""));
-            int currentVersion = Integer.valueOf(
+            int serverVersion = Integer.parseInt(version.replaceAll("\\.", ""));
+            int currentVersion = Integer.parseInt(
                     Constants.getVersion().replaceAll("\\.", ""));
             if (serverVersion > currentVersion) {
                 StringBuilder sb = new StringBuilder();

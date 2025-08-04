@@ -82,9 +82,8 @@ public class LogType {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof LogType) {
-			LogType logType = (LogType) o;
-			return getName().equals(logType.getName());
+		if (o instanceof LogType logType) {
+            return getName().equals(logType.getName());
 		}
 
 		return false;

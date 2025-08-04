@@ -20,8 +20,8 @@ import javax.swing.LookAndFeel;
 
 public class SwingLookAndFeel {
 
-	private String name;
-	private String className;
+	private final String name;
+	private final String className;
 
 	/**
 	 * Instantiates a new look and feel from its class name.
@@ -55,9 +55,8 @@ public class SwingLookAndFeel {
 			return false;
 		}
 
-		if (o instanceof SwingLookAndFeel) {
-			SwingLookAndFeel laf = (SwingLookAndFeel) o;
-			return className.equals(laf.getClassName());
+		if (o instanceof SwingLookAndFeel laf) {
+            return className.equals(laf.getClassName());
 		}
 
 		return false;

@@ -104,7 +104,7 @@ public class LogWindowToolbar extends JToolBar implements TailListener {
             }
 
             try {
-                int count = Integer.valueOf(input);
+                int count = Integer.parseInt(input);
                 if (count <= 0) {
                     final String errorMessage = String.format(Translator.tr("'%d' is an invalid number of lines."), count);
                     JOptionPane.showMessageDialog(logWindow, errorMessage, Translator.tr("Error"), JOptionPane.ERROR_MESSAGE);

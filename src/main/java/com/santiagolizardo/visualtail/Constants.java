@@ -32,7 +32,7 @@ public final class Constants {
 
     public static final String APP_NAME = "VisualTail";
 
-    public static final String LINE_SEP = System.getProperty("line.separator");
+    public static final String LINE_SEP = System.lineSeparator();
 
     public static final String USER_HOME = System.getProperty("user.home");
 

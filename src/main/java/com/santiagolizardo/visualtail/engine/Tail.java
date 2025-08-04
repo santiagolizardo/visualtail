@@ -96,7 +96,7 @@ public class Tail {
 
 	public String readPreviousLine() {
 		List<String> lines = readPreviousLines(1);
-		return lines.size() > 0 ? lines.get(0) : null;
+		return !lines.isEmpty() ? lines.get(0) : null;
 	}
 
 	public List<String> readPreviousLines(int count) {

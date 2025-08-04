@@ -9,7 +9,7 @@
 
 ### Requirements
 
-  * Java SE 17
+  * Java SE 21
   * Graphical user interface
 
 ### How to build
@@ -24,5 +24,5 @@ mvn package
 java -jar target/VisualTail-1.9.2-jar-with-dependencies.jar 
 ```
 
-or double click on the jar file using your default file manager.
+or double-click on the jar file using your default file manager.
 

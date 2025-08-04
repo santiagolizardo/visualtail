@@ -52,20 +52,20 @@ public class DesktopPanel extends JDesktopPane {
 		int x = 0;
 		int y = 0;
 
-		for (int i = 0; i < numFrames; i++) {
-			try {
-				frames[i].setMaximum(false);
-				frames[i].setIcon(false);
-			} catch (PropertyVetoException e) {
-				logger.warning(e.getMessage());
-			}
+        for (JInternalFrame frame : frames) {
+            try {
+                frame.setMaximum(false);
+                frame.setIcon(false);
+            } catch (PropertyVetoException e) {
+                logger.warning(e.getMessage());
+            }
 
-			frames[i].setSize(frameWidth, frameHeight);
-			frames[i].setLocation(x, y);
+            frame.setSize(frameWidth, frameHeight);
+            frame.setLocation(x, y);
 
-			x += diffWidth;
-			y += diffHeight;
-		}
+            x += diffWidth;
+            y += diffHeight;
+        }
 	}
 
 	/**
